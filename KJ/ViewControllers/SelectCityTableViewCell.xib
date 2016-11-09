@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="SelectCityTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <frame key="frameInset" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WlV-CN-Wqk" userLabel="city">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="44" id="TcY-SP-U93"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fwk-67-ina">
+                        <constraints>
+                            <constraint firstAttribute="width" constant="17" id="rSP-Lr-62o"/>
+                            <constraint firstAttribute="height" constant="12" id="znE-zs-T0j"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="WlV-CN-Wqk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="6DY-U8-cv0"/>
+                    <constraint firstAttribute="bottom" secondItem="WlV-CN-Wqk" secondAttribute="bottom" id="exe-dA-0Ty"/>
+                    <constraint firstItem="fwk-67-ina" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="kTW-vD-mwn"/>
+                    <constraint firstAttribute="trailing" secondItem="fwk-67-ina" secondAttribute="trailing" constant="15" id="rkT-D6-we5"/>
+                    <constraint firstItem="WlV-CN-Wqk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="uVI-LX-PZQ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="cityLabel" destination="WlV-CN-Wqk" id="VP0-bv-ZjK"/>
+                <outlet property="imgView" destination="fwk-67-ina" id="anh-EQ-kUx"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>
