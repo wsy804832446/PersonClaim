@@ -9,7 +9,5 @@
 #import "BaseTableViewController.h"
 #import "CityModel.h"
 @interface SelectDefiniteCityViewController : BaseTableViewController
-@property (nonatomic,copy)void (^SelectCityBlock)(NSString *cityId);
-//拉取城市到几级 1省  2市  3县
-@property (nonatomic,assign)NSInteger cityLevel;
+@property (nonatomic,copy)void (^SelectCityBlock)(CityModel *cityModel);
 @end

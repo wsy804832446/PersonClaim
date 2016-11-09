@@ -31,44 +31,33 @@
 }
 //城市数据
 -(void)siftDataWithCityCode:(NSString *)cityId{
-    WeakSelf(SelectCityViewController);
-    [weakSelf showHudWaitingView:WaitPrompt];
-    [[NetWorkManager shareNetWork]getCityListWithSearchCode:cityId andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
-        [weakSelf removeMBProgressHudInManaual];
-        if ([response.responseCode isEqual:@"1"]) {
-            [weakSelf.dataArray removeAllObjects];
-            [weakSelf.sectionIndexArr removeAllObjects];
-            [weakSelf.sectionIndexDic removeAllObjects];
-            for (NSDictionary *dic in response.dataArray){
-                CityModel *model = [MTLJSONAdapter modelOfClass:[CityModel class] fromJSONDictionary:dic error:NULL];
-                [weakSelf.dataArray addObject:model];
-            }
-            //当前位置空索引
-            [weakSelf.sectionIndexArr addObject:@""];
-            [weakSelf.sectionIndexDic setObject:@"empty" forKey:@[]];
-            for (CityModel *model in self.dataArray){
-                NSString *character = [self firstCharactor:model.name];
-                //之后往字母索引字典里放
-                if (![_sectionIndexDic objectForKey:character]) {
-                    [_sectionIndexDic setObject:[NSMutableArray array] forKey:character];
-                }
-                if (![_sectionIndexArr containsObject:character]) {
-                    [_sectionIndexArr addObject:character];
-                }
-                [_sectionIndexDic[character] addObject:model];
-            }
-            [_sectionIndexArr sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-                return obj1>obj2;
-            }];
-            [weakSelf.tableView reloadData];
-        }else{
-            [weakSelf showHudAuto:response.message];
+    CityModel *model = [CommUtil readDataWithFileName:@"cityList"];
+    if (model) {
+        [self.dataArray removeAllObjects];
+        [self.dataArray addObjectsFromArray:model.array];
+        [self disposalData];
+    }
+}
+//整理数据
+-(void)disposalData{
+    //当前位置空索引
+    [self.sectionIndexArr addObject:@""];
+    [self.sectionIndexDic setObject:@"empty" forKey:@[]];
+    for (CityModel *model in self.dataArray){
+        NSString *character = [self firstCharactor:model.name];
+        //之后往字母索引字典里放
+        if (![_sectionIndexDic objectForKey:character]) {
+            [_sectionIndexDic setObject:[NSMutableArray array] forKey:character];
         }
-    } andFailure:^(NSURLSessionDataTask *urlSessionDataTask, NSError *error) {
-        [weakSelf removeMBProgressHudInManaual];
-        [weakSelf showHudAuto:InternetFailerPrompt];
+        if (![_sectionIndexArr containsObject:character]) {
+            [_sectionIndexArr addObject:character];
+        }
+        [_sectionIndexDic[character] addObject:model];
+    }
+    [_sectionIndexArr sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        return obj1>obj2;
     }];
-    
+
 }
 //汉子转拼音首字母
 - (NSString *)firstCharactor:(NSString *)aString

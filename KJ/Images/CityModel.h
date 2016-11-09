@@ -13,6 +13,10 @@
 
 @property (nonatomic,copy) NSString *code;
 
+@property (nonatomic,copy) NSString *level;
+
 @property (nonatomic,copy) NSString *name;
+
+@property (nonatomic,strong) NSMutableArray *array;
 
 @end

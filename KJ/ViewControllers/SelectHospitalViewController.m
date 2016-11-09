@@ -17,10 +17,10 @@
 @property (nonatomic,strong)NSMutableArray *sectionIndexArr;
 //索引字母下医院
 @property (nonatomic,strong)NSMutableDictionary *sectionIndexDic;
-//选中cell的Index
-@property (nonatomic,strong)NSIndexPath *CellIndex;
 //RightBarButton
 @property (nonatomic,strong)UIBarButtonItem *barButtonItem;
+//当前城市
+@property (nonatomic,strong)CityModel *cureentCity;
 @end
 
 @implementation SelectHospitalViewController
@@ -33,16 +33,18 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItemExtension leftButtonItem:@selector(leftAction) andTarget:self];
     self.navigationItem.rightBarButtonItem = self.barButtonItem;
-    [self siftDataWithCityCode:@""];
+    [self siftDataWithCityCode];
     self.tableView.sectionIndexColor = [UIColor colorWithHexString:Colorblue];
     [self.view addSubview:self.txtSearch];
+    self.pageSize = 20;
+    self.pageNO =1;
     // Do any additional setup after loading the view.
 }
 //医院数据
--(void)siftDataWithCityCode:(NSString *)cityId{
+-(void)siftDataWithCityCode{
     WeakSelf(SelectHospitalViewController);
     [weakSelf showHudWaitingView:WaitPrompt];
-    [[NetWorkManager shareNetWork]getCityListWithSearchCode:cityId andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
+    [[NetWorkManager shareNetWork]getHospitalListWithDealLocalCode:self.cureentCity.Id andHospitalName:self.txtSearch.text andPageNo:self.pageNO andPageSize:self.pageSize andFlag:@"1" andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response){
         [weakSelf removeMBProgressHudInManaual];
         if ([response.responseCode isEqual:@"1"]) {
             [weakSelf.dataArray removeAllObjects];
@@ -169,11 +171,13 @@
 }
 -(void)rightAction{
     SelectDefiniteCityViewController *vc = [[SelectDefiniteCityViewController alloc]init];
-    vc.cityLevel = 2;
+    [vc setSelectCityBlock:^(CityModel *cityModel) {
+        self.cureentCity = cityModel;
+        [self.tableView reloadData];
+    }];
     [self.navigationController pushViewController:vc animated:YES];
 }
 -(void)txtChange:(MyTextField *)txt{
-    //11111111111111
 }
 -(MyTextField *)txtSearch{
     if (!_txtSearch) {

@@ -12,4 +12,10 @@
 +(NSDictionary *)JSONKeyPathsByPropertyKey{
     return @{@"Id":@"id"};
 }
+-(NSMutableArray *)array{
+    if (!_array) {
+        _array = [NSMutableArray array];
+    }
+    return _array;
+}
 @end

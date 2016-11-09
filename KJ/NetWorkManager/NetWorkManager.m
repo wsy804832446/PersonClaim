@@ -282,6 +282,12 @@ static NetWorkManager *thNetWorkManager = nil;
     [self requestOperation:kServerHost andParams:paramDic andHeaderFieldParams:nil andHttpRequestMethod:HttpRequestMethodPOST andCompletionBlockWithSuccess:success andFailure:failure];
 }
 -(void)getHospitalListWithDealLocalCode:(NSString *)dealLocalCode andHospitalName:(NSString *)hospitalName andPageNo:(NSInteger)pageNo andPageSize:(NSInteger)pageSize andFlag:(NSString *)flag andCompletionBlockWithSuccess:(CompletionBlockWithSuccess)success andFailure:(FailureBlock)failure{
+    if (!dealLocalCode) {
+        dealLocalCode = @"";
+    }
+    if (!hospitalName) {
+        hospitalName = @"";
+    }
     NSDictionary *dataDic = @{@"dealLocalCode":dealLocalCode,@"hospitalName":hospitalName,@"pageNo":[NSNumber numberWithInteger:pageNo],@"pageSize":[NSNumber numberWithInteger:pageSize],@"flag":flag};
     NSMutableDictionary *paramDic =[self dataDicAndRequestCodeWithDic:dataDic andRequestCode:@"002016"];
     [self requestOperation:kServerHost andParams:paramDic andHeaderFieldParams:nil andHttpRequestMethod:HttpRequestMethodPOST andCompletionBlockWithSuccess:success andFailure:failure];

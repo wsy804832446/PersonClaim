@@ -35,41 +35,12 @@
 }
 //城市数据
 -(void)siftDataWithCityCode:(NSString *)cityId andLevel:(NSInteger)level{
-    WeakSelf(SelectDefiniteCityViewController);
-    [weakSelf showHudWaitingView:WaitPrompt];
-    [[NetWorkManager shareNetWork]getCityListWithSearchCode:cityId andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
-        [weakSelf removeMBProgressHudInManaual];
-        if ([response.responseCode isEqual:@"1"]) {
-            if (level == 1) {
-                [weakSelf.dataArray removeAllObjects];
-                for (NSDictionary *dic in response.dataArray){
-                    CityModel *model = [MTLJSONAdapter modelOfClass:[CityModel class] fromJSONDictionary:dic error:NULL];
-                    [weakSelf.dataArray addObject:model];
-                }
-                [weakSelf.tableView reloadData];
-            }else if (level == 2){
-                [weakSelf.townDataArray removeAllObjects];
-                for (NSDictionary *dic in response.dataArray){
-                    CityModel *model = [MTLJSONAdapter modelOfClass:[CityModel class] fromJSONDictionary:dic error:NULL];
-                    [weakSelf.townDataArray addObject:model];
-                }
-                [weakSelf.tableViewTown reloadData];
-            }else if (level == 3){
-                [weakSelf.countyDataArray removeAllObjects];
-                for (NSDictionary *dic in response.dataArray){
-                    CityModel *model = [MTLJSONAdapter modelOfClass:[CityModel class] fromJSONDictionary:dic error:NULL];
-                    [weakSelf.countyDataArray addObject:model];
-                }
-                [weakSelf.tableViewCounty reloadData];
-            }
-        }else{
-            [weakSelf showHudAuto:response.message];
-        }
-    } andFailure:^(NSURLSessionDataTask *urlSessionDataTask, NSError *error) {
-        [weakSelf removeMBProgressHudInManaual];
-        [weakSelf showHudAuto:InternetFailerPrompt];
-    }];
-    
+    CityModel *model =[CommUtil readDataWithFileName:@"cityList"];
+    if (model) {
+        [self.dataArray removeAllObjects];
+        [self.dataArray addObjectsFromArray:model.array];
+        [self.tableView reloadData];
+    }
 }
 //汉子转拼音首字母
 - (NSString *)firstCharactor:(NSString *)aString
@@ -140,12 +111,14 @@
             }
         }
         CityModel *model = self.dataArray[indexPath.row];
+        [self.townDataArray removeAllObjects];
+        [self.townDataArray addObjectsFromArray:model.array];
         [self.view addSubview:self.tableViewTown];
-        [self siftDataWithCityCode:model.Id andLevel:2];
+        [self.tableViewTown reloadData];
     }else if(tableView.tag == 1001){
         CityModel *model = self.townDataArray[indexPath.row];
         if (self.SelectCityBlock) {
-            self.SelectCityBlock(model.Id);
+            self.SelectCityBlock(model);
         }
         [self.navigationController popViewControllerAnimated:YES];
     }else{

@@ -18,6 +18,7 @@
 #import "DealNameTableViewCell.h"
 #import "AccidentAddressTableViewCell.h"
 #import "SelectHospitalViewController.h"
+#import "AddCarePeopleViewController.h"
 @interface MedicalVisitViewController ()<UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property (nonatomic,assign)NSInteger contactNum;
 @property (nonatomic,strong)UILabel *placeHolder;
@@ -115,7 +116,11 @@
     
 }
 -(void)addCarePeople{
-    
+    AddCarePeopleViewController *vc = [[AddCarePeopleViewController alloc]init];
+    [vc setContactBlock:^(NSMutableArray *careArray) {
+        
+    }];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section <3) {
