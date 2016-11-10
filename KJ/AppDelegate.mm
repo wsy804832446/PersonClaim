@@ -13,7 +13,7 @@
 #import <BaiduMapAPI_Map/BMKMapComponent.h>
 #import <PgySDK/PgyManager.h>
 #import <PgyUpdate/PgyUpdateManager.h>
-@interface AppDelegate ()<CLLocationManagerDelegate>
+@interface AppDelegate ()
 
 @end
 
@@ -39,14 +39,21 @@
     //启动更新检查SDK
     [[PgyUpdateManager sharedPgyManager] startManagerWithAppId:@"e909557cf2d3d41a1e786e91809d1ed2"];
     [[PgyUpdateManager sharedPgyManager] checkUpdate];
-    [self OpenLocation];
     //拉取城市数据保存到本地
     [[NetWorkManager shareNetWork]getCityListWithSearchCode:@"" andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
         if ([response.responseCode isEqual:@"1"]) {
+            //无层级城市model
+            NSMutableArray *cityArr = [NSMutableArray array];
+            for (NSDictionary *dic in response.dataArray) {
+                CityModel *model = [MTLJSONAdapter modelOfClass:[CityModel class]fromJSONDictionary:dic error:NULL];
+                [cityArr addObject:model];
+            }
+            [CommUtil saveData:cityArr andSaveFileName:@"disorderCityList"];
+            //整理城市层级
             CityModel *countryModel;
             CityModel *provinceModel;
-            for (int i=0; i<response.dataArray.count; i++) {
-                 CityModel *model = [MTLJSONAdapter modelOfClass:[CityModel class] fromJSONDictionary:response.dataArray[i] error:NULL];
+            for (int i=0; i<cityArr.count; i++) {
+                CityModel *model = cityArr[i];
                 if ([model.level isEqual:@"1"]){
                     countryModel = model;
                 }else if ([model.level isEqual:@"2"]) {
@@ -62,34 +69,6 @@
         
     }];
     return YES;
-}
--(void)OpenLocation{
-    if ([CLLocationManager locationServicesEnabled] &&
-        ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways
-         || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined)) {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"允许人伤跟踪系统在您使用该应用时，访问您的位置吗?" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"不允许" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            }];
-            UIAlertAction *call = [UIAlertAction actionWithTitle:@"允许" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                //定位功能可用，开始定位
-                CLLocationManager * locationManger = [[CLLocationManager alloc] init];
-                locationManger.delegate = self;
-                [locationManger startUpdatingLocation];
-            }];
-            [alert addAction:cancel];
-            [alert addAction:call];
-            [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
-        }else if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied){
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"打开定位服务来允许人伤跟踪系统确定您的位置" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            }];
-            UIAlertAction *call = [UIAlertAction actionWithTitle:@"设置" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-            }];
-            [alert addAction:cancel];
-            [alert addAction:call];
-            [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
-    }
 }
 -(void)StartBaiduMap{
     BMKMapManager* mapManager = [[BMKMapManager alloc]init];

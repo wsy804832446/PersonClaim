@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		340220411DB4AC8800941FEC /* FollowDetaiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 340220401DB4AC8800941FEC /* FollowDetaiViewController.m */; };
 		34056E971DCC3C2300936C67 /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 34056E961DCC3C2300936C67 /* UIImage+Extension.m */; };
+		3405AD4E1DD43FDB0064D1DA /* BodyPartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3405AD4D1DD43FDB0064D1DA /* BodyPartModel.m */; };
+		3405AD511DD456380064D1DA /* HospitalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3405AD501DD456380064D1DA /* HospitalModel.m */; };
 		341362991DA9D88400FF17DC /* CompensationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 341362981DA9D88400FF17DC /* CompensationViewController.m */; };
 		3413629C1DAA0D9300FF17DC /* SelectCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3413629B1DAA0D9300FF17DC /* SelectCityViewController.m */; };
 		3413629E1DAA1BC700FF17DC /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3413629D1DAA1BC700FF17DC /* city.plist */; };
@@ -56,6 +58,7 @@
 		344E216E1DAC8DA400BB415D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 344E216D1DAC8DA400BB415D /* Assets.xcassets */; };
 		3453214F1DB8CBAD0055D178 /* 30-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3453214D1DB8CBAD0055D178 /* 30-1.png */; };
 		345321501DB8CBAD0055D178 /* 30.png in Resources */ = {isa = PBXBuildFile; fileRef = 3453214E1DB8CBAD0055D178 /* 30.png */; };
+		3453B7411DD43E1100D6B7F0 /* AddDiagnoseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3453B7401DD43E1100D6B7F0 /* AddDiagnoseViewController.m */; };
 		34607C6B1DBEF320006B8E2D /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34607C6A1DBEF320006B8E2D /* SearchViewController.m */; };
 		34607C6E1DBEFFD5006B8E2D /* CommUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 34607C6D1DBEFFD5006B8E2D /* CommUtil.m */; };
 		34607C721DBF0A20006B8E2D /* 1-收藏空白页.png in Resources */ = {isa = PBXBuildFile; fileRef = 34607C6F1DBF0A20006B8E2D /* 1-收藏空白页.png */; };
@@ -322,6 +325,10 @@
 		340220401DB4AC8800941FEC /* FollowDetaiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowDetaiViewController.m; sourceTree = "<group>"; };
 		34056E951DCC3C2300936C67 /* UIImage+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extension.h"; sourceTree = "<group>"; };
 		34056E961DCC3C2300936C67 /* UIImage+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extension.m"; sourceTree = "<group>"; };
+		3405AD4C1DD43FDB0064D1DA /* BodyPartModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BodyPartModel.h; sourceTree = "<group>"; };
+		3405AD4D1DD43FDB0064D1DA /* BodyPartModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BodyPartModel.m; sourceTree = "<group>"; };
+		3405AD4F1DD456380064D1DA /* HospitalModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HospitalModel.h; sourceTree = "<group>"; };
+		3405AD501DD456380064D1DA /* HospitalModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HospitalModel.m; sourceTree = "<group>"; };
 		341362971DA9D88400FF17DC /* CompensationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompensationViewController.h; sourceTree = "<group>"; };
 		341362981DA9D88400FF17DC /* CompensationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompensationViewController.m; sourceTree = "<group>"; };
 		3413629A1DAA0D9300FF17DC /* SelectCityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectCityViewController.h; sourceTree = "<group>"; };
@@ -392,6 +399,8 @@
 		344E216D1DAC8DA400BB415D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3453214D1DB8CBAD0055D178 /* 30-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "30-1.png"; sourceTree = "<group>"; };
 		3453214E1DB8CBAD0055D178 /* 30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 30.png; sourceTree = "<group>"; };
+		3453B73F1DD43E1100D6B7F0 /* AddDiagnoseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddDiagnoseViewController.h; sourceTree = "<group>"; };
+		3453B7401DD43E1100D6B7F0 /* AddDiagnoseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddDiagnoseViewController.m; sourceTree = "<group>"; };
 		34607C691DBEF320006B8E2D /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		34607C6A1DBEF320006B8E2D /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		34607C6C1DBEFFD5006B8E2D /* CommUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommUtil.h; sourceTree = "<group>"; };
@@ -983,6 +992,8 @@
 				3475F25D1DD1BC7000F4D01F /* SelectDefiniteCityViewController.m */,
 				343841901DD2C43800583A69 /* AddCarePeopleViewController.h */,
 				343841911DD2C43800583A69 /* AddCarePeopleViewController.m */,
+				3453B73F1DD43E1100D6B7F0 /* AddDiagnoseViewController.h */,
+				3453B7401DD43E1100D6B7F0 /* AddDiagnoseViewController.m */,
 			);
 			name = "医疗探视";
 			sourceTree = "<group>";
@@ -1120,10 +1131,14 @@
 				344ADBFB1DC9B650002ACE3D /* ClaimModel.m */,
 				344537D51DC9E29A00237DA3 /* ContactPeopleModel.h */,
 				344537D61DC9E29A00237DA3 /* ContactPeopleModel.m */,
+				3405AD4F1DD456380064D1DA /* HospitalModel.h */,
+				3405AD501DD456380064D1DA /* HospitalModel.m */,
 				343841931DD2C4F600583A69 /* CarePeopleModel.h */,
 				343841941DD2C4F600583A69 /* CarePeopleModel.m */,
 				3475F2571DD1A1F100F4D01F /* CityModel.h */,
 				3475F2581DD1A1F100F4D01F /* CityModel.m */,
+				3405AD4C1DD43FDB0064D1DA /* BodyPartModel.h */,
+				3405AD4D1DD43FDB0064D1DA /* BodyPartModel.m */,
 			);
 			name = Model;
 			path = Images;
@@ -1916,7 +1931,9 @@
 				44FE6A291CBF5F5400C2A8A5 /* FMDatabaseAdditions.m in Sources */,
 				44FE6A691CBF63C800C2A8A5 /* UIButton+EXT.m in Sources */,
 				44FE6AB51CBF672400C2A8A5 /* MJRefreshBackStateFooter.m in Sources */,
+				3405AD4E1DD43FDB0064D1DA /* BodyPartModel.m in Sources */,
 				44FE6A621CBF63C800C2A8A5 /* NSDate+Extension.m in Sources */,
+				3453B7411DD43E1100D6B7F0 /* AddDiagnoseViewController.m in Sources */,
 				44FE6AAD1CBF672400C2A8A5 /* MJRefreshComponent.m in Sources */,
 				34839C481DB8B82A002EB9BD /* ContactNameTableViewCell.m in Sources */,
 				34FAF96B1D9A672B00D2FABC /* LoginViewController.m in Sources */,
@@ -2035,6 +2052,7 @@
 				446771F61D2B512D001721E6 /* UIViewController+REFrostedViewController.m in Sources */,
 				44FE6AD31CBF677800C2A8A5 /* AFHTTPRequestOperationManager.m in Sources */,
 				44FE6AB81CBF672400C2A8A5 /* MJRefreshStateHeader.m in Sources */,
+				3405AD511DD456380064D1DA /* HospitalModel.m in Sources */,
 				44FE6B0F1CBF682600C2A8A5 /* SDWebImageManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2186,8 +2204,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: yu dejian (4QTEFF37DT)";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: yu dejian (4QTEFF37DT)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Jingyou Century Software Technology Co., Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: Beijing Jingyou Century Software Technology Co., Ltd.";
 				DEVELOPMENT_TEAM = 358B5J757A;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2202,8 +2220,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jingyoutimes.PersonClaim;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7a2d521a-1904-4994-bb17-e9e957e4f38d";
-				PROVISIONING_PROFILE_SPECIFIER = PersonClaimDevelop;
+				PROVISIONING_PROFILE = "f9f6ee76-2368-4055-a229-284ba2e59503";
+				PROVISIONING_PROFILE_SPECIFIER = MyPersonClaimProduct;
 			};
 			name = Debug;
 		};
@@ -2211,8 +2229,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: yu dejian (4QTEFF37DT)";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: yu dejian (4QTEFF37DT)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Jingyou Century Software Technology Co., Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: Beijing Jingyou Century Software Technology Co., Ltd.";
 				DEVELOPMENT_TEAM = 358B5J757A;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2227,8 +2245,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jingyoutimes.PersonClaim;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7a2d521a-1904-4994-bb17-e9e957e4f38d";
-				PROVISIONING_PROFILE_SPECIFIER = PersonClaimDevelop;
+				PROVISIONING_PROFILE = "f9f6ee76-2368-4055-a229-284ba2e59503";
+				PROVISIONING_PROFILE_SPECIFIER = MyPersonClaimProduct;
 			};
 			name = Release;
 		};

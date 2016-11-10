@@ -15,11 +15,11 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="事故处理人" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J7V-mw-H0w">
-                        <rect key="frame" x="15" y="0.0" width="77" height="18"/>
+                        <rect key="frame" x="15" y="0.0" width="77" height="44"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="44" id="Uwg-dG-TaR"/>
                         </constraints>
@@ -28,7 +28,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="必填" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TMI-Cq-Qmo">
-                        <rect key="frame" x="270" y="0.0" width="35" height="18"/>
+                        <rect key="frame" x="105" y="0.0" width="200" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="200" id="6Oa-cd-1an"/>
+                        </constraints>
                         <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <textInputTraits key="textInputTraits"/>
@@ -36,11 +39,11 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="J7V-mw-H0w" secondAttribute="bottom" id="3bt-49-9ni"/>
-                    <constraint firstItem="TMI-Cq-Qmo" firstAttribute="bottom" secondItem="J7V-mw-H0w" secondAttribute="bottom" id="7fs-94-9gW"/>
+                    <constraint firstItem="TMI-Cq-Qmo" firstAttribute="bottom" secondItem="J7V-mw-H0w" secondAttribute="bottom" id="Vfj-HV-Q4D"/>
+                    <constraint firstItem="TMI-Cq-Qmo" firstAttribute="top" secondItem="J7V-mw-H0w" secondAttribute="top" id="caq-aP-HTk"/>
                     <constraint firstAttribute="trailing" secondItem="TMI-Cq-Qmo" secondAttribute="trailing" constant="15" id="fDq-DA-kpN"/>
                     <constraint firstItem="J7V-mw-H0w" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="pFj-7v-wft"/>
                     <constraint firstItem="J7V-mw-H0w" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="srB-7M-8dp"/>
-                    <constraint firstItem="TMI-Cq-Qmo" firstAttribute="top" secondItem="J7V-mw-H0w" secondAttribute="top" id="vwq-i3-i1b"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

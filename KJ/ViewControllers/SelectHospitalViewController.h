@@ -9,7 +9,7 @@
 #import "BaseTableViewController.h"
 #import "CityModel.h"
 @interface SelectHospitalViewController : BaseTableViewController
-@property (nonatomic,copy)void (^SelectCityBlock)(NSString *city);
+@property (nonatomic,copy)void (^SelectHospitalBlock)(NSString *Hospital);
 //已选城市
 @property (nonatomic,copy)NSString *city;
 @end

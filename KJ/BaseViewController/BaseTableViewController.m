@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _pageNO = 1;
-    _pageSize = 15;
+    _pageSize = 20;
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithHexString:Colorblue]];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithHexString:Colorwhite],NSForegroundColorAttributeName,[UIFont systemFontOfSize:17],NSFontAttributeName,nil]];
     [self.view addSubview:self.tableView];

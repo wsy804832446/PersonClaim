@@ -10,100 +10,73 @@
 #import "SelectCityTableViewCell.h"
 #import "MyTextField.h"
 #import "SelectDefiniteCityViewController.h"
-@interface SelectHospitalViewController ()<UITextFieldDelegate>
+#import "HospitalModel.h"
+@interface SelectHospitalViewController ()<UITextFieldDelegate,CLLocationManagerDelegate>
 //搜索框
 @property (nonatomic,strong)MyTextField *txtSearch;
-//索引字母数组
-@property (nonatomic,strong)NSMutableArray *sectionIndexArr;
-//索引字母下医院
-@property (nonatomic,strong)NSMutableDictionary *sectionIndexDic;
 //RightBarButton
 @property (nonatomic,strong)UIBarButtonItem *barButtonItem;
 //当前城市
-@property (nonatomic,strong)CityModel *cureentCity;
+@property (nonatomic,strong)CityModel *currentCity;
+
+@property (nonatomic,strong)CLLocationManager * locationManger;
 @end
 
 @implementation SelectHospitalViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self OpenLocation];
     self.VCstyle = UITableViewStylePlain;
-    self.tableView.top = self.txtSearch.bottom;
+    self.tableView.top = self.txtSearch.bottom+10;
     self.tableView.height = DeviceSize.height-self.tableView.top-64;
+    [self setIsOpenFooterRefresh:YES];
+    [self setIsOpenHeaderRefresh:YES];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItemExtension leftButtonItem:@selector(leftAction) andTarget:self];
     self.navigationItem.rightBarButtonItem = self.barButtonItem;
-    [self siftDataWithCityCode];
     self.tableView.sectionIndexColor = [UIColor colorWithHexString:Colorblue];
     [self.view addSubview:self.txtSearch];
-    self.pageSize = 20;
-    self.pageNO =1;
     // Do any additional setup after loading the view.
 }
 //医院数据
 -(void)siftDataWithCityCode{
     WeakSelf(SelectHospitalViewController);
     [weakSelf showHudWaitingView:WaitPrompt];
-    [[NetWorkManager shareNetWork]getHospitalListWithDealLocalCode:self.cureentCity.Id andHospitalName:self.txtSearch.text andPageNo:self.pageNO andPageSize:self.pageSize andFlag:@"1" andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response){
+    [[NetWorkManager shareNetWork]getHospitalListWithDealLocalCode:self.currentCity.Id andHospitalName:self.txtSearch.text andPageNo:self.pageNO andPageSize:self.pageSize andFlag:@"1" andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response){
         [weakSelf removeMBProgressHudInManaual];
         if ([response.responseCode isEqual:@"1"]) {
-            [weakSelf.dataArray removeAllObjects];
-            [weakSelf.sectionIndexArr removeAllObjects];
-            [weakSelf.sectionIndexDic removeAllObjects];
-            for (NSDictionary *dic in response.dataArray){
-                CityModel *model = [MTLJSONAdapter modelOfClass:[CityModel class] fromJSONDictionary:dic error:NULL];
+            if (weakSelf.pageNO == 1) {
+                [weakSelf.dataArray removeAllObjects];
+            }
+            for (NSDictionary *dic in response.dataDic[@"hosptialList"]) {
+                HospitalModel *model = [MTLJSONAdapter modelOfClass:[HospitalModel class] fromJSONDictionary:dic error:NULL];
                 [weakSelf.dataArray addObject:model];
             }
-            for (CityModel *model in self.dataArray){
-                NSString *character = [self firstCharactor:model.name];
-                //之后往字母索引字典里放
-                if (![_sectionIndexDic objectForKey:character]) {
-                    [_sectionIndexDic setObject:[NSMutableArray array] forKey:character];
-                }
-                if (![_sectionIndexArr containsObject:character]) {
-                    [_sectionIndexArr addObject:character];
-                }
-                [_sectionIndexDic[character] addObject:model];
-            }
-            [_sectionIndexArr sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-                return obj1>obj2;
-            }];
             [weakSelf.tableView reloadData];
         }else{
             [weakSelf showHudAuto:response.message];
+            weakSelf.pageNO-=1;
         }
+        [weakSelf.tableView.header endRefreshing];
+        [weakSelf.tableView.footer endRefreshing];
     } andFailure:^(NSURLSessionDataTask *urlSessionDataTask, NSError *error) {
         [weakSelf removeMBProgressHudInManaual];
         [weakSelf showHudAuto:InternetFailerPrompt];
+        weakSelf.pageNO-=1;
+        [weakSelf.tableView.header endRefreshing];
+        [weakSelf.tableView.footer endRefreshing];
     }];
     
 }
-//汉子转拼音首字母
-- (NSString *)firstCharactor:(NSString *)aString
-{
-    //转成了可变字符串
-    NSMutableString *str = [NSMutableString stringWithString:aString];
-    //先转换为带声调的拼音
-    CFStringTransform((CFMutableStringRef)str,NULL, kCFStringTransformMandarinLatin,NO);
-    //再转换为不带声调的拼音
-    CFStringTransform((CFMutableStringRef)str,NULL, kCFStringTransformStripDiacritics,NO);
-    //转化为大写拼音
-    NSString *pinYin = [str capitalizedString];
-    //获取并返回首字母
-    return [pinYin substringToIndex:1];
-}
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return _sectionIndexArr.count;
+    return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    for (NSString *str in _sectionIndexDic.allKeys) {
-        if ([_sectionIndexArr[section] isEqual:str]) {
-            return [_sectionIndexDic[str] count];
-        }
-    }
-    return 0;
+    return self.dataArray.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    //选择城市cell复用
     SelectCityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SelectCityTableViewCell"];
     if (!cell) {
         NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"SelectCityTableViewCell" owner:nil options:nil];
@@ -111,73 +84,122 @@
             cell = [nib firstObject];
         }
     }
-    if (indexPath.section<_sectionIndexArr.count) {
-        NSString *key = _sectionIndexArr[indexPath.section];
-        NSArray *cityArray = [_sectionIndexDic objectForKey:key];
-        if (indexPath.row<cityArray.count) {
-            CityModel *model = cityArray[indexPath.row];
-            cell.cityLabel.text = model.name;
-            cell.cityId = model.Id;
-        }
-        cell.cityLabel.textColor = [UIColor colorWithHexString:Colorblack];
-    }
+    HospitalModel *model = self.dataArray[indexPath.row];
+    cell.cityLabel.text = model.hospitalName;
+    cell.cityId = model.hospitalId;
+    cell.cityLabel.textColor = [UIColor colorWithHexString:Colorblack];
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    SelectCityTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    if (self.SelectCityBlock) {
-        self.SelectCityBlock(cell.cityLabel.text);
-    }
-    [self.navigationController popViewControllerAnimated:YES];
-}
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 36;
-}
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 36)];
-    view.backgroundColor = [UIColor colorWithHexString:pageBackgroundColor];
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, 0, 36)];
-    label.text = _sectionIndexArr[section];
-    label.font = [UIFont systemFontOfSize:15];
-    label.textColor = [UIColor colorWithHexString:Colorgray];
-    label.frame = CGRectMake(15, 0, label.text.length*15, 36);
-    [view addSubview:label];
-    return view;
-}
--(NSArray<NSString *>*)sectionIndexTitlesForTableView:(UITableView *)tableView{
-    return [_sectionIndexArr subarrayWithRange:NSMakeRange(1, _sectionIndexArr.count-1)];
-}
--(NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index{
-    [tableView
-     scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:index+1]
-     atScrollPosition:UITableViewScrollPositionTop animated:YES];
-    return index+1;
-}
--(NSMutableArray *)sectionIndexArr{
-    if (!_sectionIndexArr) {
-        _sectionIndexArr = [NSMutableArray array];
-    }
-    return _sectionIndexArr;
-}
--(NSMutableDictionary *)sectionIndexDic{
-    if (!_sectionIndexDic) {
-        _sectionIndexDic = [NSMutableDictionary dictionary];
-    }
-    return _sectionIndexDic;
 }
 -(void)leftAction{
     [self.navigationController popViewControllerAnimated:YES];
 }
--(void)rightAction{
+-(void)rightAction:(UIButton *)btn{
     SelectDefiniteCityViewController *vc = [[SelectDefiniteCityViewController alloc]init];
     [vc setSelectCityBlock:^(CityModel *cityModel) {
-        self.cureentCity = cityModel;
-        [self.tableView reloadData];
+        self.currentCity = cityModel;
+        [btn setTitle:cityModel.name forState:UIControlStateNormal];
+        [self siftDataWithCityCode];
     }];
     [self.navigationController pushViewController:vc animated:YES];
 }
 -(void)txtChange:(MyTextField *)txt{
+}
+-(void)OpenLocation{
+    if ([CLLocationManager locationServicesEnabled]) {
+        if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"打开定位服务来允许人伤跟踪系统确定您的位置" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                SelectDefiniteCityViewController *vc = [[SelectDefiniteCityViewController alloc]init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }];
+            UIAlertAction *call = [UIAlertAction actionWithTitle:@"设置" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+            }];
+            [alert addAction:cancel];
+            [alert addAction:call];
+            [self presentViewController:alert animated:YES completion:nil];
+        }else if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined){
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"允许人伤跟踪系统在您使用该应用时，访问您的位置吗?" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"不允许" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                SelectDefiniteCityViewController *vc = [[SelectDefiniteCityViewController alloc]init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }];
+            UIAlertAction *call = [UIAlertAction actionWithTitle:@"允许" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                //定位功能可用，开始定位
+                [self.locationManger startUpdatingLocation];
+            }];
+            [alert addAction:cancel];
+            [alert addAction:call];
+            [self presentViewController:alert animated:YES completion:nil];
+        }else{
+            [self.locationManger startUpdatingLocation];
+        }
+    }else{
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"打开定位服务来允许人伤跟踪系统确定您的位置" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            SelectDefiniteCityViewController *vc = [[SelectDefiniteCityViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }];
+        UIAlertAction *call = [UIAlertAction actionWithTitle:@"设置" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+        }];
+        [alert addAction:cancel];
+        [alert addAction:call];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+}
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations{
+    //此处locations存储了持续更新的位置坐标值，取最后一个值为最新位置，如果不想让其持续更新位置，则在此方法中获取到一个值之后让locationManager stopUpdatingLocation
+    CLLocation *currentLocation = [locations lastObject];
+    // 获取当前所在的城市名
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    //根据经纬度反向地理编译出地址信息
+    [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *array, NSError *error)
+     {
+         if (array.count > 0)
+         {
+             CLPlacemark *placemark = [array objectAtIndex:0];
+             //NSLog(@%@,placemark.name);//具体位置
+             //获取城市
+             NSString *city = placemark.locality;
+             if (!city) {
+                 //四大直辖市的城市信息无法通过locality获得，只能通过获取省份的方法来获得（如果city为空，则可知为直辖市）
+                 city = placemark.administrativeArea;
+             }
+             //系统会一直更新数据，直到选择停止更新，因为我们只需要获得一次经纬度即可，所以获取之后就停止更新
+             [manager stopUpdatingLocation];
+             NSArray *cityArray =[CommUtil readDataWithFileName:@"disorderCityList"];
+             for (CityModel *model in cityArray) {
+                 if ([model.name isEqual:city]) {
+                     self.currentCity =model;
+                     [self siftDataWithCityCode];
+                 }
+             }
+         }else if (error == nil && [array count] == 0)
+         {
+         }else if (error != nil)
+         {
+             NSLog(@"%@",error);
+         }
+     }];
+}
+//监控用户会否授权
+-(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    if (status == kCLAuthorizationStatusAuthorizedAlways ||status == kCLAuthorizationStatusAuthorizedWhenInUse) {
+    }
+}
+-(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
+    NSLog(@"%@",error);
+}
+-(void)headerRequestWithData{
+    [self siftDataWithCityCode];
+}
+-(void)footerRequestWithData{
+    [self siftDataWithCityCode];
 }
 -(MyTextField *)txtSearch{
     if (!_txtSearch) {
@@ -201,7 +223,7 @@
 -(UIBarButtonItem *)barButtonItem{
     if (!_barButtonItem) {
         UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [rightButton addTarget:self action:@selector(rightAction) forControlEvents:UIControlEventTouchUpInside];
+        [rightButton addTarget:self action:@selector(rightAction:) forControlEvents:UIControlEventTouchUpInside];
         [rightButton setTitleColor:[UIColor colorWithHexString:Colorwhite] forState:UIControlStateNormal];
         [rightButton setTitle:@"北 京" forState:UIControlStateNormal];
         rightButton.titleLabel.font = [UIFont boldSystemFontOfSize:15];
@@ -214,7 +236,14 @@
     }
     return _barButtonItem;
 }
-
+-(CLLocationManager *)locationManger{
+    if (!_locationManger) {
+        _locationManger = [[CLLocationManager alloc]init];
+        _locationManger.delegate = self;
+        [_locationManger requestAlwaysAuthorization];
+    }
+    return _locationManger;
+}
 -(NSString *)title{
     return @"选择医院";
 }

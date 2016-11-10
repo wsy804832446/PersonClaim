@@ -49,4 +49,6 @@ typedef void (^uploadProgressBlock)(long long bytesSent, long long totalBytesSen
 -(void)getCityListWithSearchCode:(NSString *)searchCode andCompletionBlockWithSuccess:(CompletionBlockWithSuccess) success andFailure:(FailureBlock) failure;
 //拉取医院列表
 -(void)getHospitalListWithDealLocalCode:(NSString *)dealLocalCode andHospitalName:(NSString *)hospitalName andPageNo:(NSInteger)pageNo andPageSize:(NSInteger) pageSize andFlag:(NSString *)flag andCompletionBlockWithSuccess:(CompletionBlockWithSuccess) success andFailure:(FailureBlock) failure;
+//拉取诊断列表
+-(void)getDiagnoseListWithCompletionBlockWithSuccess:(CompletionBlockWithSuccess) success andFailure:(FailureBlock) failure;
 @end

@@ -10,7 +10,7 @@
 
 @implementation CityModel
 +(NSDictionary *)JSONKeyPathsByPropertyKey{
-    return @{@"Id":@"id"};
+    return @{@"Id":@"aid"};
 }
 -(NSMutableArray *)array{
     if (!_array) {

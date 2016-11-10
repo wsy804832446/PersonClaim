@@ -292,4 +292,10 @@ static NetWorkManager *thNetWorkManager = nil;
     NSMutableDictionary *paramDic =[self dataDicAndRequestCodeWithDic:dataDic andRequestCode:@"002016"];
     [self requestOperation:kServerHost andParams:paramDic andHeaderFieldParams:nil andHttpRequestMethod:HttpRequestMethodPOST andCompletionBlockWithSuccess:success andFailure:failure];
 }
+-(void)getDiagnoseListWithCompletionBlockWithSuccess:(CompletionBlockWithSuccess)success andFailure:(FailureBlock)failure{
+    NSDictionary *dataDic =@{};
+    NSMutableDictionary *paramDic =[self dataDicAndRequestCodeWithDic:dataDic andRequestCode:@"002029"];
+    [self requestOperation:kServerHost andParams:paramDic andHeaderFieldParams:nil andHttpRequestMethod:HttpRequestMethodPOST andCompletionBlockWithSuccess:success andFailure:failure];
+
+}
 @end

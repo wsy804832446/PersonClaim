@@ -19,7 +19,8 @@
 #import "AccidentAddressTableViewCell.h"
 #import "SelectHospitalViewController.h"
 #import "AddCarePeopleViewController.h"
-@interface MedicalVisitViewController ()<UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+#import "AddDiagnoseViewController.h"
+@interface MedicalVisitViewController ()<UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate>
 @property (nonatomic,assign)NSInteger contactNum;
 @property (nonatomic,strong)UILabel *placeHolder;
 //添加的联系人数组
@@ -88,9 +89,10 @@
         lblContact.font = [UIFont systemFontOfSize:15];
        
         UIButton *btnAdd = [UIButton buttonWithType:UIButtonTypeCustom];
+        btnAdd.frame = CGRectMake(DeviceSize.width-65, 0, 50, 44);
         [btnAdd setImage:[UIImage imageNamed:@"15-添加电话"] forState:UIControlStateNormal];
         [btnAdd setImage:[UIImage imageNamed:@"15-1"] forState:UIControlStateHighlighted];
-        btnAdd.frame = CGRectMake(DeviceSize.width-38, 14.5, 13, 13);
+        [btnAdd setImageEdgeInsets:UIEdgeInsetsMake(15.5, 26.5, 15.5, 10.5)];
         if (section == 0) {
             lblContact.text = @"医院";
             [btnAdd addTarget:self action:@selector(addHospital) forControlEvents:UIControlEventTouchUpInside];
@@ -113,7 +115,8 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 -(void)addDiagnose{
-    
+    AddDiagnoseViewController *vc = [[AddDiagnoseViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 -(void)addCarePeople{
     AddCarePeopleViewController *vc = [[AddCarePeopleViewController alloc]init];
@@ -144,6 +147,9 @@
             }
             cell.lblTitle.text = @"已发生医疗费";
             [cell.txtName addTarget:self action:@selector(txtChange:) forControlEvents:UIControlEventEditingChanged];
+            cell.txtName.delegate =self;
+            cell.txtName.keyboardType =UIKeyboardTypeDecimalPad;
+            cell.txtName.textAlignment = NSTextAlignmentRight;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.lblTitle.textColor = [UIColor colorWithHexString:@"#666666"];
             return cell;
@@ -419,7 +425,35 @@
 }
 -(void)txtChange:(UITextField *)txt{
     self.infoModel.address =txt.text;
-    txt.frame = CGRectMake(DeviceSize.width-15-txt.text.length*16, txt.frame.origin.y, txt.text.length*16, txt.frame.size.height);
 }
-
+//设置文本框只能输入数字
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    //如果是限制只能输入数字的文本框
+    return [self validateNumber:string];
+}
+- (BOOL)validateNumber:(NSString*)number {
+    BOOL res =YES;
+    NSCharacterSet* tmpSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789."];
+    int i =0;
+    while (i < number.length) {
+        NSString * string = [number substringWithRange:NSMakeRange(i,1)];
+        NSRange range = [string rangeOfCharacterFromSet:tmpSet];
+        if (range.length ==0) {
+            res =NO;
+            break;
+        }
+        i++;
+    }
+    return res;
+}
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
+}
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    [self.view endEditing:YES];
+}
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
 @end
