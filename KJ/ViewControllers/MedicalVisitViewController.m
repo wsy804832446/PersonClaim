@@ -9,7 +9,6 @@
 #import "MedicalVisitViewController.h"
 #import "EditDealInfoViewController.h"
 #import "EditInfoViewController.h"
-#import "AddContactPersonViewController.h"
 #import "AccidentTimeTableViewCell.h"
 #import "MedicalVisitTableViewCell.h"
 #import "PersonalInformationTableViewCell3.h"
@@ -20,11 +19,18 @@
 #import "SelectHospitalViewController.h"
 #import "AddCarePeopleViewController.h"
 #import "AddDiagnoseViewController.h"
+#import "SearchTableViewCell.h"
+#import "DepartmentsModel.h"
+#import "CarePeopleModel.h"
 @interface MedicalVisitViewController ()<UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate>
 @property (nonatomic,assign)NSInteger contactNum;
 @property (nonatomic,strong)UILabel *placeHolder;
-//添加的联系人数组
-@property (nonatomic,strong)NSMutableArray *contactPeopleArray;
+//添加的医院数组
+@property (nonatomic,strong)NSMutableArray *hospitalArray;
+//添加的诊断数组
+@property (nonatomic,strong)NSMutableArray *diagnoseArray;
+//添加的护理人数组
+@property (nonatomic,strong)NSMutableArray *carePeopleArray;
 @property (nonatomic,strong)UIButton *btnCommit;
 @property (nonatomic,strong)UIButton *btnSave;
 //本页面信息model
@@ -61,11 +67,11 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
-        return 0;
+        return self.hospitalArray.count;
     }else if(section == 1){
         return 0;
     }else if(section == 2){
-        return 0;
+        return self.carePeopleArray.count;;
     }else{
         return 4;
     }
@@ -76,6 +82,16 @@
     }else{
         return 0;
     }
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if (section ==0 &&self.hospitalArray.count>0) {
+        return 10;
+    }else if (section == 1&&self.diagnoseArray.count>0){
+        return 10;
+    }else if (section == 2&&self.carePeopleArray.count>0){
+        return 10;
+    }
+    return 0;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section <3) {
@@ -112,6 +128,11 @@
 }
 -(void)addHospital{
     SelectHospitalViewController *vc = [[SelectHospitalViewController alloc]init];
+    [vc setSelectBlock:^(HospitalModel *model, NSMutableArray *array) {
+        NSDictionary *dic = @{@"Hospital":model,@"department":array};
+        [self.hospitalArray addObject:dic];
+        [self.tableView reloadData];
+    }];
     [self.navigationController pushViewController:vc animated:YES];
 }
 -(void)addDiagnose{
@@ -120,8 +141,9 @@
 }
 -(void)addCarePeople{
     AddCarePeopleViewController *vc = [[AddCarePeopleViewController alloc]init];
-    [vc setContactBlock:^(NSMutableArray *careArray) {
-        
+    [vc setAddCareBlock:^(NSMutableArray *array) {
+        [self.carePeopleArray addObjectsFromArray:array];
+        [self.tableView reloadData];
     }];
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -133,6 +155,24 @@
             if (nib.count>0) {
                 cell = [nib firstObject];
             }
+        }
+        if (indexPath.section == 0) {
+            NSDictionary *dic = self.hospitalArray[indexPath.row];
+            NSMutableString *detailString = [NSMutableString string];
+            HospitalModel *model = dic[@"Hospital"];
+            for (DepartmentsModel *departmentsModel in dic[@"department"]) {
+                if(detailString.length>0){
+                    [detailString appendString:@"、"];
+                }
+                [detailString appendString:departmentsModel.value];
+            }
+            cell.lblTitle.text = model.hospitalName;
+            cell.lblDetail.text = detailString;
+        }else if (indexPath.section == 2){
+            CarePeopleModel *model = self.carePeopleArray[indexPath.row];
+            cell.lblTitle.text = model.name;
+            cell.lblDetail.text = model.identity;
+            cell.lblMoney.text = model.cost;
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -257,11 +297,23 @@
 -(NSString *)title{
     return @"编辑";
 }
--(NSMutableArray *)contactPeopleArray{
-    if (!_contactPeopleArray) {
-        _contactPeopleArray = [NSMutableArray array];
+-(NSMutableArray *)carePeopleArray{
+    if (!_carePeopleArray) {
+        _carePeopleArray = [NSMutableArray array];
     }
-    return _contactPeopleArray;
+    return _carePeopleArray;
+}
+-(NSMutableArray *)hospitalArray{
+    if (!_hospitalArray) {
+        _hospitalArray = [NSMutableArray array];
+    }
+    return _hospitalArray;
+}
+-(NSMutableArray *)diagnoseArray{
+    if (!_diagnoseArray) {
+        _diagnoseArray = [NSMutableArray array];
+    }
+    return _diagnoseArray;
 }
 //开始拍照
 -(void)openMenu

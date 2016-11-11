@@ -9,6 +9,7 @@
 #import "AddDiagnoseViewController.h"
 #import "PersonalInformationTableViewCell2.h"
 #import "BodyPartModel.h"
+#import "AddDiagnoseDetailViewController.h"
 @interface AddDiagnoseViewController ()
 
 @end
@@ -62,6 +63,11 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    AddDiagnoseDetailViewController *vc = [[AddDiagnoseDetailViewController alloc]init];
+    BodyPartModel *model = self.dataArray[indexPath.row];
+    vc.title = model.name;
+    vc.Id = model.Id;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

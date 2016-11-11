@@ -298,4 +298,15 @@ static NetWorkManager *thNetWorkManager = nil;
     [self requestOperation:kServerHost andParams:paramDic andHeaderFieldParams:nil andHttpRequestMethod:HttpRequestMethodPOST andCompletionBlockWithSuccess:success andFailure:failure];
 
 }
+-(void)getDiagnoseDeatilListWithKindCode:(NSString *)kindCode andSearchCode:(NSString *)searchCode andPageNo:(NSInteger)pageNo andPageSize:(NSInteger)pageSize andCompletionBlockWithSuccess:(CompletionBlockWithSuccess)success andFailure:(FailureBlock)failure{
+    if (!kindCode) {
+        kindCode = @"";
+    }
+    if (!searchCode) {
+        searchCode = @"";
+    }
+    NSDictionary *dataDic = @{@"kindCode":kindCode,@"searchCode":searchCode,@"pageNo":[NSNumber numberWithInteger:pageNo],@"pageSize":[NSNumber numberWithInteger:pageSize]};
+    NSMutableDictionary *paramDic =[self dataDicAndRequestCodeWithDic:dataDic andRequestCode:@"002022"];
+    [self requestOperation:kServerHost andParams:paramDic andHeaderFieldParams:nil andHttpRequestMethod:HttpRequestMethodPOST andCompletionBlockWithSuccess:success andFailure:failure];
+}
 @end

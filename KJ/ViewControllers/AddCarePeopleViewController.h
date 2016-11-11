@@ -10,5 +10,5 @@
 #import "CarePeopleModel.h"
 @interface AddCarePeopleViewController : BaseTableViewController
 //添加护理人回调
-@property(nonatomic,copy)void(^contactBlock)(NSMutableArray *array);
+@property(nonatomic,copy)void(^addCareBlock)(NSMutableArray *array);
 @end

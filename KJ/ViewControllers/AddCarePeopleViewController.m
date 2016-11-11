@@ -37,12 +37,21 @@
 }
 -(void)rightAction{
     for (int i=0; i<self.dataArray.count; i++) {
-        ContactPeopleModel *model = self.dataArray[i];
-
+        CarePeopleModel *model = self.dataArray[i];
+        for (int j=2; j<5; j++) {
+            DealNameTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:j inSection:i]];
+            if (j==2) {
+                model.name = cell.txtName.text;
+            }else if (j==3){
+                model.days = cell.txtName.text;
+            }else if (j==4){
+                model.cost = cell.txtName.text;
+            }
+        }
         [self.selectCareArray addObject:model];
     }
-    if (self.contactBlock) {
-        self.contactBlock(self.selectCareArray);
+    if (self.addCareBlock) {
+        self.addCareBlock(self.selectCareArray);
     }
     [self.navigationController popViewControllerAnimated:YES];
 }

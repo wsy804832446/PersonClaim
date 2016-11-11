@@ -11,6 +11,8 @@
 #import "MyTextField.h"
 #import "SelectDefiniteCityViewController.h"
 #import "HospitalModel.h"
+#import "SelectDepartmentViewController.h"
+#import "DepartmentsModel.h"
 @interface SelectHospitalViewController ()<UITextFieldDelegate,CLLocationManagerDelegate>
 //搜索框
 @property (nonatomic,strong)MyTextField *txtSearch;
@@ -20,6 +22,8 @@
 @property (nonatomic,strong)CityModel *currentCity;
 
 @property (nonatomic,strong)CLLocationManager * locationManger;
+//下一页科室array
+@property (nonatomic,strong)NSMutableArray *departmentsArray;
 @end
 
 @implementation SelectHospitalViewController
@@ -48,6 +52,11 @@
         if ([response.responseCode isEqual:@"1"]) {
             if (weakSelf.pageNO == 1) {
                 [weakSelf.dataArray removeAllObjects];
+            }
+            [self.departmentsArray removeAllObjects];
+            for (NSDictionary *dic in response.dataDic[@"dictList"]) {
+                DepartmentsModel *model = [MTLJSONAdapter modelOfClass:[DepartmentsModel class] fromJSONDictionary:dic error:NULL];
+                [self.departmentsArray addObject:model];
             }
             for (NSDictionary *dic in response.dataDic[@"hosptialList"]) {
                 HospitalModel *model = [MTLJSONAdapter modelOfClass:[HospitalModel class] fromJSONDictionary:dic error:NULL];
@@ -92,6 +101,15 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    SelectDepartmentViewController *vc = [[SelectDepartmentViewController alloc]init];
+    vc.dataArray = self.departmentsArray;
+    vc.hospitalModel = self.dataArray[indexPath.row];
+    [vc setSelectBlock:^(HospitalModel *model, NSMutableArray *array) {
+        if (self.selectBlock) {
+            self.selectBlock(model,array);
+        }
+    }];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 -(void)leftAction{
     [self.navigationController popViewControllerAnimated:YES];
@@ -243,6 +261,12 @@
         [_locationManger requestAlwaysAuthorization];
     }
     return _locationManger;
+}
+-(NSMutableArray *)departmentsArray{
+    if (!_departmentsArray) {
+        _departmentsArray = [NSMutableArray array];
+    }
+    return _departmentsArray;
 }
 -(NSString *)title{
     return @"选择医院";

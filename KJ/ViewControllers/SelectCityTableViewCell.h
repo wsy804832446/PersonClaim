@@ -13,5 +13,5 @@
 //选中对勾
 @property (copy, nonatomic) NSString *cityId;
 @property (strong, nonatomic) IBOutlet UIImageView *imgView;
-
+@property(nonatomic,assign)BOOL isSelected;
 @end

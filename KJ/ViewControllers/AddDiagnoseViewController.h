@@ -9,5 +9,4 @@
 #import "BaseTableViewController.h"
 
 @interface AddDiagnoseViewController : BaseTableViewController
-
 @end
