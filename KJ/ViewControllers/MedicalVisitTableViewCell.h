@@ -12,5 +12,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblTitle;
 @property (strong, nonatomic) IBOutlet UILabel *lblDetail;
 @property (strong, nonatomic) IBOutlet UILabel *lblMoney;
+@property (strong, nonatomic) IBOutlet UIView *line;
 
 @end

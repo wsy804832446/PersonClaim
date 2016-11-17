@@ -28,9 +28,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.VCstyle = UITableViewStyleGrouped;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItemExtension leftButtonItem:@selector(leftAction) andTarget:self];
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItemExtension rightButtonItem:@selector(rightAction:) andTarget:self andImageName:@"8-搜索"];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItemExtension rightButtonItem:@selector(rightAction) andTarget:self andImageName:@"8-搜索"];
     [self.view addSubview:self.searchScrollView];
     self.itemsArr = @[@"全部",@"代办",@"进行中",@"超时",@"完成"];
     [self AddSegumentArray:_itemsArr];
@@ -43,6 +42,9 @@
 }
 -(void)leftAction{
     [self.navigationController popViewControllerAnimated:YES];
+}
+-(void)rightAction{
+    
 }
 -(void)AddSegumentArray:(NSArray *)SegumentArray
 {
@@ -173,7 +175,7 @@
     cell.lblNum.textColor = [UIColor colorWithHexString:Colorgray];
     if (self.selectIndex == 3) {
         cell.lblState.text = nil;
-        NSMutableAttributedString *str = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"超%ld天",indexPath.row]];
+        NSMutableAttributedString *str = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"超%ld天",(long)indexPath.row]];
         NSDictionary *dict = @{NSForegroundColorAttributeName:[UIColor redColor],NSFontAttributeName:[UIFont systemFontOfSize:15]};
         NSDictionary *dict2 = @{NSForegroundColorAttributeName:[UIColor colorWithHexString:Colorgray],NSFontAttributeName:[UIFont systemFontOfSize:12]};
         [str addAttributes:dict range:NSMakeRange(1, str.length-2)];

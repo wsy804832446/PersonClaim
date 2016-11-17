@@ -74,10 +74,19 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f7w-fy-Kxy">
+                        <rect key="frame" x="15" y="0.0" width="290" height="1"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="Nqr-Ey-7oX"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="VIS-rF-xKT" firstAttribute="top" secondItem="C4F-jw-pnt" secondAttribute="top" id="2Ab-N9-7Up"/>
                     <constraint firstItem="cyd-OA-ABn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="7D4-np-hpo"/>
+                    <constraint firstItem="f7w-fy-Kxy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="7oV-eC-25t"/>
+                    <constraint firstAttribute="trailing" secondItem="f7w-fy-Kxy" secondAttribute="trailing" constant="15" id="Cj8-b4-Lg5"/>
                     <constraint firstItem="VIS-rF-xKT" firstAttribute="trailing" secondItem="hql-D0-hTy" secondAttribute="trailing" id="EWh-xj-yVo"/>
                     <constraint firstAttribute="trailing" secondItem="VIS-rF-xKT" secondAttribute="trailing" constant="15" id="LhC-Vp-oza"/>
                     <constraint firstItem="hql-D0-hTy" firstAttribute="bottom" secondItem="s6j-TN-DuZ" secondAttribute="bottom" id="PeM-JP-amR"/>
@@ -87,6 +96,7 @@
                     <constraint firstItem="s6j-TN-DuZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="fIJ-v8-am0"/>
                     <constraint firstItem="C4F-jw-pnt" firstAttribute="leading" secondItem="rjP-HY-EgT" secondAttribute="trailing" constant="5" id="nQ3-Rs-Ki0"/>
                     <constraint firstItem="rjP-HY-EgT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="qh6-yM-uo2"/>
+                    <constraint firstItem="f7w-fy-Kxy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="rQX-TZ-gJf"/>
                     <constraint firstItem="C4F-jw-pnt" firstAttribute="top" secondItem="rjP-HY-EgT" secondAttribute="top" id="sL5-rM-CJM"/>
                     <constraint firstItem="rjP-HY-EgT" firstAttribute="top" secondItem="s6j-TN-DuZ" secondAttribute="bottom" constant="7" id="tSS-4f-GOl"/>
                     <constraint firstItem="Cmx-JE-6mi" firstAttribute="bottom" secondItem="s6j-TN-DuZ" secondAttribute="bottom" id="tWQ-gZ-7Sz"/>
@@ -101,6 +111,7 @@
                 <outlet property="lblState" destination="Cmx-JE-6mi" id="nS6-5m-eDK"/>
                 <outlet property="lblTaskType" destination="cyd-OA-ABn" id="r0e-Z7-oLa"/>
                 <outlet property="lblTime" destination="C4F-jw-pnt" id="gj1-Md-5Or"/>
+                <outlet property="line" destination="f7w-fy-Kxy" id="I3f-ii-JIN"/>
             </connections>
         </tableViewCell>
     </objects>

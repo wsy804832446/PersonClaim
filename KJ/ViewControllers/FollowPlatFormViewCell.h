@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface FollowPlatFormViewCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UIView *line;
 //姓名
 @property (strong, nonatomic) IBOutlet UILabel *lblName;
 //报案号

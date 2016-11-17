@@ -17,7 +17,6 @@
 @implementation CompensationViewController
 
 - (void)viewDidLoad {
-    self.VCstyle = UITableViewStyleGrouped;
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self.view addSubview:self.seg];

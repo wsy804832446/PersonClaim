@@ -22,6 +22,7 @@
 #import "SearchTableViewCell.h"
 #import "DepartmentsModel.h"
 #import "CarePeopleModel.h"
+#import "DiagnoseDetailModel.h"
 @interface MedicalVisitViewController ()<UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate>
 @property (nonatomic,assign)NSInteger contactNum;
 @property (nonatomic,strong)UILabel *placeHolder;
@@ -44,23 +45,46 @@
 {
     UIAlertController *myActionSheet;
 }
+- (void)loadView
+{
+    [super loadView];
+    //  根据屏幕的高度自动计算弹出键盘是否试视图控制器是否向上滚动
+    self.view = [[TPKeyboardAvoidingScrollView alloc] initWithFrame:CGRectMake(0, 0, DeviceSize.width, DeviceSize.height - 64-54)];
+    [(TPKeyboardAvoidingScrollView *)self.view setContentSize:CGSizeMake(DeviceSize.width,  DeviceSize.height - 64-54)];
+     [self getLocalData];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.VCstyle = UITableViewStylePlain;
     self.tableView.top = 10;
     self.tableView.height = DeviceSize.height-self.tableView.top-64-54;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItemExtension leftButtonItem:@selector(leftAction) andTarget:self];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItemExtension rightButtonItem:@selector(rightAction) andTarget:self andTitleName:@"保存"];
     self.tableView.estimatedRowHeight = 100;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    self.tableView.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15);
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     UIView *bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, self.tableView.bottom, DeviceSize.width, 54)];
     bottomView.backgroundColor = [UIColor colorWithHexString:Colorwhite];
     [bottomView addSubview:self.btnCommit];
     [bottomView addSubview:self.btnSave];
     [self.view addSubview:bottomView];
+    //添加诊断通知
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(addDiagnose:) name:@"Diagnose" object:nil];
+    [self setUpForDismissKeyboard];
     // Do any additional setup after loading the view.
+}
+-(void)getLocalData{
+    self.infoModel =[CommUtil readDataWithFileName:self.taskModel.taskNo];
+    if (self.infoModel) {
+        self.hospitalArray =self.infoModel.hosArray;
+        self.diagnoseArray =self.infoModel.diaArray;
+        self.carePeopleArray =self.infoModel.carePeopleArray;
+    }
+}
+-(void)addDiagnose:(NSNotification *)text{
+    DiagnoseDetailModel *model = [MTLJSONAdapter modelOfClass:[DiagnoseDetailModel class] fromJSONDictionary:text.userInfo error:NULL];
+    [self.diagnoseArray addObject:model];
+    [self.tableView reloadData];
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 4;
@@ -69,7 +93,7 @@
     if (section == 0) {
         return self.hospitalArray.count;
     }else if(section == 1){
-        return 0;
+        return self.diagnoseArray.count;
     }else if(section == 2){
         return self.carePeopleArray.count;;
     }else{
@@ -80,7 +104,7 @@
     if (section < 3) {
         return 44;
     }else{
-        return 0;
+        return 0.01;
     }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -91,19 +115,19 @@
     }else if (section == 2&&self.carePeopleArray.count>0){
         return 10;
     }
-    return 0;
+    return 0.01;
 }
+
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section <3) {
         UIView *vc = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DeviceSize.width, 44)];
         vc.backgroundColor = [UIColor colorWithHexString:Colorwhite];
-        UIView *line =[[UIView alloc]initWithFrame:CGRectMake(15, 43, DeviceSize.width-30, 1)];
-        line.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
-        [vc addSubview:line];
         UILabel *lblContact = [[UILabel alloc]initWithFrame:CGRectMake(15, 1, 50, 41)];
         lblContact.textColor = [UIColor colorWithHexString:@"#666666"];
         lblContact.font = [UIFont systemFontOfSize:15];
-       
+        UIView *line =[[UIView alloc]initWithFrame:CGRectMake(15, 43, DeviceSize.width-30, 1)];
+        line.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
+        [vc addSubview:line];
         UIButton *btnAdd = [UIButton buttonWithType:UIButtonTypeCustom];
         btnAdd.frame = CGRectMake(DeviceSize.width-65, 0, 50, 44);
         [btnAdd setImage:[UIImage imageNamed:@"15-添加电话"] forState:UIControlStateNormal];
@@ -130,6 +154,7 @@
     SelectHospitalViewController *vc = [[SelectHospitalViewController alloc]init];
     [vc setSelectBlock:^(HospitalModel *model, NSMutableArray *array) {
         NSDictionary *dic = @{@"Hospital":model,@"department":array};
+        [self.hospitalArray removeAllObjects];
         [self.hospitalArray addObject:dic];
         [self.tableView reloadData];
     }];
@@ -156,6 +181,9 @@
                 cell = [nib firstObject];
             }
         }
+        if (indexPath.row == 0) {
+            [cell.line removeFromSuperview];
+        }
         if (indexPath.section == 0) {
             NSDictionary *dic = self.hospitalArray[indexPath.row];
             NSMutableString *detailString = [NSMutableString string];
@@ -168,11 +196,17 @@
             }
             cell.lblTitle.text = model.hospitalName;
             cell.lblDetail.text = detailString;
+        }else if (indexPath.section == 1){
+            DiagnoseDetailModel *model = self.diagnoseArray[indexPath.row];
+            cell.lblTitle.text = model.itemCnName;
+            cell.lblDetail.text = model.way;
+            [cell.lblMoney removeFromSuperview];
         }else if (indexPath.section == 2){
             CarePeopleModel *model = self.carePeopleArray[indexPath.row];
             cell.lblTitle.text = model.name;
-            cell.lblDetail.text = model.identity;
-            cell.lblMoney.text = model.cost;
+            SelectList *identityModel =model.identity;
+            cell.lblDetail.text =identityModel.value;
+            cell.lblMoney.text = [NSString stringWithFormat:@"￥%@",model.cost];
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -186,6 +220,7 @@
                 }
             }
             cell.lblTitle.text = @"已发生医疗费";
+            [cell.lblLine removeFromSuperview];
             [cell.txtName addTarget:self action:@selector(txtChange:) forControlEvents:UIControlEventEditingChanged];
             cell.txtName.delegate =self;
             cell.txtName.keyboardType =UIKeyboardTypeDecimalPad;
@@ -247,6 +282,47 @@
         }
     }
 }
+//设置可删除
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    return YES;
+}
+- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath{
+    //添加一个删除按钮
+    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+        //1.更新数据
+        if (indexPath.section == 0) {
+            [self.hospitalArray removeObjectAtIndex:indexPath.row];//tableview数据源
+        }else if (indexPath.section ==1){
+            [self.diagnoseArray removeObjectAtIndex:indexPath.row];//tableview数据源
+        }else if (indexPath.section ==2){
+            [self.carePeopleArray removeObjectAtIndex:indexPath.row];//tableview数据源
+        };
+        //2.更新UI
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationAutomatic)];
+    }];
+    //删除按钮颜色
+    deleteAction.backgroundColor = [UIColor colorWithHexString:@"f90d00"];
+    //添加一个编辑按钮
+    UITableViewRowAction *editRowAction =[UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+    }];
+    //编辑按钮颜色
+    editRowAction.backgroundColor = [UIColor colorWithHexString:@"c7c7cc"];
+    //将设置好的按钮方到数组中返回
+    if (indexPath.section == 2) {
+        return @[deleteAction,editRowAction];
+    }else{
+        return @[deleteAction];
+    }
+}
+//滑动删除
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (!self.tableView.isEditing)
+    {
+        return UITableViewCellEditingStyleDelete;
+    }
+    return UITableViewCellEditingStyleDelete | UITableViewCellEditingStyleInsert;
+}
 -(void)selectState:(UIButton *)btn{
     
 }
@@ -266,19 +342,15 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)rightAction{
+    self.infoModel.hosArray = self.hospitalArray;
+    self.infoModel.diaArray = self.diagnoseArray;
+    self.infoModel.carePeopleArray = self.carePeopleArray;
+    [CommUtil saveData:self.infoModel andSaveFileName:self.taskModel.taskNo];
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)textViewDidChange:(UITextView *)textView{
     AccidentAddressTableViewCell *cell;
-    if (textView.tag == 1000) {
-        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-        self.infoModel.address = textView.text;
-    }else if (textView.tag == 1001){
-        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2]];
-    }else if (textView.tag == 1002){
-        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:2]];
-        self.infoModel.remark = textView.text;
-    }
+    self.infoModel.remark = textView.text;
     if (textView.text.length>0) {
         cell.lblPlaceHolder.hidden = YES;
     }else{
@@ -404,7 +476,49 @@
     return _btnCommit;
 }
 -(void)commit{
+    NSMutableDictionary *uploadDic = [NSMutableDictionary dictionary];
     NSString *userCode = @"0131002498";
+    [uploadDic setObject:userCode forKey:@"userCode"];
+    if (self.hospitalArray.count>0) {
+        NSDictionary *selectHosDic = self.hospitalArray.firstObject;
+        HospitalModel *hospitalModel = selectHosDic[@"Hospital"];
+        NSMutableString *departmentString = [NSMutableString string];
+        for (DepartmentsModel *departmentsModel in selectHosDic[@"department"]) {
+            if (departmentString.length>0) {
+                [departmentString appendString:@","];
+            }
+            [departmentString appendFormat:@"%@",departmentsModel.key];
+        }
+        NSDictionary *hospital = @{@"hospitalId":hospitalModel.hospitalId,@"hospitalProperty":hospitalModel.hospitalProperty,@"hospitalDepartment":departmentString};
+        [uploadDic setObject:hospital forKey:@"hospital"];
+    }
+    if (self.diagnoseArray.count>0) {
+        NSMutableArray *disabList =[NSMutableArray array];
+        for (DiagnoseDetailModel *model in self.diagnoseArray) {
+            NSString * flag;
+            if ([model.way isEqual:@"保守治疗"]) {
+                flag = @"0";
+            }else if ([model.way isEqual:@"手术治疗"]){
+                flag = @"1";
+            }
+            NSDictionary *dic = @{@"id":model.Id,@"disabilityCode":model.itemCode,@"disabilityDescr":model.itemCnName,@"operation":flag};
+            [disabList addObject:dic];
+        }
+        [uploadDic setObject:disabList forKey:@"disabList"];
+    }
+    if (self.carePeopleArray.count>0) {
+        NSMutableArray *nurseList =[NSMutableArray array];
+        for (CarePeopleModel *model in self.carePeopleArray) {
+            SelectList *identityModel =model.identity;
+            NSDictionary *dic = @{@"nurseName":model.name,@"nurseIndustryCode":identityModel.key,@"nurseIndustryName":identityModel.value,@"nurseDailyReceipts":model.cost,@"nurseDayCount":model.days};
+            [nurseList addObject:dic];
+        }
+        [uploadDic setObject:nurseList forKey:@"nurseList"];
+    }
+    [uploadDic setObject:self.taskModel.taskNo forKey:@"taskNo"];
+    [uploadDic setFloat:self.infoModel.feePass forKey:@"feePass"];
+    [uploadDic setObject:@"0" forKey:@"finishFlag"];
+    [uploadDic setObject:self.infoModel.remark forKey:@"remark"];
     if (self.infoModel.imageArray.count>0) {
         self.unUploadImageArray =self.infoModel.imageArray;
         for (imageModel *model in self.infoModel.imageArray) {
@@ -419,7 +533,7 @@
     }else{
         WeakSelf(MedicalVisitViewController);
         [self showHudWaitingView:WaitPrompt];
-        [[NetWorkManager shareNetWork]uploadBaseInfoWithTaskNo:self.taskModel.taskNo andAddress:self.infoModel.address andContactPerson:self.infoModel.contactPerson andContactTel:self.infoModel.contactTel andRemark:self.infoModel.remark andAccidentDate:self.infoModel.accidentDate andUserCode:userCode andTaskType:self.taskModel.taskType andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
+        [[NetWorkManager shareNetWork]uploadMedicalWithDataDic:uploadDic andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response){
             [weakSelf removeMBProgressHudInManaual];
             if ([response.responseCode isEqual:@"1"]) {
                 [self showHudAuto:@"提交成功"];
@@ -476,7 +590,7 @@
     return _unUploadImageArray;
 }
 -(void)txtChange:(UITextField *)txt{
-    self.infoModel.address =txt.text;
+    self.infoModel.feePass =[txt.text floatValue];
 }
 //设置文本框只能输入数字
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
@@ -505,7 +619,32 @@
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     [self.view endEditing:YES];
 }
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+- (void)setUpForDismissKeyboard {
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    UITapGestureRecognizer *singleTapGR =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(tapAnywhereToDismissKeyboard:)];
+    NSOperationQueue *mainQuene =[NSOperationQueue mainQueue];
+    [nc addObserverForName:UIKeyboardWillShowNotification
+                    object:nil
+                     queue:mainQuene
+                usingBlock:^(NSNotification *note){
+                    [self.view addGestureRecognizer:singleTapGR];
+                }];
+    [nc addObserverForName:UIKeyboardWillHideNotification
+                    object:nil
+                     queue:mainQuene
+                usingBlock:^(NSNotification *note){
+                    [self.view removeGestureRecognizer:singleTapGR];
+                }];
+}
+
+- (void)tapAnywhereToDismissKeyboard:(UIGestureRecognizer *)gestureRecognizer {
+    //此method会将self.view里所有的subview的first responder都resign掉
     [self.view endEditing:YES];
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"addDiagnose" object:nil];
 }
 @end

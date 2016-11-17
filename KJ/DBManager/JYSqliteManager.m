@@ -105,11 +105,7 @@ static JYSqliteManager *jySqliteManager = nil;
         [fileManager createDirectoryAtPath:dbPath withIntermediateDirectories:YES attributes:nil error:nil];
     }
     NSLog(@"dbpath:%@",dbPath);
-    
-    NSString *dbSubPath = [dbPath stringByAppendingPathComponent:DatabaseName];
-    
-    
-    return dbSubPath;
+    return dbPath;
 }
 
 

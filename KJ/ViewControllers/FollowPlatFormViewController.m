@@ -26,7 +26,6 @@
     [super viewDidLoad];
     [self getTask];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.VCstyle = UITableViewStyleGrouped;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItemExtension leftButtonItem:@selector(leftAction) andTarget:self];
     UIButton *barbtn = self.navigationItem.leftBarButtonItem.customView;
     [barbtn setBackgroundImage:[UIImage imageNamed:@"e"] forState:UIControlStateNormal];
@@ -34,10 +33,8 @@
     self.navigationItem.title = [self nowDate:[NSDate date]];
     [self addBtnTime];
     self.tableView.top =65;
-    self.tableView.height = DeviceSize.height-self.tableView.top-49;
-    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 15,0, 15)];
-    }
+    self.tableView.height = DeviceSize.height-self.tableView.top-49-64;
+    self.tableView.separatorStyle =UITableViewCellSeparatorStyleNone;
     // Do any additional setup after loading the view.
 }
 -(void)getTask{

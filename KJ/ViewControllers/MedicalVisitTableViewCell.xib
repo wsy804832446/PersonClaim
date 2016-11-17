@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="59.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Yb-f8-20w">
@@ -42,8 +42,16 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eck-7W-ae2">
+                        <rect key="frame" x="15" y="0.0" width="290" height="1"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="2Pd-Dh-Xpq"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="eck-7W-ae2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="2KE-63-dk7"/>
                     <constraint firstItem="9ZL-ny-C48" firstAttribute="top" secondItem="hVv-DV-gpk" secondAttribute="top" id="3qx-Y3-IU2"/>
                     <constraint firstItem="9Yb-f8-20w" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="AWg-5f-7G5"/>
                     <constraint firstItem="9ZL-ny-C48" firstAttribute="bottom" secondItem="hVv-DV-gpk" secondAttribute="bottom" id="CrO-Ea-ycp"/>
@@ -51,16 +59,19 @@
                     <constraint firstItem="9ZL-ny-C48" firstAttribute="trailing" secondItem="9Yb-f8-20w" secondAttribute="trailing" id="Miz-h2-AW6"/>
                     <constraint firstAttribute="bottom" secondItem="hVv-DV-gpk" secondAttribute="bottom" constant="10" id="PHd-gN-SnW"/>
                     <constraint firstItem="hVv-DV-gpk" firstAttribute="top" secondItem="9Yb-f8-20w" secondAttribute="bottom" constant="8" id="Tby-ty-sCS"/>
+                    <constraint firstItem="eck-7W-ae2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="c8I-I0-z5f"/>
                     <constraint firstAttribute="trailing" secondItem="9ZL-ny-C48" secondAttribute="trailing" constant="15" id="gi4-ni-1CI"/>
                     <constraint firstItem="hVv-DV-gpk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="grv-bE-ZCd"/>
+                    <constraint firstAttribute="trailing" secondItem="eck-7W-ae2" secondAttribute="trailing" constant="15" id="yEX-bC-wsp"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="lblDetail" destination="hVv-DV-gpk" id="G43-4t-uRr"/>
                 <outlet property="lblMoney" destination="9ZL-ny-C48" id="wIm-Y0-MTI"/>
                 <outlet property="lblTitle" destination="9Yb-f8-20w" id="r9S-oZ-vo0"/>
+                <outlet property="line" destination="eck-7W-ae2" id="gBT-mV-Rh7"/>
             </connections>
-            <point key="canvasLocation" x="97" y="160.5"/>
+            <point key="canvasLocation" x="97" y="160"/>
         </tableViewCell>
     </objects>
 </document>

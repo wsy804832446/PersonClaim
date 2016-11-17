@@ -53,4 +53,8 @@ typedef void (^uploadProgressBlock)(long long bytesSent, long long totalBytesSen
 -(void)getDiagnoseListWithCompletionBlockWithSuccess:(CompletionBlockWithSuccess) success andFailure:(FailureBlock) failure;
 //拉取诊断详细列表
 -(void)getDiagnoseDeatilListWithKindCode:(NSString *)kindCode andSearchCode:(NSString *)searchCode andPageNo:(NSInteger)pageNo andPageSize:(NSInteger) pageSize andCompletionBlockWithSuccess:(CompletionBlockWithSuccess) success andFailure:(FailureBlock) failure;
+//拉取各类选择信息列表
+-(void)getSelectListWithCompletionBlockWithSuccess:(CompletionBlockWithSuccess) success andFailure:(FailureBlock) failure;
+//上传医疗探视
+-(void)uploadMedicalWithDataDic:(NSDictionary *)dic andCompletionBlockWithSuccess:(CompletionBlockWithSuccess) success andFailure:(FailureBlock) failure;
 @end

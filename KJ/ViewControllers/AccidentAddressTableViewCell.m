@@ -18,6 +18,7 @@
     self.txtDetail.contentInset = UIEdgeInsetsMake(0, -5, 0, -5);
     [self.btnMap setImage:[UIImage imageNamed:@"32"] forState:UIControlStateNormal];
     [self.btnMap setImageEdgeInsets:UIEdgeInsetsMake(11, 16, 0, 0)];
+    self.lblLine.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
     // Initialization code
 }
 - (IBAction)actionMap:(id)sender {

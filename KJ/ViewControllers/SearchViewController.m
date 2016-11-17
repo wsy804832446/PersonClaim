@@ -31,7 +31,6 @@
     self.automaticallyAdjustsScrollViewInsets =NO;
     // Do any additional setup after loading the view.
     self.navigationItem.rightBarButtonItem = [UIBarButtonItemExtension rightButtonItem:@selector(rightAction) andTarget:self andTitleName:@"取消"];
-    self.VCstyle = UITableViewStylePlain;
     self.navigationItem.hidesBackButton = YES;
     self.navigationItem.titleView = self.txtSearch;
     self.tableView.top =10;

@@ -21,6 +21,7 @@
     [super viewDidLoad];
     self.navigationItem.leftBarButtonItem = [UIBarButtonItemExtension leftButtonItem:@selector(leftAction) andTarget:self];
     self.navigationItem.rightBarButtonItem =[UIBarButtonItemExtension rightButtonItem:@selector(rightAction:) andTarget:self andTitleName:@"确定"];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // Do any additional setup after loading the view.
 }
 -(void)leftAction{

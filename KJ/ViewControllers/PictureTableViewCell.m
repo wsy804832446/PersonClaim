@@ -13,6 +13,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.lblTitle.textColor = [UIColor colorWithHexString:@"#666666"];
+    self.lblLine.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
     // Initialization code
 }
 -(void)configImgWithImgArray:(NSMutableArray *)array{

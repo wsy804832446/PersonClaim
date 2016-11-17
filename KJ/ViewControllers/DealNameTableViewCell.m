@@ -13,6 +13,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     [self.txtName setValue:[UIColor colorWithHexString:@"#bbbbbb"] forKeyPath:@"_placeholderLabel.textColor"];
+    self.lblLine.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
     // Initialization code
 }
 

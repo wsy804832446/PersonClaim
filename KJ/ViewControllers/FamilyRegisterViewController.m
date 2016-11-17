@@ -1,12 +1,12 @@
 //
-//  EditDealInfoViewController.m
+//  FamilyRegisterViewController.m
 //  KJ
 //
-//  Created by 王晟宇 on 2016/11/7.
+//  Created by 王晟宇 on 2016/11/16.
 //  Copyright © 2016年 iOSDeveloper. All rights reserved.
 //
 
-#import "EditDealInfoViewController.h"
+#import "FamilyRegisterViewController.h"
 #import "EditInfoViewController.h"
 #import "AddContactPersonViewController.h"
 #import "AccidentTimeTableViewCell.h"
@@ -16,7 +16,7 @@
 #import "ShowPictureViewController.h"
 #import "DealNameTableViewCell.h"
 #import "AccidentAddressTableViewCell.h"
-@interface EditDealInfoViewController ()<UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface FamilyRegisterViewController ()
 //选择时间
 @property (nonatomic,strong)UIView *containerView;
 @property (nonatomic,strong)UIDatePicker *pickView;
@@ -29,10 +29,9 @@
 @property (nonatomic,strong)EditInfoModel *infoModel;
 //未上传图片数组 （上传判断使用）
 @property (nonatomic,strong)NSMutableArray *unUploadImageArray;
-
 @end
 
-@implementation EditDealInfoViewController
+@implementation FamilyRegisterViewController
 {
     UIAlertController *myActionSheet;
 }
@@ -58,11 +57,11 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
-        return 11;
+        return 2;
     }else if(section == 1){
         return self.contactPeopleArray.count;
     }else{
-        return 3;
+        return 4;
     }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -83,7 +82,7 @@
         line.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
         [vc addSubview:line];
         UILabel *lblContact = [[UILabel alloc]initWithFrame:CGRectMake(15, 1, 50, 41)];
-        lblContact.text = @"联系人";
+        lblContact.text = @"被询问人";
         lblContact.textColor = [UIColor colorWithHexString:@"#666666"];
         lblContact.font = [UIFont systemFontOfSize:15];
         [vc addSubview:lblContact];
@@ -98,22 +97,22 @@
         return nil;
     }
 }
--(void)addContact{
-    WeakSelf(EditDealInfoViewController);
-    AddContactPersonViewController *vc = [[AddContactPersonViewController alloc]init];
-    [vc setSaveContactBlock:^(NSMutableArray *array) {
-        [self.contactPeopleArray addObjectsFromArray:array];
-        if (array.count>0) {
-            ContactPeopleModel *model = [array firstObject];
-            self.infoModel.contactPerson = model.name;
-            self.infoModel.contactTel = model.phone;
-        }
-        [weakSelf.tableView reloadData];
-    }];
-    [self.navigationController pushViewController:vc animated:YES];
-}
+//-(void)addContact{
+//    WeakSelf(EditDealInfoViewController);
+//    AddContactPersonViewController *vc = [[AddContactPersonViewController alloc]init];
+//    [vc setSaveContactBlock:^(NSMutableArray *array) {
+//        [self.contactPeopleArray addObjectsFromArray:array];
+//        if (array.count>0) {
+//            ContactPeopleModel *model = [array firstObject];
+//            self.infoModel.contactPerson = model.name;
+//            self.infoModel.contactTel = model.phone;
+//        }
+//        [weakSelf.tableView reloadData];
+//    }];
+//    [self.navigationController pushViewController:vc animated:YES];
+//}
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0&&indexPath.row ==0) {
+    if (indexPath.section == 0&&indexPath.row <4) {
         DealNameTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DealNameCell"];
         if (!cell) {
             NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"DealNameTableViewCell" owner:nil options:nil];
@@ -125,7 +124,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.lblTitle.textColor = [UIColor colorWithHexString:@"#666666"];
         return cell;
-    }else if (indexPath.section ==0&&indexPath.row == 1){
+    }else if (indexPath.section ==0&&indexPath.row < 4){
         AccidentTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TimeCell"];
         if (!cell) {
             NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"AccidentTimeTableViewCell" owner:nil options:nil];
@@ -462,7 +461,7 @@
     if (self.unUploadImageArray.count>0) {
         [self uploadImage];
     }else{
-        WeakSelf(EditDealInfoViewController);
+        WeakSelf(FamilyRegisterViewController);
         [self showHudWaitingView:WaitPrompt];
         [[NetWorkManager shareNetWork]uploadBaseInfoWithTaskNo:self.taskModel.taskNo andAddress:self.infoModel.address andContactPerson:self.infoModel.contactPerson andContactTel:self.infoModel.contactTel andRemark:self.infoModel.remark andAccidentDate:self.infoModel.accidentDate andUserCode:userCode andTaskType:self.taskModel.taskType andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
             [weakSelf removeMBProgressHudInManaual];
@@ -479,7 +478,7 @@
     }
 }
 -(void)uploadImage{
-    WeakSelf(EditDealInfoViewController);
+    WeakSelf(FamilyRegisterViewController);
     imageModel *uploadImageModel = [self.unUploadImageArray firstObject];
     [self showHudWaitingView:WaitPrompt];
     [[NetWorkManager shareNetWork]uploadImageWithImgName:uploadImageModel.imgName andImgBase64:uploadImageModel.imgBase64 andReportCode:self.taskModel.taskNo andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {

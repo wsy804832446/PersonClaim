@@ -12,6 +12,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.line.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
     // Initialization code
 }
 

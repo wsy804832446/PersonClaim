@@ -40,24 +40,34 @@
                         </connections>
                     </button>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bi7-bX-yvZ">
-                        <rect key="frame" x="15" y="32" width="290" height="28"/>
+                        <rect key="frame" x="15" y="32" width="290" height="27"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="必填" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2F2-FH-2fJ">
-                        <rect key="frame" x="15" y="32" width="31" height="28"/>
+                        <rect key="frame" x="15" y="32" width="31" height="27"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="heL-9K-fIS">
+                        <rect key="frame" x="15" y="0.0" width="290" height="1"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="lOr-OT-4cR"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="iZW-7q-yOh" secondAttribute="trailing" constant="15" id="8vv-bI-7ce"/>
+                    <constraint firstAttribute="trailing" secondItem="heL-9K-fIS" secondAttribute="trailing" constant="15" id="BJA-TM-9wU"/>
                     <constraint firstItem="Bi7-bX-yvZ" firstAttribute="top" secondItem="09S-Eu-p8q" secondAttribute="bottom" id="Dfv-r7-TWI"/>
+                    <constraint firstItem="heL-9K-fIS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="SlA-PO-jq9"/>
                     <constraint firstItem="Bi7-bX-yvZ" firstAttribute="leading" secondItem="09S-Eu-p8q" secondAttribute="leading" id="WhM-bw-rrZ"/>
                     <constraint firstItem="09S-Eu-p8q" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="XDc-dR-ati"/>
                     <constraint firstItem="Bi7-bX-yvZ" firstAttribute="bottom" secondItem="2F2-FH-2fJ" secondAttribute="bottom" id="aVM-mv-2xw"/>
+                    <constraint firstItem="heL-9K-fIS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="dX5-If-0EE"/>
                     <constraint firstItem="iZW-7q-yOh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="kH4-sn-rQd"/>
                     <constraint firstAttribute="bottom" secondItem="Bi7-bX-yvZ" secondAttribute="bottom" id="oce-LP-ZSd"/>
                     <constraint firstItem="09S-Eu-p8q" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="quS-Iv-9M5"/>
@@ -68,6 +78,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="btnMap" destination="iZW-7q-yOh" id="ndd-6H-N6A"/>
+                <outlet property="lblLine" destination="heL-9K-fIS" id="JMY-OM-UjK"/>
                 <outlet property="lblPlaceHolder" destination="2F2-FH-2fJ" id="gui-si-r2S"/>
                 <outlet property="lblTitle" destination="09S-Eu-p8q" id="3uy-Lq-mQw"/>
                 <outlet property="txtDetail" destination="Bi7-bX-yvZ" id="RaQ-VN-grp"/>

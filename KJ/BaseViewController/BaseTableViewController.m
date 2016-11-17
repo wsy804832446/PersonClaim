@@ -22,7 +22,7 @@
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithHexString:Colorblue]];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithHexString:Colorwhite],NSForegroundColorAttributeName,[UIFont systemFontOfSize:17],NSFontAttributeName,nil]];
     [self.view addSubview:self.tableView];
-    
+    [self setAutomaticallyAdjustsScrollViewInsets:NO];
     // Do any additional setup after loading the view.
 }
 #pragma mark - UITableViewDelegate
@@ -60,8 +60,7 @@
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:self.VCstyle];
-        //    _tableView.separatorInset = UIEdgeInsetsMake(0, 10, 0, 0);
+        _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStyleGrouped];
         _tableView.showsVerticalScrollIndicator =NO;
         _tableView.top = self.viewTop;
         _tableView.height -= self.frameTopHeight;

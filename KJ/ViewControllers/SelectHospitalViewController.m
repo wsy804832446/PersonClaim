@@ -31,7 +31,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self OpenLocation];
-    self.VCstyle = UITableViewStylePlain;
     self.tableView.top = self.txtSearch.bottom+10;
     self.tableView.height = DeviceSize.height-self.tableView.top-64;
     [self setIsOpenFooterRefresh:YES];
@@ -41,6 +40,7 @@
     self.navigationItem.rightBarButtonItem = self.barButtonItem;
     self.tableView.sectionIndexColor = [UIColor colorWithHexString:Colorblue];
     [self.view addSubview:self.txtSearch];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // Do any additional setup after loading the view.
 }
 //医院数据

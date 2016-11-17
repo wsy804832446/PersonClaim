@@ -13,5 +13,6 @@
 @property (nonatomic,copy)void(^btnSelectBlock)(UIButton *btn);
 @property (strong, nonatomic) IBOutlet UILabel *lblTitle;
 -(void)configImgWithImgArray:(NSMutableArray *)array;
+@property (strong, nonatomic) IBOutlet UIView *lblLine;
 
 @end

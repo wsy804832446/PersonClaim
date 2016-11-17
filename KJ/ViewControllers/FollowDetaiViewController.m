@@ -30,7 +30,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.VCstyle = UITableViewStyleGrouped;
     self.tableView.height = DeviceSize.height - self.tableView.top-54-64;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItemExtension leftButtonItem:@selector(leftAction) andTarget:self];
     self.automaticallyAdjustsScrollViewInsets = NO;

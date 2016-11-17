@@ -52,7 +52,7 @@
     return _scrollView;
 }
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    self.title = [NSString stringWithFormat:@"%.f/%ld",self.scrollView.contentOffset.x/DeviceSize.width+1,self.pictureArray.count];
+    self.title = [NSString stringWithFormat:@"%.f/%lu",self.scrollView.contentOffset.x/DeviceSize.width+1,self.pictureArray.count];
 }
 -(NSMutableArray *)pictureArray{
     if (!_pictureArray) {
@@ -61,7 +61,7 @@
     return _pictureArray;
 }
 -(NSString *)title{
-    return [NSString stringWithFormat:@"%ld/%ld",self.selectIndex+1,self.pictureArray.count];
+    return [NSString stringWithFormat:@"%d/%d",self.selectIndex+1,self.pictureArray.count];
 }
 /*
 #pragma mark - Navigation

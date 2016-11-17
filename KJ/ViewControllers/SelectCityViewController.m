@@ -21,7 +21,6 @@
 @implementation SelectCityViewController
 
 - (void)viewDidLoad {
-    self.VCstyle = UITableViewStylePlain;
     [super viewDidLoad];
     self.navigationItem.leftBarButtonItem = [UIBarButtonItemExtension leftButtonItem:@selector(leftAction) andTarget:self];
     [self siftDataWithCityCode:@""];

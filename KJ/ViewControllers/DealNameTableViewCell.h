@@ -11,5 +11,6 @@
 @interface DealNameTableViewCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UITextField *txtName;
 @property (strong, nonatomic) IBOutlet UILabel *lblTitle;
+@property (strong, nonatomic) IBOutlet UIView *lblLine;
 
 @end

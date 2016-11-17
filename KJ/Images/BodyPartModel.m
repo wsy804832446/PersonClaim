@@ -10,6 +10,6 @@
 
 @implementation BodyPartModel
 +(NSDictionary *)JSONKeyPathsByPropertyKey{
-    return @{@"Id":@"id"};
+    return @{@"Id":@"aid"};
 }
 @end

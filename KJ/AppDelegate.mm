@@ -13,6 +13,7 @@
 #import <BaiduMapAPI_Map/BMKMapComponent.h>
 #import <PgySDK/PgyManager.h>
 #import <PgyUpdate/PgyUpdateManager.h>
+#import "SelectList.h"
 @interface AppDelegate ()
 
 @end
@@ -40,6 +41,32 @@
     [[PgyUpdateManager sharedPgyManager] startManagerWithAppId:@"e909557cf2d3d41a1e786e91809d1ed2"];
     [[PgyUpdateManager sharedPgyManager] checkUpdate];
     //拉取城市数据保存到本地
+    NSArray *cityArray =[CommUtil readDataWithFileName:localCity];
+    if (cityArray.count == 0) {
+        [self getCity];
+    }
+    //拉取选择信息数据保存到本地
+    NSArray *selectListArray =[CommUtil readDataWithFileName:localSelectArry];
+    if (selectListArray.count == 0) {
+         [self getSelectList];
+    }
+    return YES;
+}
+-(void)getSelectList{
+    [[NetWorkManager shareNetWork]getSelectListWithCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
+        if ([response.responseCode isEqual:@"1"]) {
+            NSMutableArray *selectListArray = [NSMutableArray array];
+            for (NSDictionary *dic in response.dataDic[@"dictList"]) {
+                SelectList *model = [MTLJSONAdapter modelOfClass:[SelectList class] fromJSONDictionary:dic error:NULL];
+                [selectListArray addObject:model];
+            }
+             [CommUtil saveData:selectListArray andSaveFileName:localSelectArry];
+        }
+    } andFailure:^(NSURLSessionDataTask *urlSessionDataTask, NSError *error) {
+        
+    }];
+}
+-(void)getCity{
     [[NetWorkManager shareNetWork]getCityListWithSearchCode:@"" andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
         if ([response.responseCode isEqual:@"1"]) {
             //无层级城市model
@@ -48,7 +75,7 @@
                 CityModel *model = [MTLJSONAdapter modelOfClass:[CityModel class]fromJSONDictionary:dic error:NULL];
                 [cityArr addObject:model];
             }
-            [CommUtil saveData:cityArr andSaveFileName:@"disorderCityList"];
+            [CommUtil saveData:cityArr andSaveFileName:localCity];
             //整理城市层级
             CityModel *countryModel;
             CityModel *provinceModel;
@@ -68,7 +95,6 @@
     } andFailure:^(NSURLSessionDataTask *urlSessionDataTask, NSError *error) {
         
     }];
-    return YES;
 }
 -(void)StartBaiduMap{
     BMKMapManager* mapManager = [[BMKMapManager alloc]init];

@@ -7,9 +7,9 @@
 //
 
 #import "MTLModel.h"
-
+#import "SelectList.h"
 @interface CarePeopleModel : MTLModel
-@property (nonatomic,copy)NSString *identity;
+@property (nonatomic,strong)SelectList *identity;
 
 @property (nonatomic,copy)NSString *name;
 

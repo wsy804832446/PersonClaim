@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="影像资料(必填)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tGv-rp-4Yu">
-                        <rect key="frame" x="15" y="12.5" width="150" height="14"/>
+                        <rect key="frame" x="15" y="12" width="150" height="15"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="150" id="WrR-ec-YuO"/>
                         </constraints>
@@ -27,15 +27,25 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vXW-4O-lZd">
+                        <rect key="frame" x="15" y="0.0" width="290" height="1"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="tTE-Hd-noK"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="tGv-rp-4Yu" secondAttribute="bottom" constant="100" id="4ek-B4-brb"/>
+                    <constraint firstItem="vXW-4O-lZd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="KoO-KK-kjI"/>
+                    <constraint firstItem="vXW-4O-lZd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Pnc-sj-YSS"/>
                     <constraint firstItem="tGv-rp-4Yu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="jdK-iU-guF"/>
+                    <constraint firstAttribute="trailing" secondItem="vXW-4O-lZd" secondAttribute="trailing" constant="15" id="szQ-BU-err"/>
                     <constraint firstItem="tGv-rp-4Yu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="tVL-YV-7z8"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="constrainBottom" destination="4ek-B4-brb" id="Dcu-xE-gbK"/>
+                <outlet property="lblLine" destination="vXW-4O-lZd" id="V54-UV-Mr1"/>
                 <outlet property="lblTitle" destination="tGv-rp-4Yu" id="0EY-el-bXj"/>
             </connections>
             <point key="canvasLocation" x="97" y="174.5"/>

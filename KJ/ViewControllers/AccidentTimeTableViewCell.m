@@ -19,6 +19,7 @@
     [self.btnTime2 setImageEdgeInsets:UIEdgeInsetsMake(13, 0, 13, 0)];
     [self.btnTime setTitleColor:[UIColor colorWithHexString:@"#bbbbbb"] forState:UIControlStateNormal];
     [self.btnTime setTitle:@"必选" forState:UIControlStateNormal];
+    self.lblLine.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
     // Initialization code
 }
 

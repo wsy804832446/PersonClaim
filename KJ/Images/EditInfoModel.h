@@ -14,7 +14,12 @@
 @property(nonatomic,copy)NSString *contactTel;
 @property(nonatomic,copy)NSString *remark;
 @property(nonatomic,copy)NSString *accidentDate;
+@property(nonatomic,assign)CGFloat feePass;
 @property(nonatomic,copy)NSString *userCode;
+@property(nonatomic,copy)NSString *finishFlag;
+@property(nonatomic,strong)NSMutableArray *hosArray;
+@property(nonatomic,strong)NSMutableArray *diaArray;
+@property(nonatomic,strong)NSMutableArray *carePeopleArray;
 @property(nonatomic,strong)NSMutableArray *imageArray;
 @end
 

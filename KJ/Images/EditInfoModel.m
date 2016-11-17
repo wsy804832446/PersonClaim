@@ -18,6 +18,25 @@
     }
     return _imageArray;
 }
+-(NSMutableArray *)hosArray{
+    if (!_hosArray) {
+        _hosArray = [NSMutableArray array];
+    }
+    return _hosArray;
+}
+-(NSMutableArray *)diaArray{
+    if (!_diaArray) {
+        _diaArray = [NSMutableArray array];
+    }
+    return _diaArray;
+}
+-(NSMutableArray *)carePeopleArray{
+    if (!_carePeopleArray) {
+        _carePeopleArray = [NSMutableArray array];
+    }
+    return _carePeopleArray;
+}
+
 @end
 
 @implementation imageModel

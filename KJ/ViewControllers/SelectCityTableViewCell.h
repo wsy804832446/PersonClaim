@@ -14,4 +14,6 @@
 @property (copy, nonatomic) NSString *cityId;
 @property (strong, nonatomic) IBOutlet UIImageView *imgView;
 @property(nonatomic,assign)BOOL isSelected;
+@property (strong, nonatomic) IBOutlet UIView *lblLine;
+
 @end

@@ -36,8 +36,10 @@
 #define pageBackgroundColor @"#eeeeee"
 #define placeHoldColor @"#bbbbbb"
 #define unEnableColor @"#6ca6f2"
-//  数据库名称
-#define DatabaseName @"LionEye.db"
+
+//本地userdefault存储的key
+#define localCity @"disorderCityList"
+#define localSelectArry @"selectListArray"
 
 #define WaitPrompt @"请稍后..."
 #define InternetFailerPrompt @"网络有波动，请重新尝试~"

@@ -19,6 +19,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.leftBarButtonItem = [UIBarButtonItemExtension leftButtonItem:@selector(leftAction) andTarget:self];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItemExtension rightButtonItem:@selector(rightAction) andTarget:self andImageName:@"8-搜索"];
+    [self getData];
+        // Do any additional setup after loading the view.
+}
+-(void)getData{
     WeakSelf(AddDiagnoseViewController);
     [weakSelf showHudWaitingView:WaitPrompt];
     [[NetWorkManager shareNetWork]getDiagnoseListWithCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
@@ -35,10 +40,13 @@
     } andFailure:^(NSURLSessionDataTask *urlSessionDataTask, NSError *error) {
         [weakSelf removeMBProgressHudInManaual];
     }];
-    // Do any additional setup after loading the view.
+
 }
 -(void)leftAction{
     [self.navigationController popViewControllerAnimated:YES];
+}
+-(void)rightAction{
+    
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -66,7 +74,7 @@
     AddDiagnoseDetailViewController *vc = [[AddDiagnoseDetailViewController alloc]init];
     BodyPartModel *model = self.dataArray[indexPath.row];
     vc.title = model.name;
-    vc.Id = model.Id;
+    vc.body = model;
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)didReceiveMemoryWarning {

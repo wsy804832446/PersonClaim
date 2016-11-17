@@ -15,6 +15,7 @@
     self.lblTitle.textColor = [UIColor colorWithHexString:Colorblack];
     self.lblDetail.textColor = [UIColor colorWithHexString:Colorgray];
     self.lblMoney.textColor = [UIColor colorWithHexString:Colorgray];
+    self.line.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
     // Initialization code
 }
 

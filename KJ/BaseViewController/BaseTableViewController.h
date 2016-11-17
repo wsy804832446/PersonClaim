@@ -24,7 +24,6 @@
 @property (nonatomic, assign)   BOOL isOpenHeaderRefresh;
 //  开启脚部刷新
 @property (nonatomic, assign)   BOOL isOpenFooterRefresh;
-@property (nonatomic,assign)UITableViewStyle VCstyle;
 //  根据tableview样式创建tableview
 - (id)initWithTableViewStyle:(UITableViewStyle)tableViewStyle;
 

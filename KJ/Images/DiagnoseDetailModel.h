@@ -15,4 +15,6 @@
 @property (nonatomic,copy)NSString *itemCode;
 
 @property (nonatomic,copy)NSString *itemCnName;
+//治疗方式
+@property (nonatomic,copy)NSString *way;
 @end

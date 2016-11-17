@@ -37,7 +37,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.VCstyle = UITableViewStylePlain;
     self.tableView.top = 10;
     self.tableView.height = DeviceSize.height-self.tableView.top-64-54;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItemExtension leftButtonItem:@selector(leftAction) andTarget:self];
