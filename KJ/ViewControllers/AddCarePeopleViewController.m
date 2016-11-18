@@ -120,9 +120,7 @@
         cell.lblTitle.text = @"护理人身份";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.btnTime.tag = 100+indexPath.section;
-        cell.btnTime2.tag = 500+indexPath.section;
         [cell.btnTime addTarget:self action:@selector(careIdentity:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btnTime2 addTarget:self action:@selector(careIdentity:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }else{
         DealNameTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DealNameCell"];
@@ -147,16 +145,9 @@
 -(void)careIdentity:(UIButton *)btn{
     CareIdentityViewController *vc = [[CareIdentityViewController alloc]init];
     [vc setSelectIdentityBlock:^(SelectList *model) {
-        if (btn.tag<500) {
-            [btn setTitle:model.value forState:UIControlStateNormal];
-            CarePeopleModel *carePeopleModel = self.dataArray[btn.tag-100];
-            carePeopleModel.identity = model;
-        }else{
-            UIButton *button = [self.view viewWithTag:btn.tag-400];
-            [button setTitle:model.value forState:UIControlStateNormal];
-            CarePeopleModel *carePeopleModel = self.dataArray[btn.tag-500];
-            carePeopleModel.identity = model;
-        }
+        [btn setTitle:model.value forState:UIControlStateNormal];
+        CarePeopleModel *carePeopleModel = self.dataArray[btn.tag-100];
+        carePeopleModel.identity = model;
     }];
     [self.navigationController pushViewController:vc animated:YES];
 }

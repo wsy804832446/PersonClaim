@@ -136,7 +136,6 @@
         cell.lblTitle.text = @"处理时间";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell.btnTime addTarget:self action:@selector(selectTime:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btnTime2 addTarget:self action:@selector(selectTime:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }else if (indexPath.section ==1){
         ContactPeopleModel *model = self.contactPeopleArray[indexPath.row];
@@ -221,7 +220,6 @@
         cell.lblTitle.text = @"完成情况";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell.btnTime addTarget:self action:@selector(selectState:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btnTime2 addTarget:self action:@selector(selectState:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }else{
         return nil;

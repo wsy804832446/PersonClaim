@@ -11,7 +11,6 @@
 @interface AccidentTimeTableViewCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UIButton *btnTime;
 @property (strong, nonatomic) IBOutlet UILabel *lblTitle;
-@property (strong, nonatomic) IBOutlet UIButton *btnTime2;
 @property (strong, nonatomic) IBOutlet UIView *lblLine;
 
 @end

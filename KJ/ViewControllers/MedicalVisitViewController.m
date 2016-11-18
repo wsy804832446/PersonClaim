@@ -277,7 +277,6 @@
             cell.lblTitle.text = @"完成情况";
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             [cell.btnTime addTarget:self action:@selector(selectState:) forControlEvents:UIControlEventTouchUpInside];
-            [cell.btnTime2 addTarget:self action:@selector(selectState:) forControlEvents:UIControlEventTouchUpInside];
             return cell;
         }
     }

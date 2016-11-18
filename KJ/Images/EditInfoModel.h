@@ -16,8 +16,12 @@
 @property(nonatomic,copy)NSString *accidentDate;
 @property(nonatomic,assign)CGFloat feePass;
 @property(nonatomic,copy)NSString *userCode;
-@property(nonatomic,copy)NSString *finishFlag;
+@property(nonatomic,strong)ItemTypeModel *finishFlag;
 @property(nonatomic,strong)SelectList *tradeModel;
+@property(nonatomic,strong)ItemTypeModel *jobState;
+@property(nonatomic,strong)ItemTypeModel *labourContract;
+@property(nonatomic,strong)ItemTypeModel *getMoney;
+@property(nonatomic,strong)ItemTypeModel *socialSecurity;
 @property(nonatomic,strong)NSMutableArray *hosArray;
 @property(nonatomic,strong)NSMutableArray *diaArray;
 @property(nonatomic,strong)NSMutableArray *carePeopleArray;

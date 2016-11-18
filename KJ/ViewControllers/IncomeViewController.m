@@ -18,6 +18,7 @@
 #import "ShowPictureViewController.h"
 #import "AccidentAddressViewController.h"
 #import "SelectTradeViewController.h"
+#import "SelectItemViewController.h"
 @interface IncomeViewController ()<UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 //选择时间
 @property (nonatomic,strong)UIView *containerView;
@@ -160,10 +161,10 @@
                 cell = [nib firstObject];
             }
         }
+        cell.lblLine.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
         cell.lblTitle.text = @"入职时间";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell.btnTime addTarget:self action:@selector(selectTime:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btnTime2 addTarget:self action:@selector(selectTime:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }else if (indexPath.section ==2){
         ContactPeopleModel *model = self.contactPeopleArray[indexPath.row];
@@ -247,7 +248,7 @@
         cell.lblTitle.text = @"备注信息";
         [cell.btnMap removeFromSuperview];
         return cell;
-    }else if ((indexPath.section ==0 &&indexPath.row ==0)||(indexPath.section ==0 &&indexPath.row ==3)||(indexPath.section ==1 &&indexPath.row ==0)||(indexPath.section ==3 &&indexPath.row <4)){
+    }else if ((indexPath.section ==0 &&indexPath.row ==0)||(indexPath.section ==0 &&indexPath.row ==3)||(indexPath.section ==1 &&indexPath.row ==0)||(indexPath.section ==3&&indexPath.row <4&&indexPath.row >0)){
         AccidentTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TimeCell"];
         if (!cell) {
             NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"AccidentTimeTableViewCell" owner:nil options:nil];
@@ -258,56 +259,108 @@
         if (indexPath.section ==0 &&indexPath.row ==0){
             cell.lblTitle.text = @"在职情况";
             cell.lblLine.backgroundColor = [UIColor colorWithHexString:Colorwhite];
+            ItemTypeModel *model = self.infoModel.jobState;
+            if(model){
+                [cell.btnTime setTitle:model.title forState:UIControlStateNormal];
+            }
         }else if (indexPath.section ==0 &&indexPath.row ==3){
             cell.lblTitle.text = @"完成情况";
+            ItemTypeModel *model = self.infoModel.finishFlag;
+            if (model) {
+                [cell.btnTime setTitle:model.title forState:UIControlStateNormal];
+            }
         }else if (indexPath.section ==1 &&indexPath.row ==0){
             cell.lblTitle.text = @"行业";
             cell.lblLine.backgroundColor = [UIColor colorWithHexString:Colorwhite];
-        }else if (indexPath.section ==3 &&indexPath.row ==0){
-            cell.lblTitle.text = @"入职时间";
-            cell.lblLine.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
+            SelectList *model = self.infoModel.tradeModel;
+            if (model) {
+                 [cell.btnTime setTitle:model.value forState:UIControlStateNormal];
+            }
         }else if (indexPath.section ==3 &&indexPath.row ==1){
             cell.lblTitle.text = @"劳动合同";
-            cell.lblLine.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
+            ItemTypeModel *model = self.infoModel.finishFlag;
+            if (model) {
+                 [cell.btnTime setTitle:model.title forState:UIControlStateNormal];
+            }
         }else if (indexPath.section ==3 &&indexPath.row ==2){
             cell.lblTitle.text = @"社保";
             cell.lblLine.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
+            ItemTypeModel *model = self.infoModel.socialSecurity;
+            if (model) {
+                [cell.btnTime setTitle:model.title forState:UIControlStateNormal];
+            }
         }else if (indexPath.section ==3 &&indexPath.row ==3){
             cell.lblTitle.text = @"收入发放形式";
-            cell.lblLine.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
+            ItemTypeModel *model = self.infoModel.getMoney;
+            if (model) {
+                 [cell.btnTime setTitle:model.title forState:UIControlStateNormal];
+            }
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.btnTime.tag = 100+indexPath.row+indexPath.section;
-        cell.btnTime2.tag = 500+indexPath.row+indexPath.section;
+        cell.btnTime.tag = 100+indexPath.section+indexPath.row;
         [cell.btnTime addTarget:self action:@selector(selectState:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btnTime2 addTarget:self action:@selector(selectState:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }else{
         return nil;
     }
 }
 -(void)selectState:(UIButton *)btn{
-    switch (btn.tag) {
-        case 100|500:
-            break;
-        case 101:{
-            SelectTradeViewController*vc = [[SelectTradeViewController alloc]init];
-            [vc setSelectIdentityBlock:^(SelectList *model) {
-                self.infoModel.tradeModel = model;
-                if (btn.tag==101) {
-                    [btn setTitle:model.value forState:UIControlStateNormal];
-                }else{
-                    UIButton *button = [self.view viewWithTag:101];
-                    [button setTitle:model.value forState:UIControlStateNormal];
-                }
-            }];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        default:
-            break;
+    if(btn.tag == 100) {
+        SelectItemViewController *vc = [[SelectItemViewController alloc]init];
+        vc.itemName = @"在职情况";
+        LocalDataModel *model = [LocalDataModel shareInstance];
+        vc.dataArray = [NSMutableArray arrayWithArray:model.jobStateArray];
+        [vc setSelectItemBlock:^(ItemTypeModel *model) {
+            [btn setTitle:model.title forState:UIControlStateNormal];
+            self.infoModel.jobState = model;
+        }];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (btn.tag == 101){
+        SelectTradeViewController*vc = [[SelectTradeViewController alloc]init];
+        [vc setSelectIdentityBlock:^(SelectList *model) {
+            self.infoModel.tradeModel = model;
+            [btn setTitle:model.value forState:UIControlStateNormal];
+        }];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (btn.tag == 103){
+        SelectItemViewController *vc = [[SelectItemViewController alloc]init];
+        vc.itemName = @"完成情况";
+        LocalDataModel *model = [LocalDataModel shareInstance];
+        vc.dataArray = [NSMutableArray arrayWithArray:model.finishStateArray];
+        [vc setSelectItemBlock:^(ItemTypeModel *model) {
+            [btn setTitle:model.title forState:UIControlStateNormal];
+        }];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (btn.tag == 104){
+        SelectItemViewController *vc = [[SelectItemViewController alloc]init];
+        vc.itemName = @"劳动合同";
+        LocalDataModel *model = [LocalDataModel shareInstance];
+        vc.dataArray = [NSMutableArray arrayWithArray:model.labourContractArray];
+        [vc setSelectItemBlock:^(ItemTypeModel *model) {
+            [btn setTitle:model.title forState:UIControlStateNormal];
+            self.infoModel.labourContract = model;
+        }];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (btn.tag == 105){
+        SelectItemViewController *vc = [[SelectItemViewController alloc]init];
+        vc.itemName = @"社保";
+        LocalDataModel *model = [LocalDataModel shareInstance];
+        vc.dataArray = [NSMutableArray arrayWithArray:model.socialSecurityArray];
+        [vc setSelectItemBlock:^(ItemTypeModel *model) {
+            [btn setTitle:model.title forState:UIControlStateNormal];
+        }];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (btn.tag == 106){
+        SelectItemViewController *vc = [[SelectItemViewController alloc]init];
+        vc.itemName = @"收入发放形式";
+        LocalDataModel *model = [LocalDataModel shareInstance];
+        vc.dataArray = [NSMutableArray arrayWithArray:model.getMoneyArray];
+        [vc setSelectItemBlock:^(ItemTypeModel *model) {
+            [btn setTitle:model.title forState:UIControlStateNormal];
+            self.infoModel.getMoney = model;
+        }];
+        [self.navigationController pushViewController:vc animated:YES];
     }
-    
 }
 -(void)selectTime:(UIButton *)btn{
     self.tableView.userInteractionEnabled = NO;
@@ -375,7 +428,7 @@
     return _pickView;
 }
 - (void)doneAction:(UIButton *)btn {
-    AccidentTimeTableViewCell *cell =[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    AccidentTimeTableViewCell *cell =[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:3]];
     [cell.btnTime setTitle:[_formatter stringFromDate:_pickView.date] forState:UIControlStateNormal];
     self.infoModel.accidentDate =[_formatter stringFromDate:_pickView.date];
     [cell.btnTime setTitleColor:[UIColor colorWithHexString:Colorblack] forState:UIControlStateNormal];

@@ -15,10 +15,11 @@
     self.lblTitle.textColor = [UIColor colorWithHexString:@"#666666"];
     UIImage *img =[UIImage imageNamed:@"箭头"];
     img = [img imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    [self.btnTime2 setImage:img forState:UIControlStateNormal];
-    [self.btnTime2 setImageEdgeInsets:UIEdgeInsetsMake(13, 0, 13, 0)];
+    [self.btnTime setImage:img forState:UIControlStateNormal];
     [self.btnTime setTitleColor:[UIColor colorWithHexString:@"#bbbbbb"] forState:UIControlStateNormal];
     [self.btnTime setTitle:@"必选" forState:UIControlStateNormal];
+    [self.btnTime setImageEdgeInsets:UIEdgeInsetsMake(14, 200-10, 14, 0)];
+    [self.btnTime setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 15)];
     self.lblLine.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
     // Initialization code
 }

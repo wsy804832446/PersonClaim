@@ -18,15 +18,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YHg-e9-ICt">
-                        <rect key="frame" x="295" y="0.0" width="10" height="43.5"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="10" id="vIG-dh-sAe"/>
-                        </constraints>
-                        <state key="normal" title="Button">
-                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bNt-3S-8xf">
                         <rect key="frame" x="15" y="0.0" width="100" height="44"/>
                         <constraints>
@@ -38,9 +29,9 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SPs-bt-VGj">
-                        <rect key="frame" x="195" y="0.0" width="100" height="43.5"/>
+                        <rect key="frame" x="105" y="0.0" width="200" height="43.5"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="100" id="pzr-4W-Tza"/>
+                            <constraint firstAttribute="width" constant="200" id="pzr-4W-Tza"/>
                         </constraints>
                         <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                         <state key="normal" title="Button">
@@ -56,23 +47,19 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="YHg-e9-ICt" secondAttribute="bottom" id="A84-Px-Psg"/>
-                    <constraint firstItem="YHg-e9-ICt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="BrM-N3-VzV"/>
                     <constraint firstItem="bNt-3S-8xf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Dhm-tY-xox"/>
-                    <constraint firstItem="YHg-e9-ICt" firstAttribute="leading" secondItem="SPs-bt-VGj" secondAttribute="trailing" id="GBU-wz-du0"/>
                     <constraint firstAttribute="trailing" secondItem="tM9-Sn-wwZ" secondAttribute="trailing" constant="15" id="Ic2-C5-xP1"/>
                     <constraint firstAttribute="bottom" secondItem="SPs-bt-VGj" secondAttribute="bottom" id="R1n-16-Wky"/>
                     <constraint firstAttribute="bottom" secondItem="bNt-3S-8xf" secondAttribute="bottom" id="UiC-B0-tJ8"/>
                     <constraint firstItem="SPs-bt-VGj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="YkA-H2-6JR"/>
-                    <constraint firstAttribute="trailing" secondItem="YHg-e9-ICt" secondAttribute="trailing" constant="15" id="Zam-uW-UJI"/>
                     <constraint firstItem="tM9-Sn-wwZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="d88-k8-nli"/>
+                    <constraint firstAttribute="trailing" secondItem="SPs-bt-VGj" secondAttribute="trailing" constant="15" id="nHR-of-0gT"/>
                     <constraint firstItem="tM9-Sn-wwZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="xQt-pA-DQl"/>
                     <constraint firstItem="bNt-3S-8xf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="z9E-CT-kKx"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="btnTime" destination="SPs-bt-VGj" id="puB-fH-CBR"/>
-                <outlet property="btnTime2" destination="YHg-e9-ICt" id="0nJ-ed-5pk"/>
                 <outlet property="lblLine" destination="tM9-Sn-wwZ" id="FFE-ZI-olY"/>
                 <outlet property="lblTitle" destination="bNt-3S-8xf" id="qfN-i1-sfT"/>
             </connections>
