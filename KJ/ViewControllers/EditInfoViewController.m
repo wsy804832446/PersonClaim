@@ -34,7 +34,19 @@
 {
     UIAlertController *myActionSheet;
 }
-
+- (void)loadView
+{
+    [super loadView];
+    //  根据屏幕的高度自动计算弹出键盘是否试视图控制器是否向上滚动
+    self.view = [[TPKeyboardAvoidingScrollView alloc] initWithFrame:CGRectMake(0, 0, DeviceSize.width, DeviceSize.height - 64-54)];
+    [(TPKeyboardAvoidingScrollView *)self.view setContentSize:CGSizeMake(DeviceSize.width,  DeviceSize.height - 64-54)];
+    [self getLocalData];
+}
+-(void)getLocalData{
+    self.infoModel =[CommUtil readDataWithFileName:self.taskModel.taskNo];
+    if (self.infoModel) {
+    }
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.top = 10;
@@ -44,12 +56,13 @@
     self.tableView.estimatedRowHeight = 100;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.tableView.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15);
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     UIView *bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, self.tableView.bottom, DeviceSize.width, 54)];
     bottomView.backgroundColor = [UIColor colorWithHexString:Colorwhite];
     [bottomView addSubview:self.btnCommit];
     [bottomView addSubview:self.btnSave];
     [self.view addSubview:bottomView];
+    [self setUpForDismissKeyboard];
     // Do any additional setup after loading the view.
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -68,17 +81,14 @@
     if (section == 1) {
         return 44;
     }else{
-        return 0;
+        return 0.01;
     }
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 1) {
         UIView *vc = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DeviceSize.width, 44)];
         vc.backgroundColor = [UIColor colorWithHexString:Colorwhite];
-        UIView *lineTop =[[UIView alloc]initWithFrame:CGRectMake(15, 0, DeviceSize.width-30, 1)];
-        lineTop.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
-        [vc addSubview:lineTop];
-        UIView *line =[[UIView alloc]initWithFrame:CGRectMake(15, 43, DeviceSize.width-30, 1)];
+        UIView *line =[[UIView alloc]initWithFrame:CGRectMake(15, 0, DeviceSize.width-30, 1)];
         line.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
         [vc addSubview:line];
         UILabel *lblContact = [[UILabel alloc]initWithFrame:CGRectMake(15, 1, 50, 41)];
@@ -120,6 +130,7 @@
                 cell = [nib firstObject];
             }
         }
+        [cell.lblLine removeFromSuperview];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.txtDetail.delegate =self;
         cell.txtDetail.tag = 1000;
@@ -208,6 +219,7 @@
                 [self showPictureWithIndex:btn.tag-2000];
             }
         }];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else if (indexPath.section ==2 &&indexPath.row ==2){
         AccidentAddressTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AccidentAddressCell"];
@@ -536,6 +548,30 @@
         _unUploadImageArray = [NSMutableArray array];
     }
     return _unUploadImageArray;
+}
+- (void)setUpForDismissKeyboard {
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    UITapGestureRecognizer *singleTapGR =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(tapAnywhereToDismissKeyboard:)];
+    NSOperationQueue *mainQuene =[NSOperationQueue mainQueue];
+    [nc addObserverForName:UIKeyboardWillShowNotification
+                    object:nil
+                     queue:mainQuene
+                usingBlock:^(NSNotification *note){
+                    [self.view addGestureRecognizer:singleTapGR];
+                }];
+    [nc addObserverForName:UIKeyboardWillHideNotification
+                    object:nil
+                     queue:mainQuene
+                usingBlock:^(NSNotification *note){
+                    [self.view removeGestureRecognizer:singleTapGR];
+                }];
+}
+
+- (void)tapAnywhereToDismissKeyboard:(UIGestureRecognizer *)gestureRecognizer {
+    //此method会将self.view里所有的subview的first responder都resign掉
+    [self.view endEditing:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

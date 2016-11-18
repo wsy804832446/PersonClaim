@@ -7,7 +7,7 @@
 //
 
 #import "MTLModel.h"
-
+#import "SelectList.h"
 @interface EditInfoModel : MTLModel<MTLJSONSerializing>
 @property(nonatomic,copy)NSString *address;
 @property(nonatomic,copy)NSString *contactPerson;
@@ -17,6 +17,7 @@
 @property(nonatomic,assign)CGFloat feePass;
 @property(nonatomic,copy)NSString *userCode;
 @property(nonatomic,copy)NSString *finishFlag;
+@property(nonatomic,strong)SelectList *tradeModel;
 @property(nonatomic,strong)NSMutableArray *hosArray;
 @property(nonatomic,strong)NSMutableArray *diaArray;
 @property(nonatomic,strong)NSMutableArray *carePeopleArray;

@@ -12,6 +12,7 @@
 #import "EditInfoModel.h"
 #import "EditDealInfoViewController.h"
 #import "MedicalVisitViewController.h"
+#import "IncomeViewController.h"
 @interface FollowDetaiViewController ()<UIScrollViewDelegate>
 //提交按钮
 @property (nonatomic,strong)UIButton *btnCommit;
@@ -229,25 +230,29 @@
 }
 -(void)edit{
     [self setHidesBottomBarWhenPushed:YES];
-    if ([self.taskModel.taskType isEqual:@"09"]) {
-        EditInfoViewController *vc = [[EditInfoViewController alloc]init];
-        vc.claimModel = self.claimModel;
-        vc.taskModel = self.taskModel;
-        [vc setSaveInfoBlock:^(EditInfoModel *infoModel) {
-            self.infoModel = infoModel;
-        }];
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if ([self.taskModel.taskType isEqual:@"10"]){
-        EditDealInfoViewController *vc = [[EditDealInfoViewController alloc]init];
-        vc.claimModel = self.claimModel;
-        vc.taskModel = self.taskModel;
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if ([self.taskModel.taskType isEqual:@"01"]){
-        MedicalVisitViewController *vc = [[MedicalVisitViewController alloc]init];
-        vc.claimModel = self.claimModel;
-        vc.taskModel = self.taskModel;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+    IncomeViewController *vc = [[IncomeViewController alloc]init];
+    vc.claimModel = self.claimModel;
+    //        vc.taskModel = self.taskModel;
+    [self.navigationController pushViewController:vc animated:YES];
+//    if ([self.taskModel.taskType isEqual:@"09"]) {
+//        EditInfoViewController *vc = [[EditInfoViewController alloc]init];
+//        vc.claimModel = self.claimModel;
+//        vc.taskModel = self.taskModel;
+//        [vc setSaveInfoBlock:^(EditInfoModel *infoModel) {
+//            self.infoModel = infoModel;
+//        }];
+//        [self.navigationController pushViewController:vc animated:YES];
+//    }else if ([self.taskModel.taskType isEqual:@"10"]){
+//        EditDealInfoViewController *vc = [[EditDealInfoViewController alloc]init];
+//        vc.claimModel = self.claimModel;
+//        vc.taskModel = self.taskModel;
+//        [self.navigationController pushViewController:vc animated:YES];
+//    }else if ([self.taskModel.taskType isEqual:@"01"]){
+//        MedicalVisitViewController *vc = [[MedicalVisitViewController alloc]init];
+//        vc.claimModel = self.claimModel;
+//        vc.taskModel = self.taskModel;
+//        [self.navigationController pushViewController:vc animated:YES];
+//    }
 }
 -(void)changeSeg:(UISegmentedControl *)seg{
     self.vc.contentOffset = CGPointMake(DeviceSize.width*_seg.selectedSegmentIndex,0);

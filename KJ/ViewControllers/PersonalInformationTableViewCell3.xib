@@ -19,28 +19,39 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AkC-tO-4Bt" userLabel="LabelRight">
-                        <rect key="frame" x="269.5" y="13.5" width="35.5" height="17"/>
+                        <rect key="frame" x="269" y="13" width="36" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9zj-An-c7u" userLabel="LabelLeft">
-                        <rect key="frame" x="15" y="13" width="37.5" height="18"/>
+                        <rect key="frame" x="15" y="13" width="38" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fm1-ez-vwO">
+                        <rect key="frame" x="15" y="0.0" width="290" height="1"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="Fs5-uU-FQm"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="fm1-ez-vwO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="4OJ-JA-ABB"/>
                     <constraint firstItem="9zj-An-c7u" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="52X-NP-MFx"/>
                     <constraint firstItem="9zj-An-c7u" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="9pN-MI-jsh"/>
+                    <constraint firstItem="fm1-ez-vwO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="VWR-Cd-370"/>
                     <constraint firstItem="AkC-tO-4Bt" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ZcQ-hV-D65"/>
+                    <constraint firstAttribute="trailing" secondItem="fm1-ez-vwO" secondAttribute="trailing" constant="15" id="aiJ-4W-Shc"/>
                     <constraint firstAttribute="trailing" secondItem="AkC-tO-4Bt" secondAttribute="trailing" constant="15" id="uLT-ay-Pzl"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="labelLeft" destination="9zj-An-c7u" id="8aR-pT-Yf9"/>
                 <outlet property="labelRight" destination="AkC-tO-4Bt" id="fJC-fq-X3a"/>
+                <outlet property="lin" destination="fm1-ez-vwO" id="Ln3-X4-UXa"/>
             </connections>
             <point key="canvasLocation" x="155" y="285"/>
         </tableViewCell>

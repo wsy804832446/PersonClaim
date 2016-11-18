@@ -187,6 +187,9 @@
     ClaimModel *model = [self.dataArray objectAtIndex:section];
     return model.taskList.count;
 }
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 0.01;
+}
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     ClaimModel *claimModel =self.dataArray[indexPath.section];
     TaskModel *taskModel= [MTLJSONAdapter modelOfClass:[TaskModel class] fromJSONDictionary:claimModel.taskList[indexPath.row] error:NULL];
@@ -196,6 +199,9 @@
         if (nib.count>0) {
             cell = nib.firstObject;
         }
+    }
+    if (indexPath.section ==0 && indexPath.row ==0) {
+        cell.line.backgroundColor = [UIColor colorWithHexString:Colorwhite];
     }
     cell.lblName.text = claimModel.insuredName;
     cell.lblTime.text = taskModel.dispatchDate;

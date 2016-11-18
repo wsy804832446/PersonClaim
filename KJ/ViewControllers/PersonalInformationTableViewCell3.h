@@ -11,5 +11,6 @@
 @interface PersonalInformationTableViewCell3 : UITableViewCell
 @property (strong, nonatomic) IBOutlet UILabel *labelLeft;
 @property (strong, nonatomic) IBOutlet UILabel *labelRight;
+@property (strong, nonatomic) IBOutlet UIView *lin;
 
 @end

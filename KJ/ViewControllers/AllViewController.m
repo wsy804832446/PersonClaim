@@ -35,9 +35,7 @@
     [self AddSegumentArray:_itemsArr];
     self.tableView.top = self.searchScrollView.bottom+10;
     self.tableView.height = DeviceSize.height-self.tableView.top;
-    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 15,0, 15)];
-    }
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // Do any additional setup after loading the view.
 }
 -(void)leftAction{
@@ -160,6 +158,9 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 60;
 }
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 0.01;
+}
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     FollowPlatFormViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PlatFormCELL"];
     if (!cell) {
@@ -167,6 +168,9 @@
         if (nib.count>0) {
             cell = nib.firstObject;
         }
+    }
+    if (indexPath.row == 0) {
+        cell.line.backgroundColor = [UIColor colorWithHexString:Colorwhite];
     }
     cell.lblName.text = @"宋冉";
     cell.lblTime.text = [NSString stringWithFormat:@"%@",[NSDate date]];

@@ -11,6 +11,7 @@
 #import <BaiduMapAPI_Search/BMKSearchComponent.h>
 #import "BmkSearchModel.h"
 #import "SearchTableViewCell.h"
+#import "DefaultCellTableViewCell.h"
 @interface SearchViewController ()<UITextFieldDelegate,BMKSuggestionSearchDelegate>
 @property (nonatomic,strong)MyTextField *txtSearch;
 //百度地图在线建议查询对象
@@ -35,7 +36,7 @@
     self.navigationItem.titleView = self.txtSearch;
     self.tableView.top =10;
     self.tableView.height =DeviceSize.height-74;
-    [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 15, 0, 15)];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.isEmpty = YES;
     self.dataArray =[NSMutableArray arrayWithArray: [CommUtil readDataWithKey:@"searchHistory"]];
     if (self.dataArray.count ==0) {
@@ -135,11 +136,17 @@
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (self.isDataKindHistory) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MYCELL"];
+        DefaultCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultCellTableViewCell"];
         if (!cell) {
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"MYCELL"];
+            NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"DefaultCellTableViewCell" owner:nil options:nil];
+            if (nib.count>0) {
+                cell = nib.firstObject;
+            }
         }
-        cell.textLabel.text = self.dataArray[indexPath.row];
+        if (indexPath.row == 0) {
+            cell.line.backgroundColor = [UIColor colorWithHexString:Colorwhite];
+        }
+        cell.lblText.text = self.dataArray[indexPath.row];
         return cell;
     }else{
         SearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"searchCell"];
@@ -148,6 +155,9 @@
             if (nib.count>0) {
                 cell = nib.firstObject;
             }
+        }
+        if (indexPath.row == 0) {
+            [cell.line removeFromSuperview];
         }
         BmkSearchModel *model = self.dataArray[indexPath.row];
         cell.lblText.text = model.key;
@@ -161,27 +171,31 @@
     if (self.isEmpty && self.dataArray.count>0) {
         return 44;
     }else{
-        return 0;
+        return 0.01;
     }
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *vc = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DeviceSize.width, 45)];
-    vc.backgroundColor = [UIColor colorWithHexString:Colorwhite];
-    UILabel *lbl = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, 200, 44)];
-    lbl.textColor = [UIColor colorWithHexString:placeHoldColor];
-    lbl.text = @"历史记录";
-    lbl.font = [UIFont systemFontOfSize:15];
-    [vc addSubview:lbl];
-    UIButton *btnDelete = [UIButton buttonWithType:UIButtonTypeCustom];
-    btnDelete.frame = CGRectMake(DeviceSize.width-15-50, 0, 50, 44);
-    [btnDelete addTarget:self action:@selector(delete) forControlEvents:UIControlEventTouchUpInside];
-    [btnDelete setImage:[UIImage imageNamed:@"14-地图_r2_c2(2)"] forState:UIControlStateNormal];
-    [btnDelete setImageEdgeInsets:UIEdgeInsetsMake(33/2, 39, 33/2, 0)];
-    [vc addSubview:btnDelete];
-    UIView *line = [[UIView alloc]initWithFrame:CGRectMake(15, 44, DeviceSize.width-30, 1)];
-    line.backgroundColor = [UIColor colorWithHexString:pageBackgroundColor];
-    [vc addSubview:line];
-    return vc;
+    if (self.isEmpty && self.dataArray.count>0) {
+        UIView *vc = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DeviceSize.width, 45)];
+        vc.backgroundColor = [UIColor colorWithHexString:Colorwhite];
+        UILabel *lbl = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, 200, 44)];
+        lbl.textColor = [UIColor colorWithHexString:placeHoldColor];
+        lbl.text = @"历史记录";
+        lbl.font = [UIFont systemFontOfSize:15];
+        [vc addSubview:lbl];
+        UIButton *btnDelete = [UIButton buttonWithType:UIButtonTypeCustom];
+        btnDelete.frame = CGRectMake(DeviceSize.width-15-50, 0, 50, 44);
+        [btnDelete addTarget:self action:@selector(delete) forControlEvents:UIControlEventTouchUpInside];
+        [btnDelete setImage:[UIImage imageNamed:@"14-地图_r2_c2(2)"] forState:UIControlStateNormal];
+        [btnDelete setImageEdgeInsets:UIEdgeInsetsMake(33/2, 39, 33/2, 0)];
+        [vc addSubview:btnDelete];
+        UIView *line = [[UIView alloc]initWithFrame:CGRectMake(15, 44, DeviceSize.width-30, 1)];
+        line.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
+        [vc addSubview:line];
+        return vc;
+    }else{
+        return nil;
+    }
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

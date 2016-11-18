@@ -1,14 +1,14 @@
 //
-//  SearchTableViewCell.m
+//  DefaultCellTableViewCell.m
 //  KJ
 //
-//  Created by 王晟宇 on 2016/10/25.
+//  Created by 王晟宇 on 2016/11/18.
 //  Copyright © 2016年 iOSDeveloper. All rights reserved.
 //
 
-#import "SearchTableViewCell.h"
+#import "DefaultCellTableViewCell.h"
 
-@implementation SearchTableViewCell
+@implementation DefaultCellTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

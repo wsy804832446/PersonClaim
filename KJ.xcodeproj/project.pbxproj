@@ -64,6 +64,10 @@
 		3453214F1DB8CBAD0055D178 /* 30-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3453214D1DB8CBAD0055D178 /* 30-1.png */; };
 		345321501DB8CBAD0055D178 /* 30.png in Resources */ = {isa = PBXBuildFile; fileRef = 3453214E1DB8CBAD0055D178 /* 30.png */; };
 		3453B7411DD43E1100D6B7F0 /* AddDiagnoseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3453B7401DD43E1100D6B7F0 /* AddDiagnoseViewController.m */; };
+		345CF2F31DDE9A4800EBB824 /* DefaultCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 345CF2F11DDE9A4800EBB824 /* DefaultCellTableViewCell.m */; };
+		345CF2F41DDE9A4800EBB824 /* DefaultCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 345CF2F21DDE9A4800EBB824 /* DefaultCellTableViewCell.xib */; };
+		345CF2F81DDEA36E00EBB824 /* IncomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 345CF2F71DDEA36E00EBB824 /* IncomeViewController.m */; };
+		345CF2FB1DDECB4B00EBB824 /* SelectTradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 345CF2FA1DDECB4B00EBB824 /* SelectTradeViewController.m */; };
 		34607C6B1DBEF320006B8E2D /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34607C6A1DBEF320006B8E2D /* SearchViewController.m */; };
 		34607C6E1DBEFFD5006B8E2D /* CommUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 34607C6D1DBEFFD5006B8E2D /* CommUtil.m */; };
 		34607C721DBF0A20006B8E2D /* 1-收藏空白页.png in Resources */ = {isa = PBXBuildFile; fileRef = 34607C6F1DBF0A20006B8E2D /* 1-收藏空白页.png */; };
@@ -422,6 +426,13 @@
 		3453214E1DB8CBAD0055D178 /* 30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 30.png; sourceTree = "<group>"; };
 		3453B73F1DD43E1100D6B7F0 /* AddDiagnoseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddDiagnoseViewController.h; sourceTree = "<group>"; };
 		3453B7401DD43E1100D6B7F0 /* AddDiagnoseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddDiagnoseViewController.m; sourceTree = "<group>"; };
+		345CF2F01DDE9A4800EBB824 /* DefaultCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultCellTableViewCell.h; sourceTree = "<group>"; };
+		345CF2F11DDE9A4800EBB824 /* DefaultCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultCellTableViewCell.m; sourceTree = "<group>"; };
+		345CF2F21DDE9A4800EBB824 /* DefaultCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultCellTableViewCell.xib; sourceTree = "<group>"; };
+		345CF2F61DDEA36E00EBB824 /* IncomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncomeViewController.h; sourceTree = "<group>"; };
+		345CF2F71DDEA36E00EBB824 /* IncomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncomeViewController.m; sourceTree = "<group>"; };
+		345CF2F91DDECB4B00EBB824 /* SelectTradeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectTradeViewController.h; sourceTree = "<group>"; };
+		345CF2FA1DDECB4B00EBB824 /* SelectTradeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectTradeViewController.m; sourceTree = "<group>"; };
 		34607C691DBEF320006B8E2D /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		34607C6A1DBEF320006B8E2D /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		34607C6C1DBEFFD5006B8E2D /* CommUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommUtil.h; sourceTree = "<group>"; };
@@ -961,6 +972,7 @@
 				3475F24B1DD16CD200F4D01F /* 医疗探视 */,
 				344C5AA81DD0676500584668 /* 事故处理情况 */,
 				34710D3C1DDBF7B9000840EF /* 户籍居住情况 */,
+				345CF2F51DDEA32700EBB824 /* 收入情况 */,
 				344C5AA71DD0673F00584668 /* 事故基本信息 */,
 			);
 			name = "跟踪平台";
@@ -1012,6 +1024,17 @@
 				344C5AAA1DD067CC00584668 /* EditDealInfoViewController.m */,
 			);
 			name = "事故处理情况";
+			sourceTree = "<group>";
+		};
+		345CF2F51DDEA32700EBB824 /* 收入情况 */ = {
+			isa = PBXGroup;
+			children = (
+				345CF2F61DDEA36E00EBB824 /* IncomeViewController.h */,
+				345CF2F71DDEA36E00EBB824 /* IncomeViewController.m */,
+				345CF2F91DDECB4B00EBB824 /* SelectTradeViewController.h */,
+				345CF2FA1DDECB4B00EBB824 /* SelectTradeViewController.m */,
+			);
+			name = "收入情况";
 			sourceTree = "<group>";
 		};
 		34710D3C1DDBF7B9000840EF /* 户籍居住情况 */ = {
@@ -1086,6 +1109,9 @@
 				34710D401DDC3704000840EF /* AddDiagnoseDetailTableViewCell.h */,
 				34710D411DDC3704000840EF /* AddDiagnoseDetailTableViewCell.m */,
 				34710D421DDC3704000840EF /* AddDiagnoseDetailTableViewCell.xib */,
+				345CF2F01DDE9A4800EBB824 /* DefaultCellTableViewCell.h */,
+				345CF2F11DDE9A4800EBB824 /* DefaultCellTableViewCell.m */,
+				345CF2F21DDE9A4800EBB824 /* DefaultCellTableViewCell.xib */,
 			);
 			name = "跟踪详情cell";
 			sourceTree = "<group>";
@@ -1903,6 +1929,7 @@
 				3437BCFF1D9B8A80001DEC7B /* MineTableViewCell2.xib in Resources */,
 				34AD21461DB0754E00A17B29 /* 返回.png in Resources */,
 				34AD21301DB0754E00A17B29 /* 4-1.png in Resources */,
+				345CF2F41DDE9A4800EBB824 /* DefaultCellTableViewCell.xib in Resources */,
 				34607C761DBF2388006B8E2D /* 14-地图_r2_c2(2).png in Resources */,
 				34AD217F1DB0757C00A17B29 /* t.png in Resources */,
 				34AD21431DB0754E00A17B29 /* 标签.png in Resources */,
@@ -2054,6 +2081,7 @@
 				3437BD171D9BA209001DEC7B /* PersonalInformationTableViewCell2.m in Sources */,
 				343841951DD2C4F600583A69 /* CarePeopleModel.m in Sources */,
 				44FE6A181CBF5E4000C2A8A5 /* NSValueTransformer+MTLPredefinedTransformerAdditions.m in Sources */,
+				345CF2FB1DDECB4B00EBB824 /* SelectTradeViewController.m in Sources */,
 				44FE6A2B1CBF5F5400C2A8A5 /* FMDatabaseQueue.m in Sources */,
 				344912FA1DADE35B00D2C4BB /* NewPassWordViewController.m in Sources */,
 				34607C791DBF5C57006B8E2D /* BmkSearchModel.m in Sources */,
@@ -2082,6 +2110,7 @@
 				349B21DC1D9DF9100066E76E /* LayViewController.m in Sources */,
 				44FE6B171CBF682600C2A8A5 /* UIView+WebCacheOperation.m in Sources */,
 				44FE6A141CBF5E4000C2A8A5 /* NSDictionary+MTLManipulationAdditions.m in Sources */,
+				345CF2F81DDEA36E00EBB824 /* IncomeViewController.m in Sources */,
 				44FE6B131CBF682600C2A8A5 /* UIImage+MultiFormat.m in Sources */,
 				44FE6A0D1CBF5E4000C2A8A5 /* MTLJSONAdapter.m in Sources */,
 				34FAF9831D9A718600D2FABC /* MineTableViewCell2.m in Sources */,
@@ -2106,6 +2135,7 @@
 				44FE6A3F1CBF637100C2A8A5 /* UIBarButtonItemExtension.m in Sources */,
 				44FE6A6F1CBF63C800C2A8A5 /* UIView+Tag.m in Sources */,
 				44FE6A351CBF618400C2A8A5 /* BaseTabBarController.m in Sources */,
+				345CF2F31DDE9A4800EBB824 /* DefaultCellTableViewCell.m in Sources */,
 				44FE6AB31CBF672400C2A8A5 /* MJRefreshBackGifFooter.m in Sources */,
 				44FE6A651CBF63C800C2A8A5 /* NSString+Extension.m in Sources */,
 				44FE69B01CBF5CEE00C2A8A5 /* main.m in Sources */,
