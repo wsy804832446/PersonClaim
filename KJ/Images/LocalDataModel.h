@@ -21,6 +21,10 @@
 @property (nonatomic,strong)NSArray *getMoneyArray;
 //完成状态
 @property (nonatomic,strong)NSArray *finishStateArray;
+//父母健在否
+@property (nonatomic,strong)NSArray *parentStateArray;
+//是否
+@property (nonatomic,strong)NSArray *boolArray;
 @end
 
 

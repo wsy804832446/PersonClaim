@@ -20,15 +20,6 @@
     self.tableView.height = DeviceSize.height-74;
     self.tableView.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15);
     self.navigationItem.leftBarButtonItem = [UIBarButtonItemExtension leftButtonItem:@selector(leftAction) andTarget:self];
-    NSArray *seletListArray = [CommUtil readDataWithFileName:localSelectArry];
-    if (seletListArray.count >0) {
-        for (SelectList *model in seletListArray) {
-            if ([model.typeCode isEqual:@"D110"]) {
-                [self.dataArray addObject:model];
-            }
-        }
-    }
-    
     // Do any additional setup after loading the view.
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -59,7 +50,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(NSString *)title{
-    return @"选择行业";
+    return self.itemName;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

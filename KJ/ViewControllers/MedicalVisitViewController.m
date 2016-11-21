@@ -23,6 +23,7 @@
 #import "DepartmentsModel.h"
 #import "CarePeopleModel.h"
 #import "DiagnoseDetailModel.h"
+#import "SelectItemViewController.h"
 @interface MedicalVisitViewController ()<UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate>
 @property (nonatomic,assign)NSInteger contactNum;
 @property (nonatomic,strong)UILabel *placeHolder;
@@ -323,7 +324,15 @@
     return UITableViewCellEditingStyleDelete | UITableViewCellEditingStyleInsert;
 }
 -(void)selectState:(UIButton *)btn{
-    
+    SelectItemViewController *vc = [[SelectItemViewController alloc]init];
+    vc.itemName = @"完成情况";
+    LocalDataModel *model = [LocalDataModel shareInstance];
+    vc.dataArray = [NSMutableArray arrayWithArray:model.finishStateArray];
+    [vc setSelectItemBlock:^(ItemTypeModel *model) {
+        self.infoModel.finishFlag = model;
+        [btn setTitle:model.title forState:UIControlStateNormal];
+    }];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 -(void)showPictureWithIndex:(NSInteger)index{
     ShowPictureViewController *vc = [[ShowPictureViewController alloc]init];
@@ -516,7 +525,8 @@
     }
     [uploadDic setObject:self.taskModel.taskNo forKey:@"taskNo"];
     [uploadDic setFloat:self.infoModel.feePass forKey:@"feePass"];
-    [uploadDic setObject:@"0" forKey:@"finishFlag"];
+    ItemTypeModel *model =self.infoModel.finishFlag;
+    [uploadDic setObject:model.value forKey:@"finishFlag"];
     [uploadDic setObject:self.infoModel.remark forKey:@"remark"];
     if (self.infoModel.imageArray.count>0) {
         self.unUploadImageArray =self.infoModel.imageArray;

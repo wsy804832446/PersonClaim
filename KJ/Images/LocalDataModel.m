@@ -116,6 +116,36 @@ static LocalDataModel *localDataModel = nil;
     }
     return _finishStateArray;
 }
+-(NSArray *)parentStateArray{
+    if (!_parentStateArray) {
+        NSMutableArray *arr = [NSMutableArray array];
+        ItemTypeModel *firstModel = [[ItemTypeModel alloc]init];
+        firstModel.title = @"健在";
+        firstModel.value = @"0";
+        ItemTypeModel *secondModel = [[ItemTypeModel alloc]init];
+        secondModel.title = @"去世";
+        secondModel.value = @"1";
+        [arr addObject:firstModel];
+        [arr addObject:secondModel];
+        _parentStateArray = [NSArray arrayWithArray:arr];
+    }
+    return _parentStateArray;
+}
+-(NSArray *)boolArray{
+    if (!_boolArray) {
+        NSMutableArray *arr = [NSMutableArray array];
+        ItemTypeModel *firstModel = [[ItemTypeModel alloc]init];
+        firstModel.title = @"是";
+        firstModel.value = @"0";
+        ItemTypeModel *secondModel = [[ItemTypeModel alloc]init];
+        secondModel.title = @"否";
+        secondModel.value = @"1";
+        [arr addObject:firstModel];
+        [arr addObject:secondModel];
+        _boolArray = [NSArray arrayWithArray:arr];
+    }
+    return _boolArray;
+}
 @end
 
 @implementation ItemTypeModel

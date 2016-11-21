@@ -7,9 +7,11 @@
 //
 
 #import "MTLModel.h"
-
+#import "SelectList.h"
 @interface ContactPeopleModel : MTLModel
 @property (nonatomic,copy)NSString *name;
 
 @property (nonatomic,copy)NSString *phone;
+//身份（被询问人）
+@property (nonatomic,strong)SelectList *insiderIdentity;
 @end

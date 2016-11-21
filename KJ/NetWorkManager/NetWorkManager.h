@@ -57,4 +57,12 @@ typedef void (^uploadProgressBlock)(long long bytesSent, long long totalBytesSen
 -(void)getSelectListWithCompletionBlockWithSuccess:(CompletionBlockWithSuccess) success andFailure:(FailureBlock) failure;
 //上传医疗探视
 -(void)uploadMedicalWithDataDic:(NSDictionary *)dic andCompletionBlockWithSuccess:(CompletionBlockWithSuccess) success andFailure:(FailureBlock) failure;
+//上传收入情况
+-(void)uploadIncomeWithDataDic:(NSDictionary *)dic andCompletionBlockWithSuccess:(CompletionBlockWithSuccess) success andFailure:(FailureBlock) failure;
+//上传误工情况
+-(void)uploadDelayWithDataDic:(NSDictionary *)dic andCompletionBlockWithSuccess:(CompletionBlockWithSuccess) success andFailure:(FailureBlock) failure;
+//上传死亡信息
+-(void)uploadDeathInfoWithDataDic:(NSDictionary *)dic andCompletionBlockWithSuccess:(CompletionBlockWithSuccess) success andFailure:(FailureBlock) failure;
+//上传户籍信息
+-(void)uploadHouseholdInfoWithDataDic:(NSDictionary *)dic andCompletionBlockWithSuccess:(CompletionBlockWithSuccess) success andFailure:(FailureBlock) failure;
 @end

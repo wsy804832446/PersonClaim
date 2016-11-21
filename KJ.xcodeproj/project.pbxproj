@@ -63,6 +63,7 @@
 		34523D511DDD45EE00C20976 /* SearchDiagnoseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34523D501DDD45EE00C20976 /* SearchDiagnoseViewController.m */; };
 		3453214F1DB8CBAD0055D178 /* 30-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3453214D1DB8CBAD0055D178 /* 30-1.png */; };
 		345321501DB8CBAD0055D178 /* 30.png in Resources */ = {isa = PBXBuildFile; fileRef = 3453214E1DB8CBAD0055D178 /* 30.png */; };
+		345326EA1DE2FAE900988D29 /* InsiderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 345326E91DE2FAE900988D29 /* InsiderViewController.m */; };
 		3453B7411DD43E1100D6B7F0 /* AddDiagnoseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3453B7401DD43E1100D6B7F0 /* AddDiagnoseViewController.m */; };
 		345CF2F31DDE9A4800EBB824 /* DefaultCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 345CF2F11DDE9A4800EBB824 /* DefaultCellTableViewCell.m */; };
 		345CF2F41DDE9A4800EBB824 /* DefaultCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 345CF2F21DDE9A4800EBB824 /* DefaultCellTableViewCell.xib */; };
@@ -70,6 +71,8 @@
 		345CF2FB1DDECB4B00EBB824 /* SelectTradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 345CF2FA1DDECB4B00EBB824 /* SelectTradeViewController.m */; };
 		345CF2FE1DDED7AC00EBB824 /* SelectItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 345CF2FD1DDED7AC00EBB824 /* SelectItemViewController.m */; };
 		345CF3041DDED9E500EBB824 /* LocalDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 345CF3031DDED9E500EBB824 /* LocalDataModel.m */; };
+		345D55371DE1713E0024F70C /* DeathInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 345D55361DE1713E0024F70C /* DeathInfoViewController.m */; };
+		345D553B1DE1763E0024F70C /* DelayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 345D553A1DE1763E0024F70C /* DelayViewController.m */; };
 		34607C6B1DBEF320006B8E2D /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34607C6A1DBEF320006B8E2D /* SearchViewController.m */; };
 		34607C6E1DBEFFD5006B8E2D /* CommUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 34607C6D1DBEFFD5006B8E2D /* CommUtil.m */; };
 		34607C721DBF0A20006B8E2D /* 1-收藏空白页.png in Resources */ = {isa = PBXBuildFile; fileRef = 34607C6F1DBF0A20006B8E2D /* 1-收藏空白页.png */; };
@@ -426,6 +429,8 @@
 		34523D501DDD45EE00C20976 /* SearchDiagnoseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchDiagnoseViewController.m; sourceTree = "<group>"; };
 		3453214D1DB8CBAD0055D178 /* 30-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "30-1.png"; sourceTree = "<group>"; };
 		3453214E1DB8CBAD0055D178 /* 30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 30.png; sourceTree = "<group>"; };
+		345326E81DE2FAE900988D29 /* InsiderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InsiderViewController.h; sourceTree = "<group>"; };
+		345326E91DE2FAE900988D29 /* InsiderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InsiderViewController.m; sourceTree = "<group>"; };
 		3453B73F1DD43E1100D6B7F0 /* AddDiagnoseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddDiagnoseViewController.h; sourceTree = "<group>"; };
 		3453B7401DD43E1100D6B7F0 /* AddDiagnoseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddDiagnoseViewController.m; sourceTree = "<group>"; };
 		345CF2F01DDE9A4800EBB824 /* DefaultCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultCellTableViewCell.h; sourceTree = "<group>"; };
@@ -439,6 +444,10 @@
 		345CF2FD1DDED7AC00EBB824 /* SelectItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectItemViewController.m; sourceTree = "<group>"; };
 		345CF3021DDED9E500EBB824 /* LocalDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalDataModel.h; sourceTree = "<group>"; };
 		345CF3031DDED9E500EBB824 /* LocalDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalDataModel.m; sourceTree = "<group>"; };
+		345D55351DE1713E0024F70C /* DeathInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeathInfoViewController.h; sourceTree = "<group>"; };
+		345D55361DE1713E0024F70C /* DeathInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeathInfoViewController.m; sourceTree = "<group>"; };
+		345D55391DE1763E0024F70C /* DelayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelayViewController.h; sourceTree = "<group>"; };
+		345D553A1DE1763E0024F70C /* DelayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelayViewController.m; sourceTree = "<group>"; };
 		34607C691DBEF320006B8E2D /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		34607C6A1DBEF320006B8E2D /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		34607C6C1DBEFFD5006B8E2D /* CommUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommUtil.h; sourceTree = "<group>"; };
@@ -977,6 +986,9 @@
 				340220401DB4AC8800941FEC /* FollowDetaiViewController.m */,
 				345CF2FC1DDED7AC00EBB824 /* SelectItemViewController.h */,
 				345CF2FD1DDED7AC00EBB824 /* SelectItemViewController.m */,
+				345D55381DE175CF0024F70C /* 误工情况 */,
+				345D55341DE171140024F70C /* 伤残信息 */,
+				345D55331DE170FD0024F70C /* 死亡信息 */,
 				3475F24B1DD16CD200F4D01F /* 医疗探视 */,
 				344C5AA81DD0676500584668 /* 事故处理情况 */,
 				34710D3C1DDBF7B9000840EF /* 户籍居住情况 */,
@@ -1045,11 +1057,38 @@
 			name = "收入情况";
 			sourceTree = "<group>";
 		};
+		345D55331DE170FD0024F70C /* 死亡信息 */ = {
+			isa = PBXGroup;
+			children = (
+				345D55351DE1713E0024F70C /* DeathInfoViewController.h */,
+				345D55361DE1713E0024F70C /* DeathInfoViewController.m */,
+			);
+			name = "死亡信息";
+			sourceTree = "<group>";
+		};
+		345D55341DE171140024F70C /* 伤残信息 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "伤残信息";
+			sourceTree = "<group>";
+		};
+		345D55381DE175CF0024F70C /* 误工情况 */ = {
+			isa = PBXGroup;
+			children = (
+				345D55391DE1763E0024F70C /* DelayViewController.h */,
+				345D553A1DE1763E0024F70C /* DelayViewController.m */,
+			);
+			name = "误工情况";
+			sourceTree = "<group>";
+		};
 		34710D3C1DDBF7B9000840EF /* 户籍居住情况 */ = {
 			isa = PBXGroup;
 			children = (
 				34710D3D1DDBF862000840EF /* FamilyRegisterViewController.h */,
 				34710D3E1DDBF862000840EF /* FamilyRegisterViewController.m */,
+				345326E81DE2FAE900988D29 /* InsiderViewController.h */,
+				345326E91DE2FAE900988D29 /* InsiderViewController.m */,
 			);
 			name = "户籍居住情况";
 			sourceTree = "<group>";
@@ -2068,6 +2107,7 @@
 				341941021DD59AB90062003E /* DiagnoseDetailModel.m in Sources */,
 				34607C6B1DBEF320006B8E2D /* SearchViewController.m in Sources */,
 				44FE6A381CBF629400C2A8A5 /* BaseTableViewCell.m in Sources */,
+				345D553B1DE1763E0024F70C /* DelayViewController.m in Sources */,
 				44FE6ABD1CBF672400C2A8A5 /* UIView+MJExtension.m in Sources */,
 				446771F51D2B512D001721E6 /* UIView+REFrostedViewController.m in Sources */,
 				3444F1D11DC833050046E2A5 /* EditInfoViewController.m in Sources */,
@@ -2077,6 +2117,7 @@
 				341362991DA9D88400FF17DC /* CompensationViewController.m in Sources */,
 				446771F11D2B512D001721E6 /* RECommonFunctions.m in Sources */,
 				3475F24E1DD16D2000F4D01F /* MedicalVisitViewController.m in Sources */,
+				345D55371DE1713E0024F70C /* DeathInfoViewController.m in Sources */,
 				44FE6A131CBF5E4000C2A8A5 /* NSArray+MTLManipulationAdditions.m in Sources */,
 				44FE6AAB1CBF672400C2A8A5 /* MJRefreshAutoFooter.m in Sources */,
 				44FE6AD41CBF677800C2A8A5 /* AFHTTPSessionManager.m in Sources */,
@@ -2164,6 +2205,7 @@
 				345CF3041DDED9E500EBB824 /* LocalDataModel.m in Sources */,
 				446771F61D2B512D001721E6 /* UIViewController+REFrostedViewController.m in Sources */,
 				44FE6AD31CBF677800C2A8A5 /* AFHTTPRequestOperationManager.m in Sources */,
+				345326EA1DE2FAE900988D29 /* InsiderViewController.m in Sources */,
 				44FE6AB81CBF672400C2A8A5 /* MJRefreshStateHeader.m in Sources */,
 				3405AD511DD456380064D1DA /* HospitalModel.m in Sources */,
 				44FE6B0F1CBF682600C2A8A5 /* SDWebImageManager.m in Sources */,

@@ -15,6 +15,7 @@
 #import "PersonalInformationTableViewCell3.h"
 #import "PictureTableViewCell.h"
 #import "ShowPictureViewController.h"
+#import "SelectItemViewController.h"
 @interface EditInfoViewController ()<UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 //选择时间
 @property (nonatomic,strong)UIView *containerView;
@@ -112,11 +113,7 @@
     AddContactPersonViewController *vc = [[AddContactPersonViewController alloc]init];
     [vc setSaveContactBlock:^(NSMutableArray *array) {
         [self.contactPeopleArray addObjectsFromArray:array];
-        if (array.count>0) {
-            ContactPeopleModel *model = [array firstObject];
-            self.infoModel.contactPerson = model.name;
-            self.infoModel.contactTel = model.phone;
-        }
+        self.infoModel.contactPersonArray = [NSArray arrayWithArray:self.contactPeopleArray];
         [weakSelf.tableView reloadData];
     }];
     [self.navigationController pushViewController:vc animated:YES];
@@ -252,7 +249,15 @@
     }
 }
 -(void)selectState:(UIButton *)btn{
-    
+    SelectItemViewController *vc = [[SelectItemViewController alloc]init];
+    vc.itemName = @"完成情况";
+    LocalDataModel *model = [LocalDataModel shareInstance];
+    vc.dataArray = [NSMutableArray arrayWithArray:model.finishStateArray];
+    [vc setSelectItemBlock:^(ItemTypeModel *model) {
+        self.infoModel.finishFlag = model;
+        [btn setTitle:model.title forState:UIControlStateNormal];
+    }];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 -(void)selectTime:(UIButton *)btn{
     self.tableView.userInteractionEnabled = NO;
@@ -355,6 +360,7 @@
         self.infoModel.address = textView.text;
     }else if (textView.tag == 1001){
         cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2]];
+        self.infoModel.detailInfo = textView.text;
     }else if (textView.tag == 1002){
         cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:2]];
         self.infoModel.remark = textView.text;
@@ -491,7 +497,10 @@
     }else{
          WeakSelf(EditInfoViewController);
         [self showHudWaitingView:WaitPrompt];
-        [[NetWorkManager shareNetWork]uploadBaseInfoWithTaskNo:self.taskModel.taskNo andAddress:self.infoModel.address andContactPerson:self.infoModel.contactPerson andContactTel:self.infoModel.contactTel andRemark:self.infoModel.remark andAccidentDate:self.infoModel.accidentDate andUserCode:userCode andTaskType:self.taskModel.taskType andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
+        //text
+        ContactPeopleModel *model =[self.contactPeopleArray firstObject];
+        ItemTypeModel *finish = self.infoModel.finishFlag;
+        [[NetWorkManager shareNetWork]uploadBaseInfoWithTaskNo:self.taskModel.taskNo andAddress:self.infoModel.address andContactPerson:model.name andContactTel:model.phone andRemark:self.infoModel.remark andAccidentDate:self.infoModel.accidentDate andUserCode:userCode andTaskType:self.taskModel.taskType andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
             [weakSelf removeMBProgressHudInManaual];
             if ([response.responseCode isEqual:@"1"]) {
                 [self showHudAuto:@"提交成功"];

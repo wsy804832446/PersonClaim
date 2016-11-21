@@ -32,6 +32,7 @@
 @property (nonatomic,strong)EditInfoModel *infoModel;
 //未上传图片数组 （上传判断使用）
 @property (nonatomic,strong)NSMutableArray *unUploadImageArray;
+//是否在职
 @end
 
 @implementation IncomeViewController
@@ -48,10 +49,6 @@
 }
 -(void)getLocalData{
     NSArray *arr =[CommUtil readDataWithFileName:localSelectArry];
-    for (SelectList *model in arr) {
-        NSString *str = [NSString stringWithFormat:@"%@,%@",model.typeCode,model.value];
-        NSLog(@"%@",str);
-    }
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -72,30 +69,51 @@
     // Do any additional setup after loading the view.
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 4;
+    return 5;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (section == 0) {
+    ItemTypeModel *model =self.infoModel.jobState;
+    if (section == 0 ) {
         return 4;
     }else if(section == 1){
-        return 3;
+        if ([model.value isEqual:@"0"]) {
+            return 3;
+        }else{
+            return 0;
+        }
     }else if(section == 2){
-        return self.contactPeopleArray.count;
+        if ([model.value isEqual:@"0"]) {
+            return self.contactPeopleArray.count;
+        }else{
+            return 0;
+        }
+    }else if(section == 3){
+        if ([model.value isEqual:@"0"]) {
+            return 5;
+        }else{
+            return 0;
+        }
     }else{
-        return 5;
+        if ([model.value isEqual:@"1"]) {
+            return 1;
+        }else{
+            return 0;
+        }
     }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    ItemTypeModel *model =self.infoModel.jobState;
     if (section == 1) {
         return 10;
-    }else  if (section == 2){
+    }else  if (section == 2 && [model.value isEqual:@"0"]){
         return 44;
     }else{
         return 0.01;
     }
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    if (section == 2) {
+     ItemTypeModel *model =self.infoModel.jobState;
+    if (section == 2 && [model.value isEqual:@"0"]) {
         UIView *vc = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DeviceSize.width, 44)];
         vc.backgroundColor = [UIColor colorWithHexString:Colorwhite];
         UIView *line =[[UIView alloc]initWithFrame:CGRectMake(15, 0, DeviceSize.width-30, 1)];
@@ -126,11 +144,7 @@
     AddContactPersonViewController *vc = [[AddContactPersonViewController alloc]init];
     [vc setSaveContactBlock:^(NSMutableArray *array) {
         [self.contactPeopleArray addObjectsFromArray:array];
-        if (array.count>0) {
-            ContactPeopleModel *model = [array firstObject];
-            self.infoModel.contactPerson = model.name;
-            self.infoModel.contactTel = model.phone;
-        }
+        self.infoModel.IncomeContactPersonArray  = [NSArray arrayWithArray:self.contactPeopleArray];
         [weakSelf.tableView reloadData];
     }];
     [self.navigationController pushViewController:vc animated:YES];
@@ -146,23 +160,30 @@
         }
         if ((indexPath.section == 1&&indexPath.row ==1)) {
             cell.lblTitle.text = @"单位名称";
+            cell.txtName.tag = 5000;
         }else{
             cell.lblTitle.text = @"月收入";
+            cell.txtName.tag = 5001;
         }
         [cell.txtName addTarget:self action:@selector(txtChange:) forControlEvents:UIControlEventEditingChanged];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.lblTitle.textColor = [UIColor colorWithHexString:@"#666666"];
         return cell;
-    }else if (indexPath.section ==3&&indexPath.row == 0){
-        AccidentTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TimeCell"];
-        if (!cell) {
-            NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"AccidentTimeTableViewCell" owner:nil options:nil];
-            if (nib.count>0) {
-                cell = [nib firstObject];
+    }else if ((indexPath.section ==3&&indexPath.row == 0) ||indexPath.section == 4){
+        AccidentTimeTableViewCell *cell = [[[NSBundle mainBundle]loadNibNamed:@"AccidentTimeTableViewCell" owner:nil options:nil]firstObject];
+        if (indexPath.section == 4) {
+            cell.lblTitle.text = @"离职时间";
+            cell.lblLine.backgroundColor = [UIColor colorWithHexString:Colorwhite];
+            if (self.infoModel.offWorkDate.length>0) {
+                [cell.btnTime setTitle:self.infoModel.offWorkDate forState:UIControlStateNormal];
+            }
+        }else{
+            cell.lblTitle.text = @"入职时间";
+            cell.lblLine.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
+            if (self.infoModel.takingWorkDate.length>0) {
+                [cell.btnTime setTitle:self.infoModel.takingWorkDate forState:UIControlStateNormal];
             }
         }
-        cell.lblLine.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
-        cell.lblTitle.text = @"入职时间";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell.btnTime addTarget:self action:@selector(selectTime:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
@@ -203,7 +224,7 @@
             AccidentAddressViewController *vc = [[AccidentAddressViewController alloc]init];
             [vc setSelectAddressBlock:^(NSString *address) {
                 [weakCell configCellWithAddress:address];
-                self.infoModel.address = address;
+                self.infoModel.UnitAddress = address;
                 [self.tableView reloadData];
             }];
             [weakSelf.navigationController pushViewController:vc animated:YES];
@@ -249,13 +270,7 @@
         [cell.btnMap removeFromSuperview];
         return cell;
     }else if ((indexPath.section ==0 &&indexPath.row ==0)||(indexPath.section ==0 &&indexPath.row ==3)||(indexPath.section ==1 &&indexPath.row ==0)||(indexPath.section ==3&&indexPath.row <4&&indexPath.row >0)){
-        AccidentTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TimeCell"];
-        if (!cell) {
-            NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"AccidentTimeTableViewCell" owner:nil options:nil];
-            if (nib.count>0) {
-                cell = [nib firstObject];
-            }
-        }
+        AccidentTimeTableViewCell *cell = [[[NSBundle mainBundle]loadNibNamed:@"AccidentTimeTableViewCell" owner:nil options:nil]firstObject];
         if (indexPath.section ==0 &&indexPath.row ==0){
             cell.lblTitle.text = @"在职情况";
             cell.lblLine.backgroundColor = [UIColor colorWithHexString:Colorwhite];
@@ -278,13 +293,12 @@
             }
         }else if (indexPath.section ==3 &&indexPath.row ==1){
             cell.lblTitle.text = @"劳动合同";
-            ItemTypeModel *model = self.infoModel.finishFlag;
+            ItemTypeModel *model = self.infoModel.labourContract;
             if (model) {
                  [cell.btnTime setTitle:model.title forState:UIControlStateNormal];
             }
         }else if (indexPath.section ==3 &&indexPath.row ==2){
             cell.lblTitle.text = @"社保";
-            cell.lblLine.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
             ItemTypeModel *model = self.infoModel.socialSecurity;
             if (model) {
                 [cell.btnTime setTitle:model.title forState:UIControlStateNormal];
@@ -313,10 +327,20 @@
         [vc setSelectItemBlock:^(ItemTypeModel *model) {
             [btn setTitle:model.title forState:UIControlStateNormal];
             self.infoModel.jobState = model;
+            [self.tableView reloadData];
         }];
         [self.navigationController pushViewController:vc animated:YES];
     }else if (btn.tag == 101){
         SelectTradeViewController*vc = [[SelectTradeViewController alloc]init];
+        vc.itemName = @"选择行业";
+        NSArray *seletListArray = [CommUtil readDataWithFileName:localSelectArry];
+        if (seletListArray.count >0) {
+            for (SelectList *model in seletListArray) {
+                if ([model.typeCode isEqual:@"D110"]) {
+                    [vc.dataArray addObject:model];
+                }
+            }
+        }
         [vc setSelectIdentityBlock:^(SelectList *model) {
             self.infoModel.tradeModel = model;
             [btn setTitle:model.value forState:UIControlStateNormal];
@@ -328,6 +352,7 @@
         LocalDataModel *model = [LocalDataModel shareInstance];
         vc.dataArray = [NSMutableArray arrayWithArray:model.finishStateArray];
         [vc setSelectItemBlock:^(ItemTypeModel *model) {
+            self.infoModel.finishFlag = model;
             [btn setTitle:model.title forState:UIControlStateNormal];
         }];
         [self.navigationController pushViewController:vc animated:YES];
@@ -348,6 +373,7 @@
         vc.dataArray = [NSMutableArray arrayWithArray:model.socialSecurityArray];
         [vc setSelectItemBlock:^(ItemTypeModel *model) {
             [btn setTitle:model.title forState:UIControlStateNormal];
+            self.infoModel.socialSecurity = model;
         }];
         [self.navigationController pushViewController:vc animated:YES];
     }else if (btn.tag == 106){
@@ -428,9 +454,17 @@
     return _pickView;
 }
 - (void)doneAction:(UIButton *)btn {
-    AccidentTimeTableViewCell *cell =[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:3]];
+    ItemTypeModel *model = self.infoModel.jobState;
+    AccidentTimeTableViewCell *cell;
+    if ([model.value isEqual:@"0"]) {
+        cell=[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:3]];
+        self.infoModel.takingWorkDate =[_formatter stringFromDate:_pickView.date];
+    }else{
+        cell=[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:4]];
+        self.infoModel.offWorkDate =[_formatter stringFromDate:_pickView.date];
+    }
+   
     [cell.btnTime setTitle:[_formatter stringFromDate:_pickView.date] forState:UIControlStateNormal];
-    self.infoModel.accidentDate =[_formatter stringFromDate:_pickView.date];
     [cell.btnTime setTitleColor:[UIColor colorWithHexString:Colorblack] forState:UIControlStateNormal];
     [self cancelAction:nil];
 }
@@ -455,14 +489,12 @@
 }
 -(void)textViewDidChange:(UITextView *)textView{
     AccidentAddressTableViewCell *cell;
-    if (textView.tag == 1000) {
-        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-        self.infoModel.address = textView.text;
+    if (textView.tag == 1002){
+        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+        self.infoModel.remark =textView.text;
     }else if (textView.tag == 1001){
-        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2]];
-    }else if (textView.tag == 1002){
-        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:2]];
-        self.infoModel.remark = textView.text;
+        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:1]];
+        self.infoModel.UnitAddress = textView.text;
     }
     if (textView.text.length>0) {
         cell.lblPlaceHolder.hidden = YES;
@@ -581,7 +613,56 @@
     return _btnCommit;
 }
 -(void)commit{
+    NSMutableDictionary *uploadDic = [NSMutableDictionary dictionary];
     NSString *userCode = @"0131002498";
+    [uploadDic setObject:userCode forKey:@"userCode"];
+    [uploadDic setObject:self.taskModel.taskNo forKey:@"taskNo"];
+    ItemTypeModel *itemModel = self.infoModel.finishFlag;
+    [uploadDic setObject:itemModel.value forKey:@"finishFlag"];
+    [uploadDic setObject:self.infoModel.remark forKey:@"remark"];
+    ItemTypeModel *incumbencyModel = self.infoModel.jobState;
+    [uploadDic setObject:incumbencyModel.value forKey:@"incumbency"];
+    if ([incumbencyModel.value isEqual:@"0"]) {
+        if (self.contactPeopleArray.count>0) {
+            ContactPeopleModel *model = [self.contactPeopleArray firstObject];
+            [uploadDic setObject:model.name forKey:@"unitContact"];
+            [uploadDic setObject:model.phone forKey:@"unitContactPhone"];
+        }
+        [uploadDic setObject:self.infoModel.UnitName forKey:@"workUnit"];
+        [uploadDic setObject:self.infoModel.UnitAddress forKey:@"workUnitAddress"];
+        SelectList *tradeModel = self.infoModel.tradeModel;
+        [uploadDic setObject:tradeModel.key forKey:@"workStation"];
+        [uploadDic setObject:self.infoModel.takingWorkDate forKey:@"onWorkDate"];
+        ItemTypeModel *contractModel = self.infoModel.labourContract;
+        [uploadDic setObject:contractModel.value forKey:@"contract"];
+        ItemTypeModel *socialSecurityModel = self.infoModel.socialSecurity;
+        [uploadDic setObject:socialSecurityModel.value forKey:@"socialSecurity"];
+        [uploadDic setFloat:self.infoModel.monthIncome forKey:@"monthSalary"];
+        ItemTypeModel *incomeWayModel = self.infoModel.getMoney;
+        [uploadDic setObject:incomeWayModel.value forKey:@"incomeWay"];
+        [uploadDic setObject:@"" forKey:@"offWorkDate"];
+    }else{
+        [uploadDic setObject:@"" forKey:@"unitContact"];
+        [uploadDic setObject:@"" forKey:@"unitContactPhone"];
+        [uploadDic setObject:@""forKey:@"workUnit"];
+        [uploadDic setObject:@""forKey:@"workUnitAddress"];
+        [uploadDic setObject:@"" forKey:@"workStation"];
+        [uploadDic setObject:@""forKey:@"onWorkDate"];
+        [uploadDic setObject:@"" forKey:@"contract"];
+        [uploadDic setObject:@"" forKey:@"socialSecurity"];
+        [uploadDic setObject:@"" forKey:@"monthSalary"];
+        [uploadDic setObject:@"" forKey:@"incomeWay"];
+        [uploadDic setObject:self.infoModel.offWorkDate forKey:@"offWorkDate"];
+        [uploadDic setFloat:0 forKey:@"monthSalary"];
+    }
+    if (self.infoModel.imageArray.count>0) {
+            self.unUploadImageArray =self.infoModel.imageArray;
+            for (imageModel *model in self.infoModel.imageArray) {
+                if (model.isUpload) {
+                    [self.unUploadImageArray removeObject:model];
+                }
+            }
+        }
     if (self.infoModel.imageArray.count>0) {
         self.unUploadImageArray =self.infoModel.imageArray;
         for (imageModel *model in self.infoModel.imageArray) {
@@ -596,7 +677,7 @@
     }else{
         WeakSelf(IncomeViewController);
         [self showHudWaitingView:WaitPrompt];
-        [[NetWorkManager shareNetWork]uploadBaseInfoWithTaskNo:self.taskModel.taskNo andAddress:self.infoModel.address andContactPerson:self.infoModel.contactPerson andContactTel:self.infoModel.contactTel andRemark:self.infoModel.remark andAccidentDate:self.infoModel.accidentDate andUserCode:userCode andTaskType:self.taskModel.taskType andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
+        [[NetWorkManager shareNetWork]uploadIncomeWithDataDic:uploadDic andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
             [weakSelf removeMBProgressHudInManaual];
             if ([response.responseCode isEqual:@"1"]) {
                 [self showHudAuto:@"提交成功"];
@@ -653,7 +734,11 @@
     return _unUploadImageArray;
 }
 -(void)txtChange:(UITextField *)txt{
-    self.infoModel.address =txt.text;
+    if (txt.tag == 5000) {
+        self.infoModel.UnitName =txt.text;
+    }else{
+        self.infoModel.monthIncome =[txt.text floatValue];
+    }
     txt.frame = CGRectMake(DeviceSize.width-15-txt.text.length*16, txt.frame.origin.y, txt.text.length*16, txt.frame.size.height);
 }
 - (void)setUpForDismissKeyboard {

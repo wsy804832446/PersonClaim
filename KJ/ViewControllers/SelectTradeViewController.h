@@ -9,5 +9,6 @@
 #import "BaseTableViewController.h"
 #import "SelectList.h"
 @interface SelectTradeViewController : BaseTableViewController
+@property (nonatomic,copy)NSString *itemName;
 @property (nonatomic,copy)void (^SelectIdentityBlock)(SelectList *model);
 @end
