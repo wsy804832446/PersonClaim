@@ -7,7 +7,7 @@
 //
 
 #import "UpbringViewController.h"
-#import "EditInfoViewController.h"
+#import "EditInfoModel.h"
 #import "AddContactPersonViewController.h"
 #import "AccidentTimeTableViewCell.h"
 #import "ContactPeopleModel.h"
@@ -369,9 +369,9 @@
         [[NetWorkManager shareNetWork]uploadUpBringInfoWithDataDic:uploadDic andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
             [weakSelf removeMBProgressHudInManaual];
             if ([response.responseCode isEqual:@"1"]) {
-                NSLog(@"success");
+                [weakSelf showHudAuto:@"提交成功"];
             }else{
-                [weakSelf showHudAuto:@"上传失败"];
+                [weakSelf showHudAuto:@"提交失败"];
             }
         } andFailure:^(NSURLSessionDataTask *urlSessionDataTask, NSError *error) {
             [weakSelf removeMBProgressHudInManaual];

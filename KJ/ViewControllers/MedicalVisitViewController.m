@@ -153,6 +153,7 @@
 }
 -(void)addHospital{
     SelectHospitalViewController *vc = [[SelectHospitalViewController alloc]init];
+    vc.flag = @"1";
     [vc setSelectBlock:^(HospitalModel *model, NSMutableArray *array) {
         NSDictionary *dic = @{@"Hospital":model,@"department":array};
         [self.hospitalArray removeAllObjects];
@@ -545,9 +546,9 @@
         [[NetWorkManager shareNetWork]uploadMedicalWithDataDic:uploadDic andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response){
             [weakSelf removeMBProgressHudInManaual];
             if ([response.responseCode isEqual:@"1"]) {
-                [self showHudAuto:@"提交成功"];
+                [weakSelf showHudAuto:@"提交成功"];
             }else{
-                [self showHudAuto:@"提交失败"];
+                [weakSelf showHudAuto:@"提交失败"];
             }
         } andFailure:^(NSURLSessionDataTask *urlSessionDataTask, NSError *error) {
             [self removeMBProgressHudInManaual];

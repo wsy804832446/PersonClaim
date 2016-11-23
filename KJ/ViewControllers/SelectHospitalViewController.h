@@ -13,4 +13,7 @@
 @property (nonatomic,copy)void (^selectBlock)(HospitalModel *model,NSMutableArray *array);
 //已选城市
 @property (nonatomic,copy)NSString *city;
+@property (nonatomic,copy)void (^selectOrganizationBlock)(HospitalModel *model);
+//为1是医院  为2是鉴定机构
+@property (nonatomic,copy)NSString *flag;
 @end

@@ -47,7 +47,7 @@
 -(void)siftDataWithCityCode{
     WeakSelf(SelectHospitalViewController);
     [weakSelf showHudWaitingView:WaitPrompt];
-    [[NetWorkManager shareNetWork]getHospitalListWithDealLocalCode:self.currentCity.Id andHospitalName:self.txtSearch.text andPageNo:self.pageNO andPageSize:self.pageSize andFlag:@"1" andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response){
+    [[NetWorkManager shareNetWork]getHospitalListWithDealLocalCode:self.currentCity.Id andHospitalName:self.txtSearch.text andPageNo:self.pageNO andPageSize:self.pageSize andFlag:self.flag andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response){
         [weakSelf removeMBProgressHudInManaual];
         if ([response.responseCode isEqual:@"1"]) {
             if (weakSelf.pageNO == 1) {
@@ -93,6 +93,9 @@
             cell = [nib firstObject];
         }
     }
+    if (indexPath.row == 0) {
+        cell.lblLine.backgroundColor = [UIColor colorWithHexString:Colorwhite];
+    }
     HospitalModel *model = self.dataArray[indexPath.row];
     cell.cityLabel.text = model.hospitalName;
     cell.cityId = model.hospitalId;
@@ -101,15 +104,23 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    SelectDepartmentViewController *vc = [[SelectDepartmentViewController alloc]init];
-    vc.dataArray = self.departmentsArray;
-    vc.hospitalModel = self.dataArray[indexPath.row];
-    [vc setSelectBlock:^(HospitalModel *model, NSMutableArray *array) {
-        if (self.selectBlock) {
-            self.selectBlock(model,array);
+    if ([self.flag isEqual:@"1"]) {
+        SelectDepartmentViewController *vc = [[SelectDepartmentViewController alloc]init];
+        vc.dataArray = self.departmentsArray;
+        vc.hospitalModel = self.dataArray[indexPath.row];
+        [vc setSelectBlock:^(HospitalModel *model, NSMutableArray *array) {
+            if (self.selectBlock) {
+                self.selectBlock(model,array);
+            }
+        }];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        HospitalModel *model = self.dataArray[indexPath.row];
+        if (self.selectOrganizationBlock) {
+            self.selectOrganizationBlock(model);
         }
-    }];
-    [self.navigationController pushViewController:vc animated:YES];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 -(void)leftAction{
     [self.navigationController popViewControllerAnimated:YES];
@@ -222,7 +233,11 @@
 -(MyTextField *)txtSearch{
     if (!_txtSearch) {
         _txtSearch = [[MyTextField alloc]initWithFrame:CGRectMake(15, 10, DeviceSize.width-30, 29)];
-        _txtSearch.placeholder= @"搜索医院";
+        if ([self.flag isEqual:@"1"]) {
+            _txtSearch.placeholder= @"搜索医院";
+        }else{
+            _txtSearch.placeholder= @"搜索鉴定机构";
+        }
         _txtSearch.delegate = self;
         _txtSearch.layer.masksToBounds = YES;
         _txtSearch.layer.cornerRadius = 29*0.16;
@@ -269,7 +284,11 @@
     return _departmentsArray;
 }
 -(NSString *)title{
-    return @"选择医院";
+    if ([self.flag isEqual:@"1"]) {
+        return @"选择医院";
+    }else{
+        return @"选择鉴定机构";
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

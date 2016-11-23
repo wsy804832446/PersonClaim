@@ -67,4 +67,6 @@ typedef void (^uploadProgressBlock)(long long bytesSent, long long totalBytesSen
 -(void)uploadHouseholdInfoWithDataDic:(NSDictionary *)dic andCompletionBlockWithSuccess:(CompletionBlockWithSuccess) success andFailure:(FailureBlock) failure;
 //上传被抚养人信息
 -(void)uploadUpBringInfoWithDataDic:(NSDictionary *)dic andCompletionBlockWithSuccess:(CompletionBlockWithSuccess) success andFailure:(FailureBlock) failure;
+//拉取伤残等级列表
+-(void)getDisabilityListWithGadeCode:(NSString *)gadeCode andSearchCode:(NSString*)searchCode andPageNo:(NSInteger)pageNo andPageSize:(NSInteger)pageSize CompletionBlockWithSuccess:(CompletionBlockWithSuccess) success andFailure:(FailureBlock) failure;
 @end

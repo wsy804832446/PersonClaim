@@ -1,41 +1,39 @@
 //
-//  FamilyRegisterViewController.m
+//  DisabilityViewController.m
 //  KJ
 //
-//  Created by 王晟宇 on 2016/11/16.
+//  Created by 王晟宇 on 2016/11/23.
 //  Copyright © 2016年 iOSDeveloper. All rights reserved.
 //
 
-#import "FamilyRegisterViewController.h"
+#import "DisabilityViewController.h"
 #import "EditInfoModel.h"
-#import "DealNameTableViewCell.h"
 #import "AccidentTimeTableViewCell.h"
 #import "PersonalInformationTableViewCell3.h"
-#import "AccidentAddressTableViewCell.h"
 #import "PictureTableViewCell.h"
 #import "ShowPictureViewController.h"
-#import "AccidentAddressViewController.h"
-#import "SelectTradeViewController.h"
+#import "DealNameTableViewCell.h"
 #import "SelectItemViewController.h"
-#import "SelectDefiniteCityViewController.h"
-#import "InsiderViewController.h"
-#import "ContactPeopleModel.h"
-@interface FamilyRegisterViewController ()<UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
-//选择时间
-@property (nonatomic,strong)UIView *containerView;
-@property (nonatomic,strong)UIDatePicker *pickView;
-@property (nonatomic,strong)NSDateFormatter *formatter;
-//添加的询问人数组
-@property (nonatomic,strong)NSMutableArray *askPeopleArray;
-@property (nonatomic,strong)UIButton *btnCommit;
-@property (nonatomic,strong)UIButton *btnSave;
+#import "AccidentAddressTableViewCell.h"
+#import "SelectHospitalViewController.h"
+#import "SelectDisabilityTypeViewController.h"
+@interface DisabilityViewController ()<UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 //本页面信息model
 @property (nonatomic,strong)EditInfoModel *infoModel;
 //未上传图片数组 （上传判断使用）
 @property (nonatomic,strong)NSMutableArray *unUploadImageArray;
+//伤残等级数组
+@property (nonatomic,strong)NSMutableArray *levelArray;
+@property (nonatomic,strong)UIButton *btnCommit;
+@property (nonatomic,strong)UIButton *btnSave;
+//选择时间
+@property (nonatomic,strong)UIView *containerView;
+@property (nonatomic,strong)UIDatePicker *pickView;
+@property (nonatomic,strong)NSDateFormatter *formatter;
 @end
 
-@implementation FamilyRegisterViewController
+@implementation DisabilityViewController
+
 {
     UIAlertController *myActionSheet;
 }
@@ -48,10 +46,8 @@
     [self getLocalData];
 }
 -(void)getLocalData{
-    NSArray *arr =[CommUtil readDataWithFileName:localSelectArry];
-    for (SelectList *model in arr) {
-        NSString *str = [NSString stringWithFormat:@"%@,%@",model.typeCode,model.value];
-        NSLog(@"%@",str);
+    self.infoModel =[CommUtil readDataWithFileName:self.taskModel.taskNo];
+    if (self.infoModel) {
     }
 }
 - (void)viewDidLoad {
@@ -77,15 +73,15 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
-        return 11;
-    }else if(section == 1){
-        return self.askPeopleArray.count;
-    }else {
         return 3;
+    }else if (section == 1){
+        return self.levelArray.count;
+    }else{
+        return 5;
     }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section == 1){
+    if (section == 1) {
         return 44;
     }else{
         return 0.01;
@@ -98,9 +94,8 @@
         UIView *line =[[UIView alloc]initWithFrame:CGRectMake(15, 0, DeviceSize.width-30, 1)];
         line.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
         [vc addSubview:line];
-        UILabel *lblContact = [[UILabel alloc]initWithFrame:CGRectMake(15, 1, 100, 41)];
-        lblContact.text = @"被询问人";
-        lblContact.backgroundColor =[UIColor colorWithHexString:Colorwhite];
+        UILabel *lblContact = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, 70, 41)];
+        lblContact.text = @"伤残等级";
         lblContact.textColor = [UIColor colorWithHexString:@"#666666"];
         lblContact.font = [UIFont systemFontOfSize:15];
         [vc addSubview:lblContact];
@@ -108,24 +103,22 @@
         [btnAdd setImage:[UIImage imageNamed:@"15-添加电话"] forState:UIControlStateNormal];
         [btnAdd setImage:[UIImage imageNamed:@"15-1"] forState:UIControlStateHighlighted];
         btnAdd.frame = CGRectMake(DeviceSize.width-38, 14.5, 13, 13);
-        [btnAdd addTarget:self action:@selector(addContact) forControlEvents:UIControlEventTouchUpInside];
+        [btnAdd addTarget:self action:@selector(addDisability) forControlEvents:UIControlEventTouchUpInside];
         [vc addSubview:btnAdd];
         return vc;
     }else{
         return nil;
     }
 }
--(void)addContact{
-    InsiderViewController *vc = [[InsiderViewController alloc]init];
-    [vc setSaveInsiderBlock:^(NSMutableArray *insiderArray) {
-        [self.askPeopleArray addObjectsFromArray:insiderArray];
-        self.infoModel.insiderPersonArray = [NSArray arrayWithArray:self.askPeopleArray];
-        [self.tableView reloadData];
+-(void)addDisability{
+    SelectDisabilityTypeViewController *vc = [[SelectDisabilityTypeViewController alloc]init];
+    [vc setSelectBlock:^(NSMutableArray *array) {
+        [self.levelArray addObjectsFromArray:array];
     }];
     [self.navigationController pushViewController:vc animated:YES];
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if ((indexPath.section == 0&&indexPath.row ==4)||(indexPath.section == 0&&indexPath.row ==5)||(indexPath.section == 0&&indexPath.row ==10)) {
+    if ((indexPath.section == 2&&indexPath.row ==0)||(indexPath.section == 0&&indexPath.row ==1)) {
         DealNameTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DealNameCell"];
         if (!cell) {
             NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"DealNameTableViewCell" owner:nil options:nil];
@@ -133,77 +126,18 @@
                 cell = [nib firstObject];
             }
         }
-        if ((indexPath.section == 0&&indexPath.row ==4)) {
-            cell.lblTitle.text = @"子女人数";
-            cell.txtName.tag = 5001;
-        }else if ((indexPath.section == 0&&indexPath.row ==5)){
-            cell.lblTitle.text = @"兄弟姐妹人数";
-            cell.txtName.tag = 5002;
+        if (indexPath.row == 0) {
+            cell.lblTitle.text = @"伤残赔偿系数";
+            cell.txtName.tag = 3000;
         }else{
-            cell.lblTitle.text = @"连续居住年限";
-            cell.txtName.tag = 5003;
+            cell.lblTitle.text = @"鉴定人";
+            cell.txtName.tag = 3001;
         }
         [cell.txtName addTarget:self action:@selector(txtChange:) forControlEvents:UIControlEventEditingChanged];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.lblTitle.textColor = [UIColor colorWithHexString:@"#666666"];
         return cell;
-    }else if ((indexPath.section ==0 &&indexPath.row ==8)||(indexPath.section ==0&&indexPath.row ==9)){
-        AccidentTimeTableViewCell *cell = [[[NSBundle mainBundle]loadNibNamed:@"AccidentTimeTableViewCell" owner:nil options:nil]firstObject];
-        if (indexPath.section ==0 &&indexPath.row ==8){
-            cell.lblTitle.text = @"开始居住时间";
-            cell.btnTime.tag =3000;
-        }else if (indexPath.section ==0 &&indexPath.row ==9){
-            cell.lblTitle.text = @"结束居住时间";
-            cell.btnTime.tag =3001;
-        }
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [cell.btnTime addTarget:self action:@selector(selectTime:) forControlEvents:UIControlEventTouchUpInside];
-        return cell;
-    }else if (indexPath.section ==1){
-        ContactPeopleModel *model = self.askPeopleArray[indexPath.row];
-        PersonalInformationTableViewCell3 *cell = [tableView dequeueReusableCellWithIdentifier:@"PersonalInformationCell3"];
-        if (!cell) {
-            NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"PersonalInformationTableViewCell3" owner:self options:nil];
-            if (nib.count > 0) {
-                cell = nib.firstObject;
-            }
-        }
-        cell.labelLeft.text = model.name;
-        cell.labelRight.text = model.phone;
-        cell.labelLeft.textColor = [UIColor colorWithHexString:Colorblack];
-        cell.labelRight.textColor = [UIColor colorWithHexString:Colorgray];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        return cell;
-    }else if (indexPath.section ==0 &&indexPath.row ==7){
-        AccidentAddressTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AccidentAddressCell"];
-        if (!cell) {
-            NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"AccidentAddressTableViewCell" owner:nil options:nil];
-            if (nib.count>0) {
-                cell = [nib firstObject];
-            }
-        }
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.txtDetail.delegate =self;
-        cell.txtDetail.tag = 1001;
-        if (cell.txtDetail.text.length ==0) {
-            cell.lblPlaceHolder.hidden = NO;
-        }else{
-            cell.lblPlaceHolder.hidden = YES;
-        }
-        WeakSelf(FamilyRegisterViewController);
-        __weak AccidentAddressTableViewCell *weakCell = cell;
-        [cell setBtnClickBlock:^{
-            AccidentAddressViewController *vc = [[AccidentAddressViewController alloc]init];
-            [vc setSelectAddressBlock:^(NSString *address) {
-                [weakCell configCellWithAddress:address];
-                self.infoModel.houseAddress = address;
-                [self.tableView reloadData];
-            }];
-            [weakSelf.navigationController pushViewController:vc animated:YES];
-        }];
-        cell.lblTitle.text = @"居住地址";
-        return cell;
-    }else if (indexPath.section ==2 &&indexPath.row ==0){
+    }else if (indexPath.section ==2 &&indexPath.row ==2){
         PictureTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PictureCell"];
         if (!cell) {
             NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"PictureTableViewCell" owner:nil options:nil];
@@ -226,7 +160,7 @@
             }
         }];
         return cell;
-    }else if (indexPath.section ==2 &&indexPath.row ==1){
+    }else if ((indexPath.section ==2 &&indexPath.row ==1)||(indexPath.section ==2 &&indexPath.row ==3 )){
         AccidentAddressTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AccidentAddressCell"];
         if (!cell) {
             NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"AccidentAddressTableViewCell" owner:nil options:nil];
@@ -236,120 +170,56 @@
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.txtDetail.delegate =self;
-        cell.txtDetail.tag = 1002;
         cell.lblPlaceHolder.hidden = YES;
-        cell.lblTitle.text = @"备注信息";
+        if (indexPath.row == 1) {
+            cell.lblTitle.text = @"伤残描述";
+            cell.txtDetail.tag =1000;
+        }else{
+            cell.lblTitle.text = @"备注信息";
+            cell.txtDetail.tag =1001;
+        }
         [cell.btnMap removeFromSuperview];
         return cell;
-    }else if ((indexPath.section ==0 &&indexPath.row <4)||(indexPath.section ==0 &&indexPath.row ==6)||(indexPath.section ==2 &&indexPath.row ==2)){
-        AccidentTimeTableViewCell *cell = [[[NSBundle mainBundle]loadNibNamed:@"AccidentTimeTableViewCell" owner:nil options:nil]firstObject];
-        if (indexPath.section ==0 &&indexPath.row ==0){
-            cell.lblTitle.text = @"户籍地";
-            cell.lblLine.backgroundColor = [UIColor colorWithHexString:Colorwhite];
-        }else if (indexPath.section ==0 &&indexPath.row ==1){
-            cell.lblTitle.text = @"户籍类型";
-        }else if (indexPath.section ==0 &&indexPath.row ==2){
-            cell.lblTitle.text = @"父亲";
-        }else if (indexPath.section ==0 &&indexPath.row ==3){
-            cell.lblTitle.text = @"母亲";
-        }else if (indexPath.section ==0 &&indexPath.row ==6){
-            cell.lblTitle.text = @"户籍地居住";
-        }else if (indexPath.section ==2 &&indexPath.row ==2){
+    }else if ((indexPath.section ==2 &&indexPath.row ==4)||(indexPath.section ==0 &&indexPath.row ==0)){
+        AccidentTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TimeCell"];
+        if (!cell) {
+            NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"AccidentTimeTableViewCell" owner:nil options:nil];
+            if (nib.count>0) {
+                cell = [nib firstObject];
+            }
+        }
+        if (indexPath.row == 0) {
+            cell.lblLine.backgroundColor =[UIColor colorWithHexString:Colorwhite];
+            cell.lblTitle.text = @"鉴定机构";
+            cell.btnTime.tag = 4000;
+        }else{
             cell.lblTitle.text = @"完成情况";
+            cell.btnTime.tag = 4001;
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.btnTime.tag = 100+indexPath.section+indexPath.row;
         [cell.btnTime addTarget:self action:@selector(selectState:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }else{
-        return nil;
-    }
-}
--(void)selectState:(UIButton *)btn{
-    if(btn.tag == 100) {
-        SelectDefiniteCityViewController *vc = [[SelectDefiniteCityViewController alloc]init];
-        vc.title = @"户籍地";
-        [vc setSelectCityBlock:^(CityModel *model) {
-            [btn setTitle:model.name forState:UIControlStateNormal];
-            self.infoModel.household =model;
-        }];
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (btn.tag == 101){
-        SelectTradeViewController*vc = [[SelectTradeViewController alloc]init];
-        vc.itemName = @"户籍类型";
-        NSArray *seletListArray = [CommUtil readDataWithFileName:localSelectArry];
-        if (seletListArray.count >0) {
-            for (SelectList *model in seletListArray) {
-                if ([model.typeCode isEqual:@"D109"]) {
-                    [vc.dataArray addObject:model];
-                }
+        AccidentTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TimeCell"];
+        if (!cell) {
+            NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"AccidentTimeTableViewCell" owner:nil options:nil];
+            if (nib.count>0) {
+                cell = [nib firstObject];
             }
         }
-        [vc setSelectIdentityBlock:^(SelectList *model) {
-            self.infoModel.householdType = model;
-            [btn setTitle:model.value forState:UIControlStateNormal];
-        }];
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (btn.tag == 102){
-        SelectItemViewController *vc = [[SelectItemViewController alloc]init];
-        vc.itemName = @"父亲";
-        LocalDataModel *model = [LocalDataModel shareInstance];
-        vc.dataArray = [NSMutableArray arrayWithArray:model.parentStateArray];
-        [vc setSelectItemBlock:^(ItemTypeModel *model) {
-            [btn setTitle:model.title forState:UIControlStateNormal];
-            self.infoModel.fatherExt = model;
-        }];
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (btn.tag == 103){
-        SelectItemViewController *vc = [[SelectItemViewController alloc]init];
-        vc.itemName = @"母亲";
-        LocalDataModel *model = [LocalDataModel shareInstance];
-        vc.dataArray = [NSMutableArray arrayWithArray:model.parentStateArray];
-        [vc setSelectItemBlock:^(ItemTypeModel *model) {
-            [btn setTitle:model.title forState:UIControlStateNormal];
-            self.infoModel.matherExt = model;
-        }];
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (btn.tag == 106){
-        SelectItemViewController *vc = [[SelectItemViewController alloc]init];
-        vc.itemName = @"户籍地居住";
-        LocalDataModel *model = [LocalDataModel shareInstance];
-        vc.dataArray = [NSMutableArray arrayWithArray:model.boolArray];
-        [vc setSelectItemBlock:^(ItemTypeModel *model) {
-            [btn setTitle:model.title forState:UIControlStateNormal];
-            self.infoModel.addressBeTrue = model;
-        }];
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (btn.tag == 104){
-        SelectItemViewController *vc = [[SelectItemViewController alloc]init];
-        vc.itemName = @"完成情况";
-        LocalDataModel *model = [LocalDataModel shareInstance];
-        vc.dataArray = [NSMutableArray arrayWithArray:model.finishStateArray];
-        [vc setSelectItemBlock:^(ItemTypeModel *model) {
-            [btn setTitle:model.title forState:UIControlStateNormal];
-            self.infoModel.finishFlag = model;
-        }];
-        [self.navigationController pushViewController:vc animated:YES];
+        cell.lblTitle.text = @"死亡日期";
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell.btnTime addTarget:self action:@selector(selectTime) forControlEvents:UIControlEventTouchUpInside];
+        return cell;
     }
 }
--(void)selectTime:(UIButton *)btn{
+-(void)selectTime{
     self.tableView.userInteractionEnabled = NO;
-    self.containerView.tag =btn.tag;
     [self.view addSubview:self.containerView];
     [UIView animateWithDuration:0.5 animations:^{
         _containerView.frame = CGRectMake(0, self.view.bottom - 176-64, DeviceSize.width, 176);
     }];
-}
--(void)showPictureWithIndex:(NSInteger)index{
-    ShowPictureViewController *vc = [[ShowPictureViewController alloc]init];
-    //取出model里所有图片
-    NSMutableArray *array = [NSMutableArray array];
-    for (imageModel *model in self.infoModel.imageArray) {
-        [array addObject:model.image];
-    }
-    vc.pictureArray = array;
-    vc.selectIndex = index;
-    [self.navigationController pushViewController:vc animated:YES];
+
 }
 -(NSDateFormatter *)formatter{
     if (!_formatter) {
@@ -399,16 +269,8 @@
     return _pickView;
 }
 - (void)doneAction:(UIButton *)btn {
-    UIView *vc = btn.superview;
-    AccidentTimeTableViewCell *cell;
-    if (vc.tag == 3000) {
-        cell=[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:8 inSection:0]];
-        self.infoModel.liveStartDate =[_formatter stringFromDate:_pickView.date];
-    }else{
-        cell=[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:9 inSection:0]];
-        self.infoModel.liveEndDate =[_formatter stringFromDate:_pickView.date];
-    }
-    
+    AccidentTimeTableViewCell *cell=[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+    self.infoModel.deathDate =[_formatter stringFromDate:_pickView.date];
     [cell.btnTime setTitle:[_formatter stringFromDate:_pickView.date] forState:UIControlStateNormal];
     [cell.btnTime setTitleColor:[UIColor colorWithHexString:Colorblack] forState:UIControlStateNormal];
     [self cancelAction:nil];
@@ -426,6 +288,38 @@
 - (void)setSelectDate:(NSString *)selectDate {
     [_pickView setDate:[self.formatter dateFromString:selectDate] animated:YES];
 }
+-(void)selectState:(UIButton *)btn{
+    if (btn.tag == 4001) {
+        SelectItemViewController *vc = [[SelectItemViewController alloc]init];
+        vc.itemName = @"完成情况";
+        LocalDataModel *model = [LocalDataModel shareInstance];
+        vc.dataArray = [NSMutableArray arrayWithArray:model.finishStateArray];
+        [vc setSelectItemBlock:^(ItemTypeModel *model) {
+            self.infoModel.finishFlag = model;
+            [btn setTitle:model.title forState:UIControlStateNormal];
+        }];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        SelectHospitalViewController *vc = [[SelectHospitalViewController alloc]init];
+        vc.flag =@"2";
+        [vc setSelectOrganizationBlock:^(HospitalModel *model) {
+            self.infoModel.organization = model;
+            [btn setTitle:model.hospitalName forState:UIControlStateNormal];
+        }];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+-(void)showPictureWithIndex:(NSInteger)index{
+    ShowPictureViewController *vc = [[ShowPictureViewController alloc]init];
+    //取出model里所有图片
+    NSMutableArray *array = [NSMutableArray array];
+    for (imageModel *model in self.infoModel.imageArray) {
+        [array addObject:model.image];
+    }
+    vc.pictureArray = array;
+    vc.selectIndex = index;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 -(void)leftAction{
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -433,20 +327,10 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)textViewDidChange:(UITextView *)textView{
-    AccidentAddressTableViewCell *cell;
-    if(textView.tag == 1001){
-        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:7 inSection:0]];
-        self.infoModel.houseAddress = textView.text;
-    }else if (textView.tag == 1002){
-        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:2]];
-        self.infoModel.remark = textView.text;
-    }
-    if (textView.text.length>0) {
-        cell.lblPlaceHolder.hidden = YES;
+    if (textView.tag == 1000) {
+        self.infoModel.disabilityDescribe = textView.text;
     }else{
-        if (textView.tag != 1002) {
-            cell.lblPlaceHolder.hidden = NO;
-        }
+        self.infoModel.remark = textView.text;
     }
     CGRect frame = textView.frame;
     CGSize constraintSize = CGSizeMake(frame.size.width, MAXFLOAT);
@@ -456,18 +340,8 @@
     [self.tableView beginUpdates];
     [self.tableView endUpdates];
 }
-
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [self cancelAction:nil];
-}
 -(NSString *)title{
     return @"编辑";
-}
--(NSMutableArray *)askPeopleArray{
-    if (!_askPeopleArray) {
-        _askPeopleArray = [NSMutableArray array];
-    }
-    return _askPeopleArray;
 }
 //开始拍照
 -(void)openMenu
@@ -565,29 +439,8 @@
     ItemTypeModel *finishModel = self.infoModel.finishFlag;
     [uploadDic setObject:finishModel.value forKey:@"finishFlag"];
     [uploadDic setObject:self.infoModel.remark forKey:@"remark"];
-    [uploadDic setObject:self.infoModel.houseAddress forKey:@"address"];
-    CityModel *cityModel = self.infoModel.household;
-    [uploadDic setObject:cityModel.name forKey:@"household"];
-    SelectList *typeModel = self.infoModel.householdType;
-    [uploadDic setObject:typeModel.value forKey:@"householdType"];
-    ItemTypeModel *fatherModel = self.infoModel.fatherExt;
-    [uploadDic setObject:fatherModel.value forKey:@"fatherExt"];
-    ItemTypeModel *motherModel = self.infoModel.matherExt;
-    [uploadDic setObject:motherModel.value forKey:@"matherExt"];
-    [uploadDic setInteger:self.infoModel.sonCount.integerValue forKey:@"sonCount"];
-    [uploadDic setInteger:self.infoModel.bratherCount.integerValue forKey:@"bratherCount"];
-    ItemTypeModel *addressBeTrueModel = self.infoModel.addressBeTrue;
-    [uploadDic setObject:addressBeTrueModel.value forKey:@"addressBeTrue"];
-    [uploadDic setObject:self.infoModel.liveStartDate forKey:@"liveStartDate"];
-    [uploadDic setObject:self.infoModel.liveEndDate forKey:@"liveEndDate"];
-    if (self.infoModel.insiderPersonArray.count >0) {
-        ContactPeopleModel *model = self.infoModel.insiderPersonArray.firstObject;
-        [uploadDic setObject:model.name forKey:@"insider"];
-        [uploadDic setObject:model.phone forKey:@"insiderPhone"];
-        SelectList *idModel = model.insiderIdentity;
-        [uploadDic setObject:idModel.value forKey:@"insiderIdentity"];
-    }
-    if (self.infoModel.imageArray.count>0) {
+    [uploadDic setObject:self.infoModel.maintenance forKey:@"dependentSum"];
+       if (self.infoModel.imageArray.count>0) {
         self.unUploadImageArray =self.infoModel.imageArray;
         for (imageModel *model in self.infoModel.imageArray) {
             if (model.isUpload) {
@@ -599,23 +452,23 @@
     if (self.unUploadImageArray.count>0) {
         [self uploadImage];
     }else{
-        WeakSelf(FamilyRegisterViewController);
-        [self showHudWaitingView:WaitPrompt];
-        [[NetWorkManager shareNetWork]uploadHouseholdInfoWithDataDic:uploadDic andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
+        WeakSelf(DisabilityViewController);
+        [[NetWorkManager shareNetWork]uploadUpBringInfoWithDataDic:uploadDic andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
             [weakSelf removeMBProgressHudInManaual];
             if ([response.responseCode isEqual:@"1"]) {
-                [weakSelf showHudAuto:@"提交成功"];
+                NSLog(@"success");
             }else{
-                [weakSelf showHudAuto:@"提交失败"];
+                [weakSelf showHudAuto:@"上传失败"];
             }
         } andFailure:^(NSURLSessionDataTask *urlSessionDataTask, NSError *error) {
             [weakSelf removeMBProgressHudInManaual];
             [weakSelf showHudAuto:InternetFailerPrompt];
         }];
     }
+    
 }
 -(void)uploadImage{
-    WeakSelf(FamilyRegisterViewController);
+    WeakSelf(DisabilityViewController);
     imageModel *uploadImageModel = [self.unUploadImageArray firstObject];
     [self showHudWaitingView:WaitPrompt];
     [[NetWorkManager shareNetWork]uploadImageWithImgName:uploadImageModel.imgName andImgBase64:uploadImageModel.imgBase64 andReportCode:self.taskModel.taskNo andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
@@ -657,11 +510,10 @@
     return _unUploadImageArray;
 }
 -(void)txtChange:(UITextField *)txt{
-    if (txt.tag == 5001) {
-        self.infoModel.sonCount =txt.text;
-    }else if (txt.tag == 5002){
-        self.infoModel.bratherCount =txt.text;
-    }else if (txt.tag == 5003){
+    if (txt.tag == 3000) {
+        self.infoModel.ratio = txt.text;
+    }else{
+        self.infoModel.identifier =txt.text;
     }
     txt.frame = CGRectMake(DeviceSize.width-15-txt.text.length*16, txt.frame.origin.y, txt.text.length*16, txt.frame.size.height);
 }
@@ -690,6 +542,12 @@
     [self.view endEditing:YES];
 }
 
+-(NSMutableArray *)levelArray{
+    if (!_levelArray) {
+        _levelArray = [NSMutableArray array];
+    }
+    return _levelArray;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

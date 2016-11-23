@@ -39,32 +39,31 @@
 }
 -(void)getTask{
     NSArray *localClaimArray = [CommUtil readDataWithFileName:[NSString stringWithFormat:@"cliam%@",@"000111"]];
-    if (localClaimArray.count>0) {
-        [self.dataArray removeAllObjects];
-        [self.dataArray addObjectsFromArray:localClaimArray];
-    }else{
-        WeakSelf(FollowPlatFormViewController);
-        [self showHudWaitingView:WaitPrompt];
-        [[NetWorkManager shareNetWork]getTaskWithUserId:@"000111" andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
-            [weakSelf removeMBProgressHudInManaual];
-            if ([response.responseCode isEqual:@"1"]) {
-                NSArray *claimArray = response.dataDic[@"claimList"];
-                for (NSDictionary *claimDic in claimArray) {
-                    ClaimModel *model = [MTLJSONAdapter modelOfClass:[ClaimModel class] fromJSONDictionary:claimDic error:NULL];
-                    [weakSelf.dataArray addObject:model];
-                }
-                dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                    [CommUtil saveData:[NSArray arrayWithArray:weakSelf.dataArray] andSaveFileName:[NSString stringWithFormat:@"cliam%@",@"000111"]];
-                });
-                [weakSelf.tableView reloadData];
-            }else{
-                [weakSelf showHudAuto:response.message];
+//    if (localClaimArray.count>0) {
+//        [self.dataArray removeAllObjects];
+//        [self.dataArray addObjectsFromArray:localClaimArray];
+//    }
+    WeakSelf(FollowPlatFormViewController);
+    [self showHudWaitingView:WaitPrompt];
+    [[NetWorkManager shareNetWork]getTaskWithUserId:@"000111" andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
+        [weakSelf removeMBProgressHudInManaual];
+        if ([response.responseCode isEqual:@"1"]) {
+            NSArray *claimArray = response.dataDic[@"claimList"];
+            for (NSDictionary *claimDic in claimArray) {
+                ClaimModel *model = [MTLJSONAdapter modelOfClass:[ClaimModel class] fromJSONDictionary:claimDic error:NULL];
+                [weakSelf.dataArray addObject:model];
             }
-        } andFailure:^(NSURLSessionDataTask *urlSessionDataTask, NSError *error) {
-            [weakSelf removeMBProgressHudInManaual];
-            [weakSelf showHudAuto:InternetFailerPrompt];
-        }];
-    }
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                [CommUtil saveData:[NSArray arrayWithArray:weakSelf.dataArray] andSaveFileName:[NSString stringWithFormat:@"cliam%@",@"000111"]];
+            });
+            [weakSelf.tableView reloadData];
+        }else{
+            [weakSelf showHudAuto:response.message];
+        }
+    } andFailure:^(NSURLSessionDataTask *urlSessionDataTask, NSError *error) {
+        [weakSelf removeMBProgressHudInManaual];
+        [weakSelf showHudAuto:InternetFailerPrompt];
+    }];
 }
 -(void)leftAction{
 }
@@ -202,6 +201,8 @@
     }
     if (indexPath.section ==0 && indexPath.row ==0) {
         cell.line.backgroundColor = [UIColor colorWithHexString:Colorwhite];
+    }else{
+        cell.line.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
     }
     cell.lblName.text = claimModel.insuredName;
     cell.lblTime.text = taskModel.dispatchDate;
@@ -217,8 +218,14 @@
     cell.lblTaskType.backgroundColor = [UIColor colorWithHexString:@"#9DC5F9"];
     cell.lblTaskType.textColor = [UIColor colorWithHexString:Colorwhite];
     if ([taskModel.taskType isEqualToString:@"01"]) {cell.lblTaskType.text = @"医";
-    }if ([taskModel.taskType isEqualToString:@"09"]) {cell.lblTaskType.text = @"基";
-    }if ([taskModel.taskType isEqualToString:@"10"]) {cell.lblTaskType.text = @"处";
+    }else if ([taskModel.taskType isEqualToString:@"02"]) {cell.lblTaskType.text = @"薪";
+    }else if ([taskModel.taskType isEqualToString:@"03"]) {cell.lblTaskType.text = @"误";
+    }else if ([taskModel.taskType isEqualToString:@"04"]) {cell.lblTaskType.text = @"籍";
+    }else if ([taskModel.taskType isEqualToString:@"05"]) {cell.lblTaskType.text = @"扶";
+    }else if ([taskModel.taskType isEqualToString:@"06"]) {cell.lblTaskType.text = @"死";
+    }else if ([taskModel.taskType isEqualToString:@"08"]) {cell.lblTaskType.text = @"伤";
+    }else if ([taskModel.taskType isEqualToString:@"09"]) {cell.lblTaskType.text = @"基";
+    }else if ([taskModel.taskType isEqualToString:@"10"]) {cell.lblTaskType.text = @"处";
     }
     switch (indexPath.row%4) {
         case 0:

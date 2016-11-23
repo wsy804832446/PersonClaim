@@ -484,9 +484,9 @@
         [[NetWorkManager shareNetWork]uploadBaseInfoWithTaskNo:self.taskModel.taskNo andAddress:self.infoModel.dealName andContactPerson:model.name andContactTel:model.phone andRemark:self.infoModel.remark andAccidentDate:self.infoModel.dealDate andUserCode:userCode andTaskType:self.taskModel.taskType andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
             [weakSelf removeMBProgressHudInManaual];
             if ([response.responseCode isEqual:@"1"]) {
-                [self showHudAuto:@"提交成功"];
+                [weakSelf showHudAuto:@"提交成功"];
             }else{
-                [self showHudAuto:@"提交失败"];
+                [weakSelf showHudAuto:@"提交失败"];
             }
         } andFailure:^(NSURLSessionDataTask *urlSessionDataTask, NSError *error) {
             [self removeMBProgressHudInManaual];

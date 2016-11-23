@@ -675,9 +675,9 @@
         [[NetWorkManager shareNetWork]uploadDelayWithDataDic:uploadDic andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
             [weakSelf removeMBProgressHudInManaual];
             if ([response.responseCode isEqual:@"1"]) {
-                [self showHudAuto:@"提交成功"];
+                [weakSelf showHudAuto:@"提交成功"];
             }else{
-                [self showHudAuto:@"提交失败"];
+                [weakSelf showHudAuto:@"提交失败"];
             }
         } andFailure:^(NSURLSessionDataTask *urlSessionDataTask, NSError *error) {
             [self removeMBProgressHudInManaual];

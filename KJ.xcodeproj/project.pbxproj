@@ -60,6 +60,13 @@
 		344C5AAF1DD0690200584668 /* DealNameTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 344C5AAD1DD0690200584668 /* DealNameTableViewCell.m */; };
 		344C5AB01DD0690200584668 /* DealNameTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 344C5AAE1DD0690200584668 /* DealNameTableViewCell.xib */; };
 		344E216E1DAC8DA400BB415D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 344E216D1DAC8DA400BB415D /* Assets.xcassets */; };
+		344E7FC01DE536D1008400FA /* DisabilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 344E7FBF1DE536D1008400FA /* DisabilityViewController.m */; };
+		344E7FC31DE545E2008400FA /* SelectDisabilityTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 344E7FC21DE545E2008400FA /* SelectDisabilityTypeViewController.m */; };
+		344E7FC61DE5942B008400FA /* DisabilityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 344E7FC51DE5942B008400FA /* DisabilityModel.m */; };
+		344E7FCA1DE5986A008400FA /* DisabilityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 344E7FC81DE5986A008400FA /* DisabilityTableViewCell.m */; };
+		344E7FCB1DE5986A008400FA /* DisabilityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 344E7FC91DE5986A008400FA /* DisabilityTableViewCell.xib */; };
+		344E7FCE1DE59AEF008400FA /* 切图-跟踪_r1_c3.png in Resources */ = {isa = PBXBuildFile; fileRef = 344E7FCC1DE59AEF008400FA /* 切图-跟踪_r1_c3.png */; };
+		344E7FCF1DE59AEF008400FA /* 切图-跟踪_r2_c1.png in Resources */ = {isa = PBXBuildFile; fileRef = 344E7FCD1DE59AEF008400FA /* 切图-跟踪_r2_c1.png */; };
 		34523D511DDD45EE00C20976 /* SearchDiagnoseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34523D501DDD45EE00C20976 /* SearchDiagnoseViewController.m */; };
 		3453214F1DB8CBAD0055D178 /* 30-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3453214D1DB8CBAD0055D178 /* 30-1.png */; };
 		345321501DB8CBAD0055D178 /* 30.png in Resources */ = {isa = PBXBuildFile; fileRef = 3453214E1DB8CBAD0055D178 /* 30.png */; };
@@ -430,6 +437,17 @@
 		344C5AAD1DD0690200584668 /* DealNameTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealNameTableViewCell.m; sourceTree = "<group>"; };
 		344C5AAE1DD0690200584668 /* DealNameTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DealNameTableViewCell.xib; sourceTree = "<group>"; };
 		344E216D1DAC8DA400BB415D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		344E7FBE1DE536D1008400FA /* DisabilityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisabilityViewController.h; sourceTree = "<group>"; };
+		344E7FBF1DE536D1008400FA /* DisabilityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisabilityViewController.m; sourceTree = "<group>"; };
+		344E7FC11DE545E2008400FA /* SelectDisabilityTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectDisabilityTypeViewController.h; sourceTree = "<group>"; };
+		344E7FC21DE545E2008400FA /* SelectDisabilityTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectDisabilityTypeViewController.m; sourceTree = "<group>"; };
+		344E7FC41DE5942B008400FA /* DisabilityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisabilityModel.h; sourceTree = "<group>"; };
+		344E7FC51DE5942B008400FA /* DisabilityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisabilityModel.m; sourceTree = "<group>"; };
+		344E7FC71DE5986A008400FA /* DisabilityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisabilityTableViewCell.h; sourceTree = "<group>"; };
+		344E7FC81DE5986A008400FA /* DisabilityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisabilityTableViewCell.m; sourceTree = "<group>"; };
+		344E7FC91DE5986A008400FA /* DisabilityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DisabilityTableViewCell.xib; sourceTree = "<group>"; };
+		344E7FCC1DE59AEF008400FA /* 切图-跟踪_r1_c3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "切图-跟踪_r1_c3.png"; sourceTree = "<group>"; };
+		344E7FCD1DE59AEF008400FA /* 切图-跟踪_r2_c1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "切图-跟踪_r2_c1.png"; sourceTree = "<group>"; };
 		34523D4F1DDD45EE00C20976 /* SearchDiagnoseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchDiagnoseViewController.h; sourceTree = "<group>"; };
 		34523D501DDD45EE00C20976 /* SearchDiagnoseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchDiagnoseViewController.m; sourceTree = "<group>"; };
 		3453214D1DB8CBAD0055D178 /* 30-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "30-1.png"; sourceTree = "<group>"; };
@@ -1084,6 +1102,10 @@
 		345D55341DE171140024F70C /* 伤残信息 */ = {
 			isa = PBXGroup;
 			children = (
+				344E7FBE1DE536D1008400FA /* DisabilityViewController.h */,
+				344E7FBF1DE536D1008400FA /* DisabilityViewController.m */,
+				344E7FC11DE545E2008400FA /* SelectDisabilityTypeViewController.h */,
+				344E7FC21DE545E2008400FA /* SelectDisabilityTypeViewController.m */,
 			);
 			name = "伤残信息";
 			sourceTree = "<group>";
@@ -1188,6 +1210,9 @@
 				345CF2F01DDE9A4800EBB824 /* DefaultCellTableViewCell.h */,
 				345CF2F11DDE9A4800EBB824 /* DefaultCellTableViewCell.m */,
 				345CF2F21DDE9A4800EBB824 /* DefaultCellTableViewCell.xib */,
+				344E7FC71DE5986A008400FA /* DisabilityTableViewCell.h */,
+				344E7FC81DE5986A008400FA /* DisabilityTableViewCell.m */,
+				344E7FC91DE5986A008400FA /* DisabilityTableViewCell.xib */,
 			);
 			name = "跟踪详情cell";
 			sourceTree = "<group>";
@@ -1271,6 +1296,8 @@
 				34607C701DBF0A20006B8E2D /* 2-搜索空白页.png */,
 				34607C711DBF0A20006B8E2D /* 3-日历空白页.png */,
 				34607C751DBF2388006B8E2D /* 14-地图_r2_c2(2).png */,
+				344E7FCC1DE59AEF008400FA /* 切图-跟踪_r1_c3.png */,
+				344E7FCD1DE59AEF008400FA /* 切图-跟踪_r2_c1.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -1306,6 +1333,8 @@
 				345CF3031DDED9E500EBB824 /* LocalDataModel.m */,
 				347127DD1DE4183F008B2B8E /* UpBringModel.h */,
 				347127DE1DE4183F008B2B8E /* UpBringModel.m */,
+				344E7FC41DE5942B008400FA /* DisabilityModel.h */,
+				344E7FC51DE5942B008400FA /* DisabilityModel.m */,
 			);
 			name = Model;
 			path = Images;
@@ -1953,6 +1982,7 @@
 				344E216E1DAC8DA400BB415D /* Assets.xcassets in Resources */,
 				34AD216C1DB0757C00A17B29 /* 12-1.png in Resources */,
 				34AD21751DB0757C00A17B29 /* 17.png in Resources */,
+				344E7FCB1DE5986A008400FA /* DisabilityTableViewCell.xib in Resources */,
 				34AD212E1DB0754E00A17B29 /* 3-医疗理赔系统APP端-我的_r3_c2.png in Resources */,
 				34AD21251DB0754E00A17B29 /* 1-我的切图_r2_c1@2x.png in Resources */,
 				3437BCF71D9B5B83001DEC7B /* MineTableViewCell.xib in Resources */,
@@ -1970,9 +2000,11 @@
 				34AD21421DB0754E00A17B29 /* 未命名-1_r2_c7.png in Resources */,
 				34AD216D1DB0757C00A17B29 /* 12.png in Resources */,
 				44FE69BE1CBF5CEE00C2A8A5 /* LaunchScreen.storyboard in Resources */,
+				344E7FCF1DE59AEF008400FA /* 切图-跟踪_r2_c1.png in Resources */,
 				34AD21741DB0757C00A17B29 /* 17-1.png in Resources */,
 				34AD21231DB0754E00A17B29 /* 1-切图.png in Resources */,
 				34607C741DBF0A20006B8E2D /* 3-日历空白页.png in Resources */,
+				344E7FCE1DE59AEF008400FA /* 切图-跟踪_r1_c3.png in Resources */,
 				34AF949D1DBB197E00D84254 /* 32.png in Resources */,
 				34AD212B1DB0754E00A17B29 /* 2-1.png in Resources */,
 				344C5AB01DD0690200584668 /* DealNameTableViewCell.xib in Resources */,
@@ -2072,6 +2104,7 @@
 				34772E251D9AA1A20015E384 /* MineViewController.m in Sources */,
 				44FE6AB01CBF672400C2A8A5 /* MJRefreshAutoGifFooter.m in Sources */,
 				3437BD2B1D9BBCB4001DEC7B /* FeedbackViewController.m in Sources */,
+				344E7FC31DE545E2008400FA /* SelectDisabilityTypeViewController.m in Sources */,
 				44FE6B221CBF6B6A00C2A8A5 /* NetWorkManager.m in Sources */,
 				44FE6A681CBF63C800C2A8A5 /* SGSaveFile.m in Sources */,
 				3496938D1DB9FA490034A2A6 /* AccidentAddressViewController.m in Sources */,
@@ -2091,6 +2124,7 @@
 				44FE6AAF1CBF672400C2A8A5 /* MJRefreshHeader.m in Sources */,
 				44FE6A321CBF610000C2A8A5 /* BaseNavigationController.m in Sources */,
 				44FE6AB11CBF672400C2A8A5 /* MJRefreshAutoNormalFooter.m in Sources */,
+				344E7FCA1DE5986A008400FA /* DisabilityTableViewCell.m in Sources */,
 				44FE6A3B1CBF62F700C2A8A5 /* BaseViewController.m in Sources */,
 				44FE6A161CBF5E4000C2A8A5 /* NSObject+MTLComparisonAdditions.m in Sources */,
 				341940FC1DD56ECB0062003E /* DepartmentsModel.m in Sources */,
@@ -2199,6 +2233,7 @@
 				44FE6A141CBF5E4000C2A8A5 /* NSDictionary+MTLManipulationAdditions.m in Sources */,
 				345CF2F81DDEA36E00EBB824 /* IncomeViewController.m in Sources */,
 				44FE6B131CBF682600C2A8A5 /* UIImage+MultiFormat.m in Sources */,
+				344E7FC61DE5942B008400FA /* DisabilityModel.m in Sources */,
 				44FE6A0D1CBF5E4000C2A8A5 /* MTLJSONAdapter.m in Sources */,
 				34FAF9831D9A718600D2FABC /* MineTableViewCell2.m in Sources */,
 				44FE6B0E1CBF682600C2A8A5 /* SDWebImageDownloaderOperation.m in Sources */,
@@ -2209,6 +2244,7 @@
 				34710D471DDC38F2000840EF /* SelectWayViewController.m in Sources */,
 				44FE6AB21CBF672400C2A8A5 /* MJRefreshAutoStateFooter.m in Sources */,
 				44FE6B0D1CBF682600C2A8A5 /* SDWebImageDownloader.m in Sources */,
+				344E7FC01DE536D1008400FA /* DisabilityViewController.m in Sources */,
 				34607C7D1DBF635A006B8E2D /* SearchTableViewCell.m in Sources */,
 				44FE6A0E1CBF5E4000C2A8A5 /* MTLManagedObjectAdapter.m in Sources */,
 				44FE6AB61CBF672400C2A8A5 /* MJRefreshGifHeader.m in Sources */,

@@ -338,4 +338,16 @@ static NetWorkManager *thNetWorkManager = nil;
     NSMutableDictionary *paramDic =[self dataDicAndRequestCodeWithDic:dic andRequestCode:@"002012"];
     [self requestOperation:kServerHost andParams:paramDic andHeaderFieldParams:nil andHttpRequestMethod:HttpRequestMethodPOST andCompletionBlockWithSuccess:success andFailure:failure];
 }
+-(void)getDisabilityListWithGadeCode:(NSString *)gadeCode andSearchCode:(NSString *)searchCode andPageNo:(NSInteger)pageNo andPageSize:(NSInteger)pageSize CompletionBlockWithSuccess:(CompletionBlockWithSuccess)success andFailure:(FailureBlock)failure{
+    if (!gadeCode) {
+        gadeCode = @"";
+    }
+    if (!searchCode) {
+        searchCode = @"";
+    }
+    NSDictionary *dataDic = @{@"gadeCode":gadeCode,@"searchCode":searchCode,@"pageNo":[NSNumber numberWithInteger:pageNo],@"pageSize":[NSNumber numberWithInteger:pageSize]};
+    NSMutableDictionary *paramDic =[self dataDicAndRequestCodeWithDic:dataDic andRequestCode:@"002023"];
+    [self requestOperation:kServerHost andParams:paramDic andHeaderFieldParams:nil andHttpRequestMethod:HttpRequestMethodPOST andCompletionBlockWithSuccess:success andFailure:failure];
+
+}
 @end

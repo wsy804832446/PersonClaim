@@ -9,6 +9,7 @@
 #import "MTLModel.h"
 #import "SelectList.h"
 #import "CityModel.h"
+#import "HospitalModel.h"
 @interface EditInfoModel : MTLModel<MTLJSONSerializing>
 //所有模块共用
   //备注
@@ -126,6 +127,16 @@
   //抚养费金额
 @property (nonatomic,copy)NSString *maintenance;
 
+
+//伤残信息
+  //鉴定机构
+@property (nonatomic,strong)HospitalModel *organization;
+  // 鉴定人
+@property (nonatomic,copy)NSString *identifier;
+  //伤残等级
+@property (nonatomic,strong) NSArray *levelArray;
+  //伤残描述
+@property (nonatomic,copy)NSString *disabilityDescribe;
 @end
 
 @interface imageModel : MTLModel
