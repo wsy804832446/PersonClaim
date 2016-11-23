@@ -114,6 +114,18 @@
   //连续居住年限
   //居住地址
 @property(nonatomic,copy)NSString *houseAddress;
+
+
+
+
+//被扶养人
+  //被扶养人
+@property (nonatomic,strong) NSArray *upBringArray;
+  //伤残赔偿系数
+@property (nonatomic,copy)NSString *ratio;
+  //抚养费金额
+@property (nonatomic,copy)NSString *maintenance;
+
 @end
 
 @interface imageModel : MTLModel

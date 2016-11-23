@@ -129,6 +129,7 @@
                 cell = [nib firstObject];
             }
         }
+        [cell.lblLine removeFromSuperview];
         cell.lblTitle.text = @"询问人身份";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.btnTime.tag = 100+indexPath.section;

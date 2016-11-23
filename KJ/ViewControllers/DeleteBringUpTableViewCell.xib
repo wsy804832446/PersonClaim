@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DeleteBringCell" rowHeight="44" id="KGk-i7-Jjw" customClass="DeleteBringUpTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K4W-Io-RYa">
+                        <rect key="frame" x="15" y="5" width="3" height="20"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="3" id="5Xc-eg-7dt"/>
+                            <constraint firstAttribute="height" constant="20" id="QBK-It-s74"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a1N-8I-OCR">
+                        <rect key="frame" x="23" y="-15" width="0.0" height="45"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="44" id="W42-gx-axe"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wmr-Yl-xqP">
+                        <rect key="frame" x="265" y="0.0" width="40" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="jYF-aH-XQi"/>
+                        </constraints>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GB4-2s-4QF">
+                        <rect key="frame" x="229" y="7" width="16" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="16" id="7La-51-Lbr"/>
+                            <constraint firstAttribute="height" constant="16" id="wRU-d1-mgA"/>
+                        </constraints>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="K4W-Io-RYa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="29k-m6-xRB"/>
+                    <constraint firstAttribute="bottom" secondItem="a1N-8I-OCR" secondAttribute="bottom" id="6Ev-eq-Vmz"/>
+                    <constraint firstItem="Wmr-Yl-xqP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="7S0-0w-99R"/>
+                    <constraint firstItem="K4W-Io-RYa" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="9qz-rj-m8T"/>
+                    <constraint firstAttribute="bottom" secondItem="Wmr-Yl-xqP" secondAttribute="bottom" id="NqN-Ce-Kop"/>
+                    <constraint firstAttribute="trailing" secondItem="Wmr-Yl-xqP" secondAttribute="trailing" constant="15" id="SCi-v6-QZW"/>
+                    <constraint firstItem="Wmr-Yl-xqP" firstAttribute="leading" secondItem="GB4-2s-4QF" secondAttribute="trailing" constant="20" id="dwa-Af-lwh"/>
+                    <constraint firstItem="a1N-8I-OCR" firstAttribute="leading" secondItem="K4W-Io-RYa" secondAttribute="trailing" constant="5" id="iEA-e1-cX6"/>
+                    <constraint firstItem="GB4-2s-4QF" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="jLr-9T-sgM"/>
+                    <constraint firstItem="a1N-8I-OCR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="lSv-x8-7MO"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="btnDelete" destination="GB4-2s-4QF" id="HBp-Wy-FsU"/>
+                <outlet property="btnOpen" destination="Wmr-Yl-xqP" id="REu-re-Sgc"/>
+                <outlet property="lblBringUp" destination="a1N-8I-OCR" id="zMg-uU-csJ"/>
+                <outlet property="lineV" destination="K4W-Io-RYa" id="y1C-DY-fMV"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

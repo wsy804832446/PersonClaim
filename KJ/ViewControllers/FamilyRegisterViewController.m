@@ -19,6 +19,7 @@
 #import "SelectItemViewController.h"
 #import "SelectDefiniteCityViewController.h"
 #import "InsiderViewController.h"
+#import "ContactPeopleModel.h"
 @interface FamilyRegisterViewController ()<UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 //选择时间
 @property (nonatomic,strong)UIView *containerView;
@@ -115,6 +116,13 @@
     }
 }
 -(void)addContact{
+    InsiderViewController *vc = [[InsiderViewController alloc]init];
+    [vc setSaveInsiderBlock:^(NSMutableArray *insiderArray) {
+        [self.askPeopleArray addObjectsFromArray:insiderArray];
+        self.infoModel.insiderPersonArray = [NSArray arrayWithArray:self.askPeopleArray];
+        [self.tableView reloadData];
+    }];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if ((indexPath.section == 0&&indexPath.row ==4)||(indexPath.section == 0&&indexPath.row ==5)||(indexPath.section == 0&&indexPath.row ==10)) {
@@ -130,8 +138,10 @@
             cell.txtName.tag = 5001;
         }else if ((indexPath.section == 0&&indexPath.row ==5)){
             cell.lblTitle.text = @"兄弟姐妹人数";
+            cell.txtName.tag = 5002;
         }else{
             cell.lblTitle.text = @"连续居住年限";
+            cell.txtName.tag = 5003;
         }
         [cell.txtName addTarget:self action:@selector(txtChange:) forControlEvents:UIControlEventEditingChanged];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -150,7 +160,20 @@
         [cell.btnTime addTarget:self action:@selector(selectTime:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }else if (indexPath.section ==1){
-        return nil;
+        ContactPeopleModel *model = self.askPeopleArray[indexPath.row];
+        PersonalInformationTableViewCell3 *cell = [tableView dequeueReusableCellWithIdentifier:@"PersonalInformationCell3"];
+        if (!cell) {
+            NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"PersonalInformationTableViewCell3" owner:self options:nil];
+            if (nib.count > 0) {
+                cell = nib.firstObject;
+            }
+        }
+        cell.labelLeft.text = model.name;
+        cell.labelRight.text = model.phone;
+        cell.labelLeft.textColor = [UIColor colorWithHexString:Colorblack];
+        cell.labelRight.textColor = [UIColor colorWithHexString:Colorgray];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
     }else if (indexPath.section ==0 &&indexPath.row ==7){
         AccidentAddressTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AccidentAddressCell"];
         if (!cell) {
@@ -411,13 +434,11 @@
 }
 -(void)textViewDidChange:(UITextView *)textView{
     AccidentAddressTableViewCell *cell;
-    if (textView.tag == 1000) {
-        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-        self.infoModel.address = textView.text;
-    }else if (textView.tag == 1001){
-        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2]];
+    if(textView.tag == 1001){
+        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:7 inSection:0]];
+        self.infoModel.houseAddress = textView.text;
     }else if (textView.tag == 1002){
-        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:2]];
+        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:2]];
         self.infoModel.remark = textView.text;
     }
     if (textView.text.length>0) {
@@ -538,6 +559,34 @@
 }
 -(void)commit{
     NSString *userCode = @"0131002498";
+    NSMutableDictionary *uploadDic = [NSMutableDictionary dictionary];
+    [uploadDic setObject:self.taskModel.taskNo forKey:@"taskNo"];
+    [uploadDic setObject:userCode forKey:@"userCode"];
+    ItemTypeModel *finishModel = self.infoModel.finishFlag;
+    [uploadDic setObject:finishModel.value forKey:@"finishFlag"];
+    [uploadDic setObject:self.infoModel.remark forKey:@"remark"];
+    [uploadDic setObject:self.infoModel.houseAddress forKey:@"address"];
+    CityModel *cityModel = self.infoModel.household;
+    [uploadDic setObject:cityModel.name forKey:@"household"];
+    SelectList *typeModel = self.infoModel.householdType;
+    [uploadDic setObject:typeModel.value forKey:@"householdType"];
+    ItemTypeModel *fatherModel = self.infoModel.fatherExt;
+    [uploadDic setObject:fatherModel.value forKey:@"fatherExt"];
+    ItemTypeModel *motherModel = self.infoModel.matherExt;
+    [uploadDic setObject:motherModel.value forKey:@"matherExt"];
+    [uploadDic setInteger:self.infoModel.sonCount.integerValue forKey:@"sonCount"];
+    [uploadDic setInteger:self.infoModel.bratherCount.integerValue forKey:@"bratherCount"];
+    ItemTypeModel *addressBeTrueModel = self.infoModel.addressBeTrue;
+    [uploadDic setObject:addressBeTrueModel.value forKey:@"addressBeTrue"];
+    [uploadDic setObject:self.infoModel.liveStartDate forKey:@"liveStartDate"];
+    [uploadDic setObject:self.infoModel.liveEndDate forKey:@"liveEndDate"];
+    if (self.infoModel.insiderPersonArray.count >0) {
+        ContactPeopleModel *model = self.infoModel.insiderPersonArray.firstObject;
+        [uploadDic setObject:model.name forKey:@"insider"];
+        [uploadDic setObject:model.phone forKey:@"insiderPhone"];
+        SelectList *idModel = model.insiderIdentity;
+        [uploadDic setObject:idModel.value forKey:@"insiderIdentity"];
+    }
     if (self.infoModel.imageArray.count>0) {
         self.unUploadImageArray =self.infoModel.imageArray;
         for (imageModel *model in self.infoModel.imageArray) {
@@ -552,7 +601,18 @@
     }else{
         WeakSelf(FamilyRegisterViewController);
         [self showHudWaitingView:WaitPrompt];
-           }
+        [[NetWorkManager shareNetWork]uploadHouseholdInfoWithDataDic:uploadDic andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
+            [weakSelf removeMBProgressHudInManaual];
+            if ([response.responseCode isEqual:@"1"]) {
+                
+            }else{
+                [weakSelf showHudAuto:@"上传失败"];
+            }
+        } andFailure:^(NSURLSessionDataTask *urlSessionDataTask, NSError *error) {
+            [weakSelf removeMBProgressHudInManaual];
+            [weakSelf showHudAuto:InternetFailerPrompt];
+        }];
+    }
 }
 -(void)uploadImage{
     WeakSelf(FamilyRegisterViewController);
@@ -597,7 +657,12 @@
     return _unUploadImageArray;
 }
 -(void)txtChange:(UITextField *)txt{
-    self.infoModel.address =txt.text;
+    if (txt.tag == 5001) {
+        self.infoModel.sonCount =txt.text;
+    }else if (txt.tag == 5002){
+        self.infoModel.bratherCount =txt.text;
+    }else if (txt.tag == 5003){
+    }
     txt.frame = CGRectMake(DeviceSize.width-15-txt.text.length*16, txt.frame.origin.y, txt.text.length*16, txt.frame.size.height);
 }
 - (void)setUpForDismissKeyboard {

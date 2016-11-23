@@ -16,6 +16,7 @@
 #import "FamilyRegisterViewController.h"
 #import "DeathInfoViewController.h"
 #import "DelayViewController.h"
+#import "UpbringViewController.h"
 @interface FollowDetaiViewController ()<UIScrollViewDelegate>
 //提交按钮
 @property (nonatomic,strong)UIButton *btnCommit;
@@ -233,6 +234,11 @@
 }
 -(void)edit{
     [self setHidesBottomBarWhenPushed:YES];
+    UpbringViewController *vc = [[UpbringViewController alloc]init];
+    vc.claimModel = self.claimModel;
+    vc.taskModel = self.taskModel;
+    [self.navigationController pushViewController:vc animated:YES];
+    
 //    DelayViewController *vc = [[DelayViewController alloc]init];
 //    vc.claimModel = self.claimModel;
 //    vc.taskModel = self.taskModel;
@@ -243,10 +249,10 @@
 //    vc.taskModel = self.taskModel;
 //    [self.navigationController pushViewController:vc animated:YES];
     
-    FamilyRegisterViewController *vc = [[FamilyRegisterViewController alloc]init];
-    vc.claimModel = self.claimModel;
-    vc.taskModel = self.taskModel;
-    [self.navigationController pushViewController:vc animated:YES];
+//    FamilyRegisterViewController *vc = [[FamilyRegisterViewController alloc]init];
+//    vc.claimModel = self.claimModel;
+//    vc.taskModel = self.taskModel;
+//    [self.navigationController pushViewController:vc animated:YES];
     
     
 //    IncomeViewController *vc = [[IncomeViewController alloc]init];

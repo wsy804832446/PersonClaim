@@ -334,4 +334,8 @@ static NetWorkManager *thNetWorkManager = nil;
     NSMutableDictionary *paramDic =[self dataDicAndRequestCodeWithDic:dic andRequestCode:@"002010"];
     [self requestOperation:kServerHost andParams:paramDic andHeaderFieldParams:nil andHttpRequestMethod:HttpRequestMethodPOST andCompletionBlockWithSuccess:success andFailure:failure];
 }
+-(void)uploadUpBringInfoWithDataDic:(NSDictionary *)dic andCompletionBlockWithSuccess:(CompletionBlockWithSuccess)success andFailure:(FailureBlock)failure{
+    NSMutableDictionary *paramDic =[self dataDicAndRequestCodeWithDic:dic andRequestCode:@"002012"];
+    [self requestOperation:kServerHost andParams:paramDic andHeaderFieldParams:nil andHttpRequestMethod:HttpRequestMethodPOST andCompletionBlockWithSuccess:success andFailure:failure];
+}
 @end
