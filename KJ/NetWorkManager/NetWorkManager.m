@@ -350,4 +350,9 @@ static NetWorkManager *thNetWorkManager = nil;
     [self requestOperation:kServerHost andParams:paramDic andHeaderFieldParams:nil andHttpRequestMethod:HttpRequestMethodPOST andCompletionBlockWithSuccess:success andFailure:failure];
 
 }
+-(void)uploaddDisabilityInfoWithDataDic:(NSDictionary *)dic andCompletionBlockWithSuccess:(CompletionBlockWithSuccess)success andFailure:(FailureBlock)failure{
+    NSMutableDictionary *paramDic =[self dataDicAndRequestCodeWithDic:dic andRequestCode:@"002013"];
+    [self requestOperation:kServerHost andParams:paramDic andHeaderFieldParams:nil andHttpRequestMethod:HttpRequestMethodPOST andCompletionBlockWithSuccess:success andFailure:failure];
+
+}
 @end

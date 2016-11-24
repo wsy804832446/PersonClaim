@@ -13,6 +13,8 @@
 
 @property (nonatomic,copy)NSString *disabilityGradeId;
 
+@property (nonatomic,copy)NSString *disabilityName;
+
 @property (nonatomic,copy)NSString *disabilityCode;
 
 @property (nonatomic,copy)NSString *disabilityDescr;

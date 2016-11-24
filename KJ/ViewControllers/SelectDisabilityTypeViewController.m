@@ -90,6 +90,7 @@
             }
             for (NSDictionary *dic in response.dataDic[@"disabList"]) {
                 DisabilityModel *model = [MTLJSONAdapter modelOfClass:[DisabilityModel class] fromJSONDictionary:dic error:NULL];
+                model.disabilityName =weakSelf.itemsArr[weakSelf.selectIndex];
                 [weakSelf.dataArray addObject:model];
             }
             [weakSelf.tableView reloadData];

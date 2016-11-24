@@ -11,6 +11,20 @@
 		34056E971DCC3C2300936C67 /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 34056E961DCC3C2300936C67 /* UIImage+Extension.m */; };
 		3405AD4E1DD43FDB0064D1DA /* BodyPartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3405AD4D1DD43FDB0064D1DA /* BodyPartModel.m */; };
 		3405AD511DD456380064D1DA /* HospitalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3405AD501DD456380064D1DA /* HospitalModel.m */; };
+		340B870B1DE69ACB004D54ED /* 120.png in Resources */ = {isa = PBXBuildFile; fileRef = 340B87091DE69ACB004D54ED /* 120.png */; };
+		340B870C1DE69ACB004D54ED /* 180.png in Resources */ = {isa = PBXBuildFile; fileRef = 340B870A1DE69ACB004D54ED /* 180.png */; };
+		340B87151DE69B4A004D54ED /* 29.png in Resources */ = {isa = PBXBuildFile; fileRef = 340B870D1DE69B4A004D54ED /* 29.png */; };
+		340B87161DE69B4A004D54ED /* 40.png in Resources */ = {isa = PBXBuildFile; fileRef = 340B870E1DE69B4A004D54ED /* 40.png */; };
+		340B87171DE69B4A004D54ED /* 58.png in Resources */ = {isa = PBXBuildFile; fileRef = 340B870F1DE69B4A004D54ED /* 58.png */; };
+		340B87181DE69B4A004D54ED /* 76.png in Resources */ = {isa = PBXBuildFile; fileRef = 340B87101DE69B4A004D54ED /* 76.png */; };
+		340B87191DE69B4A004D54ED /* 80.png in Resources */ = {isa = PBXBuildFile; fileRef = 340B87111DE69B4A004D54ED /* 80.png */; };
+		340B871A1DE69B4A004D54ED /* 152.png in Resources */ = {isa = PBXBuildFile; fileRef = 340B87121DE69B4A004D54ED /* 152.png */; };
+		340B871B1DE69B4A004D54ED /* 512.png in Resources */ = {isa = PBXBuildFile; fileRef = 340B87131DE69B4A004D54ED /* 512.png */; };
+		340B871C1DE69B4A004D54ED /* 1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 340B87141DE69B4A004D54ED /* 1024.png */; };
+		340B87251DE6C661004D54ED /* 4s.png in Resources */ = {isa = PBXBuildFile; fileRef = 340B87211DE6C661004D54ED /* 4s.png */; };
+		340B87261DE6C661004D54ED /* 5s.png in Resources */ = {isa = PBXBuildFile; fileRef = 340B87221DE6C661004D54ED /* 5s.png */; };
+		340B87271DE6C661004D54ED /* 6p.png in Resources */ = {isa = PBXBuildFile; fileRef = 340B87231DE6C661004D54ED /* 6p.png */; };
+		340B87281DE6C661004D54ED /* 6s.png in Resources */ = {isa = PBXBuildFile; fileRef = 340B87241DE6C661004D54ED /* 6s.png */; };
 		341362991DA9D88400FF17DC /* CompensationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 341362981DA9D88400FF17DC /* CompensationViewController.m */; };
 		3413629C1DAA0D9300FF17DC /* SelectCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3413629B1DAA0D9300FF17DC /* SelectCityViewController.m */; };
 		3413629E1DAA1BC700FF17DC /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3413629D1DAA1BC700FF17DC /* city.plist */; };
@@ -361,6 +375,20 @@
 		3405AD4D1DD43FDB0064D1DA /* BodyPartModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BodyPartModel.m; sourceTree = "<group>"; };
 		3405AD4F1DD456380064D1DA /* HospitalModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HospitalModel.h; sourceTree = "<group>"; };
 		3405AD501DD456380064D1DA /* HospitalModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HospitalModel.m; sourceTree = "<group>"; };
+		340B87091DE69ACB004D54ED /* 120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 120.png; sourceTree = "<group>"; };
+		340B870A1DE69ACB004D54ED /* 180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 180.png; sourceTree = "<group>"; };
+		340B870D1DE69B4A004D54ED /* 29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 29.png; sourceTree = "<group>"; };
+		340B870E1DE69B4A004D54ED /* 40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 40.png; sourceTree = "<group>"; };
+		340B870F1DE69B4A004D54ED /* 58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 58.png; sourceTree = "<group>"; };
+		340B87101DE69B4A004D54ED /* 76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 76.png; sourceTree = "<group>"; };
+		340B87111DE69B4A004D54ED /* 80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 80.png; sourceTree = "<group>"; };
+		340B87121DE69B4A004D54ED /* 152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 152.png; sourceTree = "<group>"; };
+		340B87131DE69B4A004D54ED /* 512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 512.png; sourceTree = "<group>"; };
+		340B87141DE69B4A004D54ED /* 1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1024.png; sourceTree = "<group>"; };
+		340B87211DE6C661004D54ED /* 4s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4s.png; sourceTree = "<group>"; };
+		340B87221DE6C661004D54ED /* 5s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5s.png; sourceTree = "<group>"; };
+		340B87231DE6C661004D54ED /* 6p.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 6p.png; sourceTree = "<group>"; };
+		340B87241DE6C661004D54ED /* 6s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 6s.png; sourceTree = "<group>"; };
 		341362971DA9D88400FF17DC /* CompensationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompensationViewController.h; sourceTree = "<group>"; };
 		341362981DA9D88400FF17DC /* CompensationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompensationViewController.m; sourceTree = "<group>"; };
 		3413629A1DAA0D9300FF17DC /* SelectCityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectCityViewController.h; sourceTree = "<group>"; };
@@ -1298,6 +1326,20 @@
 				34607C751DBF2388006B8E2D /* 14-地图_r2_c2(2).png */,
 				344E7FCC1DE59AEF008400FA /* 切图-跟踪_r1_c3.png */,
 				344E7FCD1DE59AEF008400FA /* 切图-跟踪_r2_c1.png */,
+				340B87091DE69ACB004D54ED /* 120.png */,
+				340B870A1DE69ACB004D54ED /* 180.png */,
+				340B870D1DE69B4A004D54ED /* 29.png */,
+				340B870E1DE69B4A004D54ED /* 40.png */,
+				340B870F1DE69B4A004D54ED /* 58.png */,
+				340B87101DE69B4A004D54ED /* 76.png */,
+				340B87111DE69B4A004D54ED /* 80.png */,
+				340B87121DE69B4A004D54ED /* 152.png */,
+				340B87131DE69B4A004D54ED /* 512.png */,
+				340B87141DE69B4A004D54ED /* 1024.png */,
+				340B87211DE6C661004D54ED /* 4s.png */,
+				340B87221DE6C661004D54ED /* 5s.png */,
+				340B87231DE6C661004D54ED /* 6p.png */,
+				340B87241DE6C661004D54ED /* 6s.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -1966,6 +2008,7 @@
 				34AD21321DB0754E00A17B29 /* IOS-@2X.png in Resources */,
 				34AD212D1DB0754E00A17B29 /* 3-1.png in Resources */,
 				34AD213C1DB0754E00A17B29 /* 地区下拉箭头.png in Resources */,
+				340B870C1DE69ACB004D54ED /* 180.png in Resources */,
 				34607C721DBF0A20006B8E2D /* 1-收藏空白页.png in Resources */,
 				34AD21661DB0757C00A17B29 /* 8-搜索-1.png in Resources */,
 				34AD21361DB0754E00A17B29 /* 切图-全_r11_c5.png in Resources */,
@@ -1982,6 +2025,7 @@
 				344E216E1DAC8DA400BB415D /* Assets.xcassets in Resources */,
 				34AD216C1DB0757C00A17B29 /* 12-1.png in Resources */,
 				34AD21751DB0757C00A17B29 /* 17.png in Resources */,
+				340B871A1DE69B4A004D54ED /* 152.png in Resources */,
 				344E7FCB1DE5986A008400FA /* DisabilityTableViewCell.xib in Resources */,
 				34AD212E1DB0754E00A17B29 /* 3-医疗理赔系统APP端-我的_r3_c2.png in Resources */,
 				34AD21251DB0754E00A17B29 /* 1-我的切图_r2_c1@2x.png in Resources */,
@@ -1990,13 +2034,16 @@
 				34AD21671DB0757C00A17B29 /* 8-搜索.png in Resources */,
 				34AD217C1DB0757C00A17B29 /* e.png in Resources */,
 				3475F25B1DD1B95A00F4D01F /* search.png in Resources */,
+				340B87151DE69B4A004D54ED /* 29.png in Resources */,
 				34AD21881DB0A38F00A17B29 /* FollowPlatFormViewCell.xib in Resources */,
+				340B871B1DE69B4A004D54ED /* 512.png in Resources */,
 				34AF949B1DBB197E00D84254 /* 31-1.png in Resources */,
 				34AD21401DB0754E00A17B29 /* 未命名-1_r1_c3.png in Resources */,
 				34772C1E1DB4B3F8009D51B0 /* FollowDetailTableViewCell.xib in Resources */,
 				34AD21381DB0754E00A17B29 /* 切图-全_r1_c3.png in Resources */,
 				34AD21271DB0754E00A17B29 /* 1-我的切图_r5_c6@2x.png in Resources */,
 				34AD21641DB0757C00A17B29 /* 5.png in Resources */,
+				340B87251DE6C661004D54ED /* 4s.png in Resources */,
 				34AD21421DB0754E00A17B29 /* 未命名-1_r2_c7.png in Resources */,
 				34AD216D1DB0757C00A17B29 /* 12.png in Resources */,
 				44FE69BE1CBF5CEE00C2A8A5 /* LaunchScreen.storyboard in Resources */,
@@ -2009,6 +2056,7 @@
 				34AD212B1DB0754E00A17B29 /* 2-1.png in Resources */,
 				344C5AB01DD0690200584668 /* DealNameTableViewCell.xib in Resources */,
 				34AD216F1DB0757C00A17B29 /* 13.png in Resources */,
+				340B87181DE69B4A004D54ED /* 76.png in Resources */,
 				34AD212F1DB0754E00A17B29 /* 3.png in Resources */,
 				34AF94971DBB104500D84254 /* mapapi.bundle in Resources */,
 				34AD21721DB0757C00A17B29 /* 16-1.png in Resources */,
@@ -2020,7 +2068,9 @@
 				34AD21211DB0754E00A17B29 /* 1-1.png in Resources */,
 				34AD21261DB0754E00A17B29 /* 1-我的切图_r2_c4@2x.png in Resources */,
 				34AD21331DB0754E00A17B29 /* IOS-@3X.png in Resources */,
+				340B87161DE69B4A004D54ED /* 40.png in Resources */,
 				34DF309A1DC88D8C00EC6B57 /* AccidentTimeTableViewCell.xib in Resources */,
+				340B871C1DE69B4A004D54ED /* 1024.png in Resources */,
 				34AD21651DB0757C00A17B29 /* 6.png in Resources */,
 				34AF949C1DBB197E00D84254 /* 31.png in Resources */,
 				34AD21241DB0754E00A17B29 /* 1-我的切图_r1_c6@2x.png in Resources */,
@@ -2032,6 +2082,9 @@
 				3475F2531DD1713B00F4D01F /* MedicalVisitTableViewCell.xib in Resources */,
 				34839C441DB8B562002EB9BD /* DeleteContactTableViewCell.xib in Resources */,
 				34D95C7F1D9E43AB0092ECD3 /* ToolTableViewCell.xib in Resources */,
+				340B87191DE69B4A004D54ED /* 80.png in Resources */,
+				340B87281DE6C661004D54ED /* 6s.png in Resources */,
+				340B870B1DE69ACB004D54ED /* 120.png in Resources */,
 				34AD21441DB0754E00A17B29 /* 登录icon.png in Resources */,
 				34AD217E1DB0757C00A17B29 /* r.png in Resources */,
 				34AD21451DB0754E00A17B29 /* 箭头.png in Resources */,
@@ -2041,9 +2094,11 @@
 				3437BCFF1D9B8A80001DEC7B /* MineTableViewCell2.xib in Resources */,
 				34AD21461DB0754E00A17B29 /* 返回.png in Resources */,
 				34AD21301DB0754E00A17B29 /* 4-1.png in Resources */,
+				340B87171DE69B4A004D54ED /* 58.png in Resources */,
 				345CF2F41DDE9A4800EBB824 /* DefaultCellTableViewCell.xib in Resources */,
 				34607C761DBF2388006B8E2D /* 14-地图_r2_c2(2).png in Resources */,
 				34AD217F1DB0757C00A17B29 /* t.png in Resources */,
+				340B87261DE6C661004D54ED /* 5s.png in Resources */,
 				34AD21431DB0754E00A17B29 /* 标签.png in Resources */,
 				34ED55EF1DC845B300D8CA37 /* AccidentAddressTableViewCell.xib in Resources */,
 				34AD21731DB0757C00A17B29 /* 16.png in Resources */,
@@ -2069,6 +2124,7 @@
 				34AD21791DB0757C00A17B29 /* 21.png in Resources */,
 				3437BD181D9BA209001DEC7B /* PersonalInformationTableViewCell2.xib in Resources */,
 				347127E41DE4228C008B2B8E /* DeleteBringUpTableViewCell.xib in Resources */,
+				340B87271DE6C661004D54ED /* 6p.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

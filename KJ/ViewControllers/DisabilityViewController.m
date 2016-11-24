@@ -17,6 +17,8 @@
 #import "AccidentAddressTableViewCell.h"
 #import "SelectHospitalViewController.h"
 #import "SelectDisabilityTypeViewController.h"
+#import "MedicalVisitTableViewCell.h"
+#import "DisabilityModel.h"
 @interface DisabilityViewController ()<UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 //本页面信息model
 @property (nonatomic,strong)EditInfoModel *infoModel;
@@ -95,7 +97,7 @@
         line.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
         [vc addSubview:line];
         UILabel *lblContact = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, 70, 41)];
-        lblContact.text = @"伤残等级";
+        lblContact.text = @"伤残信息";
         lblContact.textColor = [UIColor colorWithHexString:@"#666666"];
         lblContact.font = [UIFont systemFontOfSize:15];
         [vc addSubview:lblContact];
@@ -114,18 +116,14 @@
     SelectDisabilityTypeViewController *vc = [[SelectDisabilityTypeViewController alloc]init];
     [vc setSelectBlock:^(NSMutableArray *array) {
         [self.levelArray addObjectsFromArray:array];
+        self.infoModel.levelArray = [NSArray arrayWithArray:self.levelArray];
+        [self.tableView reloadData];
     }];
     [self.navigationController pushViewController:vc animated:YES];
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if ((indexPath.section == 2&&indexPath.row ==0)||(indexPath.section == 0&&indexPath.row ==1)) {
-        DealNameTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DealNameCell"];
-        if (!cell) {
-            NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"DealNameTableViewCell" owner:nil options:nil];
-            if (nib.count>0) {
-                cell = [nib firstObject];
-            }
-        }
+        DealNameTableViewCell *cell = [[[NSBundle mainBundle]loadNibNamed:@"DealNameTableViewCell" owner:nil options:nil]firstObject];
         if (indexPath.row == 0) {
             cell.lblTitle.text = @"伤残赔偿系数";
             cell.txtName.tag = 3000;
@@ -161,13 +159,7 @@
         }];
         return cell;
     }else if ((indexPath.section ==2 &&indexPath.row ==1)||(indexPath.section ==2 &&indexPath.row ==3 )){
-        AccidentAddressTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AccidentAddressCell"];
-        if (!cell) {
-            NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"AccidentAddressTableViewCell" owner:nil options:nil];
-            if (nib.count>0) {
-                cell = [nib firstObject];
-            }
-        }
+        AccidentAddressTableViewCell *cell = [[[NSBundle mainBundle]loadNibNamed:@"AccidentAddressTableViewCell" owner:nil options:nil]firstObject];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.txtDetail.delegate =self;
         cell.lblPlaceHolder.hidden = YES;
@@ -181,13 +173,7 @@
         [cell.btnMap removeFromSuperview];
         return cell;
     }else if ((indexPath.section ==2 &&indexPath.row ==4)||(indexPath.section ==0 &&indexPath.row ==0)){
-        AccidentTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TimeCell"];
-        if (!cell) {
-            NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"AccidentTimeTableViewCell" owner:nil options:nil];
-            if (nib.count>0) {
-                cell = [nib firstObject];
-            }
-        }
+        AccidentTimeTableViewCell *cell = [[[NSBundle mainBundle]loadNibNamed:@"AccidentTimeTableViewCell" owner:nil options:nil]firstObject];
         if (indexPath.row == 0) {
             cell.lblLine.backgroundColor =[UIColor colorWithHexString:Colorwhite];
             cell.lblTitle.text = @"鉴定机构";
@@ -199,6 +185,18 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell.btnTime addTarget:self action:@selector(selectState:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
+    }else if (indexPath.section == 1){
+        MedicalVisitTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MedicalCell"];
+        if (!cell) {
+            NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"MedicalVisitTableViewCell" owner:nil options:nil];
+            if (nib.count>0) {
+                cell = [nib firstObject];
+            }
+        }
+        DisabilityModel *model = self.levelArray[indexPath.row];
+        cell.lblTitle.text = model.disabilityCode;
+        cell.lblDetail.text = model.disabilityDescr;
+        return cell;
     }else{
         AccidentTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TimeCell"];
         if (!cell) {
@@ -207,7 +205,7 @@
                 cell = [nib firstObject];
             }
         }
-        cell.lblTitle.text = @"死亡日期";
+        cell.lblTitle.text = @"鉴定日期";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell.btnTime addTarget:self action:@selector(selectTime) forControlEvents:UIControlEventTouchUpInside];
         return cell;
@@ -439,8 +437,20 @@
     ItemTypeModel *finishModel = self.infoModel.finishFlag;
     [uploadDic setObject:finishModel.value forKey:@"finishFlag"];
     [uploadDic setObject:self.infoModel.remark forKey:@"remark"];
-    [uploadDic setObject:self.infoModel.maintenance forKey:@"dependentSum"];
-       if (self.infoModel.imageArray.count>0) {
+    [uploadDic setObject:self.infoModel.identifier forKey:@"disabilityPersonName"];
+    [uploadDic setObject:self.infoModel.deathDate forKey:@"disabilityEfficientDate"];
+    HospitalModel *orModel = self.infoModel.organization;
+    [uploadDic setObject:orModel.hospitalId forKey:@"disabilityIdentifyOrgId"];
+    [uploadDic setObject:orModel.hospitalName forKey:@"disabilityIdentifyOrgName"];
+    [uploadDic setObject:self.infoModel.disabilityDescribe forKey:@"identifyRemarkInfo"];
+    [uploadDic setObject:self.infoModel.ratio forKey:@"disabilityRatioFormula"];
+    NSMutableArray *levelArr = [NSMutableArray array];
+    for (DisabilityModel *model in self.infoModel.levelArray) {
+        NSDictionary *dic = @{@"id":model.Id,@"disabilityGradeId":model.disabilityGradeId,@"disabilityGradeName":model.disabilityName,@"disabilityCode":model.disabilityCode,@"disabilityDescr":model.disabilityDescr};
+        [levelArr addObject:dic];
+    }
+    [uploadDic setObject:levelArr forKey:@"disabilityItemList"];
+    if (self.infoModel.imageArray.count>0) {
         self.unUploadImageArray =self.infoModel.imageArray;
         for (imageModel *model in self.infoModel.imageArray) {
             if (model.isUpload) {
@@ -453,12 +463,12 @@
         [self uploadImage];
     }else{
         WeakSelf(DisabilityViewController);
-        [[NetWorkManager shareNetWork]uploadUpBringInfoWithDataDic:uploadDic andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
+        [[NetWorkManager shareNetWork]uploaddDisabilityInfoWithDataDic:uploadDic andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response)  {
             [weakSelf removeMBProgressHudInManaual];
             if ([response.responseCode isEqual:@"1"]) {
-                NSLog(@"success");
+                [weakSelf showHudAuto:@"提交成功"];
             }else{
-                [weakSelf showHudAuto:@"上传失败"];
+                [weakSelf showHudAuto:@"提交失败"];
             }
         } andFailure:^(NSURLSessionDataTask *urlSessionDataTask, NSError *error) {
             [weakSelf removeMBProgressHudInManaual];
