@@ -249,15 +249,22 @@
     }
 }
 -(void)selectState:(UIButton *)btn{
-    SelectItemViewController *vc = [[SelectItemViewController alloc]init];
-    vc.itemName = @"完成情况";
     LocalDataModel *model = [LocalDataModel shareInstance];
-    vc.dataArray = [NSMutableArray arrayWithArray:model.finishStateArray];
-    [vc setSelectItemBlock:^(ItemTypeModel *model) {
+    NSArray *completeArray = [NSMutableArray arrayWithArray:model.finishStateArray];
+    UIAlertController *selectAlert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *actionComplete = [UIAlertAction actionWithTitle:@"完成" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        ItemTypeModel *model = completeArray.firstObject;
         self.infoModel.finishFlag = model;
         [btn setTitle:model.title forState:UIControlStateNormal];
     }];
-    [self.navigationController pushViewController:vc animated:YES];
+    UIAlertAction *actionUnComplete = [UIAlertAction actionWithTitle:@"未完成" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        ItemTypeModel *model = completeArray.lastObject;
+        self.infoModel.finishFlag = model;
+        [btn setTitle:model.title forState:UIControlStateNormal];
+    }];
+    [selectAlert addAction:actionComplete];
+    [selectAlert addAction:actionUnComplete];
+    [self presentViewController:selectAlert animated:YES completion:nil];
 }
 -(void)selectTime:(UIButton *)btn{
     self.tableView.userInteractionEnabled = NO;
@@ -280,7 +287,7 @@
 -(NSDateFormatter *)formatter{
     if (!_formatter) {
         _formatter =[[NSDateFormatter alloc] init];
-        [_formatter setDateFormat:@"yyyy-MM-dd"];
+        [_formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     }
     return _formatter;
 }
@@ -318,7 +325,7 @@
         _pickView.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
         [_pickView setDate:[NSDate date] animated:YES];
         [_pickView setMaximumDate:[NSDate date]];
-        [_pickView setDatePickerMode:UIDatePickerModeDate];
+        [_pickView setDatePickerMode:UIDatePickerModeDateAndTime];
         [_pickView setMinimumDate:[self.formatter dateFromString:@"1950-01-01日"]];
         _pickView.backgroundColor = [UIColor colorWithHexString:Colorwhite];
     }
@@ -491,6 +498,7 @@
             }
         }
     }
+
     //图片全部上传后开始上传基本信息
     if (self.unUploadImageArray.count>0) {
         [self uploadImage];
@@ -500,7 +508,7 @@
         //text
         ContactPeopleModel *model =[self.contactPeopleArray firstObject];
         ItemTypeModel *finish = self.infoModel.finishFlag;
-        [[NetWorkManager shareNetWork]uploadBaseInfoWithTaskNo:self.taskModel.taskNo andAddress:self.infoModel.address andContactPerson:model.name andContactTel:model.phone andRemark:self.infoModel.remark andAccidentDate:self.infoModel.accidentDate andUserCode:userCode andTaskType:self.taskModel.taskType andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
+        [[NetWorkManager shareNetWork]uploadBaseInfoWithTaskNo:self.taskModel.taskNo andAddress:self.infoModel.address andContactPerson:model.name andContactTel:model.phone andRemark:self.infoModel.remark andAccidentDate:self.infoModel.accidentDate andUserCode:userCode andTaskType:self.taskModel.taskType andFinishFlag:finish.value andAccidentRemark:self.infoModel.detailInfo andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response){
             [weakSelf removeMBProgressHudInManaual];
             if ([response.responseCode isEqual:@"1"]) {
                 [self showHudAuto:@"提交成功"];
@@ -521,6 +529,7 @@
     [[NetWorkManager shareNetWork]uploadImageWithImgName:uploadImageModel.imgName andImgBase64:uploadImageModel.imgBase64 andReportCode:self.taskModel.taskNo andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
         [weakSelf removeMBProgressHudInManaual];
         if ([response.responseCode isEqual:@"1"]) {
+            uploadImageModel.isUpload = YES;
             [weakSelf commit];
         }else{
             [weakSelf showHudAuto:@"上传失败"];
@@ -551,7 +560,7 @@
     return _infoModel;
 }
 -(NSMutableArray *)unUploadImageArray{
-    if (_unUploadImageArray) {
+    if (!_unUploadImageArray) {
         _unUploadImageArray = [NSMutableArray array];
     }
     return _unUploadImageArray;

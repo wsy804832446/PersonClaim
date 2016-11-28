@@ -631,7 +631,7 @@
         [uploadDic setObject:self.infoModel.UnitName forKey:@"workUnit"];
         [uploadDic setObject:self.infoModel.UnitAddress forKey:@"workUnitAddress"];
         SelectList *tradeModel = self.infoModel.tradeModel;
-        [uploadDic setObject:tradeModel.key forKey:@"workStation"];
+        [uploadDic setObject:tradeModel.value forKey:@"workStation"];
         [uploadDic setObject:self.infoModel.takingWorkDate forKey:@"onWorkDate"];
         ItemTypeModel *contractModel = self.infoModel.labourContract;
         [uploadDic setObject:contractModel.value forKey:@"contract"];
@@ -698,6 +698,7 @@
     [[NetWorkManager shareNetWork]uploadImageWithImgName:uploadImageModel.imgName andImgBase64:uploadImageModel.imgBase64 andReportCode:self.taskModel.taskNo andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
         [weakSelf removeMBProgressHudInManaual];
         if ([response.responseCode isEqual:@"1"]) {
+            uploadImageModel.isUpload = YES;
             [weakSelf commit];
         }else{
             [weakSelf showHudAuto:@"上传失败"];
@@ -728,7 +729,7 @@
     return _infoModel;
 }
 -(NSMutableArray *)unUploadImageArray{
-    if (_unUploadImageArray) {
+    if (!_unUploadImageArray) {
         _unUploadImageArray = [NSMutableArray array];
     }
     return _unUploadImageArray;

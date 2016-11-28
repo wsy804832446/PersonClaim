@@ -24,6 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     [self getTask];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItemExtension leftButtonItem:@selector(leftAction) andTarget:self];
@@ -35,6 +36,7 @@
     self.tableView.top =65;
     self.tableView.height = DeviceSize.height-self.tableView.top-49-64;
     self.tableView.separatorStyle =UITableViewCellSeparatorStyleNone;
+    self.isOpenHeaderRefresh = YES;
     // Do any additional setup after loading the view.
 }
 -(void)getTask{
@@ -45,9 +47,12 @@
 //    }
     WeakSelf(FollowPlatFormViewController);
     [self showHudWaitingView:WaitPrompt];
-    [[NetWorkManager shareNetWork]getTaskWithUserId:@"000111" andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
+    [[NetWorkManager shareNetWork]getTaskWithUserId:[CommUtil readDataWithFileName:@"account"] andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
         [weakSelf removeMBProgressHudInManaual];
         if ([response.responseCode isEqual:@"1"]) {
+            if (weakSelf.pageNO == 1) {
+                [weakSelf.dataArray removeAllObjects];
+            }
             NSArray *claimArray = response.dataDic[@"claimList"];
             for (NSDictionary *claimDic in claimArray) {
                 ClaimModel *model = [MTLJSONAdapter modelOfClass:[ClaimModel class] fromJSONDictionary:claimDic error:NULL];
@@ -60,9 +65,11 @@
         }else{
             [weakSelf showHudAuto:response.message];
         }
+        [weakSelf.tableView.header endRefreshing];
     } andFailure:^(NSURLSessionDataTask *urlSessionDataTask, NSError *error) {
         [weakSelf removeMBProgressHudInManaual];
         [weakSelf showHudAuto:InternetFailerPrompt];
+        [weakSelf.tableView.header endRefreshing];
     }];
 }
 -(void)leftAction{
@@ -271,6 +278,9 @@
         [_calendar setTimeZone:[[NSTimeZone alloc] initWithName:@"Asia/Shanghai"]];
     }
     return _calendar;
+}
+-(void)headerRequestWithData{
+    [self getTask];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

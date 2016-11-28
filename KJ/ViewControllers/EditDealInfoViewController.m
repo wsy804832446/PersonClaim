@@ -479,9 +479,10 @@
         [self uploadImage];
     }else{
         ContactPeopleModel *model = self.contactPeopleArray.firstObject;
+        ItemTypeModel *completeModel = self.infoModel.finishFlag;
         WeakSelf(EditDealInfoViewController);
         [self showHudWaitingView:WaitPrompt];
-        [[NetWorkManager shareNetWork]uploadBaseInfoWithTaskNo:self.taskModel.taskNo andAddress:self.infoModel.dealName andContactPerson:model.name andContactTel:model.phone andRemark:self.infoModel.remark andAccidentDate:self.infoModel.dealDate andUserCode:userCode andTaskType:self.taskModel.taskType andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
+        [[NetWorkManager shareNetWork]uploadBaseInfoWithTaskNo:self.taskModel.taskNo andAddress:self.infoModel.dealName andContactPerson:model.name andContactTel:model.phone andRemark:self.infoModel.remark andAccidentDate:self.infoModel.dealDate andUserCode:userCode andTaskType:self.taskModel.taskType andFinishFlag:completeModel.value andAccidentRemark:self.infoModel.dealResult andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
             [weakSelf removeMBProgressHudInManaual];
             if ([response.responseCode isEqual:@"1"]) {
                 [weakSelf showHudAuto:@"提交成功"];
@@ -502,7 +503,9 @@
     [[NetWorkManager shareNetWork]uploadImageWithImgName:uploadImageModel.imgName andImgBase64:uploadImageModel.imgBase64 andReportCode:self.taskModel.taskNo andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
         [weakSelf removeMBProgressHudInManaual];
         if ([response.responseCode isEqual:@"1"]) {
+            uploadImageModel.isUpload = YES;
             [weakSelf commit];
+            
         }else{
             [weakSelf showHudAuto:@"上传失败"];
         }
@@ -532,13 +535,13 @@
     return _infoModel;
 }
 -(NSMutableArray *)unUploadImageArray{
-    if (_unUploadImageArray) {
+    if (!_unUploadImageArray) {
         _unUploadImageArray = [NSMutableArray array];
     }
     return _unUploadImageArray;
 }
 -(void)txtChange:(UITextField *)txt{
-    self.infoModel.address =txt.text;
+    self.infoModel.dealName =txt.text;
     txt.frame = CGRectMake(DeviceSize.width-15-txt.text.length*16, txt.frame.origin.y, txt.text.length*16, txt.frame.size.height);
 }
 - (void)setUpForDismissKeyboard {

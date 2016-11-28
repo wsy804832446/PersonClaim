@@ -303,8 +303,11 @@
 //        [[NetWorkManager shareNetWork]LoginWithAccount:self.accountField.text andPassword:self.passWordField.text andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
 //            [weakSelf removeMBProgressHudInManaual];
 //            if ([response.responseCode isEqual:@"1"] ) {
+//                [CommUtil saveData:self.accountField.text andSaveFileName:@"account"];
 //                PersonInfoModel *model = [response thParseDataFromDic:response.dataDic andModel:[PersonInfoModel class]];
-//                [CommUtil saveData:model andSaveFileName:@"PersonInfoModel"];
+//                [CommUtil saveData:model andSaveFileName:[NSString stringWithFormat:@"PersonInfoModel%@",[CommUtil readDataWithFileName:@"account"]]];
+//                TabBarViewController *tabVc = [[TabBarViewController alloc]init];
+//                [weakSelf presentViewController:tabVc animated:YES completion:nil];
 //               
 //            }else{
 //                [self showHudAuto:response.message];

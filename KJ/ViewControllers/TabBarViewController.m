@@ -7,7 +7,7 @@
 //
 
 #import "TabBarViewController.h"
-#import "FollowPlatFormViewController.h"
+#import "HomePageViewController.h"
 #import "ToolViewController.h"
 #import "MineViewController.h"
 @interface TabBarViewController ()
@@ -22,7 +22,7 @@
     // Do any additional setup after loading the view.
 }
 -(void)loadViewController{
-    FollowPlatFormViewController *FirstVc = [[FollowPlatFormViewController alloc]init];
+    HomePageViewController *FirstVc = [[HomePageViewController alloc]init];
     FirstVc.title = @"追踪平台";
     FirstVc.tabBarItem.image =[UIImage imageNamed:@"1-我的切图_r6_c1"];
     FirstVc.tabBarItem.selectedImage =[UIImage imageNamed:@"1-我的切图_r2_c1"];

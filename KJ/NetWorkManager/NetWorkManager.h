@@ -42,7 +42,7 @@ typedef void (^uploadProgressBlock)(long long bytesSent, long long totalBytesSen
 //接受任务
 -(void)getTaskWithUserId:(NSString *)userId andCompletionBlockWithSuccess:(CompletionBlockWithSuccess) success andFailure:(FailureBlock) failure;
 //上传事故基本信息
--(void)uploadBaseInfoWithTaskNo:(NSString *)taskNo andAddress:(NSString *)address andContactPerson:(NSString *)contactPerson andContactTel:(NSString *)contactTel andRemark:(NSString *)remark andAccidentDate:(NSString *)accidentDate andUserCode:(NSString *)userCode andTaskType:(NSString *)taskType andCompletionBlockWithSuccess:(CompletionBlockWithSuccess) success andFailure:(FailureBlock) failure;
+-(void)uploadBaseInfoWithTaskNo:(NSString *)taskNo andAddress:(NSString *)address andContactPerson:(NSString *)contactPerson andContactTel:(NSString *)contactTel andRemark:(NSString *)remark andAccidentDate:(NSString *)accidentDate andUserCode:(NSString *)userCode andTaskType:(NSString *)taskType andFinishFlag:(NSString *)finishFlag andAccidentRemark:(NSString *)accidentRemark andCompletionBlockWithSuccess:(CompletionBlockWithSuccess) success andFailure:(FailureBlock) failure;
 //上传影像资料
 -(void)uploadImageWithImgName:(NSString *)imgName andImgBase64:(NSString *)imgBase64 andReportCode:(NSString *)reportCode andCompletionBlockWithSuccess:(CompletionBlockWithSuccess) success andFailure:(FailureBlock) failure;
 //拉取城市列表

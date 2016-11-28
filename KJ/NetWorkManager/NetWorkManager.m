@@ -8,8 +8,9 @@
 
 #import "NetWorkManager.h"
 //测试地址
-#define kServerHost @"http://192.168.223.134:8088/mobileService/ifc"
-//#define kServerHost @"http://192.168.223.133:8989/YiDong"
+//#define kServerHost @"http://192.168.223.134:8088/mobileService/ifc"
+//生产地址
+#define kServerHost @"http://124.42.1.7:8001/mobileService/ifc"
 @interface NetWorkManager ()
 {
     NSString *URLPath;
@@ -257,8 +258,8 @@ static NetWorkManager *thNetWorkManager = nil;
     NSMutableDictionary *paramDic =[self dataDicAndRequestCodeWithDic:dataDic andRequestCode:@"002001"];
     [self requestOperation:kServerHost andParams:paramDic andHeaderFieldParams:nil andHttpRequestMethod:HttpRequestMethodPOST andCompletionBlockWithSuccess:success andFailure:failure];
 }
--(void)uploadBaseInfoWithTaskNo:(NSString *)taskNo andAddress:(NSString *)address andContactPerson:(NSString *)contactPerson andContactTel:(NSString *)contactTel andRemark:(NSString *)remark andAccidentDate:(NSString *)accidentDate andUserCode:(NSString *)userCode andTaskType:(NSString *)taskType  andCompletionBlockWithSuccess:(CompletionBlockWithSuccess)success andFailure:(FailureBlock)failure{
-    NSDictionary *dataDic = @{@"taskNo":taskNo,@"address":address,@"contactPerson":contactPerson,@"contactTel":contactTel,@"remark":remark,@"accidentDate":accidentDate,@"userCode":userCode};
+-(void)uploadBaseInfoWithTaskNo:(NSString *)taskNo andAddress:(NSString *)address andContactPerson:(NSString *)contactPerson andContactTel:(NSString *)contactTel andRemark:(NSString *)remark andAccidentDate:(NSString *)accidentDate andUserCode:(NSString *)userCode andTaskType:(NSString *)taskType  andFinishFlag:(NSString *)finishFlag andAccidentRemark:(NSString *)accidentRemark andCompletionBlockWithSuccess:(CompletionBlockWithSuccess)success andFailure:(FailureBlock)failure{
+    NSDictionary *dataDic = @{@"taskNo":taskNo,@"address":address,@"contactPerson":contactPerson,@"contactTel":contactTel,@"remark":remark,@"accidentDate":accidentDate,@"userCode":userCode,@"finishFlag":finishFlag,@"accidentRemark":accidentRemark};
     NSMutableDictionary *paramDic = [NSMutableDictionary dictionary];
     if ([taskType isEqual:@"09"]) {
         paramDic =[self dataDicAndRequestCodeWithDic:dataDic andRequestCode:@"002005"];

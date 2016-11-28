@@ -18,7 +18,7 @@
 #import "AccidentAddressViewController.h"
 #import "SelectTradeViewController.h"
 #import "SelectItemViewController.h"
-@interface DeathInfoViewController ()<UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface DeathInfoViewController ()<UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
 //选择时间
 @property (nonatomic,strong)UIView *containerView;
 @property (nonatomic,strong)UIDatePicker *pickView;
@@ -29,6 +29,10 @@
 @property (nonatomic,strong)EditInfoModel *infoModel;
 //未上传图片数组 （上传判断使用）
 @property (nonatomic,strong)NSMutableArray *unUploadImageArray;
+//选项卡
+@property (nonatomic,strong)UIView *selectPicker;
+//选项卡数据源
+@property (nonatomic,strong)NSMutableArray *selectDataArray;
 @end
 
 @implementation DeathInfoViewController
@@ -159,22 +163,21 @@
     }
 }
 -(void)selectState:(UIButton *)btn{
+    [self.selectDataArray removeAllObjects];
+    self.tableView.userInteractionEnabled = NO;
     if(btn.tag == 100) {
-        SelectTradeViewController*vc = [[SelectTradeViewController alloc]init];
-        vc.itemName = @"死亡原因";
         NSArray *seletListArray = [CommUtil readDataWithFileName:localSelectArry];
         if (seletListArray.count >0) {
             for (SelectList *model in seletListArray) {
                 if ([model.typeCode isEqual:@"D115"]) {
-                    [vc.dataArray addObject:model];
+                    [self.selectDataArray addObject:model];
                 }
             }
         }
-        [vc setSelectIdentityBlock:^(SelectList *model) {
-            self.infoModel.deathReason = model;
-            [btn setTitle:model.value forState:UIControlStateNormal];
+        [self.view addSubview:self.selectPicker];
+        [UIView animateWithDuration:0.5 animations:^{
+            _selectPicker.frame = CGRectMake(0, self.view.bottom - 176-64, DeviceSize.width, 176);
         }];
-        [self.navigationController pushViewController:vc animated:YES];
     }else if (btn.tag == 106){
         SelectItemViewController *vc = [[SelectItemViewController alloc]init];
         vc.itemName = @"完成情况";
@@ -263,11 +266,13 @@
     self.tableView.userInteractionEnabled = YES;
     [UIView animateWithDuration:0.5 animations:^{
         _containerView.frame = CGRectMake(0, self.view.bottom, DeviceSize.width, 176);
+        _selectPicker.frame = CGRectMake(0, self.view.bottom, DeviceSize.width, 176);
     }];
     [UIView setAnimationDidStopSelector:@selector(removePick)];
 }
 -(void)removePick{
     [_containerView removeFromSuperview];
+    [_selectPicker removeFromSuperview];
 }
 - (void)setSelectDate:(NSString *)selectDate {
     [_pickView setDate:[self.formatter dateFromString:selectDate] animated:YES];
@@ -445,6 +450,7 @@
     [[NetWorkManager shareNetWork]uploadImageWithImgName:uploadImageModel.imgName andImgBase64:uploadImageModel.imgBase64 andReportCode:self.taskModel.taskNo andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
         [weakSelf removeMBProgressHudInManaual];
         if ([response.responseCode isEqual:@"1"]) {
+            uploadImageModel.isUpload = YES;
             [weakSelf commit];
         }else{
             [weakSelf showHudAuto:@"上传失败"];
@@ -475,7 +481,7 @@
     return _infoModel;
 }
 -(NSMutableArray *)unUploadImageArray{
-    if (_unUploadImageArray) {
+    if (!_unUploadImageArray) {
         _unUploadImageArray = [NSMutableArray array];
     }
     return _unUploadImageArray;
@@ -512,7 +518,74 @@
     //此method会将self.view里所有的subview的first responder都resign掉
     [self.view endEditing:YES];
 }
-
+-(UIView *)selectPicker{
+    if (!_selectPicker) {
+        _selectPicker = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.bottom, DeviceSize.width, 176)];
+        _selectPicker.backgroundColor = [UIColor colorWithHexString:@"#efefef"];
+        UIPickerView *pick =[[UIPickerView alloc]initWithFrame:CGRectMake(0, 44, DeviceSize.width, 132)];
+        pick.delegate =self;
+        pick.dataSource = self;
+        pick.backgroundColor =[UIColor colorWithHexString:Colorwhite];
+        [_selectPicker addSubview:pick];
+        UIButton *btnCancel = [UIButton buttonWithType:UIButtonTypeCustom];
+        btnCancel.frame =CGRectMake(20,12,40,20);
+        [btnCancel setTitle:@"取消" forState:UIControlStateNormal];
+        [btnCancel setTitleColor:[UIColor colorWithHexString:Colorblack] forState:UIControlStateNormal];
+        [btnCancel setBackgroundColor:[UIColor colorWithHexString:@"#efefef"]];
+        [btnCancel addTarget:self action:@selector(cancelAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_selectPicker addSubview:btnCancel];
+        UIButton *btnDone = [UIButton buttonWithType:UIButtonTypeCustom];
+        btnDone.frame = CGRectMake(self.view.width-20-btnCancel.size.width, btnCancel.top,btnCancel.size.width, btnCancel.size.height);
+        [btnDone setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btnDone setTitle:@"确定" forState:UIControlStateNormal];
+        btnDone.backgroundColor = [UIColor colorWithHexString:@"#efefef"];
+        [btnDone addTarget:self action:@selector(doneAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_selectPicker addSubview:btnDone];
+        UILabel *lblTitle = [[UILabel alloc]initWithFrame:CGRectMake(DeviceSize.width/2-40, 12, 80, 20)];
+        lblTitle.backgroundColor = [UIColor colorWithHexString:@"#efefef"];
+        lblTitle.textColor = [UIColor colorWithHexString:Colorblack];
+        lblTitle.font = [UIFont systemFontOfSize:17];
+        [_selectPicker addSubview:lblTitle];    return _selectPicker;
+    }
+    return _selectPicker;
+}
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+    return 1;
+}
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+    return self.selectDataArray.count;
+}
+-(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component{
+    return 44;
+}
+-(UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
+    //设置分割线的颜色
+    for(UIView *singleLine in pickerView.subviews)
+    {
+        if (singleLine.frame.size.height < 1)
+        {
+            singleLine.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
+        }
+    }
+    SelectList *model = [self.selectDataArray objectAtIndex:row];
+    UILabel *genderLabel = [UILabel new];
+    genderLabel.textAlignment = NSTextAlignmentCenter;
+    genderLabel.text = model.value;
+    genderLabel.font = [UIFont systemFontOfSize:17];
+    return genderLabel;
+}
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+    SelectList *model = [self.selectDataArray objectAtIndex:row];
+    self.infoModel.deathReason = model;
+    AccidentTimeTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    [cell.btnTime setTitle:model.value forState:UIControlStateNormal];
+}
+-(NSMutableArray *)selectDataArray{
+    if (!_selectDataArray) {
+        _selectDataArray = [NSMutableArray array];
+    }
+    return _selectDataArray;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

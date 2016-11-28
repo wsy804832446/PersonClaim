@@ -343,6 +343,16 @@
         [self.navigationController pushViewController:vc animated:YES];
     }else if (btn.tag == 6002){
         SelectTradeViewController*vc = [[SelectTradeViewController alloc]init];
+        vc.itemName = @"选择行业";
+        NSArray *seletListArray = [CommUtil readDataWithFileName:localSelectArry];
+        if (seletListArray.count >0) {
+            for (SelectList *model in seletListArray) {
+                if ([model.typeCode isEqual:@"D110"]) {
+                    [vc.dataArray addObject:model];
+                }
+            }
+        }
+
         [vc setSelectIdentityBlock:^(SelectList *model) {
             self.infoModel.tradeModel = model;
             [btn setTitle:model.value forState:UIControlStateNormal];
@@ -634,7 +644,7 @@
         [uploadDic setObject:self.infoModel.UnitName forKey:@"workUnit"];
         [uploadDic setObject:self.infoModel.UnitAddress forKey:@"workUnitAddress"];
         SelectList *tradeModel = self.infoModel.tradeModel;
-        [uploadDic setObject:tradeModel.key forKey:@"workStation"];
+        [uploadDic setObject:tradeModel.value forKey:@"workStation"];
         [uploadDic setObject:self.infoModel.takingWorkDate forKey:@"onWorkDate"];
         ItemTypeModel *contractModel = self.infoModel.labourContract;
         [uploadDic setObject:contractModel.value forKey:@"contract"];
@@ -692,6 +702,7 @@
     [[NetWorkManager shareNetWork]uploadImageWithImgName:uploadImageModel.imgName andImgBase64:uploadImageModel.imgBase64 andReportCode:self.taskModel.taskNo andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
         [weakSelf removeMBProgressHudInManaual];
         if ([response.responseCode isEqual:@"1"]) {
+            uploadImageModel.isUpload = YES;
             [weakSelf commit];
         }else{
             [weakSelf showHudAuto:@"上传失败"];
@@ -722,7 +733,7 @@
     return _infoModel;
 }
 -(NSMutableArray *)unUploadImageArray{
-    if (_unUploadImageArray) {
+    if (!_unUploadImageArray) {
         _unUploadImageArray = [NSMutableArray array];
     }
     return _unUploadImageArray;
