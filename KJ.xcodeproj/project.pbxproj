@@ -20,6 +20,7 @@
 		3413629E1DAA1BC700FF17DC /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3413629D1DAA1BC700FF17DC /* city.plist */; };
 		34136C441DC18E9F00E93EFF /* PersonInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 34136C431DC18E9F00E93EFF /* PersonInfoModel.m */; };
 		3415CC0A1DF691C200C6F8CF /* nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 3415CC091DF691C200C6F8CF /* nor.png */; };
+		3415CC101DF6D8C700C6F8CF /* LayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3415CC0F1DF6D8C700C6F8CF /* LayModel.m */; };
 		341940F91DD569710062003E /* SelectDepartmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 341940F81DD569710062003E /* SelectDepartmentViewController.m */; };
 		341940FC1DD56ECB0062003E /* DepartmentsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 341940FB1DD56ECB0062003E /* DepartmentsModel.m */; };
 		341940FF1DD598EE0062003E /* AddDiagnoseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 341940FE1DD598EE0062003E /* AddDiagnoseDetailViewController.m */; };
@@ -413,6 +414,8 @@
 		34136C421DC18E9F00E93EFF /* PersonInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonInfoModel.h; sourceTree = "<group>"; };
 		34136C431DC18E9F00E93EFF /* PersonInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonInfoModel.m; sourceTree = "<group>"; };
 		3415CC091DF691C200C6F8CF /* nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nor.png; sourceTree = "<group>"; };
+		3415CC0E1DF6D8C700C6F8CF /* LayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayModel.h; sourceTree = "<group>"; };
+		3415CC0F1DF6D8C700C6F8CF /* LayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayModel.m; sourceTree = "<group>"; };
 		341940F71DD569710062003E /* SelectDepartmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectDepartmentViewController.h; sourceTree = "<group>"; };
 		341940F81DD569710062003E /* SelectDepartmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectDepartmentViewController.m; sourceTree = "<group>"; };
 		341940FA1DD56ECB0062003E /* DepartmentsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DepartmentsModel.h; sourceTree = "<group>"; };
@@ -1456,6 +1459,8 @@
 				347127DE1DE4183F008B2B8E /* UpBringModel.m */,
 				344E7FC41DE5942B008400FA /* DisabilityModel.h */,
 				344E7FC51DE5942B008400FA /* DisabilityModel.m */,
+				3415CC0E1DF6D8C700C6F8CF /* LayModel.h */,
+				3415CC0F1DF6D8C700C6F8CF /* LayModel.m */,
 			);
 			name = Model;
 			path = Images;
@@ -2383,6 +2388,7 @@
 				3475F2521DD1713B00F4D01F /* MedicalVisitTableViewCell.m in Sources */,
 				44FE6B1C1CBF682600C2A8A5 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				3475F2561DD1827000F4D01F /* SelectHospitalViewController.m in Sources */,
+				3415CC101DF6D8C700C6F8CF /* LayModel.m in Sources */,
 				341940FF1DD598EE0062003E /* AddDiagnoseDetailViewController.m in Sources */,
 				44FE6AD81CBF677800C2A8A5 /* AFURLRequestSerialization.m in Sources */,
 				343841921DD2C43800583A69 /* AddCarePeopleViewController.m in Sources */,

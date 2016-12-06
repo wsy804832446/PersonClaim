@@ -71,4 +71,8 @@ typedef void (^uploadProgressBlock)(long long bytesSent, long long totalBytesSen
 -(void)getDisabilityListWithGadeCode:(NSString *)gadeCode andSearchCode:(NSString*)searchCode andPageNo:(NSInteger)pageNo andPageSize:(NSInteger)pageSize CompletionBlockWithSuccess:(CompletionBlockWithSuccess) success andFailure:(FailureBlock) failure;
 //上传被伤残信息
 -(void)uploaddDisabilityInfoWithDataDic:(NSDictionary *)dic andCompletionBlockWithSuccess:(CompletionBlockWithSuccess) success andFailure:(FailureBlock) failure;
+//获取法律法规
+-(void)getLayWithPageNo:(NSInteger)pageNo andPageSize:(NSInteger)pageSize andCompletionBlockWithSuccess:(CompletionBlockWithSuccess) success andFailure:(FailureBlock) failure;
+//获取赔偿标准
+-(void)getStandardWithRegionId:(NSString *)regionId andStandardYear:(NSInteger)standardYear andCompletionBlockWithSuccess:(CompletionBlockWithSuccess) success andFailure:(FailureBlock) failure;
 @end
