@@ -12,6 +12,12 @@
 +(NSDictionary *)JSONKeyPathsByPropertyKey{
     return @{};
 }
+-(NSMutableArray *)taskArr{
+    if (!_taskArr) {
+        _taskArr = [NSMutableArray array];
+    }
+    return _taskArr;
+}
 @end
 
 

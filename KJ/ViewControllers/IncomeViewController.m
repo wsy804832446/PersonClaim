@@ -48,7 +48,10 @@
     [self getLocalData];
 }
 -(void)getLocalData{
-    NSArray *arr =[CommUtil readDataWithFileName:localSelectArry];
+    self.infoModel =[CommUtil readDataWithFileName:[NSString stringWithFormat:@"%@%@",self.taskModel.taskNo,self.taskModel.taskType]];
+    if (self.infoModel.IncomeContactPersonArray.count>0) {
+        [self.contactPeopleArray addObjectsFromArray:self.infoModel.IncomeContactPersonArray];
+    }
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -161,9 +164,16 @@
         if ((indexPath.section == 1&&indexPath.row ==1)) {
             cell.lblTitle.text = @"单位名称";
             cell.txtName.tag = 5000;
+            if (self.infoModel.UnitName.length>0) {
+                cell.txtName.text =self.infoModel.UnitName;
+            }
         }else{
             cell.lblTitle.text = @"月收入";
             cell.txtName.tag = 5001;
+            cell.txtName.keyboardType = UIKeyboardTypeDecimalPad;
+            if (self.infoModel.monthIncome) {
+                cell.txtName.text =[NSString stringWithFormat:@"%.f",self.infoModel.monthIncome];
+            }
         }
         [cell.txtName addTarget:self action:@selector(txtChange:) forControlEvents:UIControlEventEditingChanged];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -229,6 +239,9 @@
             }];
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }];
+        if (self.infoModel.UnitAddress.length>0) {
+            cell.txtDetail.text =self.infoModel.UnitAddress;
+        }
         cell.lblTitle.text = @"单位地址";
         return cell;
     }else if (indexPath.section ==0 &&indexPath.row ==1){
@@ -267,6 +280,9 @@
         cell.txtDetail.tag = 1002;
         cell.lblPlaceHolder.hidden = YES;
         cell.lblTitle.text = @"备注信息";
+        if (self.infoModel.remark.length>0) {
+            cell.txtDetail.text =self.infoModel.remark;
+        }
         [cell.btnMap removeFromSuperview];
         return cell;
     }else if ((indexPath.section ==0 &&indexPath.row ==0)||(indexPath.section ==0 &&indexPath.row ==3)||(indexPath.section ==1 &&indexPath.row ==0)||(indexPath.section ==3&&indexPath.row <4&&indexPath.row >0)){
@@ -281,32 +297,32 @@
         }else if (indexPath.section ==0 &&indexPath.row ==3){
             cell.lblTitle.text = @"完成情况";
             ItemTypeModel *model = self.infoModel.finishFlag;
-            if (model) {
+            if (model.title.length>0) {
                 [cell.btnTime setTitle:model.title forState:UIControlStateNormal];
             }
         }else if (indexPath.section ==1 &&indexPath.row ==0){
             cell.lblTitle.text = @"行业";
             cell.lblLine.backgroundColor = [UIColor colorWithHexString:Colorwhite];
             SelectList *model = self.infoModel.tradeModel;
-            if (model) {
+            if (model.value.length>0) {
                  [cell.btnTime setTitle:model.value forState:UIControlStateNormal];
             }
         }else if (indexPath.section ==3 &&indexPath.row ==1){
             cell.lblTitle.text = @"劳动合同";
             ItemTypeModel *model = self.infoModel.labourContract;
-            if (model) {
+            if (model.title.length>0) {
                  [cell.btnTime setTitle:model.title forState:UIControlStateNormal];
             }
         }else if (indexPath.section ==3 &&indexPath.row ==2){
             cell.lblTitle.text = @"社保";
             ItemTypeModel *model = self.infoModel.socialSecurity;
-            if (model) {
+            if (model.title.length>0) {
                 [cell.btnTime setTitle:model.title forState:UIControlStateNormal];
             }
         }else if (indexPath.section ==3 &&indexPath.row ==3){
             cell.lblTitle.text = @"收入发放形式";
             ItemTypeModel *model = self.infoModel.getMoney;
-            if (model) {
+            if (model.title.length>0) {
                  [cell.btnTime setTitle:model.title forState:UIControlStateNormal];
             }
         }
@@ -485,6 +501,10 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)rightAction{
+    [CommUtil saveData:self.infoModel andSaveFileName:[NSString stringWithFormat:@"%@%@",self.taskModel.taskNo,self.taskModel.taskType]];
+    if (self.saveInfoBlock) {
+        self.saveInfoBlock(self.infoModel);
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)textViewDidChange:(UITextView *)textView{

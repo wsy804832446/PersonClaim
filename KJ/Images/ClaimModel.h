@@ -37,6 +37,8 @@
 @property (nonatomic,copy)NSString *lockFlag;
 
 @property (nonatomic,strong)NSMutableArray *taskList;
+//分类时用到
+@property (nonatomic,strong)NSMutableArray *taskArr;
 @end
 
 

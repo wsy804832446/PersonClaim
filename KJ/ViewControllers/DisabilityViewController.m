@@ -48,8 +48,9 @@
     [self getLocalData];
 }
 -(void)getLocalData{
-    self.infoModel =[CommUtil readDataWithFileName:self.taskModel.taskNo];
-    if (self.infoModel) {
+    self.infoModel =[CommUtil readDataWithFileName:[NSString stringWithFormat:@"%@%@",self.taskModel.taskNo,self.taskModel.taskType]];
+    if (self.infoModel.levelArray.count>0) {
+        [self.levelArray addObjectsFromArray:self.infoModel.levelArray];
     }
 }
 - (void)viewDidLoad {
@@ -126,10 +127,18 @@
         DealNameTableViewCell *cell = [[[NSBundle mainBundle]loadNibNamed:@"DealNameTableViewCell" owner:nil options:nil]firstObject];
         if (indexPath.row == 0) {
             cell.lblTitle.text = @"伤残赔偿系数";
+            if (self.infoModel.ratio.length>0) {
+                cell.txtName.text =self.infoModel.ratio;
+            }
+            cell.txtName.placeholder = @"%";
+            cell.txtName.keyboardType = UIKeyboardTypeDecimalPad;
             cell.txtName.tag = 3000;
         }else{
             cell.lblTitle.text = @"鉴定人";
             cell.txtName.tag = 3001;
+            if (self.infoModel.identifier.length>0) {
+                cell.txtName.text =self.infoModel.identifier;
+            }
         }
         [cell.txtName addTarget:self action:@selector(txtChange:) forControlEvents:UIControlEventEditingChanged];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -166,9 +175,15 @@
         if (indexPath.row == 1) {
             cell.lblTitle.text = @"伤残描述";
             cell.txtDetail.tag =1000;
+            if (self.infoModel.disabilityDescribe.length>0) {
+                cell.txtDetail.text =self.infoModel.disabilityDescribe;
+            }
         }else{
             cell.lblTitle.text = @"备注信息";
             cell.txtDetail.tag =1001;
+            if (self.infoModel.remark.length>0) {
+                cell.txtDetail.text =self.infoModel.remark;
+            }
         }
         [cell.btnMap removeFromSuperview];
         return cell;
@@ -178,9 +193,17 @@
             cell.lblLine.backgroundColor =[UIColor colorWithHexString:Colorwhite];
             cell.lblTitle.text = @"鉴定机构";
             cell.btnTime.tag = 4000;
+            HospitalModel *model = self.infoModel.organization;
+            if (model.hospitalName.length>0) {
+                [cell.btnTime setTitle:model.hospitalName forState:UIControlStateNormal];
+            }
         }else{
             cell.lblTitle.text = @"完成情况";
             cell.btnTime.tag = 4001;
+            ItemTypeModel *model = self.infoModel.finishFlag;
+            if (model.title.length>0) {
+                [cell.btnTime setTitle:model.title forState:UIControlStateNormal];
+            }
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell.btnTime addTarget:self action:@selector(selectState:) forControlEvents:UIControlEventTouchUpInside];
@@ -207,6 +230,9 @@
         }
         cell.lblTitle.text = @"鉴定日期";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if (self.infoModel.deathDate.length>0) {
+            [cell.btnTime setTitle:self.infoModel.deathDate forState:UIControlStateNormal];
+        }
         [cell.btnTime addTarget:self action:@selector(selectTime) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
@@ -322,6 +348,10 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)rightAction{
+    [CommUtil saveData:self.infoModel andSaveFileName:[NSString stringWithFormat:@"%@%@",self.taskModel.taskNo,self.taskModel.taskType]];
+    if (self.saveInfoBlock) {
+        self.saveInfoBlock(self.infoModel);
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)textViewDidChange:(UITextView *)textView{

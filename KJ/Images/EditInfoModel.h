@@ -113,6 +113,7 @@
   //结束居住时间
 @property(nonatomic,copy)NSString *liveEndDate;
   //连续居住年限
+@property(nonatomic,copy)NSString *liveStay;
   //居住地址
 @property(nonatomic,copy)NSString *houseAddress;
 

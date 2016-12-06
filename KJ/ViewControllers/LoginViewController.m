@@ -53,6 +53,7 @@
     [super viewDidLoad];
     [self createUI];
     [self.navigationController setNavigationBarHidden:YES];
+    
     //倒计时60s
     self.countNum = 60;
     // Do any additional setup after loading the view.
@@ -166,6 +167,7 @@
         _passWordField = [[MyTextField alloc]initWithFrame:CGRectMake(_btnAccount.left, _accountField.bottom+14, _btnAccount.width*2, 44)];
         _passWordField.placeholder= @"请输入密码";
         _passWordField.delegate = self;
+        [_passWordField setSecureTextEntry:YES];
         _passWordField.layer.masksToBounds = YES;
         _passWordField.layer.cornerRadius = 5;
         _passWordField.layer.borderWidth = 1;
@@ -295,30 +297,30 @@
     }
 }
 -(void)login:(UIButton *)btn{
-    TabBarViewController *tabVc = [[TabBarViewController alloc]init];
-    [self presentViewController:tabVc animated:YES completion:nil];
-//    if (self.btnAccount.selected) {
-//        WeakSelf(LoginViewController);
-//        [weakSelf showHudWaitingView:WaitPrompt];
-//        [[NetWorkManager shareNetWork]LoginWithAccount:self.accountField.text andPassword:self.passWordField.text andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
-//            [weakSelf removeMBProgressHudInManaual];
-//            if ([response.responseCode isEqual:@"1"] ) {
-//                [CommUtil saveData:self.accountField.text andSaveFileName:@"account"];
-//                PersonInfoModel *model = [response thParseDataFromDic:response.dataDic andModel:[PersonInfoModel class]];
-//                [CommUtil saveData:model andSaveFileName:[NSString stringWithFormat:@"PersonInfoModel%@",[CommUtil readDataWithFileName:@"account"]]];
-//                TabBarViewController *tabVc = [[TabBarViewController alloc]init];
-//                [weakSelf presentViewController:tabVc animated:YES completion:nil];
-//               
-//            }else{
-//                [self showHudAuto:response.message];
-//            }
-//        } andFailure:^(NSURLSessionDataTask *urlSessionDataTask, NSError *error) {
-//            [weakSelf removeMBProgressHudInManaual];
-//            [self showHudAuto:InternetFailerPrompt];
-//        }];
-//    }else if(self.btnPhoneMessage.selected){
-//        
-//    }
+//    TabBarViewController *tabVc = [[TabBarViewController alloc]init];
+//    [self presentViewController:tabVc animated:YES completion:nil];
+    if (self.btnAccount.selected) {
+        WeakSelf(LoginViewController);
+        [weakSelf showHudWaitingView:WaitPrompt];
+        [[NetWorkManager shareNetWork]LoginWithAccount:self.accountField.text andPassword:self.passWordField.text andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
+            [weakSelf removeMBProgressHudInManaual];
+            if ([response.responseCode isEqual:@"1"] ) {
+                [CommUtil saveData:@"0131002498" andSaveFileName:@"account"];
+                PersonInfoModel *model = [response thParseDataFromDic:response.dataDic andModel:[PersonInfoModel class]];
+                [CommUtil saveData:model andSaveFileName:[NSString stringWithFormat:@"PersonInfoModel%@",[CommUtil readDataWithFileName:@"account"]]];
+                TabBarViewController *tabVc = [[TabBarViewController alloc]init];
+                [weakSelf presentViewController:tabVc animated:YES completion:nil];
+               
+            }else{
+                [self showHudAuto:response.message];
+            }
+        } andFailure:^(NSURLSessionDataTask *urlSessionDataTask, NSError *error) {
+            [weakSelf removeMBProgressHudInManaual];
+            [self showHudAuto:InternetFailerPrompt];
+        }];
+    }else if(self.btnPhoneMessage.selected){
+        
+    }
 }
 -(UIView *)bottomView{
     if (!_bottomView) {

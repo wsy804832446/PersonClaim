@@ -48,7 +48,7 @@
     [self getLocalData];
 }
 -(void)getLocalData{
-
+    self.infoModel =[CommUtil readDataWithFileName:[NSString stringWithFormat:@"%@%@",self.taskModel.taskNo,self.taskModel.taskType]];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -88,8 +88,15 @@
         }
         if ((indexPath.section == 0&&indexPath.row ==1)) {
             cell.lblTitle.text = @"参与度";
+            if (self.infoModel.lnvolvement.length>0) {
+                cell.txtName.text =self.infoModel.lnvolvement;
+            }
             cell.txtName.tag = 5000;
+            cell.txtName.keyboardType = UIKeyboardTypeDecimalPad;
         }else{
+            if (self.infoModel.deathAddress.length>0) {
+                cell.txtName.text =self.infoModel.deathAddress;
+            }
             cell.lblTitle.text = @"死亡地点";
             cell.txtName.tag = 5001;
         }
@@ -101,6 +108,9 @@
         AccidentTimeTableViewCell *cell = [[[NSBundle mainBundle]loadNibNamed:@"AccidentTimeTableViewCell" owner:nil options:nil]firstObject];
         cell.lblLine.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
         cell.lblTitle.text = @"死亡日期";
+        if (self.infoModel.deathDate.length>0) {
+            [cell.btnTime setTitle:self.infoModel.deathDate forState:UIControlStateNormal];
+        }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell.btnTime addTarget:self action:@selector(selectTime:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
@@ -140,6 +150,9 @@
         cell.txtDetail.tag = 1002;
         cell.lblPlaceHolder.hidden = YES;
         cell.lblTitle.text = @"备注信息";
+        if (self.infoModel.remark.length>0) {
+            cell.txtDetail.text =self.infoModel.remark;
+        }
         [cell.btnMap removeFromSuperview];
         return cell;
     }else if ((indexPath.section ==0 &&indexPath.row ==0)||(indexPath.section ==0 &&indexPath.row ==6)){
@@ -147,10 +160,14 @@
         if (indexPath.section ==0 &&indexPath.row ==0){
             cell.lblTitle.text = @"死亡原因";
             cell.lblLine.backgroundColor = [UIColor colorWithHexString:Colorwhite];
+            SelectList *model = self.infoModel.deathReason;
+            if (model.value.length>0) {
+                [cell.btnTime setTitle:model.value forState:UIControlStateNormal];
+            }
         }else if (indexPath.section ==0 &&indexPath.row ==6){
             cell.lblTitle.text = @"完成情况";
             ItemTypeModel *model = self.infoModel.finishFlag;
-            if (model) {
+            if (model.title.length>0) {
                 [cell.btnTime setTitle:model.title forState:UIControlStateNormal];
             }
         }
@@ -281,6 +298,10 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)rightAction{
+    [CommUtil saveData:self.infoModel andSaveFileName:[NSString stringWithFormat:@"%@%@",self.taskModel.taskNo,self.taskModel.taskType]];
+    if (self.saveInfoBlock) {
+        self.saveInfoBlock(self.infoModel);
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)textViewDidChange:(UITextView *)textView{

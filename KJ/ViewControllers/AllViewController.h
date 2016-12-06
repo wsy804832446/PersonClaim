@@ -9,5 +9,5 @@
 #import "BaseTableViewController.h"
 
 @interface AllViewController : BaseTableViewController
-
+@property (nonatomic,assign)NSInteger claimType;
 @end

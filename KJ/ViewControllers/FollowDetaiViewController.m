@@ -36,6 +36,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.infoModel =[CommUtil readDataWithFileName:[NSString stringWithFormat:@"%@%@",self.taskModel.taskNo,self.taskModel.taskType]];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.tableView.height = DeviceSize.height - self.tableView.top-54-64;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItemExtension leftButtonItem:@selector(leftAction) andTarget:self];
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -74,7 +76,7 @@
     }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 74;
+    return 102;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     FollowDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FollowDetailCell"];
@@ -84,6 +86,7 @@
             cell = [nib firstObject];
         }
     }
+    cell.lblType.text = self.taskTypeName;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [cell configCellWithModel:self.claimModel];
     [cell setCallBlock:^{
@@ -105,7 +108,7 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section ==0) {
-        return 10;
+        return 0.5;
     }else{
         if (_seg.selectedSegmentIndex == 0) {
             return DeviceSize.height-54-133;
@@ -115,9 +118,8 @@
     }
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    //高度为10的背景色分割条
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DeviceSize.width,10)];
-    view.backgroundColor = [UIColor colorWithHexString:pageBackgroundColor];
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DeviceSize.width,0.5)];
+    view.backgroundColor = [UIColor colorWithHexString:Colorwhite alpha:0.26 ];
     if (section == 1) {
         // 增加事故基本信息view
          _vc = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, DeviceSize.width,DeviceSize.height-54-133)];
@@ -166,14 +168,16 @@
         [baseInfoView addSubview:vc2];
         //无信息占位label
         if (self.infoModel) {
-            
+            if ([self.taskModel.taskType isEqual:@"01"]) {
+                [baseInfoView addSubview:[self showView]];
+            }
         }else{
         UILabel *lbl = [[UILabel alloc]initWithFrame:CGRectMake(0, vc2.bottom, baseInfoView.width,82)];
         lbl.text = @"您还没有记录任何信息...";
         lbl.textAlignment = NSTextAlignmentCenter;
         lbl.font = [UIFont systemFontOfSize:15];
         lbl.textColor = [UIColor colorWithHexString:@"#999999"];
-        [baseInfoView addSubview:lbl];
+            [baseInfoView addSubview:lbl];
         }
         //详细资料cell放入headview防止滑动冲突
         for (int i =0; i<10; i++) {
@@ -205,28 +209,26 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     if (section == 0) {
-        return 49;
+        return 39;
     }else{
         return 0;
     }
 }
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     if (section == 0) {
-        UIView *vc = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DeviceSize.width, 49)];
+        UIView *vc = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DeviceSize.width, 39)];
         vc.backgroundColor = [UIColor colorWithHexString:pageBackgroundColor];
         //加入segment
         _seg = [[UISegmentedControl alloc]initWithItems:@[@"跟踪记录",@"详细资料"]];
-        _seg.frame =CGRectMake(15,10, DeviceSize.width-30, 39);
+        _seg.frame =CGRectMake(0,0, DeviceSize.width, 39);
         _seg.selectedSegmentIndex = self.selectIndex;
-        _seg.layer.masksToBounds = NO;
-        _seg.tintColor = [UIColor colorWithHexString:Colorblue];
+        _seg.tintColor = [UIColor clearColor];
         NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:15],NSFontAttributeName,[UIColor colorWithHexString:Colorgray], NSForegroundColorAttributeName,nil];
         [_seg setTitleTextAttributes:attributes forState:UIControlStateNormal];
-        NSDictionary *attributesSlect = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:15],NSFontAttributeName,[UIColor colorWithHexString:Colorwhite], NSForegroundColorAttributeName,nil];
+        NSDictionary *attributesSlect = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:15],NSFontAttributeName,[UIColor colorWithHexString:Colorblue], NSForegroundColorAttributeName,nil];
         [_seg setTitleTextAttributes:attributesSlect forState:UIControlStateSelected];
         [_seg addTarget:self action:@selector(changeSeg:) forControlEvents:UIControlEventValueChanged];
         _seg.backgroundColor = [UIColor colorWithHexString:Colorwhite];
-        _seg.layer.borderColor = [UIColor colorWithHexString:Colorwhite].CGColor;
         [vc addSubview:_seg];
         return vc;
     }else{
@@ -239,6 +241,10 @@
         MedicalVisitViewController *vc = [[MedicalVisitViewController alloc]init];
         vc.claimModel = self.claimModel;
         vc.taskModel = self.taskModel;
+        [vc setSaveInfoBlock:^(EditInfoModel *model) {
+            self.infoModel = model;
+            [self.tableView reloadData];
+        }];
         [self.navigationController pushViewController:vc animated:YES];
     }else if ([self.taskModel.taskType isEqual:@"02"]){
         IncomeViewController *vc = [[IncomeViewController alloc]init];
@@ -329,11 +335,22 @@
     [_infoDict setObject:@"" forKey:@"是否异地"];
     return _infoDict;
 }
+//展示区
+//被扶养人
+-(UIView *)showView{
+    MedicalVisitViewController *vc = [[MedicalVisitViewController alloc]init];
+    vc.isShow = YES;
+    vc.claimModel = self.claimModel;
+    vc.taskModel = self.taskModel;
+    return vc.view;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+-(NSString *)title{
+    return @"跟踪详情";
+}
 /*
 #pragma mark - Navigation
 

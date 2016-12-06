@@ -8,7 +8,6 @@
 
 #import "BaseTableViewController.h"
 #import "ClaimModel.h"
-#import "EditInfoModel.h"
 @interface EditInfoViewController : BaseTableViewController
 @property (nonatomic,strong)ClaimModel *claimModel;
 @property (nonatomic,strong)TaskModel *taskModel;

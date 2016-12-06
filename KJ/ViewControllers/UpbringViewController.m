@@ -44,8 +44,9 @@
     [self getLocalData];
 }
 -(void)getLocalData{
-    self.infoModel =[CommUtil readDataWithFileName:self.taskModel.taskNo];
-    if (self.infoModel) {
+    self.infoModel =[CommUtil readDataWithFileName:[NSString stringWithFormat:@"%@%@",self.taskModel.taskNo,self.taskModel.taskType]];
+    if (self.infoModel.upBringArray.count>0) {
+        [self.upBringArray addObjectsFromArray:self.infoModel.upBringArray];
     }
 }
 - (void)viewDidLoad {
@@ -124,9 +125,17 @@
         if (indexPath.row == 0) {
             cell.lblTitle.text = @"伤残赔偿系数";
             cell.txtName.tag = 3000;
+            cell.txtName.keyboardType = UIKeyboardTypeDecimalPad;
+            if (self.infoModel.ratio.length>0) {
+                cell.txtName.text = self.infoModel.ratio;
+            }
         }else{
             cell.lblTitle.text = @"抚养费金额";
             cell.txtName.tag = 3001;
+            cell.txtName.keyboardType = UIKeyboardTypeDecimalPad;
+            if (self.infoModel.maintenance.length>0) {
+                cell.txtName.text = self.infoModel.maintenance;
+            }
         }
         [cell.txtName addTarget:self action:@selector(txtChange:) forControlEvents:UIControlEventEditingChanged];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -168,6 +177,9 @@
         cell.lblPlaceHolder.hidden = YES;
         cell.lblTitle.text = @"备注信息";
         [cell.btnMap removeFromSuperview];
+        if (self.infoModel.remark.length>0) {
+            cell.txtDetail.text = self.infoModel.remark;
+        }
         return cell;
     }else if (indexPath.section ==1 &&indexPath.row ==4){
         AccidentTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TimeCell"];
@@ -180,6 +192,10 @@
         cell.lblTitle.text = @"完成情况";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell.btnTime addTarget:self action:@selector(selectState:) forControlEvents:UIControlEventTouchUpInside];
+        ItemTypeModel *model = self.infoModel.finishFlag;
+        if (model.title.length>0) {
+            [cell.btnTime setTitle:model.title forState:UIControlStateNormal];
+        }
         return cell;
     }else{
         UpBringModel *model = self.upBringArray[indexPath.row];
@@ -225,6 +241,10 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)rightAction{
+    [CommUtil saveData:self.infoModel andSaveFileName:[NSString stringWithFormat:@"%@%@",self.taskModel.taskNo,self.taskModel.taskType]];
+    if (self.saveInfoBlock) {
+        self.saveInfoBlock(self.infoModel);
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)textViewDidChange:(UITextView *)textView{

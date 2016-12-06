@@ -46,8 +46,9 @@
     [self getLocalData];
 }
 -(void)getLocalData{
-    self.infoModel =[CommUtil readDataWithFileName:self.taskModel.taskNo];
-    if (self.infoModel) {
+    self.infoModel =[CommUtil readDataWithFileName:[NSString stringWithFormat:@"%@%@",self.taskModel.taskNo,self.taskModel.taskType]];
+    if (self.infoModel.contactPersonArray.count>0) {
+        [self.contactPeopleArray addObjectsFromArray:self.infoModel.contactPersonArray];
     }
 }
 - (void)viewDidLoad {
@@ -130,6 +131,9 @@
             }
         }
         [cell.lblLine removeFromSuperview];
+        if (self.infoModel.dealName.length>0) {
+            cell.txtName.text =self.infoModel.dealName;
+        }
         [cell.txtName addTarget:self action:@selector(txtChange:) forControlEvents:UIControlEventEditingChanged];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.lblTitle.textColor = [UIColor colorWithHexString:@"#666666"];
@@ -144,6 +148,9 @@
         }
         cell.lblTitle.text = @"处理时间";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if (self.infoModel.dealDate.length>0) {
+            [cell.btnTime setTitle:self.infoModel.dealDate forState:UIControlStateNormal];
+        }
         [cell.btnTime addTarget:self action:@selector(selectTime:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }else if (indexPath.section ==1){
@@ -172,6 +179,9 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.txtDetail.delegate =self;
         cell.txtDetail.tag = 1001;
+        if (self.infoModel.dealResult.length>0) {
+            cell.txtDetail.text =self.infoModel.dealResult;
+        }
         if (cell.txtDetail.text.length ==0) {
             cell.lblPlaceHolder.hidden = NO;
         }else{
@@ -216,6 +226,9 @@
         cell.txtDetail.tag = 1002;
         cell.lblPlaceHolder.hidden = YES;
         cell.lblTitle.text = @"备注信息";
+        if (self.infoModel.remark.length>0) {
+            cell.txtDetail.text =self.infoModel.remark;
+        }
         [cell.btnMap removeFromSuperview];
         return cell;
     }else if (indexPath.section ==2 &&indexPath.row ==3){
@@ -228,6 +241,10 @@
         }
         cell.lblTitle.text = @"完成情况";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        ItemTypeModel *model = self.infoModel.finishFlag;
+        if (model.title.length>0) {
+            [cell.btnTime setTitle:model.title forState:UIControlStateNormal];
+        }
         [cell.btnTime addTarget:self action:@selector(selectState:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }else{
@@ -334,6 +351,10 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)rightAction{
+    [CommUtil saveData:self.infoModel andSaveFileName:[NSString stringWithFormat:@"%@%@",self.taskModel.taskNo,self.taskModel.taskType]];
+    if (self.saveInfoBlock) {
+        self.saveInfoBlock(self.infoModel);
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)textViewDidChange:(UITextView *)textView{

@@ -52,13 +52,61 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KJ/ViewControllers/DelayViewController.m"
-            timestampString = "502011741.304478"
+            timestampString = "502614421.90077"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "704"
-            endingLineNumber = "704"
+            startingLineNumber = "733"
+            endingLineNumber = "733"
             landmarkName = "-uploadImage"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KJ/ViewControllers/EditDealInfoViewController.m"
+            timestampString = "502611430.819937"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "524"
+            endingLineNumber = "524"
+            landmarkName = "-uploadImage"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[EditDealInfoViewController uploadImage]"
+                  moduleName = "KJ"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wsy/Desktop/%E4%BA%BA%E4%BC%A4/PersonClaim/KJ/ViewControllers/EditDealInfoViewController.m"
+                  timestampString = "502699217.099656"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "524"
+                  endingLineNumber = "524"
+                  offsetFromSymbolStart = "214">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__41-[EditDealInfoViewController uploadImage]_block_invoke"
+                  moduleName = "KJ"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wsy/Desktop/%E4%BA%BA%E4%BC%A4/PersonClaim/KJ/ViewControllers/EditDealInfoViewController.m"
+                  timestampString = "502699217.10251"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "525"
+                  endingLineNumber = "525"
+                  offsetFromSymbolStart = "75">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

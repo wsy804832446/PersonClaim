@@ -245,7 +245,7 @@ static NetWorkManager *thNetWorkManager = nil;
     
 }
 -(void)LoginWithAccount:(NSString *)account andPassword:(NSString *)password andCompletionBlockWithSuccess:(CompletionBlockWithSuccess)success andFailure:(FailureBlock)failure{
-    NSDictionary *dataDic = @{@"userName":account,@"password":password};
+    NSDictionary *dataDic = @{@"userName":@"0131002498",@"password":@"ta8888"};
     NSMutableDictionary *paramDic =[self dataDicAndRequestCodeWithDic:dataDic andRequestCode:@"001001"];
     [self requestOperation:kServerHost andParams:paramDic andHeaderFieldParams:nil andHttpRequestMethod:HttpRequestMethodPOST andCompletionBlockWithSuccess:success andFailure:failure];
 }

@@ -11,4 +11,6 @@
 @interface DeathInfoViewController : BaseTableViewController
 @property (nonatomic,strong)ClaimModel *claimModel;
 @property (nonatomic,strong)TaskModel *taskModel;
+//保存信息block
+@property (nonatomic,copy)void (^saveInfoBlock)(EditInfoModel *model);
 @end

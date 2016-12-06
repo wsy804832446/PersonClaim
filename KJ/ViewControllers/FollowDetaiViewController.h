@@ -22,4 +22,5 @@ typedef NS_ENUM(NSInteger ,FollowState){
 @property (nonatomic,assign)FollowState state;
 @property (nonatomic,strong)ClaimModel *claimModel;
 @property (nonatomic,strong)TaskModel *taskModel;
+@property (nonatomic,copy)NSString *taskTypeName;
 @end

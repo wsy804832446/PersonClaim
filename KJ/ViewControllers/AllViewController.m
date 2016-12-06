@@ -27,16 +27,54 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self getData];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItemExtension leftButtonItem:@selector(leftAction) andTarget:self];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItemExtension rightButtonItem:@selector(rightAction) andTarget:self andImageName:@"8-搜索"];
     [self.view addSubview:self.searchScrollView];
-    self.itemsArr = @[@"全部",@"代办",@"进行中",@"超时",@"完成"];
+    self.itemsArr = @[@"全部",@"未超时",@"已超时",@"已完成"];
     [self AddSegumentArray:_itemsArr];
     self.tableView.top = self.searchScrollView.bottom+10;
     self.tableView.height = DeviceSize.height-self.tableView.top;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // Do any additional setup after loading the view.
+}
+-(void)getData{
+    NSArray *arr = [CommUtil readDataWithFileName:[NSString stringWithFormat:@"cliam%@",[CommUtil readDataWithFileName:@"account"]]];
+    for (ClaimModel *claimModel in arr) {
+        for (NSDictionary * taskDic in claimModel.taskList){
+            TaskModel *taskModel = [MTLJSONAdapter modelOfClass:[TaskModel class] fromJSONDictionary:taskDic error:NULL];
+            if (self.claimType ==0 && [taskModel.taskType isEqual:@"09"]) {
+                [self.dataArray addObject:claimModel];
+                break;
+            }else if (self.claimType ==1 && [taskModel.taskType isEqual:@"10"]) {
+                [self.dataArray addObject:claimModel];
+                break;
+            }else if (self.claimType ==2 && [taskModel.taskType isEqual:@"01"]) {
+                [self.dataArray addObject:claimModel];
+                break;
+            }else if (self.claimType ==3 && [taskModel.taskType isEqual:@"02"]) {
+                [self.dataArray addObject:claimModel];
+                break;
+            }else if (self.claimType ==4 && [taskModel.taskType isEqual:@"03"]) {
+                [self.dataArray addObject:claimModel];
+                break;
+            }else if (self.claimType ==5 && [taskModel.taskType isEqual:@"04"]) {
+                [self.dataArray addObject:claimModel];
+                break;
+            }else if (self.claimType ==6 && [taskModel.taskType isEqual:@"05"]) {
+                [self.dataArray addObject:claimModel];
+                break;
+            }else if (self.claimType ==7 && [taskModel.taskType isEqual:@"08"]) {
+                [self.dataArray addObject:claimModel];
+                break;
+            }else if (self.claimType ==8 && [taskModel.taskType isEqual:@"06"]) {
+                [self.dataArray addObject:claimModel];
+                break;
+            }
+        }
+    }
 }
 -(void)leftAction{
     [self.navigationController popViewControllerAnimated:YES];
@@ -46,7 +84,7 @@
 }
 -(void)AddSegumentArray:(NSArray *)SegumentArray
 {
-    CGFloat witdFloat=(DeviceSize.width)/5;
+    CGFloat witdFloat=(DeviceSize.width)/4;
     for (int i=0; i<SegumentArray.count; i++) {
         UIButton* button=[[UIButton alloc]initWithFrame:CGRectMake(i*witdFloat, 0, witdFloat,35)];
         [button setTitle:SegumentArray[i] forState:UIControlStateNormal];
@@ -80,7 +118,6 @@
             [_buttonDown setFrame:CGRectMake(btn.left,btn.bottom,btn.width, 3)];
         }];
         _selectIndex=segument;
-        [self.dataArray addObject:@"222"];
         [self.tableView reloadData];
     }
     if (segument ==3) {
@@ -150,10 +187,34 @@
     return _overTimeBtnArray;
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    return  self.dataArray.count;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.dataArray.count;
+    ClaimModel *model = self.dataArray[section];
+    for (NSDictionary *dic in model.taskList) {
+        TaskModel *taskModel = [MTLJSONAdapter modelOfClass:[TaskModel class] fromJSONDictionary:dic error:NULL];
+        if (self.claimType ==0 && [taskModel.taskType isEqual:@"09"]) {
+            [model.taskArr addObject:taskModel];
+        }else if (self.claimType ==1 && [taskModel.taskType isEqual:@"10"]) {
+            [model.taskArr addObject:taskModel];
+        }else if (self.claimType ==2 && [taskModel.taskType isEqual:@"01"]) {
+            [model.taskArr addObject:taskModel];
+        }else if (self.claimType ==3 && [taskModel.taskType isEqual:@"02"]) {
+            [model.taskArr addObject:taskModel];
+        }else if (self.claimType ==4 && [taskModel.taskType isEqual:@"03"]) {
+            [model.taskArr addObject:taskModel];        }
+        else if (self.claimType ==5 && [taskModel.taskType isEqual:@"04"]) {
+            [model.taskArr addObject:taskModel];
+        }else if (self.claimType ==6 && [taskModel.taskType isEqual:@"05"]) {
+            [model.taskArr addObject:taskModel];
+        }else if (self.claimType ==7 && [taskModel.taskType isEqual:@"08"]) {
+            [model.taskArr addObject:taskModel];
+        }else if (self.claimType ==8 && [taskModel.taskType isEqual:@"06"]) {
+            [model.taskArr addObject:taskModel];
+        }
+
+    }
+    return model.taskArr.count;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 60;
@@ -172,65 +233,110 @@
     if (indexPath.row == 0) {
         cell.line.backgroundColor = [UIColor colorWithHexString:Colorwhite];
     }
-    cell.lblName.text = @"宋冉";
-    cell.lblTime.text = [NSString stringWithFormat:@"%@",[NSDate date]];
+    ClaimModel *claimModel =self.dataArray[indexPath.section];
+    TaskModel *taskModel= claimModel.taskArr[indexPath.row];
+    cell.lblName.text = claimModel.insuredName;
+    cell.lblTime.text = taskModel.dispatchDate;
     cell.lblTime.textColor = [UIColor colorWithHexString:Colorgray];
-    cell.lblNum.text = [NSString stringWithFormat:@"报案号:%@",@"10086"];
+    cell.lblNum.text = [NSString stringWithFormat:@"报案号:%@",claimModel.reportNo];
     cell.lblNum.textColor = [UIColor colorWithHexString:Colorgray];
-    if (self.selectIndex == 3) {
-        cell.lblState.text = nil;
-        NSMutableAttributedString *str = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"超%ld天",(long)indexPath.row]];
-        NSDictionary *dict = @{NSForegroundColorAttributeName:[UIColor redColor],NSFontAttributeName:[UIFont systemFontOfSize:15]};
-        NSDictionary *dict2 = @{NSForegroundColorAttributeName:[UIColor colorWithHexString:Colorgray],NSFontAttributeName:[UIFont systemFontOfSize:12]};
-        [str addAttributes:dict range:NSMakeRange(1, str.length-2)];
-        [str addAttributes:dict2 range:NSMakeRange(0,1)];
-        [str addAttributes:dict2 range:NSMakeRange(str.length-1, 1)];
-        cell.lblOverTime.attributedText = str;
-    }else if(self.selectIndex == 0){
-        cell.lblOverTime.attributedText = nil;
-        cell.lblState.layer.masksToBounds = YES;
-        cell.lblState.layer.borderWidth =1;
-        cell.lblState.layer.cornerRadius =4;
-        cell.lblState.font = [UIFont systemFontOfSize:12];
-        switch (indexPath.row) {
-            case 4:
-                cell.lblState.text =@" 完成 ";
-                cell.lblState.textColor = [UIColor colorWithHexString:@"#00c632"];
-                cell.lblState.layer.borderColor = [UIColor colorWithHexString:@"#00c632"].CGColor;
-                break;
-            case 3:
-                cell.lblState.text =@" 超时 ";
-                cell.lblState.textColor = [UIColor colorWithHexString:@"#ff0000"];
-                cell.lblState.layer.borderColor = [UIColor colorWithHexString:@"#ff0000"].CGColor;
-                break;
-            case 2:
-                cell.lblState.text =@" 进行中 ";
-                cell.lblState.textColor = [UIColor colorWithHexString:@"#ffc106"];
-                cell.lblState.layer.borderColor = [UIColor colorWithHexString:@"#ffc106"].CGColor;
-                break;
-            case 1:
-                cell.lblState.text =@" 待办 ";
-                cell.lblState.textColor = [UIColor colorWithHexString:@"#3282f0"];
-                cell.lblState.layer.borderColor = [UIColor colorWithHexString:@"#3282f0"].CGColor;
-                break;
-            default:
-                cell.lblState.text =@" xxx ";
-                break;
-        }
-
-    }else{
-         cell.lblState.text= nil;
+    cell.lblState.layer.masksToBounds = YES;
+    cell.lblState.layer.borderWidth =1;
+    cell.lblState.layer.cornerRadius =4;
+    cell.lblState.font = [UIFont systemFontOfSize:12];
+    cell.lblTaskType.layer.masksToBounds = YES;
+    cell.lblTaskType.layer.cornerRadius = 10;
+    cell.lblTaskType.backgroundColor = [UIColor colorWithHexString:@"#9DC5F9"];
+    cell.lblTaskType.textColor = [UIColor colorWithHexString:Colorwhite];
+    if ([taskModel.taskType isEqualToString:@"01"]) {cell.lblTaskType.text = @"医";
+    }else if ([taskModel.taskType isEqualToString:@"02"]) {cell.lblTaskType.text = @"薪";
+    }else if ([taskModel.taskType isEqualToString:@"03"]) {cell.lblTaskType.text = @"误";
+    }else if ([taskModel.taskType isEqualToString:@"04"]) {cell.lblTaskType.text = @"籍";
+    }else if ([taskModel.taskType isEqualToString:@"05"]) {cell.lblTaskType.text = @"扶";
+    }else if ([taskModel.taskType isEqualToString:@"06"]) {cell.lblTaskType.text = @"死";
+    }else if ([taskModel.taskType isEqualToString:@"08"]) {cell.lblTaskType.text = @"伤";
+    }else if ([taskModel.taskType isEqualToString:@"09"]) {cell.lblTaskType.text = @"基";
+    }else if ([taskModel.taskType isEqualToString:@"10"]) {cell.lblTaskType.text = @"处";
     }
+//    if (self.selectIndex == 3) {
+//        cell.lblState.text = nil;
+//        NSMutableAttributedString *str = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"超%ld天",(long)indexPath.row]];
+//        NSDictionary *dict = @{NSForegroundColorAttributeName:[UIColor redColor],NSFontAttributeName:[UIFont systemFontOfSize:15]};
+//        NSDictionary *dict2 = @{NSForegroundColorAttributeName:[UIColor colorWithHexString:Colorgray],NSFontAttributeName:[UIFont systemFontOfSize:12]};
+//        [str addAttributes:dict range:NSMakeRange(1, str.length-2)];
+//        [str addAttributes:dict2 range:NSMakeRange(0,1)];
+//        [str addAttributes:dict2 range:NSMakeRange(str.length-1, 1)];
+//        cell.lblOverTime.attributedText = str;
+//    }else if(self.selectIndex == 0){
+//        cell.lblOverTime.attributedText = nil;
+//        cell.lblState.layer.masksToBounds = YES;
+//        cell.lblState.layer.borderWidth =1;
+//        cell.lblState.layer.cornerRadius =4;
+//        cell.lblState.font = [UIFont systemFontOfSize:12];
+//        switch (indexPath.row) {
+//            case 4:
+//                cell.lblState.text =@" 完成 ";
+//                cell.lblState.textColor = [UIColor colorWithHexString:@"#00c632"];
+//                cell.lblState.layer.borderColor = [UIColor colorWithHexString:@"#00c632"].CGColor;
+//                break;
+//            case 3:
+//                cell.lblState.text =@" 超时 ";
+//                cell.lblState.textColor = [UIColor colorWithHexString:@"#ff0000"];
+//                cell.lblState.layer.borderColor = [UIColor colorWithHexString:@"#ff0000"].CGColor;
+//                break;
+//            case 2:
+//                cell.lblState.text =@" 进行中 ";
+//                cell.lblState.textColor = [UIColor colorWithHexString:@"#ffc106"];
+//                cell.lblState.layer.borderColor = [UIColor colorWithHexString:@"#ffc106"].CGColor;
+//                break;
+//            case 1:
+//                cell.lblState.text =@" 待办 ";
+//                cell.lblState.textColor = [UIColor colorWithHexString:@"#3282f0"];
+//                cell.lblState.layer.borderColor = [UIColor colorWithHexString:@"#3282f0"].CGColor;
+//                break;
+//            default:
+//                cell.lblState.text =@" xxx ";
+//                break;
+//        }
+//
+//    }else{
+//         cell.lblState.text= nil;
+//    }
        return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self setHidesBottomBarWhenPushed:YES];
+    FollowPlatFormViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     FollowDetaiViewController *vc = [[FollowDetaiViewController alloc]init];
+    vc.taskTypeName = cell.lblTaskType.text;
+    ClaimModel *claimModel =self.dataArray[indexPath.section];
+    vc.claimModel = claimModel;
+    vc.taskModel = claimModel.taskArr[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
 }
 -(NSString *)title{
-    return @"跟踪平台";
+    if (self.claimType ==0) {
+        return @"伤残基本信息";
+    }else if (self.claimType ==1){
+        return @"事故现场";
+    }else if (self.claimType ==2){
+        return @"医院探视";
+    }else if (self.claimType ==3){
+        return @"收入情况";
+    }else if (self.claimType ==4){
+        return @"误工情况";
+    }else if (self.claimType ==5){
+        return @"户籍居住";
+    }else if (self.claimType ==6){
+        return @"被扶养人";
+    }else if (self.claimType ==7){
+        return @"伤残鉴定";
+    }else if(self.claimType ==8){
+        return  @"死亡信息";
+    }else{
+        return @"全部任务";
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

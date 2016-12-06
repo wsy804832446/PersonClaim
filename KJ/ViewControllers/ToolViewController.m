@@ -12,6 +12,7 @@
 #import "LayViewController.h"
 #import "CompensationViewController.h"
 #import "DetailViewController.h"
+#import "CountViewController.h"
 @interface ToolViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UICollectionView *collectionView;
 @property (nonatomic,strong)UITableView *tableVew;
@@ -86,6 +87,9 @@
         [self.navigationController pushViewController:vc animated:YES];
     }else if(indexPath.row == 1){
         CompensationViewController *vc = [[CompensationViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        CountViewController *vc = [[CountViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
     }
     self.hidesBottomBarWhenPushed = NO;

@@ -53,6 +53,10 @@
         NSString *str = [NSString stringWithFormat:@"%@,%@",model.typeCode,model.value];
         NSLog(@"%@",str);
     }
+    self.infoModel =[CommUtil readDataWithFileName:[NSString stringWithFormat:@"%@%@",self.taskModel.taskNo,self.taskModel.taskType]];
+    if (self.infoModel.contactPersonArray.count>0) {
+        [self.askPeopleArray addObjectsFromArray:self.infoModel.contactPersonArray];
+    }
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -136,13 +140,23 @@
         if ((indexPath.section == 0&&indexPath.row ==4)) {
             cell.lblTitle.text = @"子女人数";
             cell.txtName.tag = 5001;
+            if (self.infoModel.sonCount.length>0) {
+                cell.txtName.text = self.infoModel.sonCount;
+            }
         }else if ((indexPath.section == 0&&indexPath.row ==5)){
             cell.lblTitle.text = @"兄弟姐妹人数";
             cell.txtName.tag = 5002;
+            if (self.infoModel.bratherCount.length>0) {
+                cell.txtName.text = self.infoModel.bratherCount;
+            }
         }else{
             cell.lblTitle.text = @"连续居住年限";
             cell.txtName.tag = 5003;
+            if (self.infoModel.liveStay.length>0) {
+                cell.txtName.text = self.infoModel.liveStay;
+            }
         }
+        cell.txtName.keyboardType = UIKeyboardTypeNumberPad;
         [cell.txtName addTarget:self action:@selector(txtChange:) forControlEvents:UIControlEventEditingChanged];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.lblTitle.textColor = [UIColor colorWithHexString:@"#666666"];
@@ -152,9 +166,15 @@
         if (indexPath.section ==0 &&indexPath.row ==8){
             cell.lblTitle.text = @"开始居住时间";
             cell.btnTime.tag =3000;
+            if (self.infoModel.liveStartDate.length>0) {
+                [cell.btnTime setTitle:self.infoModel.liveStartDate forState:UIControlStateNormal];
+            }
         }else if (indexPath.section ==0 &&indexPath.row ==9){
             cell.lblTitle.text = @"结束居住时间";
             cell.btnTime.tag =3001;
+            if (self.infoModel.liveEndDate.length>0) {
+                [cell.btnTime setTitle:self.infoModel.liveEndDate forState:UIControlStateNormal];
+            }
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell.btnTime addTarget:self action:@selector(selectTime:) forControlEvents:UIControlEventTouchUpInside];
@@ -201,6 +221,9 @@
             }];
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }];
+        if (self.infoModel.houseAddress.length>0) {
+            cell.txtDetail.text =self.infoModel.houseAddress;
+        }
         cell.lblTitle.text = @"居住地址";
         return cell;
     }else if (indexPath.section ==2 &&indexPath.row ==0){
@@ -240,22 +263,50 @@
         cell.lblPlaceHolder.hidden = YES;
         cell.lblTitle.text = @"备注信息";
         [cell.btnMap removeFromSuperview];
+        if (self.infoModel.remark.length>0) {
+            cell.txtDetail.text =self.infoModel.remark;
+        }
         return cell;
     }else if ((indexPath.section ==0 &&indexPath.row <4)||(indexPath.section ==0 &&indexPath.row ==6)||(indexPath.section ==2 &&indexPath.row ==2)){
         AccidentTimeTableViewCell *cell = [[[NSBundle mainBundle]loadNibNamed:@"AccidentTimeTableViewCell" owner:nil options:nil]firstObject];
         if (indexPath.section ==0 &&indexPath.row ==0){
             cell.lblTitle.text = @"户籍地";
             cell.lblLine.backgroundColor = [UIColor colorWithHexString:Colorwhite];
+            CityModel *model = self.infoModel.household;
+            if (model.name.length>0) {
+                [cell.btnTime setTitle:model.name forState:UIControlStateNormal];
+            }
         }else if (indexPath.section ==0 &&indexPath.row ==1){
             cell.lblTitle.text = @"户籍类型";
+            SelectList *model = self.infoModel.householdType;
+            if (model.value.length>0) {
+                [cell.btnTime setTitle:model.value forState:UIControlStateNormal];
+            }
+
         }else if (indexPath.section ==0 &&indexPath.row ==2){
             cell.lblTitle.text = @"父亲";
+            ItemTypeModel *model = self.infoModel.fatherExt;
+            if (model.title.length>0) {
+                [cell.btnTime setTitle:model.title forState:UIControlStateNormal];
+            }
         }else if (indexPath.section ==0 &&indexPath.row ==3){
             cell.lblTitle.text = @"母亲";
+            ItemTypeModel *model = self.infoModel.matherExt;
+            if (model.title.length>0) {
+                [cell.btnTime setTitle:model.title forState:UIControlStateNormal];
+            }
         }else if (indexPath.section ==0 &&indexPath.row ==6){
             cell.lblTitle.text = @"户籍地居住";
+            ItemTypeModel *model = self.infoModel.addressBeTrue;
+            if (model.title.length>0) {
+                [cell.btnTime setTitle:model.title forState:UIControlStateNormal];
+            }
         }else if (indexPath.section ==2 &&indexPath.row ==2){
             cell.lblTitle.text = @"完成情况";
+            ItemTypeModel *model = self.infoModel.finishFlag;
+            if (model.title.length>0) {
+                [cell.btnTime setTitle:model.title forState:UIControlStateNormal];
+            }
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.btnTime.tag = 100+indexPath.section+indexPath.row;
@@ -430,6 +481,10 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)rightAction{
+    [CommUtil saveData:self.infoModel andSaveFileName:[NSString stringWithFormat:@"%@%@",self.taskModel.taskNo,self.taskModel.taskType]];
+    if (self.saveInfoBlock) {
+        self.saveInfoBlock(self.infoModel);
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)textViewDidChange:(UITextView *)textView{
@@ -663,6 +718,7 @@
     }else if (txt.tag == 5002){
         self.infoModel.bratherCount =txt.text;
     }else if (txt.tag == 5003){
+        self.infoModel.liveStay = txt.text;
     }
     txt.frame = CGRectMake(DeviceSize.width-15-txt.text.length*16, txt.frame.origin.y, txt.text.length*16, txt.frame.size.height);
 }

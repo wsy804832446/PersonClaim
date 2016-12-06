@@ -39,7 +39,8 @@
 @property (nonatomic,strong)EditInfoModel *infoModel;
 //未上传图片数组 （上传判断使用）
 @property (nonatomic,strong)NSMutableArray *unUploadImageArray;
-
+//tableview 高度
+@property(nonatomic,assign)CGFloat heght;
 @end
 
 @implementation MedicalVisitViewController
@@ -48,16 +49,31 @@
 }
 - (void)loadView
 {
+    self.heght = DeviceSize.height;
     [super loadView];
+    if (self.isShow) {
+        if (self.heght!=0) {
+            self.view = [[TPKeyboardAvoidingScrollView alloc] initWithFrame:CGRectMake(0, 40, DeviceSize.width-30, self.heght)];
+        }else{
+            self.view = [[TPKeyboardAvoidingScrollView alloc] initWithFrame:CGRectMake(0, 40, DeviceSize.width-30, 1000)];
+        }
+        self.tableView.scrollEnabled = NO;
+        self.tableView.top = 0;
+    }else{
+        self.view = [[TPKeyboardAvoidingScrollView alloc] initWithFrame:CGRectMake(0, 0, DeviceSize.width, DeviceSize.height - 64-54)];
+        [(TPKeyboardAvoidingScrollView *)self.view setContentSize:CGSizeMake(DeviceSize.width,  DeviceSize.height - 64-54)];
+        self.tableView.top = 10;
+    }
     //  根据屏幕的高度自动计算弹出键盘是否试视图控制器是否向上滚动
-    self.view = [[TPKeyboardAvoidingScrollView alloc] initWithFrame:CGRectMake(0, 0, DeviceSize.width, DeviceSize.height - 64-54)];
-    [(TPKeyboardAvoidingScrollView *)self.view setContentSize:CGSizeMake(DeviceSize.width,  DeviceSize.height - 64-54)];
-     [self getLocalData];
+    [self getLocalData];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.top = 10;
-    self.tableView.height = DeviceSize.height-self.tableView.top-64-54;
+    if (self.heght!=0) {
+        self.tableView.height = self.heght;
+    }else{
+        self.tableView.height = DeviceSize.height-self.tableView.top-64-54;
+    }
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItemExtension leftButtonItem:@selector(leftAction) andTarget:self];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItemExtension rightButtonItem:@selector(rightAction) andTarget:self andTitleName:@"保存"];
@@ -75,7 +91,7 @@
     // Do any additional setup after loading the view.
 }
 -(void)getLocalData{
-    self.infoModel =[CommUtil readDataWithFileName:self.taskModel.taskNo];
+    self.infoModel =[CommUtil readDataWithFileName:[NSString stringWithFormat:@"%@%@",self.taskModel.taskNo,self.taskModel.taskType]];
     if (self.infoModel) {
         self.hospitalArray =self.infoModel.hosArray;
         self.diagnoseArray =self.infoModel.diaArray;
@@ -102,18 +118,22 @@
     }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section < 3) {
+    if (section < 3 ) {
+        self.heght+=44;
         return 44;
     }else{
         return 0.01;
     }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    if (section ==0 &&self.hospitalArray.count>0) {
+    if (section ==0 &&self.hospitalArray.count>0 && !self.isShow) {
+        self.heght+=10;
         return 10;
-    }else if (section == 1&&self.diagnoseArray.count>0){
+    }else if (section == 1&&self.diagnoseArray.count>0&&!self.isShow){
+        self.heght+=10;
         return 10;
-    }else if (section == 2&&self.carePeopleArray.count>0){
+    }else if (section == 2&&self.carePeopleArray.count>0&&!self.isShow){
+        self.heght+=10;
         return 10;
     }
     return 0.01;
@@ -121,19 +141,21 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section <3) {
-        UIView *vc = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DeviceSize.width, 44)];
+        UIView *vc = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 44)];
         vc.backgroundColor = [UIColor colorWithHexString:Colorwhite];
         UILabel *lblContact = [[UILabel alloc]initWithFrame:CGRectMake(15, 1, 50, 41)];
         lblContact.textColor = [UIColor colorWithHexString:@"#666666"];
         lblContact.font = [UIFont systemFontOfSize:15];
-        UIView *line =[[UIView alloc]initWithFrame:CGRectMake(15, 43, DeviceSize.width-30, 1)];
+        UIView *line =[[UIView alloc]initWithFrame:CGRectMake(15, 43, self.view.width-30, 1)];
         line.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
         [vc addSubview:line];
         UIButton *btnAdd = [UIButton buttonWithType:UIButtonTypeCustom];
-        btnAdd.frame = CGRectMake(DeviceSize.width-65, 0, 50, 44);
-        [btnAdd setImage:[UIImage imageNamed:@"15-添加电话"] forState:UIControlStateNormal];
-        [btnAdd setImage:[UIImage imageNamed:@"15-1"] forState:UIControlStateHighlighted];
-        [btnAdd setImageEdgeInsets:UIEdgeInsetsMake(15.5, 26.5, 15.5, 10.5)];
+        if (!self.isShow) {
+            btnAdd.frame = CGRectMake(self.view.width-65, 0, 50, 44);
+            [btnAdd setImage:[UIImage imageNamed:@"15-添加电话"] forState:UIControlStateNormal];
+            [btnAdd setImage:[UIImage imageNamed:@"15-1"] forState:UIControlStateHighlighted];
+            [btnAdd setImageEdgeInsets:UIEdgeInsetsMake(15.5, 26.5, 15.5, 10.5)];
+        }
         if (section == 0) {
             lblContact.text = @"医院";
             [btnAdd addTarget:self action:@selector(addHospital) forControlEvents:UIControlEventTouchUpInside];
@@ -183,6 +205,7 @@
                 cell = [nib firstObject];
             }
         }
+        self.heght+=44;
         if (indexPath.row == 0) {
             [cell.line removeFromSuperview];
         }
@@ -221,8 +244,12 @@
                     cell = [nib firstObject];
                 }
             }
+            self.heght+=44;
             cell.lblTitle.text = @"已发生医疗费";
             [cell.lblLine removeFromSuperview];
+            if (self.infoModel.feePass) {
+                cell.txtName.text = [NSString stringWithFormat:@"%.2f",self.infoModel.feePass];
+            }
             [cell.txtName addTarget:self action:@selector(txtChange:) forControlEvents:UIControlEventEditingChanged];
             cell.txtName.delegate =self;
             cell.txtName.keyboardType =UIKeyboardTypeDecimalPad;
@@ -252,7 +279,8 @@
                     [self showPictureWithIndex:btn.tag-2000];
                 }
             }];
-                return cell;
+            self.heght+=cell.height;
+            return cell;
         }else if (indexPath.row ==2){
             AccidentAddressTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AccidentAddressCell"];
             if (!cell) {
@@ -264,9 +292,11 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.txtDetail.delegate =self;
             cell.txtDetail.tag = 1002;
+            cell.txtDetail.text = self.infoModel.remark;
             cell.lblPlaceHolder.hidden = YES;
             cell.lblTitle.text = @"备注信息";
             [cell.btnMap removeFromSuperview];
+            self.heght+=cell.height;
             return cell;
         }else{
             AccidentTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TimeCell"];
@@ -276,9 +306,12 @@
                     cell = [nib firstObject];
                 }
             }
+            self.heght+=cell.height;
             cell.lblTitle.text = @"完成情况";
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             [cell.btnTime addTarget:self action:@selector(selectState:) forControlEvents:UIControlEventTouchUpInside];
+            ItemTypeModel *model = self.infoModel.finishFlag;
+            [cell.btnTime setTitle:model.title forState:UIControlStateNormal];
             return cell;
         }
     }
@@ -354,7 +387,10 @@
     self.infoModel.hosArray = self.hospitalArray;
     self.infoModel.diaArray = self.diagnoseArray;
     self.infoModel.carePeopleArray = self.carePeopleArray;
-    [CommUtil saveData:self.infoModel andSaveFileName:self.taskModel.taskNo];
+    [CommUtil saveData:self.infoModel andSaveFileName:[NSString stringWithFormat:@"%@%@",self.taskModel.taskNo,self.taskModel.taskType]];
+    if (self.saveInfoBlock) {
+        self.saveInfoBlock(self.infoModel);
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)textViewDidChange:(UITextView *)textView{

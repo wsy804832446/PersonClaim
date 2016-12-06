@@ -18,22 +18,20 @@
 @property (nonatomic,strong)NSDateComponents *theComponents;
 //当前几号
 @property (nonatomic,assign)NSInteger dateNum;
+@property (nonatomic,strong)UIImageView *imgView;
 @end
 
 @implementation FollowPlatFormViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
     [self getTask];
+    [self.view addSubview:self.imgView];
+    [self.view sendSubviewToBack:self.imgView];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItemExtension leftButtonItem:@selector(leftAction) andTarget:self];
-    UIButton *barbtn = self.navigationItem.leftBarButtonItem.customView;
-    [barbtn setBackgroundImage:[UIImage imageNamed:@"e"] forState:UIControlStateNormal];
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItemExtension rightButtonItem:@selector(rightAction:) andTarget:self andTitleName:@"全部"];
-    self.navigationItem.title = [self nowDate:[NSDate date]];
     [self addBtnTime];
-    self.tableView.top =65;
+    self.tableView.top =39+10;
     self.tableView.height = DeviceSize.height-self.tableView.top-49-64;
     self.tableView.separatorStyle =UITableViewCellSeparatorStyleNone;
     self.isOpenHeaderRefresh = YES;
@@ -75,10 +73,7 @@
 -(void)leftAction{
 }
 -(void)rightAction:(UIButton *)btn{
-    [self setHidesBottomBarWhenPushed:YES];
-    AllViewController *vc = [[AllViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
-    [self setHidesBottomBarWhenPushed:NO];
+    
 }
 -(void)addBtnTime{
     //获取今天日期
@@ -88,12 +83,12 @@
         self.theComponents = [self.calendar components:calendarUnit fromDate:[NSDate dateWithTimeIntervalSinceNow:(i-3)*24*3600]];
         self.dateNum = self.theComponents.day;
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame = CGRectMake(DeviceSize.width/7*i,0, DeviceSize.width/7, 55);
+        btn.frame = CGRectMake(DeviceSize.width/7*i,0, DeviceSize.width/7, 39);
         btn.tag = 1000+i;
-        btn.backgroundColor = [UIColor colorWithHexString:Colorwhite];
+        btn.backgroundColor = [UIColor clearColor];
 
         //日期label
-        UILabel *lbldate = [[UILabel alloc]initWithFrame:CGRectMake((btn.width-29)/2,13, 29, 29)];
+        UILabel *lbldate = [[UILabel alloc]initWithFrame:CGRectMake((btn.width-29)/2,0, 29, 29)];
         lbldate.textColor = [UIColor colorWithHexString:Colorgray];
         lbldate.font = [UIFont systemFontOfSize:17];
         lbldate.textAlignment = NSTextAlignmentCenter;
@@ -104,12 +99,10 @@
         lbldate.layer.masksToBounds = YES;
         lbldate.layer.cornerRadius = 29/2;
         lbldate.layer.borderWidth = 1;
+        lbldate.layer.borderColor = [UIColor clearColor].CGColor;
         lbldate.tag = 2000+i;
         if (i == 3) {
-            lbldate.layer.borderColor = [UIColor colorWithHexString:@"#ffc106"].CGColor;
             lbldate.textColor = [UIColor colorWithHexString:@"#ffc106"];
-        }else{
-            lbldate.layer.borderColor = [UIColor colorWithHexString:Colorwhite].CGColor;
         }
         [btn addTarget:self action:@selector(timeChange:) forControlEvents:UIControlEventTouchUpInside];
         [btn addSubview:lbldate];
@@ -117,22 +110,23 @@
         //添加日期label进数组
         [self.btnArr addObject:lbldate];
     }
+    UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, 39, DeviceSize.width, 10)];
+    line.backgroundColor = [UIColor colorWithHexString:pageBackgroundColor];
+    [self.view addSubview:line];
 }
 -(void)timeChange:(UIButton *)btn{
     for (UILabel *label in self.btnArr) {
         if (label.tag == btn.tag+1000) {
             label.backgroundColor = [UIColor colorWithHexString:@"#ffc106"];
-            label.layer.borderColor = [UIColor colorWithHexString:@"#ffc106"].CGColor;
             label.textColor = [UIColor colorWithHexString:Colorwhite];
         }else{
             if (label.tag-2000 == 3) {
-                label.layer.borderColor = [UIColor colorWithHexString:@"#ffc106"].CGColor;
                 label.textColor = [UIColor colorWithHexString:@"#ffc106"];
+                label.layer.borderColor = [UIColor colorWithHexString:@"#ffc106"].CGColor;
             }else{
-                label.layer.borderColor = [UIColor colorWithHexString:Colorwhite].CGColor;
                 label.textColor = [UIColor colorWithHexString:Colorgray];
             }
-            label.backgroundColor = [UIColor colorWithHexString:Colorwhite];
+            label.backgroundColor = [UIColor clearColor];
         }
     }
     NSDateComponents *components = [[NSDateComponents alloc]init];
@@ -234,8 +228,8 @@
     }else if ([taskModel.taskType isEqualToString:@"09"]) {cell.lblTaskType.text = @"基";
     }else if ([taskModel.taskType isEqualToString:@"10"]) {cell.lblTaskType.text = @"处";
     }
-    switch (indexPath.row%4) {
-        case 0:
+    switch (indexPath.section) {
+        case 3:
             cell.lblState.text =@" 完成 ";
             cell.lblState.textColor = [UIColor colorWithHexString:@"#00c632"];
             cell.lblState.layer.borderColor = [UIColor colorWithHexString:@"#00c632"].CGColor;
@@ -250,7 +244,7 @@
             cell.lblState.textColor = [UIColor colorWithHexString:@"#ffc106"];
             cell.lblState.layer.borderColor = [UIColor colorWithHexString:@"#ffc106"].CGColor;
             break;
-        case 3:
+        case 0:
             cell.lblState.text =@" 待办 ";
             cell.lblState.textColor = [UIColor colorWithHexString:@"#3282f0"];
             cell.lblState.layer.borderColor = [UIColor colorWithHexString:@"#3282f0"].CGColor;
@@ -265,12 +259,14 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self setHidesBottomBarWhenPushed:YES];
+    [self.parentViewController setHidesBottomBarWhenPushed:YES];
+    FollowPlatFormViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     FollowDetaiViewController *vc = [[FollowDetaiViewController alloc]init];
+    vc.taskTypeName = cell.lblTaskType.text;
     vc.claimModel = self.dataArray[indexPath.section];
     vc.taskModel = [MTLJSONAdapter modelOfClass:[TaskModel class] fromJSONDictionary:vc.claimModel.taskList[indexPath.row] error:NULL];
-    [self.navigationController pushViewController:vc animated:YES];
-    [self setHidesBottomBarWhenPushed:NO];
+    [self.parentViewController.navigationController pushViewController:vc animated:YES];
+    [self.parentViewController setHidesBottomBarWhenPushed:NO];
 }
 -(NSCalendar *)calendar{
     if (!_calendar) {
@@ -278,6 +274,13 @@
         [_calendar setTimeZone:[[NSTimeZone alloc] initWithName:@"Asia/Shanghai"]];
     }
     return _calendar;
+}
+-(UIImageView *)imgView{
+    if (!_imgView) {
+        _imgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, -64, DeviceSize.width, 306*DeviceSize.width/375)];
+        [_imgView setImage:[UIImage imageNamed:@"home img"]];
+    }
+    return _imgView;
 }
 -(void)headerRequestWithData{
     [self getTask];
