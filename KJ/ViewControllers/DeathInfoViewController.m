@@ -181,7 +181,6 @@
 }
 -(void)selectState:(UIButton *)btn{
     [self.selectDataArray removeAllObjects];
-    self.tableView.userInteractionEnabled = NO;
     if(btn.tag == 100) {
         NSArray *seletListArray = [CommUtil readDataWithFileName:localSelectArry];
         if (seletListArray.count >0) {
@@ -191,10 +190,18 @@
                 }
             }
         }
-        [self.view addSubview:self.selectPicker];
-        [UIView animateWithDuration:0.5 animations:^{
-            _selectPicker.frame = CGRectMake(0, self.view.bottom - 176-64, DeviceSize.width, 176);
+        SelectTradeViewController *vc = [[SelectTradeViewController alloc]init];
+        vc.itemName = @"死亡原因";
+        [vc.dataArray addObjectsFromArray:self.selectDataArray];
+        [vc setSelectIdentityBlock:^(SelectList *model) {
+            self.infoModel.deathReason = model;
+            [btn setTitle:model.value forState:UIControlStateNormal];
         }];
+        [self.navigationController pushViewController:vc animated:YES];
+//        [self.view addSubview:self.selectPicker];
+//        [UIView animateWithDuration:0.5 animations:^{
+//            _selectPicker.frame = CGRectMake(0, self.view.bottom - 176-64, DeviceSize.width, 176);
+//        }];
     }else if (btn.tag == 106){
         SelectItemViewController *vc = [[SelectItemViewController alloc]init];
         vc.itemName = @"完成情况";

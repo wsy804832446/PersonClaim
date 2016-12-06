@@ -23,7 +23,7 @@
     [self getTask];
     [self.view addSubview:self.imgView];
     [self.view sendSubviewToBack:self.imgView];
-    [self drawView];
+//    [self drawView];
     [self.view addSubview:self.collectionView];
     // Do any additional setup after loading the view.
 }
@@ -130,7 +130,7 @@
 -(UIImageView *)imgView{
     if (!_imgView) {
         _imgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, -64, DeviceSize.width, 306*DeviceSize.width/375)];
-        [_imgView setImage:[UIImage imageNamed:@"home img"]];
+        [_imgView setImage:[UIImage imageNamed:@"0-2跟踪员-5.fw_r2_c2"]];
     }
     return _imgView;
 }

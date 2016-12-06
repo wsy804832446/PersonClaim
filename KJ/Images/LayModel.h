@@ -8,6 +8,19 @@
 
 #import "MTLModel.h"
 
-@interface LayModel : MTLModel
+@interface LayModel : MTLModel<MTLJSONSerializing>
 
+@property (nonatomic,copy)NSString *lawId;
+
+@property (nonatomic,copy)NSString *lawShortName;
+
+@property (nonatomic,copy)NSString *lawOrder;
+
+@property (nonatomic,copy)NSString *lawFullName;
+
+@property (nonatomic,copy)NSString *lawFullContent;
+
+@property (nonatomic,copy)NSString *createUserId;
+
+@property (nonatomic,copy)NSString *createDate;
 @end

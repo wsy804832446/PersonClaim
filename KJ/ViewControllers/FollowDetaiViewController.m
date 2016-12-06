@@ -130,22 +130,28 @@
         _vc.backgroundColor = [UIColor colorWithHexString:pageBackgroundColor];
         _vc.delegate = self;
         _vc.tag = 10000;
-        UIView *baseInfoView = [[UIView alloc]initWithFrame:CGRectMake(15, 10, DeviceSize.width-30, 122)];
+        UIView *baseInfoView = [[UIView alloc]initWithFrame:CGRectMake(0, 10, DeviceSize.width, 122)];
         baseInfoView.backgroundColor = [UIColor colorWithHexString:Colorwhite];
         [_vc addSubview:baseInfoView];
         //蓝色竖条
         UIImageView *imgview = [[UIImageView alloc]initWithFrame:CGRectMake(8, 25.5/2,3, 14.5)];
         imgview.backgroundColor = [UIColor colorWithHexString:Colorblue];
         [baseInfoView addSubview:imgview];
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(imgview.right+4.5,imgview.top, 0, imgview.height)];
+        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(imgview.right+4.5,imgview.top, 100, imgview.height)];
         label.textAlignment = NSTextAlignmentLeft;
         label.font = [UIFont systemFontOfSize:15];
         if ([self.taskModel.taskType isEqual:@"01"]){
             label.text = @"医疗探视";
+        }else if ([self.taskModel.taskType isEqual:@"02"]){
+            label.text = @"收入情况";
         }else if ([self.taskModel.taskType isEqual:@"03"]){
             label.text = @"误工情况";
+        }else if ([self.taskModel.taskType isEqual:@"04"]){
+            label.text = @"户籍情况";
         }else if ([self.taskModel.taskType isEqual:@"05"]){
             label.text = @"被扶养人信息";
+        }else if ([self.taskModel.taskType isEqual:@"06"]){
+            label.text = @"死亡信息";
         }else if ([self.taskModel.taskType isEqual:@"07"]){
             label.text = @"材料调取";
         }else if ([self.taskModel.taskType isEqual:@"09"]) {
@@ -181,7 +187,7 @@
         }
         //详细资料cell放入headview防止滑动冲突
         for (int i =0; i<10; i++) {
-            UIView *cell = [[UIView alloc]initWithFrame:CGRectMake(DeviceSize.width+15, 10+i*45, DeviceSize.width-30, 45)];
+            UIView *cell = [[UIView alloc]initWithFrame:CGRectMake(DeviceSize.width, 10+i*45, DeviceSize.width, 45)];
             cell.backgroundColor = [UIColor colorWithHexString:Colorwhite];
             UILabel *lblLeft = [[UILabel alloc]initWithFrame:CGRectMake(8, 0, 0, 44)];
             lblLeft.font = [UIFont systemFontOfSize:15];

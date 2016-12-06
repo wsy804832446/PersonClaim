@@ -9,7 +9,5 @@
 #import "LayModel.h"
 
 @implementation LayModel
-+(NSDictionary *)JSONKeyPathsByPropertyKey{
-    return @{};
-}
+
 @end

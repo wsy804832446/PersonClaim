@@ -95,7 +95,7 @@
         }
     }
     if (indexPath.section == 0) {
-        cell.cityLabel.text = self.city;
+        cell.cityLabel.text = self.city.name;
         cell.imgView.image = [UIImage imageNamed:@"切图-全_r21_c17"];
     }else{
         if (indexPath.section<_sectionIndexArr.count) {
@@ -113,9 +113,15 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    SelectCityTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    if (self.SelectCityBlock) {
-        self.SelectCityBlock(cell.cityLabel.text);
+    if (indexPath.section<_sectionIndexArr.count) {
+        NSString *key = _sectionIndexArr[indexPath.section];
+        NSArray *cityArray = [_sectionIndexDic objectForKey:key];
+        if (indexPath.row<cityArray.count) {
+            CityModel *model = cityArray[indexPath.row];
+            if (self.SelectCityBlock) {
+                self.SelectCityBlock(model);
+            }
+        }
     }
     [self.navigationController popViewControllerAnimated:YES];
 }

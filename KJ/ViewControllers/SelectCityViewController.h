@@ -9,8 +9,8 @@
 #import "BaseTableViewController.h"
 #import "CityModel.h"
 @interface SelectCityViewController : BaseTableViewController
-@property (nonatomic,copy)void (^SelectCityBlock)(NSString *city);
+@property (nonatomic,copy)void (^SelectCityBlock)(CityModel *city);
 //已选城市
-@property (nonatomic,copy)NSString *city;
+@property (nonatomic,copy)CityModel *city;
 
 @end

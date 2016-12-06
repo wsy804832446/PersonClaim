@@ -2,7 +2,7 @@
 //  LayViewController.m
 //  KJ
 //
-//  Created by 王晟宇 on 16/9/30.
+//  Created by 王晟宇 on 2016/12/7.
 //  Copyright © 2016年 iOSDeveloper. All rights reserved.
 //
 
@@ -10,9 +10,9 @@
 #import "SelectCityViewController.h"
 #import "ToolTableViewCell.h"
 #import "DetailViewController.h"
+#import "LayModel.h"
 @interface LayViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UIBarButtonItem *barButtonItem;
-@property (nonatomic,strong)UITableView *tableView;
 @property (nonatomic,strong)UIScrollView *searchScrollView;
 //标题名称数组
 @property (nonatomic,strong)NSArray *itemsArr;
@@ -22,10 +22,6 @@
 @property (nonatomic,strong)UIView *buttonDown;
 //标题按钮数组
 @property (nonatomic,strong)NSMutableArray *ButtonArray;
-//数据数组
-@property (nonatomic,strong)NSMutableArray *dataArray;
-//展示区
-@property (nonatomic,strong)UIScrollView *scrollView;
 @end
 
 @implementation LayViewController
@@ -39,12 +35,42 @@
     self.itemsArr =  @[@"临床鉴定",@"精神损害",@"道路交通",@"民事诉讼",@"xxxx",@"xxxx",@"临床鉴定",@"精神损害"];
     self.selectIndex = 0;
     [self.view addSubview:self.searchScrollView];
-    [self.view addSubview:self.scrollView];
-    [self addTableView];
     [self AddSegumentArray:_itemsArr];
+    self.tableView.top = self.searchScrollView.bottom+10;
+    self.tableView.height = DeviceSize.height-64-self.tableView.top;
+    self.isOpenFooterRefresh = YES;
+    self.isOpenHeaderRefresh = YES;
+    [self getData];
     // Do any additional setup after loading the view.
 }
-
+-(void)getData{
+    WeakSelf(LayViewController);
+    [weakSelf showHudWaitingView:WaitPrompt];
+    [[NetWorkManager shareNetWork]getLayWithPageNo:self.pageNO andPageSize:self.pageSize andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
+        [weakSelf removeMBProgressHudInManaual];
+        if ([response.responseCode isEqual:@"1"]) {
+            if (weakSelf.pageNO == 1) {
+                [weakSelf.dataArray removeAllObjects];
+            }
+            for (NSDictionary *dic in response.dataDic[@"lawsList"]) {
+                LayModel *model = [MTLJSONAdapter modelOfClass:[LayModel class] fromJSONDictionary:dic error:NULL];
+                [weakSelf.dataArray addObject:model];
+            }
+            [weakSelf.tableView reloadData];
+        }else{
+            [weakSelf showHudAuto:response.message];
+            weakSelf.pageNO-=1;
+        }
+        [weakSelf.tableView.header endRefreshing];
+        [weakSelf.tableView.footer endRefreshing];
+    } andFailure:^(NSURLSessionDataTask *urlSessionDataTask, NSError *error) {
+        [weakSelf removeMBProgressHudInManaual];
+        [weakSelf showHudAuto:InternetFailerPrompt];
+        weakSelf.pageNO-=1;
+        [weakSelf.tableView.header endRefreshing];
+        [weakSelf.tableView.footer endRefreshing];
+    }];
+}
 -(void)AddSegumentArray:(NSArray *)SegumentArray
 {
     CGFloat witdFloat=(DeviceSize.width)/4;
@@ -66,13 +92,10 @@
     }
     [[self.ButtonArray firstObject] setSelected:YES];
 }
--(void)changeTheSegument:(UIButton*)button
-{
+-(void)changeTheSegument:(UIButton*)button{
     [self selectTheSegument:button.tag-1000];
-    self.scrollView.contentOffset = CGPointMake((button.tag-1000)*DeviceSize.width, 0);
 }
--(void)selectTheSegument:(NSInteger)segument
-{
+-(void)selectTheSegument:(NSInteger)segument{
     if (self.selectIndex!=segument) {
         [self.ButtonArray[_selectIndex] setSelected:NO];
         UIButton *btn = self.ButtonArray[segument] ;
@@ -83,21 +106,21 @@
         _selectIndex=segument;
     }
 }
-//自定义rightBarButtonItem
+ //自定义rightBarButtonItem
 -(UIBarButtonItem *)barButtonItem{
     if (!_barButtonItem) {
-        UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [rightButton addTarget:self action:@selector(rightAction:) forControlEvents:UIControlEventTouchUpInside];
-        [rightButton setTitleColor:[UIColor colorWithHexString:Colorwhite] forState:UIControlStateNormal];
-        [rightButton setTitle:@"北 京" forState:UIControlStateNormal];
-        rightButton.titleLabel.font = [UIFont boldSystemFontOfSize:15];
-        rightButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-        rightButton.frame = CGRectMake(0, 0,18*rightButton.titleLabel.text.length+13,20);
-        [rightButton setImage:[UIImage imageNamed:@"地区下拉箭头"] forState:UIControlStateNormal];
-        rightButton.imageEdgeInsets = UIEdgeInsetsMake(10,18*rightButton.titleLabel.text.length+3,5,0);
-        rightButton.titleEdgeInsets =UIEdgeInsetsMake(0,-10,0,0);
-        _barButtonItem = [[UIBarButtonItem alloc]initWithCustomView:rightButton];
-    }
+         UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+         [rightButton addTarget:self action:@selector(rightAction:) forControlEvents:UIControlEventTouchUpInside];
+         [rightButton setTitleColor:[UIColor colorWithHexString:Colorwhite] forState:UIControlStateNormal];
+         [rightButton setTitle:@"北 京" forState:UIControlStateNormal];
+         rightButton.titleLabel.font = [UIFont boldSystemFontOfSize:15];
+         rightButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+         rightButton.frame = CGRectMake(0, 0,18*rightButton.titleLabel.text.length+13,20);
+         [rightButton setImage:[UIImage imageNamed:@"地区下拉箭头"] forState:UIControlStateNormal];
+         rightButton.imageEdgeInsets = UIEdgeInsetsMake(10,18*rightButton.titleLabel.text.length+3,5,0);
+         rightButton.titleEdgeInsets =UIEdgeInsetsMake(0,-10,0,0);
+         _barButtonItem = [[UIBarButtonItem alloc]initWithCustomView:rightButton];
+     }
     return _barButtonItem;
 }
 -(void)leftAction{
@@ -106,36 +129,10 @@
 -(void)rightAction:(UIButton *)btn{
     self.hidesBottomBarWhenPushed = YES;
     SelectCityViewController *vc = [[SelectCityViewController alloc]init];
-    vc.city = btn.titleLabel.text;
-    [vc setSelectCityBlock:^(NSString *city) {
-        [btn setTitle:city forState:UIControlStateNormal];
-    }];
+    [vc setSelectCityBlock:^(CityModel * city) {
+         [btn setTitle:city.name forState:UIControlStateNormal];
+     }];
     [self.navigationController pushViewController:vc animated:YES];
-}
-- (UIScrollView *)searchScrollView{
-    if (!_searchScrollView) {
-        _searchScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, DeviceSize.width, 38)];
-        _searchScrollView.delegate = self;
-        _searchScrollView.backgroundColor = [UIColor colorWithHexString:Colorwhite];
-        _searchScrollView.contentSize = CGSizeMake(DeviceSize.width/4*_itemsArr.count, 38);
-        _searchScrollView.showsHorizontalScrollIndicator = NO;
-        _searchScrollView.showsVerticalScrollIndicator = NO;
-        _searchScrollView.pagingEnabled = NO;
-        _searchScrollView.bouncesZoom = NO;
-    }
-    return _searchScrollView;
-}
--(void)addTableView{
-    for (int i=0; i<self.itemsArr.count; i++) {
-        UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectMake(i*DeviceSize.width,0, self.view.width, DeviceSize.height-_searchScrollView.bottom-10) style:UITableViewStyleGrouped];
-        tableView.delegate = self;
-        tableView.showsVerticalScrollIndicator = NO;
-        tableView.dataSource = self;
-        if ([tableView respondsToSelector:@selector(setSeparatorInset:)]) {
-            [tableView setSeparatorInset:UIEdgeInsetsMake(0, 15,0, 15)];
-        }
-        [self.scrollView addSubview:tableView];
-    }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 0.1;
@@ -154,16 +151,15 @@
     if (!cell) {
         NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"ToolTableViewCell" owner:nil options:nil];
         if (nib.count>0) {
-            cell = nib.lastObject;
+        cell = nib.lastObject;
         }
     }
-    NSMutableString *str = [NSMutableString string];
-    [str appendFormat:@"由于图片宽度是固定的这样就可以计算每行文字缩短的字数。只要文本的总体高度低于图像总高度则文字长度都是缩短的。用CTTypesetterSuggestLineBreak函数动态的计算每一行里的字数，因为每一行里面的中文字、标点符号、数字、字母都不一样所以可以显示的字数肯定也是不同的，所以需要作这样的计算。这样循环直至文本结束，就可以知道有多少行字了。再根据字体高度和行间距得出总的文本高度，如果文本高度大于图片总高度那么显示区域的Frame高度就是文本的高度，反之"];
-    cell.Detail.text = str;
+    LayModel *model = self.dataArray[indexPath.row];
+    cell.Detail.text = model.lawShortName;
     cell.Detail.numberOfLines = 2;
-    cell.kind.text = @"xxx法院";
+    cell.kind.text = model.createUserId;
     cell.kind.textColor = [UIColor colorWithHexString:@"#666666"];
-    cell.time.text = @"2016-09-18";
+    cell.time.text = model.createDate;
     cell.time.textColor = [UIColor colorWithHexString:@"#666666"];
     cell.labelConstrains.constant = -12;
     return cell;
@@ -179,38 +175,36 @@
 }
 -(NSMutableArray *)ButtonArray{
     if (!_ButtonArray) {
-        _ButtonArray = [NSMutableArray array];
+     _ButtonArray = [NSMutableArray array];
     }
     return _ButtonArray;
+}
+-(void)headerRequestWithData{
+    [self getData];
+}
+-(void)footerRequestWithData{
+    [self getData];
 }
 -(NSString *)title{
     return @"法律法规";
 }
--(NSMutableArray *)dataArray{
-    if (!_dataArray) {
-        _dataArray = [NSMutableArray array];
+- (UIScrollView *)searchScrollView{
+    if (!_searchScrollView) {
+        _searchScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, DeviceSize.width, 38)];
+        _searchScrollView.delegate = self;
+        _searchScrollView.backgroundColor = [UIColor colorWithHexString:Colorwhite];
+        _searchScrollView.contentSize = CGSizeMake(DeviceSize.width/4*_itemsArr.count, 38);
+        _searchScrollView.showsHorizontalScrollIndicator = NO;
+        _searchScrollView.showsVerticalScrollIndicator = NO;
+        _searchScrollView.pagingEnabled = NO;
+        _searchScrollView.bouncesZoom = NO;
     }
-    return _dataArray;
+    return _searchScrollView;
 }
--(UIScrollView *)scrollView{
-    if (!_scrollView) {
-        _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, self.searchScrollView.bottom+10, DeviceSize.width, DeviceSize.height-(self.searchScrollView.bottom+10))];
-        _scrollView.contentSize = CGSizeMake(self.itemsArr.count*DeviceSize.width, _scrollView.height);
-        _scrollView.pagingEnabled = YES;
-        _scrollView.showsVerticalScrollIndicator = NO;
-        _scrollView.showsHorizontalScrollIndicator = NO;
-        _scrollView.delegate = self;
-    }
-    return _scrollView;
-}
--(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    UIButton *btn = [self.view viewWithTag:scrollView.contentOffset.x/DeviceSize.width+1000];
-    [self selectTheSegument:btn.tag-1000];
-    self.searchScrollView.contentOffset = CGPointMake(btn.left, 0);
-}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+// Dispose of any resources that can be recreated.
 }
 
 /*
