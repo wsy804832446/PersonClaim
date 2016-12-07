@@ -9,7 +9,8 @@
 #import "AllViewController.h"
 #import "FollowPlatFormViewCell.h"
 #import "FollowDetaiViewController.h"
-@interface AllViewController ()
+#import "HomeShaiXuanCollectionViewCell.h"
+@interface AllViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 //标题名称数组
 @property (nonatomic,strong)NSArray *itemsArr;
 //选中index
@@ -21,6 +22,8 @@
 @property (nonatomic,strong)UIScrollView *searchScrollView;
 //超时时间按钮数组
 @property (nonatomic,strong)NSMutableArray *overTimeBtnArray;
+//筛选view
+@property(nonatomic,strong)UICollectionView *collectionView;
 @end
 
 @implementation AllViewController
@@ -31,7 +34,7 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItemExtension leftButtonItem:@selector(leftAction) andTarget:self];
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItemExtension rightButtonItem:@selector(rightAction) andTarget:self andImageName:@"8-搜索"];
+    [self addBtnRight];
     [self.view addSubview:self.searchScrollView];
     self.itemsArr = @[@"全部",@"未超时",@"已超时",@"已完成"];
     [self AddSegumentArray:_itemsArr];
@@ -40,8 +43,45 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // Do any additional setup after loading the view.
 }
+-(void)addBtnRight{
+    UIView * rightButtonParentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
+    rightButtonParentView.backgroundColor = [UIColor clearColor];
+    UIButton * btnSearch= [UIButton buttonWithType:UIButtonTypeCustom];
+    btnSearch.frame = CGRectMake(50, 0, 50, 44);
+    [btnSearch setImage:[UIImage imageNamed:@"8-搜索"] forState:UIControlStateNormal];
+    [btnSearch setImage:[UIImage imageNamed:@"8-搜索-1"] forState:UIControlStateHighlighted];
+    [btnSearch setImageEdgeInsets:UIEdgeInsetsMake(11, 28, 11, 0)];
+    [btnSearch addTarget:self action:@selector(secrchClick:) forControlEvents:UIControlEventTouchUpInside];
+    btnSearch.tag = 1000;
+    [rightButtonParentView addSubview:btnSearch];
+    
+    UIButton * btnScreen= [UIButton buttonWithType:UIButtonTypeCustom];
+    btnScreen.frame = CGRectMake(0, 0, 50, 44);
+    [btnScreen setImage:[UIImage imageNamed:@"shaixuan"] forState:UIControlStateNormal];
+    [btnScreen setImageEdgeInsets:UIEdgeInsetsMake(11, 28, 11, 0)];
+    [btnScreen addTarget:self action:@selector(screenClick:) forControlEvents:UIControlEventTouchUpInside];
+    [rightButtonParentView addSubview:btnScreen];
+    btnScreen.tag = 1001;
+    UIBarButtonItem * rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButtonParentView];
+    self.navigationItem.rightBarButtonItem = rightButtonItem;
+}
+-(void)secrchClick:(UIButton *)btn{
+    
+}
+-(void)screenClick:(UIButton *)btn{
+    UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.size.width, self.view.size.height)];
+    backView.backgroundColor = [UIColor colorWithHexString:Colorblack alpha:0.5];
+    backView.tag = 6666;
+    [self.view addSubview:backView];
+    [backView addSubview:self.collectionView];
+    [UIView animateWithDuration:0.5 animations:^{
+        self.collectionView.frame = CGRectMake(0, 0, DeviceSize.width, 312);
+    }];
+    btn.enabled = NO;
+}
 -(void)getData{
     NSArray *arr = [CommUtil readDataWithFileName:[NSString stringWithFormat:@"cliam%@",[CommUtil readDataWithFileName:@"account"]]];
+    [self.dataArray removeAllObjects];
     for (ClaimModel *claimModel in arr) {
         for (NSDictionary * taskDic in claimModel.taskList){
             TaskModel *taskModel = [MTLJSONAdapter modelOfClass:[TaskModel class] fromJSONDictionary:taskDic error:NULL];
@@ -70,6 +110,9 @@
                 [self.dataArray addObject:claimModel];
                 break;
             }else if (self.claimType ==8 && [taskModel.taskType isEqual:@"06"]) {
+                [self.dataArray addObject:claimModel];
+                break;
+            }else if (self.claimType ==10) {
                 [self.dataArray addObject:claimModel];
                 break;
             }
@@ -315,6 +358,39 @@
     vc.taskModel = claimModel.taskArr[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
 }
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return 1;
+}
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return 10;
+}
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    HomeShaiXuanCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HomeShaiXuanCell" forIndexPath:indexPath];
+    if (!cell) {
+        NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"HomeCollectionViewCell" owner:nil options:nil];
+        if (nib.count>0) {
+            cell = [nib firstObject];
+        }
+    }
+    [cell configCellWithRow:indexPath.row];
+    return cell;
+}
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row>0) {
+        self.claimType = indexPath.row-1;
+    }else{
+        self.claimType = 10;
+    }
+    UIView *backView = [self.view viewWithTag:6666];
+    [backView removeFromSuperview];
+    [self getData];
+    UIButton *btn = [self.navigationItem.rightBarButtonItem.customView viewWithTag:1001];
+    btn.enabled = YES;
+    [self setTitle:self.title];
+    [self.tableView reloadData];
+    
+}
 -(NSString *)title{
     if (self.claimType ==0) {
         return @"伤残基本信息";
@@ -337,6 +413,24 @@
     }else{
         return @"全部任务";
     }
+}
+-(UICollectionView *)collectionView{
+    if (!_collectionView) {
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
+        // 设置间距
+        layout.minimumLineSpacing = 0;
+        layout.minimumInteritemSpacing = 0;
+        layout.itemSize = CGSizeMake(DeviceSize.width/4,312/3);
+        _collectionView =[[UICollectionView alloc]initWithFrame:CGRectMake(0, -312, DeviceSize.width,312)collectionViewLayout:layout];
+        _collectionView.scrollEnabled = NO;
+        _collectionView.contentSize = CGSizeMake(DeviceSize.width, 312);
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+        _collectionView.backgroundColor =[UIColor colorWithHexString:Colorwhite];
+        [_collectionView registerNib:[UINib nibWithNibName:@"HomeShaiXuanCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"HomeShaiXuanCell"];
+    }
+    return _collectionView;
+
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

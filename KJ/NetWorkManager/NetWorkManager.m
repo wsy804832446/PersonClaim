@@ -362,6 +362,9 @@ static NetWorkManager *thNetWorkManager = nil;
     [self requestOperation:kServerHost andParams:paramDic andHeaderFieldParams:nil andHttpRequestMethod:HttpRequestMethodPOST andCompletionBlockWithSuccess:success andFailure:failure];
 }
 -(void)getStandardWithRegionId:(NSString *)regionId andStandardYear:(NSInteger)standardYear andCompletionBlockWithSuccess:(CompletionBlockWithSuccess)success andFailure:(FailureBlock)failure{
+    if (!regionId) {
+        regionId = @"";
+    }
     NSDictionary *dataDic = @{@"regionId":regionId,@"standardYear":[NSNumber numberWithInteger:standardYear]};
     NSMutableDictionary *paramDic =[self dataDicAndRequestCodeWithDic:dataDic andRequestCode:@"002003"];
     [self requestOperation:kServerHost andParams:paramDic andHeaderFieldParams:nil andHttpRequestMethod:HttpRequestMethodPOST andCompletionBlockWithSuccess:success andFailure:failure];

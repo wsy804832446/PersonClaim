@@ -64,50 +64,50 @@
 -(void)OpenLocation{
     if (self.currentCity) {
         [self getData];
-    }else{
-        if ([CLLocationManager locationServicesEnabled]) {
-            if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"打开定位服务来允许人伤跟踪系统确定您的位置" preferredStyle:UIAlertControllerStyleAlert];
-                UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    SelectCityViewController *vc = [[SelectCityViewController alloc]init];
-                    [self.navigationController pushViewController:vc animated:YES];
-                }];
-                UIAlertAction *call = [UIAlertAction actionWithTitle:@"设置" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-                }];
-                [alert addAction:cancel];
-                [alert addAction:call];
-                [self presentViewController:alert animated:YES completion:nil];
-            }else if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined){
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"允许人伤跟踪系统在您使用该应用时，访问您的位置吗?" preferredStyle:UIAlertControllerStyleAlert];
-                UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"不允许" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    SelectCityViewController *vc = [[SelectCityViewController alloc]init];
-                    [self.navigationController pushViewController:vc animated:YES];
-                }];
-                UIAlertAction *call = [UIAlertAction actionWithTitle:@"允许" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    //定位功能可用，开始定位
-                    [self.locationManger startUpdatingLocation];
-                }];
-                [alert addAction:cancel];
-                [alert addAction:call];
-                [self presentViewController:alert animated:YES completion:nil];
-            }else{
-                [self.locationManger startUpdatingLocation];
-            }
-        }else{
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"打开定位服务来允许人伤跟踪系统确定您的位置" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                SelectCityViewController *vc = [[SelectCityViewController alloc]init];
-                [self.navigationController pushViewController:vc animated:YES];
-            }];
-            UIAlertAction *call = [UIAlertAction actionWithTitle:@"设置" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-            }];
-            [alert addAction:cancel];
-            [alert addAction:call];
-            [self presentViewController:alert animated:YES completion:nil];
-        }
     }
+//        if ([CLLocationManager locationServicesEnabled]) {
+//            if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
+//                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"打开定位服务来允许人伤跟踪系统确定您的位置" preferredStyle:UIAlertControllerStyleAlert];
+//                UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//                    SelectCityViewController *vc = [[SelectCityViewController alloc]init];
+//                    [self.navigationController pushViewController:vc animated:YES];
+//                }];
+//                UIAlertAction *call = [UIAlertAction actionWithTitle:@"设置" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+//                }];
+//                [alert addAction:cancel];
+//                [alert addAction:call];
+//                [self presentViewController:alert animated:YES completion:nil];
+//            }else if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined){
+//                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"允许人伤跟踪系统在您使用该应用时，访问您的位置吗?" preferredStyle:UIAlertControllerStyleAlert];
+//                UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"不允许" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//                    SelectCityViewController *vc = [[SelectCityViewController alloc]init];
+//                    [self.navigationController pushViewController:vc animated:YES];
+//                }];
+//                UIAlertAction *call = [UIAlertAction actionWithTitle:@"允许" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//                    //定位功能可用，开始定位
+//                    [self.locationManger startUpdatingLocation];
+//                }];
+//                [alert addAction:cancel];
+//                [alert addAction:call];
+//                [self presentViewController:alert animated:YES completion:nil];
+//            }else{
+//                [self.locationManger startUpdatingLocation];
+//            }
+//        }else{
+//            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"打开定位服务来允许人伤跟踪系统确定您的位置" preferredStyle:UIAlertControllerStyleAlert];
+//            UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//                SelectCityViewController *vc = [[SelectCityViewController alloc]init];
+//                [self.navigationController pushViewController:vc animated:YES];
+//            }];
+//            UIAlertAction *call = [UIAlertAction actionWithTitle:@"设置" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+//            }];
+//            [alert addAction:cancel];
+//            [alert addAction:call];
+//            [self presentViewController:alert animated:YES completion:nil];
+//        }
+//    }
 }
 
 //自定义rightBarButtonItem

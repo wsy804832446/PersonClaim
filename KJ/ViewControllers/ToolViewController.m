@@ -116,7 +116,7 @@
     if (section == 0) {
         return 0;
     }else{
-        return 13;
+        return 0;
     }
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{

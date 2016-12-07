@@ -56,7 +56,7 @@
             break;
         case 6:
             self.lblText.text = @"被扶养人";
-            self.imgView.image = [UIImage imageNamed:@"1_basic"];
+            self.imgView.image = [UIImage imageNamed:@"7_raised"];
             self.lineRight.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
             self.lineBottom.backgroundColor = [UIColor colorWithHexString:Colorwhite];
             break;
