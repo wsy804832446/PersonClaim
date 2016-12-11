@@ -39,7 +39,7 @@
     self.itemsArr = @[@"全部",@"未超时",@"已超时",@"已完成"];
     [self AddSegumentArray:_itemsArr];
     self.tableView.top = self.searchScrollView.bottom+10;
-    self.tableView.height = DeviceSize.height-self.tableView.top;
+    self.tableView.height = DeviceSize.height-self.tableView.top-49-64;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // Do any additional setup after loading the view.
 }
@@ -180,7 +180,7 @@
             [self.overTimeBtnArray addObject:button];
             [self.view addSubview:button];
             self.tableView.top = button.bottom+25/2;
-            self.tableView.height = DeviceSize.height-self.tableView.top;
+            self.tableView.height = DeviceSize.height-self.tableView.top-64-49;
             if (i == 0) {
                 button.selected = YES;
                 button.backgroundColor = [UIColor colorWithHexString:Colorblue];
@@ -191,7 +191,7 @@
             [button removeFromSuperview];
         }
         self.tableView.top = self.searchScrollView.bottom+10;
-        self.tableView.height = DeviceSize.height-self.tableView.top;
+        self.tableView.height = DeviceSize.height-self.tableView.top-64-49;
     }
 }
 -(void)overTimeChange:(UIButton *)btn{
@@ -234,6 +234,7 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     ClaimModel *model = self.dataArray[section];
+    [model.taskArr removeAllObjects];
     for (NSDictionary *dic in model.taskList) {
         TaskModel *taskModel = [MTLJSONAdapter modelOfClass:[TaskModel class] fromJSONDictionary:dic error:NULL];
         if (self.claimType ==0 && [taskModel.taskType isEqual:@"09"]) {
@@ -253,6 +254,8 @@
         }else if (self.claimType ==7 && [taskModel.taskType isEqual:@"08"]) {
             [model.taskArr addObject:taskModel];
         }else if (self.claimType ==8 && [taskModel.taskType isEqual:@"06"]) {
+            [model.taskArr addObject:taskModel];
+        }else if (self.claimType ==10){
             [model.taskArr addObject:taskModel];
         }
 
@@ -288,7 +291,7 @@
     cell.lblState.layer.cornerRadius =4;
     cell.lblState.font = [UIFont systemFontOfSize:12];
     cell.lblTaskType.layer.masksToBounds = YES;
-    cell.lblTaskType.layer.cornerRadius = 10;
+    cell.lblTaskType.layer.cornerRadius = 16;
     cell.lblTaskType.backgroundColor = [UIColor colorWithHexString:@"#9DC5F9"];
     cell.lblTaskType.textColor = [UIColor colorWithHexString:Colorwhite];
     if ([taskModel.taskType isEqualToString:@"01"]) {cell.lblTaskType.text = @"医";
@@ -383,6 +386,7 @@
         self.claimType = 10;
     }
     UIView *backView = [self.view viewWithTag:6666];
+    self.collectionView.frame = CGRectMake(0, -312, DeviceSize.width, 312);
     [backView removeFromSuperview];
     [self getData];
     UIButton *btn = [self.navigationItem.rightBarButtonItem.customView viewWithTag:1001];
@@ -390,6 +394,14 @@
     [self setTitle:self.title];
     [self.tableView reloadData];
     
+}
+-(void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath{
+    HomeShaiXuanCollectionViewCell *cell =(HomeShaiXuanCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    cell.backgroundColor = [UIColor colorWithHexString:@"#eeeeee"];
+}
+-(void)collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath{
+    HomeShaiXuanCollectionViewCell *cell =(HomeShaiXuanCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    cell.backgroundColor = [UIColor colorWithHexString:Colorwhite];
 }
 -(NSString *)title{
     if (self.claimType ==0) {

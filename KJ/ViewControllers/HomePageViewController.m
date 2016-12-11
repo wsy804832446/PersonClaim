@@ -109,6 +109,14 @@
     vc.claimType = indexPath.row;
     [self.parentViewController.navigationController pushViewController:vc animated:YES];
 }
+-(void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath{
+    HomeCollectionViewCell *cell =(HomeCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    cell.backgroundColor = [UIColor colorWithHexString:@"#eeeeee"];
+}
+-(void)collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath{
+    HomeCollectionViewCell *cell =(HomeCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    cell.backgroundColor = [UIColor colorWithHexString:Colorwhite];
+}
 -(UICollectionView *)collectionView{
     if (!_collectionView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];

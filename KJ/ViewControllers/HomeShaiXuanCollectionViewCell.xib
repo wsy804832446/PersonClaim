@@ -27,24 +27,25 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hgH-T1-2Zj">
-                        <rect key="frame" x="0.0" y="0.0" width="168" height="133"/>
-                        <state key="normal" title="Button"/>
-                    </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="08R-qa-DQd">
+                        <rect key="frame" x="57" y="15" width="55" height="55"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="55" id="muo-Jc-QxX"/>
+                            <constraint firstAttribute="height" constant="55" id="scm-6O-AYE"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="UiD-46-ZPS" firstAttribute="leading" secondItem="hgH-T1-2Zj" secondAttribute="leading" id="2Vp-Ld-EHh"/>
+                <constraint firstItem="08R-qa-DQd" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="5CI-54-4gT"/>
                 <constraint firstAttribute="bottom" secondItem="UiD-46-ZPS" secondAttribute="bottom" constant="15" id="8Vd-11-mb3"/>
-                <constraint firstItem="hgH-T1-2Zj" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="C87-gY-BIB"/>
-                <constraint firstAttribute="bottom" secondItem="hgH-T1-2Zj" secondAttribute="bottom" id="ETs-TO-e19"/>
-                <constraint firstItem="hgH-T1-2Zj" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="EwF-UT-54w"/>
-                <constraint firstAttribute="trailing" secondItem="hgH-T1-2Zj" secondAttribute="trailing" id="R6V-HY-CHb"/>
-                <constraint firstItem="UiD-46-ZPS" firstAttribute="trailing" secondItem="hgH-T1-2Zj" secondAttribute="trailing" id="nMU-sO-Lzd"/>
+                <constraint firstAttribute="trailing" secondItem="UiD-46-ZPS" secondAttribute="trailing" id="Hfk-4r-HMi"/>
+                <constraint firstItem="UiD-46-ZPS" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="WgA-OK-cb9"/>
+                <constraint firstItem="08R-qa-DQd" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="w0c-Q8-f6u"/>
             </constraints>
             <size key="customSize" width="168" height="34"/>
             <connections>
-                <outlet property="btnType" destination="hgH-T1-2Zj" id="QZy-kf-HRg"/>
+                <outlet property="imgType" destination="08R-qa-DQd" id="Vck-eE-GGg"/>
                 <outlet property="lblText" destination="UiD-46-ZPS" id="e4v-sz-jg8"/>
             </connections>
             <point key="canvasLocation" x="134" y="81.5"/>

@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface HomeShaiXuanCollectionViewCell : UICollectionViewCell
-@property (strong, nonatomic) IBOutlet UIButton *btnType;
+@property (strong, nonatomic) IBOutlet UIImageView *imgType;
+
 @property (strong, nonatomic) IBOutlet UILabel *lblText;
 -(void)configCellWithRow:(NSInteger)row;
 @end

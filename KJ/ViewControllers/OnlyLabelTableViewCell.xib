@@ -15,11 +15,11 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2pv-ih-DS3">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                        <rect key="frame" x="15" y="0.0" width="290" height="43"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -28,8 +28,8 @@
                 <constraints>
                     <constraint firstItem="2pv-ih-DS3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="OWM-n2-PCd"/>
                     <constraint firstAttribute="bottom" secondItem="2pv-ih-DS3" secondAttribute="bottom" id="QWE-S0-YtO"/>
-                    <constraint firstItem="2pv-ih-DS3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Rjz-U3-NYc"/>
-                    <constraint firstAttribute="trailing" secondItem="2pv-ih-DS3" secondAttribute="trailing" id="wyF-1a-mGu"/>
+                    <constraint firstAttribute="trailing" secondItem="2pv-ih-DS3" secondAttribute="trailing" constant="15" id="dLs-46-tbD"/>
+                    <constraint firstItem="2pv-ih-DS3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="wHi-k7-UgD"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

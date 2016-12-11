@@ -71,6 +71,8 @@
 		344C5AAB1DD067CC00584668 /* EditDealInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 344C5AAA1DD067CC00584668 /* EditDealInfoViewController.m */; };
 		344C5AAF1DD0690200584668 /* DealNameTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 344C5AAD1DD0690200584668 /* DealNameTableViewCell.m */; };
 		344C5AB01DD0690200584668 /* DealNameTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 344C5AAE1DD0690200584668 /* DealNameTableViewCell.xib */; };
+		344CECC31DF94CD900C25870 /* ShowDetailLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 344CECC11DF94CD900C25870 /* ShowDetailLabelTableViewCell.m */; };
+		344CECC41DF94CD900C25870 /* ShowDetailLabelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 344CECC21DF94CD900C25870 /* ShowDetailLabelTableViewCell.xib */; };
 		344E216E1DAC8DA400BB415D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 344E216D1DAC8DA400BB415D /* Assets.xcassets */; };
 		344E7FC01DE536D1008400FA /* DisabilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 344E7FBF1DE536D1008400FA /* DisabilityViewController.m */; };
 		344E7FC31DE545E2008400FA /* SelectDisabilityTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 344E7FC21DE545E2008400FA /* SelectDisabilityTypeViewController.m */; };
@@ -152,26 +154,6 @@
 		347600A61DF8011A00498A58 /* PersonInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 347600931DF8011A00498A58 /* PersonInfoModel.m */; };
 		347600A71DF8011A00498A58 /* SelectList.m in Sources */ = {isa = PBXBuildFile; fileRef = 347600951DF8011A00498A58 /* SelectList.m */; };
 		347600A81DF8011A00498A58 /* UpBringModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 347600971DF8011A00498A58 /* UpBringModel.m */; };
-		3476FFBF1DF7F3C900498A58 /* 0_all_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3476FFAB1DF7F3C900498A58 /* 0_all_normal.png */; };
-		3476FFC01DF7F3C900498A58 /* 0_all_pre.png in Resources */ = {isa = PBXBuildFile; fileRef = 3476FFAC1DF7F3C900498A58 /* 0_all_pre.png */; };
-		3476FFC11DF7F3C900498A58 /* 1_basic_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3476FFAD1DF7F3C900498A58 /* 1_basic_normal.png */; };
-		3476FFC21DF7F3C900498A58 /* 1_basic_pre.png in Resources */ = {isa = PBXBuildFile; fileRef = 3476FFAE1DF7F3C900498A58 /* 1_basic_pre.png */; };
-		3476FFC31DF7F3C900498A58 /* 2_process_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3476FFAF1DF7F3C900498A58 /* 2_process_normal.png */; };
-		3476FFC41DF7F3C900498A58 /* 2_process_pre.png in Resources */ = {isa = PBXBuildFile; fileRef = 3476FFB01DF7F3C900498A58 /* 2_process_pre.png */; };
-		3476FFC51DF7F3C900498A58 /* 3_hospital_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3476FFB11DF7F3C900498A58 /* 3_hospital_normal.png */; };
-		3476FFC61DF7F3C900498A58 /* 3_hospital_pre.png in Resources */ = {isa = PBXBuildFile; fileRef = 3476FFB21DF7F3C900498A58 /* 3_hospital_pre.png */; };
-		3476FFC71DF7F3C900498A58 /* 4_salary_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3476FFB31DF7F3C900498A58 /* 4_salary_normal.png */; };
-		3476FFC81DF7F3C900498A58 /* 4_salary_pre.png in Resources */ = {isa = PBXBuildFile; fileRef = 3476FFB41DF7F3C900498A58 /* 4_salary_pre.png */; };
-		3476FFC91DF7F3C900498A58 /* 5_work_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3476FFB51DF7F3C900498A58 /* 5_work_normal.png */; };
-		3476FFCA1DF7F3C900498A58 /* 5_work_pre.png in Resources */ = {isa = PBXBuildFile; fileRef = 3476FFB61DF7F3C900498A58 /* 5_work_pre.png */; };
-		3476FFCB1DF7F3C900498A58 /* 6_houseregister_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3476FFB71DF7F3C900498A58 /* 6_houseregister_normal.png */; };
-		3476FFCC1DF7F3C900498A58 /* 6_houseregister_pre.png in Resources */ = {isa = PBXBuildFile; fileRef = 3476FFB81DF7F3C900498A58 /* 6_houseregister_pre.png */; };
-		3476FFCD1DF7F3C900498A58 /* 7_raised_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3476FFB91DF7F3C900498A58 /* 7_raised_normal.png */; };
-		3476FFCE1DF7F3C900498A58 /* 7_raised_pre.png in Resources */ = {isa = PBXBuildFile; fileRef = 3476FFBA1DF7F3C900498A58 /* 7_raised_pre.png */; };
-		3476FFCF1DF7F3C900498A58 /* 8_disability_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3476FFBB1DF7F3C900498A58 /* 8_disability_normal.png */; };
-		3476FFD01DF7F3C900498A58 /* 8_disability_pre.png in Resources */ = {isa = PBXBuildFile; fileRef = 3476FFBC1DF7F3C900498A58 /* 8_disability_pre.png */; };
-		3476FFD11DF7F3C900498A58 /* 9_death_mormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3476FFBD1DF7F3C900498A58 /* 9_death_mormal.png */; };
-		3476FFD21DF7F3C900498A58 /* 9_death_pre.png in Resources */ = {isa = PBXBuildFile; fileRef = 3476FFBE1DF7F3C900498A58 /* 9_death_pre.png */; };
 		3476FFD61DF7F96800498A58 /* HomeShaiXuanCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3476FFD41DF7F96800498A58 /* HomeShaiXuanCollectionViewCell.m */; };
 		3476FFD71DF7F96800498A58 /* HomeShaiXuanCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3476FFD51DF7F96800498A58 /* HomeShaiXuanCollectionViewCell.xib */; };
 		34772C1D1DB4B3F8009D51B0 /* FollowDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 34772C1B1DB4B3F8009D51B0 /* FollowDetailTableViewCell.m */; };
@@ -185,6 +167,26 @@
 		348994921DCC2D500029767F /* ShowPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 348994911DCC2D500029767F /* ShowPictureViewController.m */; };
 		348CDBC21DCAFFEB007094BF /* PictureTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 348CDBC01DCAFFEB007094BF /* PictureTableViewCell.m */; };
 		348CDBC31DCAFFEB007094BF /* PictureTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 348CDBC11DCAFFEB007094BF /* PictureTableViewCell.xib */; };
+		3490CA561DFCF2870058AE67 /* 0_all_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3490CA421DFCF2870058AE67 /* 0_all_normal.png */; };
+		3490CA571DFCF2870058AE67 /* 0_all_pre.png in Resources */ = {isa = PBXBuildFile; fileRef = 3490CA431DFCF2870058AE67 /* 0_all_pre.png */; };
+		3490CA581DFCF2870058AE67 /* 1_basic_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3490CA441DFCF2870058AE67 /* 1_basic_normal.png */; };
+		3490CA591DFCF2870058AE67 /* 1_basic_pre.png in Resources */ = {isa = PBXBuildFile; fileRef = 3490CA451DFCF2870058AE67 /* 1_basic_pre.png */; };
+		3490CA5A1DFCF2870058AE67 /* 2_process_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3490CA461DFCF2870058AE67 /* 2_process_normal.png */; };
+		3490CA5B1DFCF2870058AE67 /* 2_process_pre.png in Resources */ = {isa = PBXBuildFile; fileRef = 3490CA471DFCF2870058AE67 /* 2_process_pre.png */; };
+		3490CA5C1DFCF2870058AE67 /* 3_hospital_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3490CA481DFCF2870058AE67 /* 3_hospital_normal.png */; };
+		3490CA5D1DFCF2870058AE67 /* 3_hospital_pre.png in Resources */ = {isa = PBXBuildFile; fileRef = 3490CA491DFCF2870058AE67 /* 3_hospital_pre.png */; };
+		3490CA5E1DFCF2870058AE67 /* 4_salary_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3490CA4A1DFCF2870058AE67 /* 4_salary_normal.png */; };
+		3490CA5F1DFCF2870058AE67 /* 4_salary_pre.png in Resources */ = {isa = PBXBuildFile; fileRef = 3490CA4B1DFCF2870058AE67 /* 4_salary_pre.png */; };
+		3490CA601DFCF2870058AE67 /* 5_work_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3490CA4C1DFCF2870058AE67 /* 5_work_normal.png */; };
+		3490CA611DFCF2870058AE67 /* 5_work_pre.png in Resources */ = {isa = PBXBuildFile; fileRef = 3490CA4D1DFCF2870058AE67 /* 5_work_pre.png */; };
+		3490CA621DFCF2870058AE67 /* 6_houseregister_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3490CA4E1DFCF2870058AE67 /* 6_houseregister_normal.png */; };
+		3490CA631DFCF2870058AE67 /* 6_houseregister_pre.png in Resources */ = {isa = PBXBuildFile; fileRef = 3490CA4F1DFCF2870058AE67 /* 6_houseregister_pre.png */; };
+		3490CA641DFCF2870058AE67 /* 7_raised_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3490CA501DFCF2870058AE67 /* 7_raised_normal.png */; };
+		3490CA651DFCF2870058AE67 /* 7_raised_pre.png in Resources */ = {isa = PBXBuildFile; fileRef = 3490CA511DFCF2870058AE67 /* 7_raised_pre.png */; };
+		3490CA661DFCF2870058AE67 /* 8_disability_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3490CA521DFCF2870058AE67 /* 8_disability_normal.png */; };
+		3490CA671DFCF2870058AE67 /* 8_disability_pre.png in Resources */ = {isa = PBXBuildFile; fileRef = 3490CA531DFCF2870058AE67 /* 8_disability_pre.png */; };
+		3490CA681DFCF2870058AE67 /* 9_death_mormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3490CA541DFCF2870058AE67 /* 9_death_mormal.png */; };
+		3490CA691DFCF2870058AE67 /* 9_death_pre.png in Resources */ = {isa = PBXBuildFile; fileRef = 3490CA551DFCF2870058AE67 /* 9_death_pre.png */; };
 		3496938D1DB9FA490034A2A6 /* AccidentAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3496938C1DB9FA490034A2A6 /* AccidentAddressViewController.m */; };
 		349B21D91D9DF8E90066E76E /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 349B21D81D9DF8E90066E76E /* DetailViewController.m */; };
 		34A2EF771DAE06C10050B027 /* LjjUISegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 34A2EF761DAE06C10050B027 /* LjjUISegmentedControl.m */; };
@@ -508,6 +510,9 @@
 		344C5AAC1DD0690200584668 /* DealNameTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealNameTableViewCell.h; sourceTree = "<group>"; };
 		344C5AAD1DD0690200584668 /* DealNameTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealNameTableViewCell.m; sourceTree = "<group>"; };
 		344C5AAE1DD0690200584668 /* DealNameTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DealNameTableViewCell.xib; sourceTree = "<group>"; };
+		344CECC01DF94CD900C25870 /* ShowDetailLabelTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowDetailLabelTableViewCell.h; sourceTree = "<group>"; };
+		344CECC11DF94CD900C25870 /* ShowDetailLabelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowDetailLabelTableViewCell.m; sourceTree = "<group>"; };
+		344CECC21DF94CD900C25870 /* ShowDetailLabelTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowDetailLabelTableViewCell.xib; sourceTree = "<group>"; };
 		344E216D1DAC8DA400BB415D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		344E7FBE1DE536D1008400FA /* DisabilityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisabilityViewController.h; sourceTree = "<group>"; };
 		344E7FBF1DE536D1008400FA /* DisabilityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisabilityViewController.m; sourceTree = "<group>"; };
@@ -633,26 +638,6 @@
 		347600951DF8011A00498A58 /* SelectList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectList.m; sourceTree = "<group>"; };
 		347600961DF8011A00498A58 /* UpBringModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpBringModel.h; sourceTree = "<group>"; };
 		347600971DF8011A00498A58 /* UpBringModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpBringModel.m; sourceTree = "<group>"; };
-		3476FFAB1DF7F3C900498A58 /* 0_all_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0_all_normal.png; sourceTree = "<group>"; };
-		3476FFAC1DF7F3C900498A58 /* 0_all_pre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0_all_pre.png; sourceTree = "<group>"; };
-		3476FFAD1DF7F3C900498A58 /* 1_basic_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1_basic_normal.png; sourceTree = "<group>"; };
-		3476FFAE1DF7F3C900498A58 /* 1_basic_pre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1_basic_pre.png; sourceTree = "<group>"; };
-		3476FFAF1DF7F3C900498A58 /* 2_process_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2_process_normal.png; sourceTree = "<group>"; };
-		3476FFB01DF7F3C900498A58 /* 2_process_pre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2_process_pre.png; sourceTree = "<group>"; };
-		3476FFB11DF7F3C900498A58 /* 3_hospital_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3_hospital_normal.png; sourceTree = "<group>"; };
-		3476FFB21DF7F3C900498A58 /* 3_hospital_pre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3_hospital_pre.png; sourceTree = "<group>"; };
-		3476FFB31DF7F3C900498A58 /* 4_salary_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4_salary_normal.png; sourceTree = "<group>"; };
-		3476FFB41DF7F3C900498A58 /* 4_salary_pre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4_salary_pre.png; sourceTree = "<group>"; };
-		3476FFB51DF7F3C900498A58 /* 5_work_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5_work_normal.png; sourceTree = "<group>"; };
-		3476FFB61DF7F3C900498A58 /* 5_work_pre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5_work_pre.png; sourceTree = "<group>"; };
-		3476FFB71DF7F3C900498A58 /* 6_houseregister_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 6_houseregister_normal.png; sourceTree = "<group>"; };
-		3476FFB81DF7F3C900498A58 /* 6_houseregister_pre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 6_houseregister_pre.png; sourceTree = "<group>"; };
-		3476FFB91DF7F3C900498A58 /* 7_raised_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 7_raised_normal.png; sourceTree = "<group>"; };
-		3476FFBA1DF7F3C900498A58 /* 7_raised_pre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 7_raised_pre.png; sourceTree = "<group>"; };
-		3476FFBB1DF7F3C900498A58 /* 8_disability_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 8_disability_normal.png; sourceTree = "<group>"; };
-		3476FFBC1DF7F3C900498A58 /* 8_disability_pre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 8_disability_pre.png; sourceTree = "<group>"; };
-		3476FFBD1DF7F3C900498A58 /* 9_death_mormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 9_death_mormal.png; sourceTree = "<group>"; };
-		3476FFBE1DF7F3C900498A58 /* 9_death_pre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 9_death_pre.png; sourceTree = "<group>"; };
 		3476FFD31DF7F96800498A58 /* HomeShaiXuanCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeShaiXuanCollectionViewCell.h; sourceTree = "<group>"; };
 		3476FFD41DF7F96800498A58 /* HomeShaiXuanCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeShaiXuanCollectionViewCell.m; sourceTree = "<group>"; };
 		3476FFD51DF7F96800498A58 /* HomeShaiXuanCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeShaiXuanCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -673,6 +658,26 @@
 		348CDBBF1DCAFFEB007094BF /* PictureTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureTableViewCell.h; sourceTree = "<group>"; };
 		348CDBC01DCAFFEB007094BF /* PictureTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureTableViewCell.m; sourceTree = "<group>"; };
 		348CDBC11DCAFFEB007094BF /* PictureTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PictureTableViewCell.xib; sourceTree = "<group>"; };
+		3490CA421DFCF2870058AE67 /* 0_all_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0_all_normal.png; sourceTree = "<group>"; };
+		3490CA431DFCF2870058AE67 /* 0_all_pre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0_all_pre.png; sourceTree = "<group>"; };
+		3490CA441DFCF2870058AE67 /* 1_basic_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1_basic_normal.png; sourceTree = "<group>"; };
+		3490CA451DFCF2870058AE67 /* 1_basic_pre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1_basic_pre.png; sourceTree = "<group>"; };
+		3490CA461DFCF2870058AE67 /* 2_process_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2_process_normal.png; sourceTree = "<group>"; };
+		3490CA471DFCF2870058AE67 /* 2_process_pre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2_process_pre.png; sourceTree = "<group>"; };
+		3490CA481DFCF2870058AE67 /* 3_hospital_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3_hospital_normal.png; sourceTree = "<group>"; };
+		3490CA491DFCF2870058AE67 /* 3_hospital_pre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3_hospital_pre.png; sourceTree = "<group>"; };
+		3490CA4A1DFCF2870058AE67 /* 4_salary_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4_salary_normal.png; sourceTree = "<group>"; };
+		3490CA4B1DFCF2870058AE67 /* 4_salary_pre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4_salary_pre.png; sourceTree = "<group>"; };
+		3490CA4C1DFCF2870058AE67 /* 5_work_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5_work_normal.png; sourceTree = "<group>"; };
+		3490CA4D1DFCF2870058AE67 /* 5_work_pre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5_work_pre.png; sourceTree = "<group>"; };
+		3490CA4E1DFCF2870058AE67 /* 6_houseregister_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 6_houseregister_normal.png; sourceTree = "<group>"; };
+		3490CA4F1DFCF2870058AE67 /* 6_houseregister_pre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 6_houseregister_pre.png; sourceTree = "<group>"; };
+		3490CA501DFCF2870058AE67 /* 7_raised_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 7_raised_normal.png; sourceTree = "<group>"; };
+		3490CA511DFCF2870058AE67 /* 7_raised_pre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 7_raised_pre.png; sourceTree = "<group>"; };
+		3490CA521DFCF2870058AE67 /* 8_disability_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 8_disability_normal.png; sourceTree = "<group>"; };
+		3490CA531DFCF2870058AE67 /* 8_disability_pre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 8_disability_pre.png; sourceTree = "<group>"; };
+		3490CA541DFCF2870058AE67 /* 9_death_mormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 9_death_mormal.png; sourceTree = "<group>"; };
+		3490CA551DFCF2870058AE67 /* 9_death_pre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 9_death_pre.png; sourceTree = "<group>"; };
 		3496938B1DB9FA490034A2A6 /* AccidentAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccidentAddressViewController.h; sourceTree = "<group>"; };
 		3496938C1DB9FA490034A2A6 /* AccidentAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccidentAddressViewController.m; sourceTree = "<group>"; };
 		349B21D71D9DF8E90066E76E /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
@@ -1354,6 +1359,9 @@
 				34772C1A1DB4B3F8009D51B0 /* FollowDetailTableViewCell.h */,
 				34772C1B1DB4B3F8009D51B0 /* FollowDetailTableViewCell.m */,
 				34772C1C1DB4B3F8009D51B0 /* FollowDetailTableViewCell.xib */,
+				344CECC01DF94CD900C25870 /* ShowDetailLabelTableViewCell.h */,
+				344CECC11DF94CD900C25870 /* ShowDetailLabelTableViewCell.m */,
+				344CECC21DF94CD900C25870 /* ShowDetailLabelTableViewCell.xib */,
 				34ED55EB1DC845B300D8CA37 /* AccidentAddressTableViewCell.h */,
 				34ED55EC1DC845B300D8CA37 /* AccidentAddressTableViewCell.m */,
 				34ED55ED1DC845B300D8CA37 /* AccidentAddressTableViewCell.xib */,
@@ -1400,26 +1408,26 @@
 		34AD20FA1DB0754E00A17B29 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				3476FFAB1DF7F3C900498A58 /* 0_all_normal.png */,
-				3476FFAC1DF7F3C900498A58 /* 0_all_pre.png */,
-				3476FFAD1DF7F3C900498A58 /* 1_basic_normal.png */,
-				3476FFAE1DF7F3C900498A58 /* 1_basic_pre.png */,
-				3476FFAF1DF7F3C900498A58 /* 2_process_normal.png */,
-				3476FFB01DF7F3C900498A58 /* 2_process_pre.png */,
-				3476FFB11DF7F3C900498A58 /* 3_hospital_normal.png */,
-				3476FFB21DF7F3C900498A58 /* 3_hospital_pre.png */,
-				3476FFB31DF7F3C900498A58 /* 4_salary_normal.png */,
-				3476FFB41DF7F3C900498A58 /* 4_salary_pre.png */,
-				3476FFB51DF7F3C900498A58 /* 5_work_normal.png */,
-				3476FFB61DF7F3C900498A58 /* 5_work_pre.png */,
-				3476FFB71DF7F3C900498A58 /* 6_houseregister_normal.png */,
-				3476FFB81DF7F3C900498A58 /* 6_houseregister_pre.png */,
-				3476FFB91DF7F3C900498A58 /* 7_raised_normal.png */,
-				3476FFBA1DF7F3C900498A58 /* 7_raised_pre.png */,
-				3476FFBB1DF7F3C900498A58 /* 8_disability_normal.png */,
-				3476FFBC1DF7F3C900498A58 /* 8_disability_pre.png */,
-				3476FFBD1DF7F3C900498A58 /* 9_death_mormal.png */,
-				3476FFBE1DF7F3C900498A58 /* 9_death_pre.png */,
+				3490CA421DFCF2870058AE67 /* 0_all_normal.png */,
+				3490CA431DFCF2870058AE67 /* 0_all_pre.png */,
+				3490CA441DFCF2870058AE67 /* 1_basic_normal.png */,
+				3490CA451DFCF2870058AE67 /* 1_basic_pre.png */,
+				3490CA461DFCF2870058AE67 /* 2_process_normal.png */,
+				3490CA471DFCF2870058AE67 /* 2_process_pre.png */,
+				3490CA481DFCF2870058AE67 /* 3_hospital_normal.png */,
+				3490CA491DFCF2870058AE67 /* 3_hospital_pre.png */,
+				3490CA4A1DFCF2870058AE67 /* 4_salary_normal.png */,
+				3490CA4B1DFCF2870058AE67 /* 4_salary_pre.png */,
+				3490CA4C1DFCF2870058AE67 /* 5_work_normal.png */,
+				3490CA4D1DFCF2870058AE67 /* 5_work_pre.png */,
+				3490CA4E1DFCF2870058AE67 /* 6_houseregister_normal.png */,
+				3490CA4F1DFCF2870058AE67 /* 6_houseregister_pre.png */,
+				3490CA501DFCF2870058AE67 /* 7_raised_normal.png */,
+				3490CA511DFCF2870058AE67 /* 7_raised_pre.png */,
+				3490CA521DFCF2870058AE67 /* 8_disability_normal.png */,
+				3490CA531DFCF2870058AE67 /* 8_disability_pre.png */,
+				3490CA541DFCF2870058AE67 /* 9_death_mormal.png */,
+				3490CA551DFCF2870058AE67 /* 9_death_pre.png */,
 				3415CC091DF691C200C6F8CF /* nor.png */,
 				3452451C1DF6867100A7D53B /* editor.png */,
 				3452451D1DF6867100A7D53B /* finish.png */,
@@ -2176,21 +2184,23 @@
 				34AD212D1DB0754E00A17B29 /* 3-1.png in Resources */,
 				34AD213C1DB0754E00A17B29 /* 地区下拉箭头.png in Resources */,
 				3447E1451DEC2B6300E31592 /* 2_process.png in Resources */,
+				3490CA561DFCF2870058AE67 /* 0_all_normal.png in Resources */,
 				34607C721DBF0A20006B8E2D /* 1-收藏空白页.png in Resources */,
-				3476FFC61DF7F3C900498A58 /* 3_hospital_pre.png in Resources */,
 				34AD21661DB0757C00A17B29 /* 8-搜索-1.png in Resources */,
 				34AD21361DB0754E00A17B29 /* 切图-全_r11_c5.png in Resources */,
 				3411F6301DF7206400CEFC35 /* 0-2跟踪员-5.fw_r2_c2.png in Resources */,
 				34AD21341DB0754E00A17B29 /* 切图-全_r11_c1.png in Resources */,
 				34AD216A1DB0757C00A17B29 /* 10-1.png in Resources */,
+				3490CA5C1DFCF2870058AE67 /* 3_hospital_normal.png in Resources */,
+				3490CA691DFCF2870058AE67 /* 9_death_pre.png in Resources */,
 				34AD217A1DB0757C00A17B29 /* 切图-跟踪.png in Resources */,
+				3490CA671DFCF2870058AE67 /* 8_disability_pre.png in Resources */,
 				34AD21681DB0757C00A17B29 /* 9-1.png in Resources */,
 				34AD21691DB0757C00A17B29 /* 9.png in Resources */,
 				34AD216E1DB0757C00A17B29 /* 13-1.png in Resources */,
+				3490CA621DFCF2870058AE67 /* 6_houseregister_normal.png in Resources */,
 				345321501DB8CBAD0055D178 /* 30.png in Resources */,
 				34AD212C1DB0754E00A17B29 /* 2.png in Resources */,
-				3476FFCA1DF7F3C900498A58 /* 5_work_pre.png in Resources */,
-				3476FFCF1DF7F3C900498A58 /* 8_disability_normal.png in Resources */,
 				346A511B1DEFBC3200D03AF7 /* 152.png in Resources */,
 				34AD213D1DB0754E00A17B29 /* 收藏_r1_c1.png in Resources */,
 				342F160C1DAB245F00C4AD9C /* SelectCityTableViewCell.xib in Resources */,
@@ -2198,13 +2208,14 @@
 				345245221DF6867100A7D53B /* finish.png in Resources */,
 				3447E14A1DEC2B6300E31592 /* 7_raised.png in Resources */,
 				34AD216C1DB0757C00A17B29 /* 12-1.png in Resources */,
+				3490CA651DFCF2870058AE67 /* 7_raised_pre.png in Resources */,
 				3452451B1DF6652A00A7D53B /* shaixuan.png in Resources */,
 				34AD21751DB0757C00A17B29 /* 17.png in Resources */,
 				344E7FCB1DE5986A008400FA /* DisabilityTableViewCell.xib in Resources */,
 				3447E1481DEC2B6300E31592 /* 5_work.png in Resources */,
 				346A511E1DEFBC3200D03AF7 /* 1024.png in Resources */,
+				3490CA681DFCF2870058AE67 /* 9_death_mormal.png in Resources */,
 				34AD212E1DB0754E00A17B29 /* 3-医疗理赔系统APP端-我的_r3_c2.png in Resources */,
-				3476FFC21DF7F3C900498A58 /* 1_basic_pre.png in Resources */,
 				34AD21251DB0754E00A17B29 /* 1-我的切图_r2_c1@2x.png in Resources */,
 				3437BCF71D9B5B83001DEC7B /* MineTableViewCell.xib in Resources */,
 				34AD213F1DB0754E00A17B29 /* 未命名-1_r1_c1.png in Resources */,
@@ -2220,19 +2231,17 @@
 				34772C1E1DB4B3F8009D51B0 /* FollowDetailTableViewCell.xib in Resources */,
 				34AD21381DB0754E00A17B29 /* 切图-全_r1_c3.png in Resources */,
 				3447E1461DEC2B6300E31592 /* 3_hospital.png in Resources */,
-				3476FFC81DF7F3C900498A58 /* 4_salary_pre.png in Resources */,
 				346A51141DEFBC3200D03AF7 /* 29.png in Resources */,
 				34AD21271DB0754E00A17B29 /* 1-我的切图_r5_c6@2x.png in Resources */,
-				3476FFC41DF7F3C900498A58 /* 2_process_pre.png in Resources */,
 				34AD21641DB0757C00A17B29 /* 5.png in Resources */,
 				340B87251DE6C661004D54ED /* 4s.png in Resources */,
 				34AD21421DB0754E00A17B29 /* 未命名-1_r2_c7.png in Resources */,
+				344CECC41DF94CD900C25870 /* ShowDetailLabelTableViewCell.xib in Resources */,
 				346A51181DEFBC3200D03AF7 /* 80.png in Resources */,
 				34AD216D1DB0757C00A17B29 /* 12.png in Resources */,
+				3490CA641DFCF2870058AE67 /* 7_raised_normal.png in Resources */,
 				3447E13A1DEC2B3800E31592 /* HomeCollectionViewCell.xib in Resources */,
-				3476FFCD1DF7F3C900498A58 /* 7_raised_normal.png in Resources */,
-				3476FFC11DF7F3C900498A58 /* 1_basic_normal.png in Resources */,
-				3476FFC31DF7F3C900498A58 /* 2_process_normal.png in Resources */,
+				3490CA5B1DFCF2870058AE67 /* 2_process_pre.png in Resources */,
 				44FE69BE1CBF5CEE00C2A8A5 /* LaunchScreen.storyboard in Resources */,
 				344E7FCF1DE59AEF008400FA /* 切图-跟踪_r2_c1.png in Resources */,
 				34AD21741DB0757C00A17B29 /* 17-1.png in Resources */,
@@ -2245,46 +2254,44 @@
 				345245251DF6867100A7D53B /* unfinished.png in Resources */,
 				3447E1491DEC2B6300E31592 /* 6_houseregister.png in Resources */,
 				3447E14B1DEC2B6300E31592 /* 8_disability.png in Resources */,
+				3490CA611DFCF2870058AE67 /* 5_work_pre.png in Resources */,
 				34AF949D1DBB197E00D84254 /* 32.png in Resources */,
 				34AD212B1DB0754E00A17B29 /* 2-1.png in Resources */,
 				3447E1351DEBF84400E31592 /* home img.png in Resources */,
+				3490CA5D1DFCF2870058AE67 /* 3_hospital_pre.png in Resources */,
 				344C5AB01DD0690200584668 /* DealNameTableViewCell.xib in Resources */,
 				34AD216F1DB0757C00A17B29 /* 13.png in Resources */,
 				34AD212F1DB0754E00A17B29 /* 3.png in Resources */,
+				3490CA581DFCF2870058AE67 /* 1_basic_normal.png in Resources */,
 				34AF94971DBB104500D84254 /* mapapi.bundle in Resources */,
-				3476FFBF1DF7F3C900498A58 /* 0_all_normal.png in Resources */,
 				34AD21721DB0757C00A17B29 /* 16-1.png in Resources */,
 				345B2E9D1DED413400A8852C /* 10-空白页_r2_c2.png in Resources */,
-				3476FFC01DF7F3C900498A58 /* 0_all_pre.png in Resources */,
 				44FE6A751CBF650500C2A8A5 /* MBProgressHUD.bundle in Resources */,
 				34D95C7A1D9E32670092ECD3 /* ToolCollectionViewCell.xib in Resources */,
 				34AD212A1DB0754E00A17B29 /* 1.png in Resources */,
 				34AD21391DB0754E00A17B29 /* 切图-全_r1_c5.png in Resources */,
 				34AD21291DB0754E00A17B29 /* 1-我的切图_r6_c4@2x.png in Resources */,
-				3476FFC51DF7F3C900498A58 /* 3_hospital_normal.png in Resources */,
+				3490CA5F1DFCF2870058AE67 /* 4_salary_pre.png in Resources */,
 				34AD21211DB0754E00A17B29 /* 1-1.png in Resources */,
-				3476FFCB1DF7F3C900498A58 /* 6_houseregister_normal.png in Resources */,
 				34AD21261DB0754E00A17B29 /* 1-我的切图_r2_c4@2x.png in Resources */,
-				3476FFCE1DF7F3C900498A58 /* 7_raised_pre.png in Resources */,
 				34AD21331DB0754E00A17B29 /* IOS-@3X.png in Resources */,
 				34DF309A1DC88D8C00EC6B57 /* AccidentTimeTableViewCell.xib in Resources */,
 				34AD21651DB0757C00A17B29 /* 6.png in Resources */,
 				34AF949C1DBB197E00D84254 /* 31.png in Resources */,
 				34AD21241DB0754E00A17B29 /* 1-我的切图_r1_c6@2x.png in Resources */,
-				3476FFC71DF7F3C900498A58 /* 4_salary_normal.png in Resources */,
 				346A511C1DEFBC3200D03AF7 /* 180.png in Resources */,
-				3476FFD21DF7F3C900498A58 /* 9_death_pre.png in Resources */,
 				3413629E1DAA1BC700FF17DC /* city.plist in Resources */,
 				34607C731DBF0A20006B8E2D /* 2-搜索空白页.png in Resources */,
 				34AD21701DB0757C00A17B29 /* 15-1.png in Resources */,
+				3490CA5A1DFCF2870058AE67 /* 2_process_normal.png in Resources */,
 				3437BD1D1D9BA21B001DEC7B /* PersonalInformationTableViewCell3.xib in Resources */,
-				3476FFCC1DF7F3C900498A58 /* 6_houseregister_pre.png in Resources */,
 				34AD21351DB0754E00A17B29 /* 切图-全_r11_c3.png in Resources */,
+				3490CA5E1DFCF2870058AE67 /* 4_salary_normal.png in Resources */,
 				3475F2531DD1713B00F4D01F /* MedicalVisitTableViewCell.xib in Resources */,
+				3490CA571DFCF2870058AE67 /* 0_all_pre.png in Resources */,
 				34839C441DB8B562002EB9BD /* DeleteContactTableViewCell.xib in Resources */,
 				34D95C7F1D9E43AB0092ECD3 /* ToolTableViewCell.xib in Resources */,
 				340B87281DE6C661004D54ED /* 6s.png in Resources */,
-				3476FFD01DF7F3C900498A58 /* 8_disability_pre.png in Resources */,
 				34AD21441DB0754E00A17B29 /* 登录icon.png in Resources */,
 				346A511A1DEFBC3200D03AF7 /* 120.png in Resources */,
 				34AD217E1DB0757C00A17B29 /* r.png in Resources */,
@@ -2301,14 +2308,14 @@
 				345CF2F41DDE9A4800EBB824 /* DefaultCellTableViewCell.xib in Resources */,
 				345245231DF6867100A7D53B /* pre.png in Resources */,
 				34607C761DBF2388006B8E2D /* 14-地图_r2_c2(2).png in Resources */,
-				3476FFC91DF7F3C900498A58 /* 5_work_normal.png in Resources */,
 				34AD217F1DB0757C00A17B29 /* t.png in Resources */,
 				340B87261DE6C661004D54ED /* 5s.png in Resources */,
 				34AD21431DB0754E00A17B29 /* 标签.png in Resources */,
-				3476FFD11DF7F3C900498A58 /* 9_death_mormal.png in Resources */,
 				34ED55EF1DC845B300D8CA37 /* AccidentAddressTableViewCell.xib in Resources */,
+				3490CA631DFCF2870058AE67 /* 6_houseregister_pre.png in Resources */,
 				346A51171DEFBC3200D03AF7 /* 76.png in Resources */,
 				34AD21731DB0757C00A17B29 /* 16.png in Resources */,
+				3490CA661DFCF2870058AE67 /* 8_disability_normal.png in Resources */,
 				34AD21771DB0757C00A17B29 /* 19.png in Resources */,
 				34AD21221DB0754E00A17B29 /* 1-切图.fw.png in Resources */,
 				34AD216B1DB0757C00A17B29 /* 10.png in Resources */,
@@ -2330,11 +2337,13 @@
 				34710D441DDC3704000840EF /* AddDiagnoseDetailTableViewCell.xib in Resources */,
 				345245241DF6867100A7D53B /* timeout.png in Resources */,
 				34AD217D1DB0757C00A17B29 /* q.png in Resources */,
+				3490CA591DFCF2870058AE67 /* 1_basic_pre.png in Resources */,
 				34AD21801DB0757C00A17B29 /* w.png in Resources */,
 				34AD21791DB0757C00A17B29 /* 21.png in Resources */,
 				3437BD181D9BA209001DEC7B /* PersonalInformationTableViewCell2.xib in Resources */,
 				347127E41DE4228C008B2B8E /* DeleteBringUpTableViewCell.xib in Resources */,
 				340B87271DE6C661004D54ED /* 6p.png in Resources */,
+				3490CA601DFCF2870058AE67 /* 5_work_normal.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2425,6 +2434,7 @@
 				34AD21871DB0A38F00A17B29 /* FollowPlatFormViewCell.m in Sources */,
 				3437BCF61D9B5B83001DEC7B /* MineTableViewCell.m in Sources */,
 				34FAF96D1D9A672B00D2FABC /* TabBarViewController.m in Sources */,
+				344CECC31DF94CD900C25870 /* ShowDetailLabelTableViewCell.m in Sources */,
 				34ED55EE1DC845B300D8CA37 /* AccidentAddressTableViewCell.m in Sources */,
 				44DCD6F01CE57DCE0052C52B /* NSObject+DHF.m in Sources */,
 				344C5AAB1DD067CC00584668 /* EditDealInfoViewController.m in Sources */,

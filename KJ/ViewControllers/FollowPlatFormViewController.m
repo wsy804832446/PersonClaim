@@ -208,14 +208,14 @@
     cell.lblName.text = claimModel.insuredName;
     cell.lblTime.text = taskModel.dispatchDate;
     cell.lblTime.textColor = [UIColor colorWithHexString:Colorgray];
-    cell.lblNum.text = [NSString stringWithFormat:@"报案号:%@",claimModel.reportNo];
+    cell.lblNum.text =claimModel.reportNo;
     cell.lblNum.textColor = [UIColor colorWithHexString:Colorgray];
     cell.lblState.layer.masksToBounds = YES;
     cell.lblState.layer.borderWidth =1;
     cell.lblState.layer.cornerRadius =4;
     cell.lblState.font = [UIFont systemFontOfSize:12];
     cell.lblTaskType.layer.masksToBounds = YES;
-    cell.lblTaskType.layer.cornerRadius = 10;
+    cell.lblTaskType.layer.cornerRadius = 16;
     cell.lblTaskType.backgroundColor = [UIColor colorWithHexString:@"#9DC5F9"];
     cell.lblTaskType.textColor = [UIColor colorWithHexString:Colorwhite];
     if ([taskModel.taskType isEqualToString:@"01"]) {cell.lblTaskType.text = @"医";
