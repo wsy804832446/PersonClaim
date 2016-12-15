@@ -18,8 +18,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E51-L3-jkM">
-                        <rect key="frame" x="15" y="14" width="290" height="15"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E51-L3-jkM">
+                        <rect key="frame" x="95" y="10" width="210" height="23"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -28,23 +28,36 @@
                         <rect key="frame" x="15" y="0.0" width="290" height="1"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="1" id="vDI-Vh-fNQ"/>
+                            <constraint firstAttribute="height" constant="0.5" id="vDI-Vh-fNQ"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bxy-GL-QQW">
+                        <rect key="frame" x="15" y="10" width="80" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="1KN-jF-17F"/>
+                            <constraint firstAttribute="width" constant="80" id="XsH-RH-Tio"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="E51-L3-jkM" secondAttribute="bottom" constant="14" id="C5r-IN-NwE"/>
+                    <constraint firstItem="E51-L3-jkM" firstAttribute="leading" secondItem="bxy-GL-QQW" secondAttribute="trailing" id="6DB-Ey-BDU"/>
+                    <constraint firstItem="E51-L3-jkM" firstAttribute="top" secondItem="bxy-GL-QQW" secondAttribute="top" id="ADH-fm-KXe"/>
+                    <constraint firstAttribute="bottom" secondItem="E51-L3-jkM" secondAttribute="bottom" constant="10" id="C5r-IN-NwE"/>
                     <constraint firstAttribute="trailing" secondItem="E51-L3-jkM" secondAttribute="trailing" constant="15" id="DEu-3Q-2Lg"/>
-                    <constraint firstItem="E51-L3-jkM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="Ltc-Aw-w0c"/>
+                    <constraint firstItem="E51-L3-jkM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Ltc-Aw-w0c"/>
+                    <constraint firstItem="bxy-GL-QQW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="R3t-dW-Fpn"/>
                     <constraint firstItem="V0t-4e-IZf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Sqe-KM-ceR"/>
                     <constraint firstItem="V0t-4e-IZf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Utf-5B-PyT"/>
-                    <constraint firstItem="E51-L3-jkM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="aCM-Fb-smw"/>
                     <constraint firstAttribute="trailing" secondItem="V0t-4e-IZf" secondAttribute="trailing" constant="15" id="sky-WY-a6l"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="lblShowDetail" destination="E51-L3-jkM" id="wWk-R1-IhL"/>
-                <outlet property="line" destination="V0t-4e-IZf" id="4Q4-td-dne"/>
+                <outlet property="lblTitle" destination="bxy-GL-QQW" id="HLF-sv-3vv"/>
+                <outlet property="line" destination="V0t-4e-IZf" id="5Mx-xq-bne"/>
             </connections>
         </tableViewCell>
     </objects>

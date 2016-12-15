@@ -38,7 +38,7 @@
                         <rect key="frame" x="15" y="0.0" width="290" height="1"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="1" id="BnZ-bP-0ig"/>
+                            <constraint firstAttribute="height" constant="0.5" id="BnZ-bP-0ig"/>
                         </constraints>
                     </view>
                 </subviews>

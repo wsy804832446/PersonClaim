@@ -281,10 +281,26 @@
     }
     ClaimModel *claimModel =self.dataArray[indexPath.section];
     TaskModel *taskModel= claimModel.taskArr[indexPath.row];
+    taskModel.deadline = taskModel.dispatchDate;
     cell.lblName.text = claimModel.insuredName;
-    cell.lblTime.text = taskModel.dispatchDate;
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *Date = [formatter dateFromString:taskModel.dispatchDate];
+    NSDate *currenteDate = [NSDate date];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *component = [calendar components:NSCalendarUnitYear fromDate:currenteDate];
+    NSUInteger currentYear = [component year];
+    component = [calendar components:NSCalendarUnitYear fromDate:Date];
+    NSUInteger taskYear = [component year];
+    if (currentYear ==taskYear) {
+        [formatter setDateFormat:@"MM-dd HH:mm"];
+    }else{
+        [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    }
+    NSString *dateStr = [formatter stringFromDate:Date];
+    cell.lblTime.text = dateStr;
     cell.lblTime.textColor = [UIColor colorWithHexString:Colorgray];
-    cell.lblNum.text = [NSString stringWithFormat:@"报案号:%@",claimModel.reportNo];
+    cell.lblNum.text = claimModel.reportNo;
     cell.lblNum.textColor = [UIColor colorWithHexString:Colorgray];
     cell.lblState.layer.masksToBounds = YES;
     cell.lblState.layer.borderWidth =1;

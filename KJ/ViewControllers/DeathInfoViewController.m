@@ -69,16 +69,65 @@
     // Do any additional setup after loading the view.
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    return 2;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 7;
+    if (section ==0) {
+        return 5;
+    }else{
+        return 2;
+    }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 0.01;
 }
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 10;
+}
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if ((indexPath.section == 0&&indexPath.row ==1)||(indexPath.section == 0&&indexPath.row ==3)) {
+    if (indexPath.section ==0&&indexPath.row == 0){
+        AccidentTimeTableViewCell *cell = [[[NSBundle mainBundle]loadNibNamed:@"AccidentTimeTableViewCell" owner:nil options:nil]firstObject];
+        cell.lblLine.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
+        cell.lblTitle.text = @"死亡时间";
+        if (self.infoModel.deathDate.length>0) {
+            [cell.btnTime setTitle:self.infoModel.deathDate forState:UIControlStateNormal];
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell.btnTime addTarget:self action:@selector(selectTime:) forControlEvents:UIControlEventTouchUpInside];
+        return cell;
+    }else if (indexPath.section ==0 &&indexPath.row ==1){
+        AccidentAddressTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AccidentAddressCell"];
+        if (!cell) {
+            NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"AccidentAddressTableViewCell" owner:nil options:nil];
+            if (nib.count>0) {
+                cell = [nib firstObject];
+            }
+        }
+        cell.lblTitle.text = @"死亡地点";
+        if (self.infoModel.deathAddress.length>0) {
+            cell.txtDetail.text = self.infoModel.deathAddress;
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.txtDetail.delegate =self;
+        cell.txtDetail.tag = 1000;
+        if (cell.txtDetail.text.length ==0) {
+            cell.lblPlaceHolder.hidden = NO;
+        }else{
+            cell.lblPlaceHolder.hidden = YES;
+        }
+        WeakSelf(DeathInfoViewController);
+        __weak AccidentAddressTableViewCell *weakCell = cell;
+        [cell setBtnClickBlock:^{
+            AccidentAddressViewController *vc = [[AccidentAddressViewController alloc]init];
+            [vc setSelectAddressBlock:^(NSString *address) {
+                [weakCell configCellWithAddress:address];
+                self.infoModel.deathAddress = address;
+                [self.tableView reloadData];
+            }];
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        }];
+        return cell;
+    }else if (indexPath.section == 0&&indexPath.row ==3) {
         DealNameTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DealNameCell"];
         if (!cell) {
             NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"DealNameTableViewCell" owner:nil options:nil];
@@ -86,33 +135,15 @@
                 cell = [nib firstObject];
             }
         }
-        if ((indexPath.section == 0&&indexPath.row ==1)) {
-            cell.lblTitle.text = @"参与度";
-            if (self.infoModel.lnvolvement.length>0) {
-                cell.txtName.text =self.infoModel.lnvolvement;
-            }
-            cell.txtName.tag = 5000;
-            cell.txtName.keyboardType = UIKeyboardTypeDecimalPad;
-        }else{
-            if (self.infoModel.deathAddress.length>0) {
-                cell.txtName.text =self.infoModel.deathAddress;
-            }
-            cell.lblTitle.text = @"死亡地点";
-            cell.txtName.tag = 5001;
+        cell.lblTitle.text = @"参与度";
+        if (self.infoModel.lnvolvement.length>0) {
+            cell.txtName.text =self.infoModel.lnvolvement;
         }
+        cell.txtName.tag = 5000;
+        cell.txtName.keyboardType = UIKeyboardTypeDecimalPad;
         [cell.txtName addTarget:self action:@selector(txtChange:) forControlEvents:UIControlEventEditingChanged];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.lblTitle.textColor = [UIColor colorWithHexString:@"#666666"];
-        return cell;
-    }else if (indexPath.section ==0&&indexPath.row == 2){
-        AccidentTimeTableViewCell *cell = [[[NSBundle mainBundle]loadNibNamed:@"AccidentTimeTableViewCell" owner:nil options:nil]firstObject];
-        cell.lblLine.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
-        cell.lblTitle.text = @"死亡日期";
-        if (self.infoModel.deathDate.length>0) {
-            [cell.btnTime setTitle:self.infoModel.deathDate forState:UIControlStateNormal];
-        }
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [cell.btnTime addTarget:self action:@selector(selectTime:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }else if (indexPath.section ==0 &&indexPath.row ==4){
         PictureTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PictureCell"];
@@ -137,7 +168,7 @@
             }
         }];
         return cell;
-    }else if (indexPath.section ==0 &&indexPath.row ==5){
+    }else if (indexPath.section ==1 &&indexPath.row ==1){
         AccidentAddressTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AccidentAddressCell"];
         if (!cell) {
             NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"AccidentAddressTableViewCell" owner:nil options:nil];
@@ -155,17 +186,17 @@
         }
         [cell.btnMap removeFromSuperview];
         return cell;
-    }else if ((indexPath.section ==0 &&indexPath.row ==0)||(indexPath.section ==0 &&indexPath.row ==6)){
+    }else if ((indexPath.section ==0 &&indexPath.row ==2)||(indexPath.section ==1 &&indexPath.row ==0)){
         AccidentTimeTableViewCell *cell = [[[NSBundle mainBundle]loadNibNamed:@"AccidentTimeTableViewCell" owner:nil options:nil]firstObject];
-        if (indexPath.section ==0 &&indexPath.row ==0){
+        if (indexPath.section ==0 &&indexPath.row ==2){
             cell.lblTitle.text = @"死亡原因";
-            cell.lblLine.backgroundColor = [UIColor colorWithHexString:Colorwhite];
             SelectList *model = self.infoModel.deathReason;
             if (model.value.length>0) {
                 [cell.btnTime setTitle:model.value forState:UIControlStateNormal];
             }
-        }else if (indexPath.section ==0 &&indexPath.row ==6){
+        }else if (indexPath.section ==1 &&indexPath.row ==0){
             cell.lblTitle.text = @"完成情况";
+            [cell.lblLine removeFromSuperview];
             ItemTypeModel *model = self.infoModel.finishFlag;
             if (model.title.length>0) {
                 [cell.btnTime setTitle:model.title forState:UIControlStateNormal];
@@ -280,7 +311,7 @@
     return _pickView;
 }
 - (void)doneAction:(UIButton *)btn {
-    AccidentTimeTableViewCell *cell =[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+    AccidentTimeTableViewCell *cell =[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     [cell.btnTime setTitle:[_formatter stringFromDate:_pickView.date] forState:UIControlStateNormal];
     self.infoModel.deathDate =[_formatter stringFromDate:_pickView.date];
     [cell.btnTime setTitleColor:[UIColor colorWithHexString:Colorblack] forState:UIControlStateNormal];
@@ -313,19 +344,19 @@
 }
 -(void)textViewDidChange:(UITextView *)textView{
     AccidentAddressTableViewCell *cell;
-    if (textView.tag == 1001){
-        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:7 inSection:0]];
-        self.infoModel.houseAddress = textView.text;
-    }else if (textView.tag == 1002){
-        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:2]];
-        self.infoModel.remark = textView.text;
-    }
-    if (textView.text.length>0) {
-        cell.lblPlaceHolder.hidden = YES;
-    }else{
-        if (textView.tag != 1002) {
-            cell.lblPlaceHolder.hidden = NO;
+    if (textView.tag == 1000){
+        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        self.infoModel.deathAddress = textView.text;
+        if (textView.text.length>0) {
+            cell.lblPlaceHolder.hidden = YES;
+        }else{
+            if (textView.tag != 1002) {
+                cell.lblPlaceHolder.hidden = NO;
+            }
         }
+    }else if (textView.tag == 1002){
+        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]];
+        self.infoModel.remark = textView.text;
     }
     CGRect frame = textView.frame;
     CGSize constraintSize = CGSizeMake(frame.size.width, MAXFLOAT);
@@ -515,11 +546,7 @@
     return _unUploadImageArray;
 }
 -(void)txtChange:(UITextField *)txt{
-    if (txt.tag == 5000) {
-        self.infoModel.lnvolvement =txt.text;
-    }else{
-        self.infoModel.deathAddress =txt.text;
-    }
+    self.infoModel.lnvolvement =txt.text;
     txt.frame = CGRectMake(DeviceSize.width-15-txt.text.length*16, txt.frame.origin.y, txt.text.length*16, txt.frame.size.height);
 }
 - (void)setUpForDismissKeyboard {

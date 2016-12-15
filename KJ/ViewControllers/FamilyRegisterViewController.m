@@ -77,31 +77,37 @@
     // Do any additional setup after loading the view.
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return 6;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
-        return 11;
-    }else if(section == 1){
-        return self.askPeopleArray.count;
-    }else {
         return 3;
+    }else if(section == 1){
+        return 4;
+    }else if(section == 2){
+        return 4;
+    }else if(section == 3){
+        return self.askPeopleArray.count;
+    }else if(section == 4){
+        return 1;
+    }else{
+        return 2;
     }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section == 1){
+    if (section == 3){
         return 44;
     }else{
         return 0.01;
     }
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    if (section == 1) {
+    if (section == 3) {
         UIView *vc = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DeviceSize.width, 44)];
         vc.backgroundColor = [UIColor colorWithHexString:Colorwhite];
-        UIView *line =[[UIView alloc]initWithFrame:CGRectMake(15, 0, DeviceSize.width-30, 1)];
-        line.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
-        [vc addSubview:line];
+//        UIView *line =[[UIView alloc]initWithFrame:CGRectMake(15, 0, DeviceSize.width-30, 1)];
+//        line.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
+//        [vc addSubview:line];
         UILabel *lblContact = [[UILabel alloc]initWithFrame:CGRectMake(15, 1, 100, 41)];
         lblContact.text = @"被询问人";
         lblContact.backgroundColor =[UIColor colorWithHexString:Colorwhite];
@@ -119,6 +125,9 @@
         return nil;
     }
 }
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 10;
+}
 -(void)addContact{
     InsiderViewController *vc = [[InsiderViewController alloc]init];
     [vc setSaveInsiderBlock:^(NSMutableArray *insiderArray) {
@@ -129,7 +138,7 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if ((indexPath.section == 0&&indexPath.row ==4)||(indexPath.section == 0&&indexPath.row ==5)||(indexPath.section == 0&&indexPath.row ==10)) {
+    if ((indexPath.section == 1&&indexPath.row ==2)||(indexPath.section == 1&&indexPath.row ==3)||(indexPath.section == 2&&indexPath.row ==3)) {
         DealNameTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DealNameCell"];
         if (!cell) {
             NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"DealNameTableViewCell" owner:nil options:nil];
@@ -137,20 +146,20 @@
                 cell = [nib firstObject];
             }
         }
-        if ((indexPath.section == 0&&indexPath.row ==4)) {
+        if ((indexPath.section == 1&&indexPath.row ==2)) {
             cell.lblTitle.text = @"子女人数";
             cell.txtName.tag = 5001;
             if (self.infoModel.sonCount.length>0) {
                 cell.txtName.text = self.infoModel.sonCount;
             }
-        }else if ((indexPath.section == 0&&indexPath.row ==5)){
-            cell.lblTitle.text = @"兄弟姐妹人数";
+        }else if ((indexPath.section == 1&&indexPath.row ==3)){
+            cell.lblTitle.text = @"姊妹人数";
             cell.txtName.tag = 5002;
             if (self.infoModel.bratherCount.length>0) {
                 cell.txtName.text = self.infoModel.bratherCount;
             }
         }else{
-            cell.lblTitle.text = @"连续居住年限";
+            cell.lblTitle.text = @"居住年限";
             cell.txtName.tag = 5003;
             if (self.infoModel.liveStay.length>0) {
                 cell.txtName.text = self.infoModel.liveStay;
@@ -161,16 +170,16 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.lblTitle.textColor = [UIColor colorWithHexString:@"#666666"];
         return cell;
-    }else if ((indexPath.section ==0 &&indexPath.row ==8)||(indexPath.section ==0&&indexPath.row ==9)){
+    }else if ((indexPath.section ==2 &&indexPath.row ==1)||(indexPath.section ==2&&indexPath.row ==2)){
         AccidentTimeTableViewCell *cell = [[[NSBundle mainBundle]loadNibNamed:@"AccidentTimeTableViewCell" owner:nil options:nil]firstObject];
-        if (indexPath.section ==0 &&indexPath.row ==8){
-            cell.lblTitle.text = @"开始居住时间";
+        if (indexPath.section ==2 &&indexPath.row ==1){
+            cell.lblTitle.text = @"居住开始时间";
             cell.btnTime.tag =3000;
             if (self.infoModel.liveStartDate.length>0) {
                 [cell.btnTime setTitle:self.infoModel.liveStartDate forState:UIControlStateNormal];
             }
-        }else if (indexPath.section ==0 &&indexPath.row ==9){
-            cell.lblTitle.text = @"结束居住时间";
+        }else if (indexPath.section ==2 &&indexPath.row ==2){
+            cell.lblTitle.text = @"居住结束时间";
             cell.btnTime.tag =3001;
             if (self.infoModel.liveEndDate.length>0) {
                 [cell.btnTime setTitle:self.infoModel.liveEndDate forState:UIControlStateNormal];
@@ -179,7 +188,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell.btnTime addTarget:self action:@selector(selectTime:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
-    }else if (indexPath.section ==1){
+    }else if (indexPath.section ==3){
         ContactPeopleModel *model = self.askPeopleArray[indexPath.row];
         PersonalInformationTableViewCell3 *cell = [tableView dequeueReusableCellWithIdentifier:@"PersonalInformationCell3"];
         if (!cell) {
@@ -194,7 +203,7 @@
         cell.labelRight.textColor = [UIColor colorWithHexString:Colorgray];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
-    }else if (indexPath.section ==0 &&indexPath.row ==7){
+    }else if (indexPath.section ==2 &&indexPath.row ==0){
         AccidentAddressTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AccidentAddressCell"];
         if (!cell) {
             NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"AccidentAddressTableViewCell" owner:nil options:nil];
@@ -205,6 +214,9 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.txtDetail.delegate =self;
         cell.txtDetail.tag = 1001;
+        if (self.infoModel.houseAddress.length>0) {
+            cell.txtDetail.text =self.infoModel.houseAddress;
+        }
         if (cell.txtDetail.text.length ==0) {
             cell.lblPlaceHolder.hidden = NO;
         }else{
@@ -221,12 +233,10 @@
             }];
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }];
-        if (self.infoModel.houseAddress.length>0) {
-            cell.txtDetail.text =self.infoModel.houseAddress;
-        }
         cell.lblTitle.text = @"居住地址";
+        [cell.lblLine removeFromSuperview];
         return cell;
-    }else if (indexPath.section ==2 &&indexPath.row ==0){
+    }else if (indexPath.section ==4){
         PictureTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PictureCell"];
         if (!cell) {
             NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"PictureTableViewCell" owner:nil options:nil];
@@ -234,6 +244,7 @@
                 cell = [nib firstObject];
             }
         }
+        [cell.lblLine removeFromSuperview];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         //取出model里所有图片
         NSMutableArray *array = [NSMutableArray array];
@@ -249,7 +260,7 @@
             }
         }];
         return cell;
-    }else if (indexPath.section ==2 &&indexPath.row ==1){
+    }else if (indexPath.section ==5 &&indexPath.row ==1){
         AccidentAddressTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AccidentAddressCell"];
         if (!cell) {
             NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"AccidentAddressTableViewCell" owner:nil options:nil];
@@ -267,7 +278,7 @@
             cell.txtDetail.text =self.infoModel.remark;
         }
         return cell;
-    }else if ((indexPath.section ==0 &&indexPath.row <4)||(indexPath.section ==0 &&indexPath.row ==6)||(indexPath.section ==2 &&indexPath.row ==2)){
+    }else if ((indexPath.section ==0 &&indexPath.row <3)||(indexPath.section ==1 &&indexPath.row <2)||(indexPath.section ==5 &&indexPath.row ==0)){
         AccidentTimeTableViewCell *cell = [[[NSBundle mainBundle]loadNibNamed:@"AccidentTimeTableViewCell" owner:nil options:nil]firstObject];
         if (indexPath.section ==0 &&indexPath.row ==0){
             cell.lblTitle.text = @"户籍地";
@@ -283,26 +294,28 @@
                 [cell.btnTime setTitle:model.value forState:UIControlStateNormal];
             }
 
-        }else if (indexPath.section ==0 &&indexPath.row ==2){
-            cell.lblTitle.text = @"父亲";
+        }else if (indexPath.section ==1 &&indexPath.row ==0){
+            cell.lblTitle.text = @"父亲状况";
+            [cell.lblLine removeFromSuperview];
             ItemTypeModel *model = self.infoModel.fatherExt;
             if (model.title.length>0) {
                 [cell.btnTime setTitle:model.title forState:UIControlStateNormal];
             }
-        }else if (indexPath.section ==0 &&indexPath.row ==3){
-            cell.lblTitle.text = @"母亲";
+        }else if (indexPath.section ==1 &&indexPath.row ==1){
+            cell.lblTitle.text = @"母亲状况";
             ItemTypeModel *model = self.infoModel.matherExt;
             if (model.title.length>0) {
                 [cell.btnTime setTitle:model.title forState:UIControlStateNormal];
             }
-        }else if (indexPath.section ==0 &&indexPath.row ==6){
+        }else if (indexPath.section ==0 &&indexPath.row ==2){
             cell.lblTitle.text = @"户籍地居住";
             ItemTypeModel *model = self.infoModel.addressBeTrue;
             if (model.title.length>0) {
                 [cell.btnTime setTitle:model.title forState:UIControlStateNormal];
             }
-        }else if (indexPath.section ==2 &&indexPath.row ==2){
+        }else if (indexPath.section ==5 &&indexPath.row ==0){
             cell.lblTitle.text = @"完成情况";
+            [cell.lblLine removeFromSuperview];
             ItemTypeModel *model = self.infoModel.finishFlag;
             if (model.title.length>0) {
                 [cell.btnTime setTitle:model.title forState:UIControlStateNormal];
@@ -453,10 +466,10 @@
     UIView *vc = btn.superview;
     AccidentTimeTableViewCell *cell;
     if (vc.tag == 3000) {
-        cell=[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:8 inSection:0]];
+        cell=[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:2]];
         self.infoModel.liveStartDate =[_formatter stringFromDate:_pickView.date];
     }else{
-        cell=[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:9 inSection:0]];
+        cell=[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:2]];
         self.infoModel.liveEndDate =[_formatter stringFromDate:_pickView.date];
     }
     
@@ -490,19 +503,20 @@
 -(void)textViewDidChange:(UITextView *)textView{
     AccidentAddressTableViewCell *cell;
     if(textView.tag == 1001){
-        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:7 inSection:0]];
+        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2]];
         self.infoModel.houseAddress = textView.text;
+        if (textView.text.length>0) {
+            cell.lblPlaceHolder.hidden = YES;
+        }else{
+            if (textView.tag != 1002) {
+                cell.lblPlaceHolder.hidden = NO;
+            }
+        }
     }else if (textView.tag == 1002){
-        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:2]];
+        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:5]];
         self.infoModel.remark = textView.text;
     }
-    if (textView.text.length>0) {
-        cell.lblPlaceHolder.hidden = YES;
-    }else{
-        if (textView.tag != 1002) {
-            cell.lblPlaceHolder.hidden = NO;
-        }
-    }
+   
     CGRect frame = textView.frame;
     CGSize constraintSize = CGSizeMake(frame.size.width, MAXFLOAT);
     CGSize size = [textView sizeThatFits:constraintSize];

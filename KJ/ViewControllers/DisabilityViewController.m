@@ -76,11 +76,11 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
-        return 3;
+        return 5;
     }else if (section == 1){
         return self.levelArray.count;
     }else{
-        return 5;
+        return 2;
     }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -94,11 +94,11 @@
     if (section == 1) {
         UIView *vc = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DeviceSize.width, 44)];
         vc.backgroundColor = [UIColor colorWithHexString:Colorwhite];
-        UIView *line =[[UIView alloc]initWithFrame:CGRectMake(15, 0, DeviceSize.width-30, 1)];
-        line.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
-        [vc addSubview:line];
+//        UIView *line =[[UIView alloc]initWithFrame:CGRectMake(15, 0, DeviceSize.width-30, 1)];
+//        line.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
+//        [vc addSubview:line];
         UILabel *lblContact = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, 70, 41)];
-        lblContact.text = @"伤残信息";
+        lblContact.text = @"伤残等级";
         lblContact.textColor = [UIColor colorWithHexString:@"#666666"];
         lblContact.font = [UIFont systemFontOfSize:15];
         [vc addSubview:lblContact];
@@ -113,6 +113,9 @@
         return nil;
     }
 }
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 10;
+}
 -(void)addDisability{
     SelectDisabilityTypeViewController *vc = [[SelectDisabilityTypeViewController alloc]init];
     [vc setSelectBlock:^(NSMutableArray *array) {
@@ -123,9 +126,9 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if ((indexPath.section == 2&&indexPath.row ==0)||(indexPath.section == 0&&indexPath.row ==1)) {
+    if ((indexPath.section == 0&&indexPath.row ==2)||(indexPath.section == 0&&indexPath.row ==1)) {
         DealNameTableViewCell *cell = [[[NSBundle mainBundle]loadNibNamed:@"DealNameTableViewCell" owner:nil options:nil]firstObject];
-        if (indexPath.row == 0) {
+        if (indexPath.row == 2) {
             cell.lblTitle.text = @"伤残赔偿系数";
             if (self.infoModel.ratio.length>0) {
                 cell.txtName.text =self.infoModel.ratio;
@@ -144,7 +147,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.lblTitle.textColor = [UIColor colorWithHexString:@"#666666"];
         return cell;
-    }else if (indexPath.section ==2 &&indexPath.row ==2){
+    }else if (indexPath.section ==0 &&indexPath.row ==4){
         PictureTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PictureCell"];
         if (!cell) {
             NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"PictureTableViewCell" owner:nil options:nil];
@@ -167,12 +170,12 @@
             }
         }];
         return cell;
-    }else if ((indexPath.section ==2 &&indexPath.row ==1)||(indexPath.section ==2 &&indexPath.row ==3 )){
+    }else if ((indexPath.section ==0 &&indexPath.row ==3)||(indexPath.section ==2 &&indexPath.row ==1 )){
         AccidentAddressTableViewCell *cell = [[[NSBundle mainBundle]loadNibNamed:@"AccidentAddressTableViewCell" owner:nil options:nil]firstObject];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.txtDetail.delegate =self;
         cell.lblPlaceHolder.hidden = YES;
-        if (indexPath.row == 1) {
+        if (indexPath.row == 3) {
             cell.lblTitle.text = @"伤残描述";
             cell.txtDetail.tag =1000;
             if (self.infoModel.disabilityDescribe.length>0) {
@@ -187,9 +190,9 @@
         }
         [cell.btnMap removeFromSuperview];
         return cell;
-    }else if ((indexPath.section ==2 &&indexPath.row ==4)||(indexPath.section ==0 &&indexPath.row ==0)){
+    }else if ((indexPath.section ==2 &&indexPath.row ==0)||(indexPath.section ==0 &&indexPath.row ==0)){
         AccidentTimeTableViewCell *cell = [[[NSBundle mainBundle]loadNibNamed:@"AccidentTimeTableViewCell" owner:nil options:nil]firstObject];
-        if (indexPath.row == 0) {
+        if (indexPath.section == 0) {
             cell.lblLine.backgroundColor =[UIColor colorWithHexString:Colorwhite];
             cell.lblTitle.text = @"鉴定机构";
             cell.btnTime.tag = 4000;
@@ -200,6 +203,7 @@
         }else{
             cell.lblTitle.text = @"完成情况";
             cell.btnTime.tag = 4001;
+            [cell.lblLine removeFromSuperview];
             ItemTypeModel *model = self.infoModel.finishFlag;
             if (model.title.length>0) {
                 [cell.btnTime setTitle:model.title forState:UIControlStateNormal];
@@ -217,100 +221,11 @@
             }
         }
         DisabilityModel *model = self.levelArray[indexPath.row];
-        cell.lblTitle.text = model.disabilityCode;
+        cell.lblTitle.text = [NSString stringWithFormat:@"%@[%@]",model.level,model.disabilityCode];
         cell.lblDetail.text = model.disabilityDescr;
         return cell;
-    }else{
-        AccidentTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TimeCell"];
-        if (!cell) {
-            NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"AccidentTimeTableViewCell" owner:nil options:nil];
-            if (nib.count>0) {
-                cell = [nib firstObject];
-            }
-        }
-        cell.lblTitle.text = @"鉴定日期";
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        if (self.infoModel.deathDate.length>0) {
-            [cell.btnTime setTitle:self.infoModel.deathDate forState:UIControlStateNormal];
-        }
-        [cell.btnTime addTarget:self action:@selector(selectTime) forControlEvents:UIControlEventTouchUpInside];
-        return cell;
     }
-}
--(void)selectTime{
-    self.tableView.userInteractionEnabled = NO;
-    [self.view addSubview:self.containerView];
-    [UIView animateWithDuration:0.5 animations:^{
-        _containerView.frame = CGRectMake(0, self.view.bottom - 176-64, DeviceSize.width, 176);
-    }];
-
-}
--(NSDateFormatter *)formatter{
-    if (!_formatter) {
-        _formatter =[[NSDateFormatter alloc] init];
-        [_formatter setDateFormat:@"yyyy-MM-dd"];
-    }
-    return _formatter;
-}
--(UIView *)containerView{
-    if (!_containerView) {
-        _containerView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.bottom, DeviceSize.width, 176)];
-        _containerView.backgroundColor = [UIColor colorWithHexString:@"#efefef"];
-        [_containerView addSubview:self.pickView];
-        UIButton *btnCancel = [UIButton buttonWithType:UIButtonTypeCustom];
-        btnCancel.frame =CGRectMake(20,12,40,20);
-        [btnCancel setTitle:@"取消" forState:UIControlStateNormal];
-        [btnCancel setTitleColor:[UIColor colorWithHexString:Colorblack] forState:UIControlStateNormal];
-        [btnCancel setBackgroundColor:[UIColor colorWithHexString:@"#efefef"]];
-        [btnCancel addTarget:self action:@selector(cancelAction:) forControlEvents:UIControlEventTouchUpInside];
-        [_containerView addSubview:btnCancel];
-        UIButton *btnDone = [UIButton buttonWithType:UIButtonTypeCustom];
-        btnDone.frame = CGRectMake(self.view.width-20-btnCancel.size.width, btnCancel.top,btnCancel.size.width, btnCancel.size.height);
-        [btnDone setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [btnDone setTitle:@"确定" forState:UIControlStateNormal];
-        btnDone.backgroundColor = [UIColor colorWithHexString:@"#efefef"];
-        [btnDone addTarget:self action:@selector(doneAction:) forControlEvents:UIControlEventTouchUpInside];
-        [_containerView addSubview:btnDone];
-        UILabel *lblTitle = [[UILabel alloc]initWithFrame:CGRectMake(DeviceSize.width/2-40, 12, 80, 20)];
-        lblTitle.backgroundColor = [UIColor colorWithHexString:@"#efefef"];
-        lblTitle.textColor = [UIColor colorWithHexString:Colorblack];
-        lblTitle.text = @"选择时间";
-        lblTitle.font = [UIFont systemFontOfSize:17];
-        [_containerView addSubview:lblTitle];
-    }
-    return _containerView;
-}
--(UIDatePicker *)pickView{
-    if (!_pickView) {
-        _pickView = [[UIDatePicker alloc]initWithFrame:CGRectMake(0, 44, DeviceSize.width,132)];
-        _pickView.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
-        [_pickView setDate:[NSDate date] animated:YES];
-        [_pickView setMaximumDate:[NSDate date]];
-        [_pickView setDatePickerMode:UIDatePickerModeDate];
-        [_pickView setMinimumDate:[self.formatter dateFromString:@"1950-01-01日"]];
-        _pickView.backgroundColor = [UIColor colorWithHexString:Colorwhite];
-    }
-    return _pickView;
-}
-- (void)doneAction:(UIButton *)btn {
-    AccidentTimeTableViewCell *cell=[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
-    self.infoModel.deathDate =[_formatter stringFromDate:_pickView.date];
-    [cell.btnTime setTitle:[_formatter stringFromDate:_pickView.date] forState:UIControlStateNormal];
-    [cell.btnTime setTitleColor:[UIColor colorWithHexString:Colorblack] forState:UIControlStateNormal];
-    [self cancelAction:nil];
-}
-- (void)cancelAction:(UIButton *)btn {
-    self.tableView.userInteractionEnabled = YES;
-    [UIView animateWithDuration:0.5 animations:^{
-        _containerView.frame = CGRectMake(0, self.view.bottom, DeviceSize.width, 176);
-    }];
-    [UIView setAnimationDidStopSelector:@selector(removePick)];
-}
--(void)removePick{
-    [_containerView removeFromSuperview];
-}
-- (void)setSelectDate:(NSString *)selectDate {
-    [_pickView setDate:[self.formatter dateFromString:selectDate] animated:YES];
+    return nil;
 }
 -(void)selectState:(UIButton *)btn{
     if (btn.tag == 4001) {

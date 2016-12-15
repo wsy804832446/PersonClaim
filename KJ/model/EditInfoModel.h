@@ -48,7 +48,7 @@
   //护理人
 @property(nonatomic,strong)NSMutableArray *carePeopleArray;
   //已发生医疗费
-@property(nonatomic,assign)CGFloat feePass;
+@property(nonatomic,copy)NSString * feePass;
 
 
 //收入情况(误工情况)
@@ -59,7 +59,7 @@
   //离职时间
 @property(nonatomic,copy)NSString *offWorkDate;
   //月收入
-@property(nonatomic,assign)CGFloat monthIncome;
+@property(nonatomic,copy)NSString * monthIncome;
   //单位名称
 @property(nonatomic,copy)NSString *UnitName;
   //单位地址
@@ -72,10 +72,10 @@
 @property(nonatomic,strong)ItemTypeModel *getMoney;
   //社保
 @property(nonatomic,strong)ItemTypeModel *socialSecurity;
-  //实际休息天数(误工)
-@property(nonatomic,assign)NSInteger restDays;
-  //收入减少金额(误工)
-@property(nonatomic,assign)CGFloat incomeDecreases;
+  //误工天数(误工)
+@property(nonatomic,copy)NSString * restDays;
+  //收误工费(误工)
+@property(nonatomic,copy)NSString * incomeDecreases;
 ;
   //联系人
 @property(nonatomic,copy)NSArray *IncomeContactPersonArray;
@@ -102,7 +102,7 @@
 @property(nonatomic,strong)SelectList *householdType;
   //子女数量
 @property(nonatomic,copy)NSString *sonCount;
-  //兄弟数量
+  //姊妹数量
 @property(nonatomic,copy)NSString *bratherCount;
   //是否户籍地居住
 @property(nonatomic,strong)ItemTypeModel *addressBeTrue;

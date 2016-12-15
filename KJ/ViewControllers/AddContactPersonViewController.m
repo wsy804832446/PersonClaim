@@ -28,7 +28,7 @@
     [self.view addSubview:self.contactTableView];
     ContactPeopleModel *model =[[ContactPeopleModel alloc]init];
     [self.dataArray addObject:model];
-    [self addBottomView];
+//    [self addBottomView];
 }
     // Do any additional setup after loading the view.
 

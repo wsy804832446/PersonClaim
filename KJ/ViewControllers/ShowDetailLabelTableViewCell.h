@@ -11,6 +11,6 @@
 @interface ShowDetailLabelTableViewCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UILabel *lblShowDetail;
 @property (strong, nonatomic) IBOutlet UIView *line;
-
+@property (strong, nonatomic) IBOutlet UILabel *lblTitle;
 -(void)configCellWithString:(NSString *)string;
 @end

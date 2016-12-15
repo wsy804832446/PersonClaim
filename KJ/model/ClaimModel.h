@@ -60,4 +60,6 @@
 @property (nonatomic,copy)NSString *injureId;
 
 @property (nonatomic,copy)NSString *dispatchDate;
+
+@property (nonatomic,copy)NSString *deadline;
 @end

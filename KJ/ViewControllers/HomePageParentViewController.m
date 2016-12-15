@@ -40,13 +40,15 @@
 }
 -(void)addBarbutton{
     UIButton *btnLeft = [UIButton buttonWithType:UIButtonTypeCustom];
-    btnLeft.frame = CGRectMake(20, 25, 24, 22);
+    btnLeft.frame = CGRectMake(20, 30, 24, 22);
     [btnLeft setImage:[UIImage imageNamed:@"22-消息(1)"] forState:UIControlStateNormal];
     [btnLeft setImage:[UIImage imageNamed:@"22-消息-1(1)"] forState:UIControlStateHighlighted];
+    btnLeft.tag = 8888;
     [self.view addSubview:btnLeft];
     UIButton *btnRight = [UIButton buttonWithType:UIButtonTypeCustom];
-    btnRight.frame = CGRectMake(self.view.right-20-24, 25, 24, 22);
+    btnRight.frame = CGRectMake(self.view.right-20-24, 30, 24, 22);
     [btnRight setImage:[UIImage imageNamed:@"shaixuan"] forState:UIControlStateNormal];
+    btnRight.tag = 9999;
     [self.view addSubview:btnRight];
 }
 -(UISegmentedControl *)segMent{
@@ -68,6 +70,10 @@
         [self addChildViewController:self.firstvc];
         [self transitionFromViewController:self.currentVc toViewController:self.firstvc duration:0 options:0 animations:nil completion:^(BOOL finished) {
             if (finished) {
+                UIButton *btnLeft = [self.view viewWithTag:8888];
+                UIButton *btnRight = [self.view viewWithTag:9999];
+                [self.view bringSubviewToFront:btnLeft];
+                [self.view bringSubviewToFront:btnRight];
                 [self.view bringSubviewToFront:self.segMent];
                 [self.firstvc didMoveToParentViewController:self];
                 [self.currentVc willMoveToParentViewController:nil];
@@ -79,6 +85,10 @@
         [self addChildViewController:self.secondVc];
         [self transitionFromViewController:self.currentVc toViewController:self.secondVc duration:0 options:0 animations:nil completion:^(BOOL finished) {
             if (finished) {
+                UIButton *btnLeft = [self.view viewWithTag:8888];
+                UIButton *btnRight = [self.view viewWithTag:9999];
+                [self.view bringSubviewToFront:btnLeft];
+                [self.view bringSubviewToFront:btnRight];
                 [self.view bringSubviewToFront:self.segMent];
                 [self.secondVc didMoveToParentViewController:self];
                 [self.currentVc willMoveToParentViewController:nil];

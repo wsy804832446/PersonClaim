@@ -48,15 +48,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KJ/ViewControllers/DelayViewController.m"
-            timestampString = "502614421.90077"
+            timestampString = "503487273.029357"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "733"
-            endingLineNumber = "733"
+            startingLineNumber = "731"
+            endingLineNumber = "731"
             landmarkName = "-uploadImage"
             landmarkType = "7">
          </BreakpointContent>
@@ -64,27 +64,27 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KJ/ViewControllers/EditDealInfoViewController.m"
-            timestampString = "502611430.819937"
+            timestampString = "503477534.179203"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "524"
-            endingLineNumber = "524"
+            startingLineNumber = "535"
+            endingLineNumber = "535"
             landmarkName = "-uploadImage"
             landmarkType = "7">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[EditDealInfoViewController uploadImage]"
                   moduleName = "KJ"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/wsy/Desktop/%E4%BA%BA%E4%BC%A4/PersonClaim/KJ/ViewControllers/EditDealInfoViewController.m"
-                  timestampString = "503118234.911879"
+                  timestampString = "503136901.65012"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "524"
@@ -92,14 +92,14 @@
                   offsetFromSymbolStart = "214">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__41-[EditDealInfoViewController uploadImage]_block_invoke"
                   moduleName = "KJ"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/wsy/Desktop/%E4%BA%BA%E4%BC%A4/PersonClaim/KJ/ViewControllers/EditDealInfoViewController.m"
-                  timestampString = "503118234.913974"
+                  timestampString = "503136901.65245"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "525"
@@ -107,6 +107,22 @@
                   offsetFromSymbolStart = "75">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KJ/ViewControllers/FollowDetaiViewController.m"
+            timestampString = "503474701.527438"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "540"
+            endingLineNumber = "540"
+            landmarkName = "-tableView:heightForRowAtIndexPath:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

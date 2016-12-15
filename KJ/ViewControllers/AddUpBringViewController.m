@@ -67,7 +67,7 @@
     btnAdd.frame = CGRectMake(15, 7, DeviceSize.width-30, 40);
     btnAdd.layer.masksToBounds = YES;
     btnAdd.layer.cornerRadius = 40*0.16;
-    [btnAdd setTitle:@"+添加被抚养人" forState:UIControlStateNormal];
+    [btnAdd setTitle:@"+添加被扶养人" forState:UIControlStateNormal];
     [btnAdd setTitleColor:[UIColor colorWithHexString:Colorwhite] forState:UIControlStateNormal];
     [btnAdd setBackgroundColor:[UIColor colorWithHexString:Colorblue]];
     [btnAdd addTarget:self action:@selector(addSection) forControlEvents:UIControlEventTouchUpInside];
@@ -128,10 +128,10 @@
             cell.lblTitle.text = @"年龄";
             [cell.txtName addTarget:self action:@selector(ageChange:) forControlEvents:UIControlEventEditingChanged];
         }else if (indexPath.row == 6){
-            cell.lblTitle.text = @"抚养年限";
+            cell.lblTitle.text = @"扶养年限";
             [cell.txtName addTarget:self action:@selector(yearsChange:) forControlEvents:UIControlEventEditingChanged];
         }else{
-            cell.lblTitle.text = @"共同抚养人数";
+            cell.lblTitle.text = @"共同扶养人数";
             [cell.txtName addTarget:self action:@selector(numChange:) forControlEvents:UIControlEventEditingChanged];
         }
         cell.txtName.tag = indexPath.section;
@@ -180,7 +180,7 @@
         return cell;
     }else{
         DeleteBringUpTableViewCell *cell = [[[NSBundle mainBundle]loadNibNamed:@"DeleteBringUpTableViewCell" owner:nil options:nil]firstObject];
-        cell.lblBringUp.text = [NSString stringWithFormat:@"被抚养人%lu",indexPath.section+1];
+        cell.lblBringUp.text = [NSString stringWithFormat:@"被扶养人%lu",indexPath.section+1];
         cell.lineV.backgroundColor = [UIColor colorWithHexString:Colorblue];
         UIImage *image =[UIImage imageNamed:@"16"];
         image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -373,7 +373,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 -(NSString *)title{
-    return @"添加被抚养人";
+    return @"添加被扶养人";
 }
 -(NSMutableArray *)selectUpBringArray{
     if (!_selectUpBringArray) {

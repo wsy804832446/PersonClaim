@@ -20,4 +20,6 @@
 @property (nonatomic,copy)NSString *disabilityDescr;
 
 @property (nonatomic,copy)NSString *disabilityScale;
+
+@property (nonatomic,copy)NSString *level;
 @end

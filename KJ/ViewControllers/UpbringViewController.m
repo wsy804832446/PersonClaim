@@ -68,13 +68,15 @@
     // Do any additional setup after loading the view.
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return 3;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
         return self.upBringArray.count;
+    }else if (section == 1){
+        return 3;
     }else{
-        return 5;
+        return 2;
     }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -89,7 +91,7 @@
         UIView *vc = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DeviceSize.width, 44)];
         vc.backgroundColor = [UIColor colorWithHexString:Colorwhite];
         UILabel *lblContact = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, 70, 41)];
-        lblContact.text = @"被抚养人";
+        lblContact.text = @"被扶养人";
         lblContact.textColor = [UIColor colorWithHexString:@"#666666"];
         lblContact.font = [UIFont systemFontOfSize:15];
         [vc addSubview:lblContact];
@@ -103,6 +105,9 @@
     }else{
         return nil;
     }
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 10;
 }
 -(void)addUpBring{
     AddUpBringViewController *vc = [[AddUpBringViewController alloc]init];
@@ -123,6 +128,7 @@
             }
         }
         if (indexPath.row == 0) {
+            [cell.lblLine removeFromSuperview];
             cell.lblTitle.text = @"伤残赔偿系数";
             cell.txtName.tag = 3000;
             cell.txtName.keyboardType = UIKeyboardTypeDecimalPad;
@@ -130,7 +136,7 @@
                 cell.txtName.text = self.infoModel.ratio;
             }
         }else{
-            cell.lblTitle.text = @"抚养费金额";
+            cell.lblTitle.text = @"扶养费金额";
             cell.txtName.tag = 3001;
             cell.txtName.keyboardType = UIKeyboardTypeDecimalPad;
             if (self.infoModel.maintenance.length>0) {
@@ -164,7 +170,7 @@
             }
         }];
         return cell;
-    }else if (indexPath.section ==1 &&indexPath.row ==3){
+    }else if (indexPath.section ==2 &&indexPath.row ==1){
         AccidentAddressTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AccidentAddressCell"];
         if (!cell) {
             NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"AccidentAddressTableViewCell" owner:nil options:nil];
@@ -181,7 +187,7 @@
             cell.txtDetail.text = self.infoModel.remark;
         }
         return cell;
-    }else if (indexPath.section ==1 &&indexPath.row ==4){
+    }else if (indexPath.section ==2 &&indexPath.row ==0){
         AccidentTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TimeCell"];
         if (!cell) {
             NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"AccidentTimeTableViewCell" owner:nil options:nil];
@@ -190,6 +196,7 @@
             }
         }
         cell.lblTitle.text = @"完成情况";
+        [cell.lblLine removeFromSuperview];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell.btnTime addTarget:self action:@selector(selectState:) forControlEvents:UIControlEventTouchUpInside];
         ItemTypeModel *model = self.infoModel.finishFlag;

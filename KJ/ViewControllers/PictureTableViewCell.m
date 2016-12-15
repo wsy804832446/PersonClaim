@@ -12,7 +12,11 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.lblTitle.textColor = [UIColor colorWithHexString:@"#666666"];
+    NSAttributedString *identity = [[NSAttributedString alloc]initWithString:@"(必填)"attributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:placeHoldColor]}];
+    NSAttributedString *strName = [[NSAttributedString alloc]initWithString:@"影像资料" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#666666"]}];
+    NSMutableAttributedString *string = [[NSMutableAttributedString alloc]initWithAttributedString:strName];
+    [string appendAttributedString:identity];
+    self.lblTitle.attributedText = string;
     self.lblLine.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
     // Initialization code
 }

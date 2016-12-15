@@ -14,6 +14,8 @@
     [super awakeFromNib];
     self.lblShowDetail.numberOfLines =0;
     self.line.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
+    self.lblTitle.textColor = [UIColor colorWithHexString:@"#666666"];
+    self.lblTitle.backgroundColor = [UIColor colorWithHexString:Colorwhite];
     // Initialization code
 }
 -(void)configCellWithString:(NSString *)string{

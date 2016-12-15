@@ -68,6 +68,8 @@
 		344ADBEC1DC97A95002ACE3D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 344ADBEB1DC97A95002ACE3D /* AudioToolbox.framework */; };
 		344ADBEE1DC97AA6002ACE3D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 344ADBED1DC97AA6002ACE3D /* AVFoundation.framework */; };
 		344ADBF01DC97AB7002ACE3D /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 344ADBEF1DC97AB7002ACE3D /* CoreMotion.framework */; };
+		344B20351DFE6D8B00C8B852 /* ImagePhotoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 344B20331DFE6D8B00C8B852 /* ImagePhotoTableViewCell.m */; };
+		344B20361DFE6D8B00C8B852 /* ImagePhotoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 344B20341DFE6D8B00C8B852 /* ImagePhotoTableViewCell.xib */; };
 		344C5AAB1DD067CC00584668 /* EditDealInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 344C5AAA1DD067CC00584668 /* EditDealInfoViewController.m */; };
 		344C5AAF1DD0690200584668 /* DealNameTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 344C5AAD1DD0690200584668 /* DealNameTableViewCell.m */; };
 		344C5AB01DD0690200584668 /* DealNameTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 344C5AAE1DD0690200584668 /* DealNameTableViewCell.xib */; };
@@ -187,6 +189,8 @@
 		3490CA671DFCF2870058AE67 /* 8_disability_pre.png in Resources */ = {isa = PBXBuildFile; fileRef = 3490CA531DFCF2870058AE67 /* 8_disability_pre.png */; };
 		3490CA681DFCF2870058AE67 /* 9_death_mormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3490CA541DFCF2870058AE67 /* 9_death_mormal.png */; };
 		3490CA691DFCF2870058AE67 /* 9_death_pre.png in Resources */ = {isa = PBXBuildFile; fileRef = 3490CA551DFCF2870058AE67 /* 9_death_pre.png */; };
+		3490CA6E1DFD1D560058AE67 /* LXRTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3490CA6C1DFD1D560058AE67 /* LXRTableViewCell.m */; };
+		3490CA6F1DFD1D560058AE67 /* LXRTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3490CA6D1DFD1D560058AE67 /* LXRTableViewCell.xib */; };
 		3496938D1DB9FA490034A2A6 /* AccidentAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3496938C1DB9FA490034A2A6 /* AccidentAddressViewController.m */; };
 		349B21D91D9DF8E90066E76E /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 349B21D81D9DF8E90066E76E /* DetailViewController.m */; };
 		34A2EF771DAE06C10050B027 /* LjjUISegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 34A2EF761DAE06C10050B027 /* LjjUISegmentedControl.m */; };
@@ -505,6 +509,9 @@
 		344ADBEB1DC97A95002ACE3D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		344ADBED1DC97AA6002ACE3D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		344ADBEF1DC97AB7002ACE3D /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		344B20321DFE6D8B00C8B852 /* ImagePhotoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePhotoTableViewCell.h; sourceTree = "<group>"; };
+		344B20331DFE6D8B00C8B852 /* ImagePhotoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePhotoTableViewCell.m; sourceTree = "<group>"; };
+		344B20341DFE6D8B00C8B852 /* ImagePhotoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImagePhotoTableViewCell.xib; sourceTree = "<group>"; };
 		344C5AA91DD067CC00584668 /* EditDealInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditDealInfoViewController.h; sourceTree = "<group>"; };
 		344C5AAA1DD067CC00584668 /* EditDealInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditDealInfoViewController.m; sourceTree = "<group>"; };
 		344C5AAC1DD0690200584668 /* DealNameTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealNameTableViewCell.h; sourceTree = "<group>"; };
@@ -678,6 +685,9 @@
 		3490CA531DFCF2870058AE67 /* 8_disability_pre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 8_disability_pre.png; sourceTree = "<group>"; };
 		3490CA541DFCF2870058AE67 /* 9_death_mormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 9_death_mormal.png; sourceTree = "<group>"; };
 		3490CA551DFCF2870058AE67 /* 9_death_pre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 9_death_pre.png; sourceTree = "<group>"; };
+		3490CA6B1DFD1D560058AE67 /* LXRTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXRTableViewCell.h; sourceTree = "<group>"; };
+		3490CA6C1DFD1D560058AE67 /* LXRTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXRTableViewCell.m; sourceTree = "<group>"; };
+		3490CA6D1DFD1D560058AE67 /* LXRTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LXRTableViewCell.xib; sourceTree = "<group>"; };
 		3496938B1DB9FA490034A2A6 /* AccidentAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccidentAddressViewController.h; sourceTree = "<group>"; };
 		3496938C1DB9FA490034A2A6 /* AccidentAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccidentAddressViewController.m; sourceTree = "<group>"; };
 		349B21D71D9DF8E90066E76E /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
@@ -1405,6 +1415,19 @@
 			name = "跟踪详情cell";
 			sourceTree = "<group>";
 		};
+		3490CA6A1DFD1D240058AE67 /* 详情展示cell */ = {
+			isa = PBXGroup;
+			children = (
+				3490CA6B1DFD1D560058AE67 /* LXRTableViewCell.h */,
+				3490CA6C1DFD1D560058AE67 /* LXRTableViewCell.m */,
+				3490CA6D1DFD1D560058AE67 /* LXRTableViewCell.xib */,
+				344B20321DFE6D8B00C8B852 /* ImagePhotoTableViewCell.h */,
+				344B20331DFE6D8B00C8B852 /* ImagePhotoTableViewCell.m */,
+				344B20341DFE6D8B00C8B852 /* ImagePhotoTableViewCell.xib */,
+			);
+			name = "详情展示cell";
+			sourceTree = "<group>";
+		};
 		34AD20FA1DB0754E00A17B29 /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -1582,6 +1605,7 @@
 				34AD21841DB0A38E00A17B29 /* FollowPlatFormViewCell.h */,
 				34AD21851DB0A38F00A17B29 /* FollowPlatFormViewCell.m */,
 				34AD21861DB0A38F00A17B29 /* FollowPlatFormViewCell.xib */,
+				3490CA6A1DFD1D240058AE67 /* 详情展示cell */,
 				34839C3F1DB8B510002EB9BD /* 跟踪详情cell */,
 			);
 			name = views;
@@ -2287,6 +2311,7 @@
 				3437BD1D1D9BA21B001DEC7B /* PersonalInformationTableViewCell3.xib in Resources */,
 				34AD21351DB0754E00A17B29 /* 切图-全_r11_c3.png in Resources */,
 				3490CA5E1DFCF2870058AE67 /* 4_salary_normal.png in Resources */,
+				3490CA6F1DFD1D560058AE67 /* LXRTableViewCell.xib in Resources */,
 				3475F2531DD1713B00F4D01F /* MedicalVisitTableViewCell.xib in Resources */,
 				3490CA571DFCF2870058AE67 /* 0_all_pre.png in Resources */,
 				34839C441DB8B562002EB9BD /* DeleteContactTableViewCell.xib in Resources */,
@@ -2339,6 +2364,7 @@
 				34AD217D1DB0757C00A17B29 /* q.png in Resources */,
 				3490CA591DFCF2870058AE67 /* 1_basic_pre.png in Resources */,
 				34AD21801DB0757C00A17B29 /* w.png in Resources */,
+				344B20361DFE6D8B00C8B852 /* ImagePhotoTableViewCell.xib in Resources */,
 				34AD21791DB0757C00A17B29 /* 21.png in Resources */,
 				3437BD181D9BA209001DEC7B /* PersonalInformationTableViewCell2.xib in Resources */,
 				347127E41DE4228C008B2B8E /* DeleteBringUpTableViewCell.xib in Resources */,
@@ -2434,6 +2460,7 @@
 				34AD21871DB0A38F00A17B29 /* FollowPlatFormViewCell.m in Sources */,
 				3437BCF61D9B5B83001DEC7B /* MineTableViewCell.m in Sources */,
 				34FAF96D1D9A672B00D2FABC /* TabBarViewController.m in Sources */,
+				3490CA6E1DFD1D560058AE67 /* LXRTableViewCell.m in Sources */,
 				344CECC31DF94CD900C25870 /* ShowDetailLabelTableViewCell.m in Sources */,
 				34ED55EE1DC845B300D8CA37 /* AccidentAddressTableViewCell.m in Sources */,
 				44DCD6F01CE57DCE0052C52B /* NSObject+DHF.m in Sources */,
@@ -2530,6 +2557,7 @@
 				347127DC1DE417EF008B2B8E /* AddUpBringViewController.m in Sources */,
 				34772C1D1DB4B3F8009D51B0 /* FollowDetailTableViewCell.m in Sources */,
 				446771F21D2B512D001721E6 /* REFrostedContainerViewController.m in Sources */,
+				344B20351DFE6D8B00C8B852 /* ImagePhotoTableViewCell.m in Sources */,
 				3475F25E1DD1BC7000F4D01F /* SelectDefiniteCityViewController.m in Sources */,
 				349B21D91D9DF8E90066E76E /* DetailViewController.m in Sources */,
 				446771F41D2B512D001721E6 /* UIImage+REFrostedViewController.m in Sources */,

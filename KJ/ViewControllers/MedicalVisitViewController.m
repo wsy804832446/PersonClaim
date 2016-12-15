@@ -39,8 +39,6 @@
 @property (nonatomic,strong)EditInfoModel *infoModel;
 //未上传图片数组 （上传判断使用）
 @property (nonatomic,strong)NSMutableArray *unUploadImageArray;
-//tableview 高度
-@property(nonatomic,assign)CGFloat heght;
 @end
 
 @implementation MedicalVisitViewController
@@ -49,31 +47,16 @@
 }
 - (void)loadView
 {
-    self.heght = DeviceSize.height;
     [super loadView];
-    if (self.isShow) {
-        if (self.heght!=0) {
-            self.view = [[TPKeyboardAvoidingScrollView alloc] initWithFrame:CGRectMake(0, 40, DeviceSize.width-30, self.heght)];
-        }else{
-            self.view = [[TPKeyboardAvoidingScrollView alloc] initWithFrame:CGRectMake(0, 40, DeviceSize.width-30, 1000)];
-        }
-        self.tableView.scrollEnabled = NO;
-        self.tableView.top = 0;
-    }else{
-        self.view = [[TPKeyboardAvoidingScrollView alloc] initWithFrame:CGRectMake(0, 0, DeviceSize.width, DeviceSize.height - 64-54)];
-        [(TPKeyboardAvoidingScrollView *)self.view setContentSize:CGSizeMake(DeviceSize.width,  DeviceSize.height - 64-54)];
-        self.tableView.top = 10;
-    }
+    self.view = [[TPKeyboardAvoidingScrollView alloc] initWithFrame:CGRectMake(0, 0, DeviceSize.width, DeviceSize.height - 64-54)];
+    [(TPKeyboardAvoidingScrollView *)self.view setContentSize:CGSizeMake(DeviceSize.width,  DeviceSize.height - 64-54)];
+    self.tableView.top = 10;
     //  根据屏幕的高度自动计算弹出键盘是否试视图控制器是否向上滚动
     [self getLocalData];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if (self.heght!=0) {
-        self.tableView.height = self.heght;
-    }else{
-        self.tableView.height = DeviceSize.height-self.tableView.top-64-54;
-    }
+    self.tableView.height = DeviceSize.height-self.tableView.top-64-54;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItemExtension leftButtonItem:@selector(leftAction) andTarget:self];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItemExtension rightButtonItem:@selector(rightAction) andTarget:self andTitleName:@"保存"];
@@ -104,7 +87,7 @@
     [self.tableView reloadData];
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 4;
+    return 5;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
@@ -113,30 +96,21 @@
         return self.diagnoseArray.count;
     }else if(section == 2){
         return self.carePeopleArray.count;;
+    }else if(section == 3){
+        return 2;
     }else{
-        return 4;
+        return 2;
     }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section < 3 ) {
-        self.heght+=44;
         return 44;
     }else{
         return 0.01;
     }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    if (section ==0 &&self.hospitalArray.count>0 && !self.isShow) {
-        self.heght+=10;
-        return 10;
-    }else if (section == 1&&self.diagnoseArray.count>0&&!self.isShow){
-        self.heght+=10;
-        return 10;
-    }else if (section == 2&&self.carePeopleArray.count>0&&!self.isShow){
-        self.heght+=10;
-        return 10;
-    }
-    return 0.01;
+    return 10;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -146,9 +120,9 @@
         UILabel *lblContact = [[UILabel alloc]initWithFrame:CGRectMake(15, 1, 50, 41)];
         lblContact.textColor = [UIColor colorWithHexString:@"#666666"];
         lblContact.font = [UIFont systemFontOfSize:15];
-        UIView *line =[[UIView alloc]initWithFrame:CGRectMake(15, 43, self.view.width-30, 1)];
-        line.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
-        [vc addSubview:line];
+//        UIView *line =[[UIView alloc]initWithFrame:CGRectMake(15, 43, self.view.width-30, 1)];
+//        line.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
+//        [vc addSubview:line];
         UIButton *btnAdd = [UIButton buttonWithType:UIButtonTypeCustom];
         if (!self.isShow) {
             btnAdd.frame = CGRectMake(self.view.width-65, 0, 50, 44);
@@ -205,10 +179,6 @@
                 cell = [nib firstObject];
             }
         }
-        self.heght+=44;
-        if (indexPath.row == 0) {
-            [cell.line removeFromSuperview];
-        }
         if (indexPath.section == 0) {
             NSDictionary *dic = self.hospitalArray[indexPath.row];
             NSMutableString *detailString = [NSMutableString string];
@@ -236,7 +206,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else {
-        if (indexPath.row == 0){
+        if (indexPath.row == 0 && indexPath.section ==3){
             DealNameTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DealNameCell"];
             if (!cell) {
                 NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"DealNameTableViewCell" owner:nil options:nil];
@@ -244,11 +214,10 @@
                     cell = [nib firstObject];
                 }
             }
-            self.heght+=44;
             cell.lblTitle.text = @"已发生医疗费";
             [cell.lblLine removeFromSuperview];
-            if (self.infoModel.feePass) {
-                cell.txtName.text = [NSString stringWithFormat:@"%.2f",self.infoModel.feePass];
+            if (self.infoModel.feePass.length>0) {
+                cell.txtName.text = self.infoModel.feePass;
             }
             [cell.txtName addTarget:self action:@selector(txtChange:) forControlEvents:UIControlEventEditingChanged];
             cell.txtName.delegate =self;
@@ -257,7 +226,7 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.lblTitle.textColor = [UIColor colorWithHexString:@"#666666"];
             return cell;
-        }else if (indexPath.row ==1){
+        }else if (indexPath.row ==1 && indexPath.section ==3){
             PictureTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PictureCell"];
             if (!cell) {
                 NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"PictureTableViewCell" owner:nil options:nil];
@@ -279,9 +248,8 @@
                     [self showPictureWithIndex:btn.tag-2000];
                 }
             }];
-            self.heght+=cell.height;
             return cell;
-        }else if (indexPath.row ==2){
+        }else if (indexPath.row ==1 &&indexPath.section ==4){
             AccidentAddressTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AccidentAddressCell"];
             if (!cell) {
                 NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"AccidentAddressTableViewCell" owner:nil options:nil];
@@ -296,7 +264,6 @@
             cell.lblPlaceHolder.hidden = YES;
             cell.lblTitle.text = @"备注信息";
             [cell.btnMap removeFromSuperview];
-            self.heght+=cell.height;
             return cell;
         }else{
             AccidentTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TimeCell"];
@@ -306,7 +273,7 @@
                     cell = [nib firstObject];
                 }
             }
-            self.heght+=cell.height;
+            [cell.lblLine removeFromSuperview];
             cell.lblTitle.text = @"完成情况";
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             [cell.btnTime addTarget:self action:@selector(selectState:) forControlEvents:UIControlEventTouchUpInside];
@@ -561,7 +528,7 @@
         [uploadDic setObject:nurseList forKey:@"nurseList"];
     }
     [uploadDic setObject:self.taskModel.taskNo forKey:@"taskNo"];
-    [uploadDic setFloat:self.infoModel.feePass forKey:@"feePass"];
+    [uploadDic setFloat:[self.infoModel.feePass floatValue] forKey:@"feePass"];
     ItemTypeModel *model =self.infoModel.finishFlag;
     [uploadDic setObject:model.value forKey:@"finishFlag"];
     [uploadDic setObject:self.infoModel.remark forKey:@"remark"];
@@ -637,7 +604,7 @@
     return _unUploadImageArray;
 }
 -(void)txtChange:(UITextField *)txt{
-    self.infoModel.feePass =[txt.text floatValue];
+    self.infoModel.feePass =txt.text;
 }
 //设置文本框只能输入数字
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {

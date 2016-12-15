@@ -72,11 +72,11 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
-        return 2;
+        return 4;
     }else if(section == 1){
         return self.contactPeopleArray.count;
     }else{
-        return 4;
+        return 2;
     }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -90,9 +90,6 @@
     if (section == 1) {
         UIView *vc = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DeviceSize.width, 44)];
         vc.backgroundColor = [UIColor colorWithHexString:Colorwhite];
-        UIView *line =[[UIView alloc]initWithFrame:CGRectMake(15, 0, DeviceSize.width-30, 1)];
-        line.backgroundColor = [UIColor colorWithHexString:@"#dddddd"];
-        [vc addSubview:line];
         UILabel *lblContact = [[UILabel alloc]initWithFrame:CGRectMake(15, 1, 50, 41)];
         lblContact.text = @"联系人";
         lblContact.textColor = [UIColor colorWithHexString:@"#666666"];
@@ -108,6 +105,9 @@
     }else{
         return nil;
     }
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 10;
 }
 -(void)addContact{
     WeakSelf(EditInfoViewController);
@@ -135,10 +135,10 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.txtDetail.delegate =self;
         cell.txtDetail.tag = 1000;
-        if (cell.txtDetail.text.length ==0) {
-            cell.lblPlaceHolder.hidden = NO;
-        }else{
+        if (cell.txtDetail.text.length >0) {
             cell.lblPlaceHolder.hidden = YES;
+        }else{
+            cell.lblPlaceHolder.hidden = NO;
         }
         WeakSelf(EditInfoViewController);
         __weak AccidentAddressTableViewCell *weakCell = cell;
@@ -182,7 +182,7 @@
         cell.labelRight.textColor = [UIColor colorWithHexString:Colorgray];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
-    }else if (indexPath.section ==2 &&indexPath.row ==0){
+    }else if (indexPath.section ==0 &&indexPath.row ==2){
         AccidentAddressTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AccidentAddressCell"];
         if (!cell) {
             NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"AccidentAddressTableViewCell" owner:nil options:nil];
@@ -204,7 +204,7 @@
         cell.lblTitle.text = @"事故详细信息";
         [cell.btnMap removeFromSuperview];
         return cell;
-    }else if (indexPath.section ==2 &&indexPath.row ==1){
+    }else if (indexPath.section ==0 &&indexPath.row ==3){
         PictureTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PictureCell"];
         if (!cell) {
             NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"PictureTableViewCell" owner:nil options:nil];
@@ -227,7 +227,7 @@
         }];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
-    }else if (indexPath.section ==2 &&indexPath.row ==2){
+    }else if (indexPath.section ==2 &&indexPath.row ==1){
         AccidentAddressTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AccidentAddressCell"];
         if (!cell) {
             NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"AccidentAddressTableViewCell" owner:nil options:nil];
@@ -245,7 +245,7 @@
         }
         [cell.btnMap removeFromSuperview];
         return cell;
-    }else if (indexPath.section ==2 &&indexPath.row ==3){
+    }else if (indexPath.section ==2 &&indexPath.row ==0){
         AccidentTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TimeCell"];
         if (!cell) {
             NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"AccidentTimeTableViewCell" owner:nil options:nil];
@@ -253,6 +253,7 @@
                 cell = [nib firstObject];
             }
         }
+        [cell.lblLine removeFromSuperview];
         cell.lblTitle.text = @"完成情况";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         ItemTypeModel *model = self.infoModel.finishFlag;
@@ -383,19 +384,26 @@
     if (textView.tag == 1000) {
         cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
         self.infoModel.address = textView.text;
-    }else if (textView.tag == 1001){
-        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2]];
-        self.infoModel.detailInfo = textView.text;
-    }else if (textView.tag == 1002){
-        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:2]];
-        self.infoModel.remark = textView.text;
-    }
-    if (textView.text.length>0) {
-        cell.lblPlaceHolder.hidden = YES;
-    }else{
-        if (textView.tag != 1002) {
-            cell.lblPlaceHolder.hidden = NO;
+        if (textView.text.length>0) {
+            cell.lblPlaceHolder.hidden = YES;
+        }else{
+            if (textView.tag != 1002) {
+                cell.lblPlaceHolder.hidden = NO;
+            }
         }
+    }else if (textView.tag == 1001){
+        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+        self.infoModel.detailInfo = textView.text;
+        if (textView.text.length>0) {
+            cell.lblPlaceHolder.hidden = YES;
+        }else{
+            if (textView.tag != 1002) {
+                cell.lblPlaceHolder.hidden = NO;
+            }
+        }
+    }else if (textView.tag == 1002){
+        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:2]];
+        self.infoModel.remark = textView.text;
     }
     CGRect frame = textView.frame;
     CGSize constraintSize = CGSizeMake(frame.size.width, MAXFLOAT);

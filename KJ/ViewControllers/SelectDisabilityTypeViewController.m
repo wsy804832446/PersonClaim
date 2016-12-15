@@ -175,6 +175,8 @@
     DisabilityModel *model = self.dataArray[btn.tag-1000];
     btn.selected = !btn.selected;
     if (btn.selected) {
+        UIButton *button = self.ButtonArray[_selectIndex];
+        model.level = [NSString stringWithFormat:@"%@伤残",button.titleLabel.text];
         [self.selectArray addObject:model];
     }else{
         [self.dataArray removeObject:model];
