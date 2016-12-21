@@ -23,7 +23,7 @@
     [self getTask];
     [self.view addSubview:self.imgView];
     [self.view sendSubviewToBack:self.imgView];
-//    [self drawView];
+    [self drawView];
     [self.view addSubview:self.collectionView];
     // Do any additional setup after loading the view.
 }
@@ -59,7 +59,7 @@
     UIBezierPath *bezier =[UIBezierPath bezierPathWithArcCenter:CGPointMake(0, 0) radius:80 startAngle:M_PI_2 endAngle: M_PI_2+M_PI*2 clockwise:YES];
     CAShapeLayer *shape = [[CAShapeLayer alloc]init];
     shape.fillColor = [UIColor clearColor].CGColor;;
-    shape.position = CGPointMake(self.imgView.center.x, self.imgView.center.y+69);
+    shape.position = CGPointMake(self.imgView.center.x, self.imgView.center.y+80);
     shape.strokeStart = 0.f;
     shape.strokeEnd = 0.5f;
     shape.lineWidth = 25;
@@ -68,7 +68,7 @@
     [self.imgView.layer addSublayer:shape];
     CAShapeLayer *shape2 = [[CAShapeLayer alloc]init];
     shape2.fillColor = [UIColor clearColor].CGColor;;
-    shape2.position = CGPointMake(self.imgView.center.x+6, self.imgView.center.y+69) ;
+    shape2.position = CGPointMake(self.imgView.center.x+6, self.imgView.center.y+80) ;
     shape2.strokeStart = 0.5f;
     shape2.strokeEnd = 0.75f;
     shape2.lineWidth = 25;
@@ -77,7 +77,7 @@
     [self.imgView.layer addSublayer:shape2];
     CAShapeLayer *shape3 = [[CAShapeLayer alloc]init];
     shape3.fillColor = [UIColor clearColor].CGColor;;
-    shape3.position = CGPointMake(self.imgView.center.x+6, self.imgView.center.y+69);
+    shape3.position = CGPointMake(self.imgView.center.x+6, self.imgView.center.y+80);
     shape3.strokeStart = 0.75f;
     shape3.strokeEnd = 1;
     shape3.lineWidth = 25;
@@ -138,7 +138,7 @@
 -(UIImageView *)imgView{
     if (!_imgView) {
         _imgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, -64, DeviceSize.width, 306*DeviceSize.width/375)];
-        [_imgView setImage:[UIImage imageNamed:@"0-2跟踪员-5.fw_r2_c2"]];
+        [_imgView setImage:[UIImage imageNamed:@"home img"]];
     }
     return _imgView;
 }

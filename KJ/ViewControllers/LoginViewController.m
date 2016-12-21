@@ -149,7 +149,7 @@
         _accountField.layer.masksToBounds = YES;
         _accountField.delegate = self;
         _accountField.layer.cornerRadius = 5;
-        _accountField.layer.borderWidth = 1;
+        _accountField.layer.borderWidth = 0.5;
         _accountField.layer.borderColor = [UIColor colorWithHexString:placeHoldColor].CGColor;
         _accountField.tag = 3000;
         [_accountField addTarget:self action:@selector(txtChange:) forControlEvents:UIControlEventEditingChanged];
@@ -170,7 +170,7 @@
         [_passWordField setSecureTextEntry:YES];
         _passWordField.layer.masksToBounds = YES;
         _passWordField.layer.cornerRadius = 5;
-        _passWordField.layer.borderWidth = 1;
+        _passWordField.layer.borderWidth = 0.5;
         _passWordField.layer.borderColor = [UIColor colorWithHexString:placeHoldColor].CGColor;
         _passWordField.tag = 3001;
         _passWordField.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -190,7 +190,7 @@
         _phoneField.layer.masksToBounds = YES;
         _phoneField.delegate = self;
         _phoneField.layer.cornerRadius = 5;
-        _phoneField.layer.borderWidth = 1;
+        _phoneField.layer.borderWidth = 0.5;
         _phoneField.layer.borderColor = [UIColor colorWithHexString:placeHoldColor].CGColor;
         _phoneField.tag = 3002;
         UIImageView *icon = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"2"]];
@@ -209,7 +209,7 @@
         _VerificationCodeField.delegate = self;
         _VerificationCodeField.layer.masksToBounds = YES;
         _VerificationCodeField.layer.cornerRadius = 5;
-        _VerificationCodeField.layer.borderWidth = 1;
+        _VerificationCodeField.layer.borderWidth = 0.5;
         _VerificationCodeField.layer.borderColor = [UIColor colorWithHexString:placeHoldColor].CGColor;
         _VerificationCodeField.tag = 3003;
         _VerificationCodeField.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -297,30 +297,30 @@
     }
 }
 -(void)login:(UIButton *)btn{
-//    TabBarViewController *tabVc = [[TabBarViewController alloc]init];
-//    [self presentViewController:tabVc animated:YES completion:nil];
-    if (self.btnAccount.selected) {
-        WeakSelf(LoginViewController);
-        [weakSelf showHudWaitingView:WaitPrompt];
-        [[NetWorkManager shareNetWork]LoginWithAccount:self.accountField.text andPassword:self.passWordField.text andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
-            [weakSelf removeMBProgressHudInManaual];
-            if ([response.responseCode isEqual:@"1"] ) {
-                [CommUtil saveData:@"0131002498" andSaveFileName:@"account"];
-                PersonInfoModel *model = [response thParseDataFromDic:response.dataDic andModel:[PersonInfoModel class]];
-                [CommUtil saveData:model andSaveFileName:[NSString stringWithFormat:@"PersonInfoModel%@",[CommUtil readDataWithFileName:@"account"]]];
-                TabBarViewController *tabVc = [[TabBarViewController alloc]init];
-                [weakSelf presentViewController:tabVc animated:YES completion:nil];
-               
-            }else{
-                [self showHudAuto:response.message];
-            }
-        } andFailure:^(NSURLSessionDataTask *urlSessionDataTask, NSError *error) {
-            [weakSelf removeMBProgressHudInManaual];
-            [self showHudAuto:InternetFailerPrompt];
-        }];
-    }else if(self.btnPhoneMessage.selected){
-        
-    }
+    TabBarViewController *tabVc = [[TabBarViewController alloc]init];
+    [self presentViewController:tabVc animated:YES completion:nil];
+//    if (self.btnAccount.selected) {
+//        WeakSelf(LoginViewController);
+//        [weakSelf showHudWaitingView:WaitPrompt];
+//        [[NetWorkManager shareNetWork]LoginWithAccount:self.accountField.text andPassword:self.passWordField.text andCompletionBlockWithSuccess:^(NSURLSessionDataTask *urlSessionDataTask, HttpResponse *response) {
+//            [weakSelf removeMBProgressHudInManaual];
+//            if ([response.responseCode isEqual:@"1"] ) {
+//                [CommUtil saveData:@"0131002498" andSaveFileName:@"account"];
+//                PersonInfoModel *model = [response thParseDataFromDic:response.dataDic andModel:[PersonInfoModel class]];
+//                [CommUtil saveData:model andSaveFileName:[NSString stringWithFormat:@"PersonInfoModel%@",[CommUtil readDataWithFileName:@"account"]]];
+//                TabBarViewController *tabVc = [[TabBarViewController alloc]init];
+//                [weakSelf presentViewController:tabVc animated:YES completion:nil];
+//               
+//            }else{
+//                [self showHudAuto:response.message];
+//            }
+//        } andFailure:^(NSURLSessionDataTask *urlSessionDataTask, NSError *error) {
+//            [weakSelf removeMBProgressHudInManaual];
+//            [self showHudAuto:InternetFailerPrompt];
+//        }];
+//    }else if(self.btnPhoneMessage.selected){
+//        
+//    }
 }
 -(UIView *)bottomView{
     if (!_bottomView) {

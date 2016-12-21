@@ -33,6 +33,7 @@
 {
     if (!_stateLabel) {
         [self addSubview:_stateLabel = [UILabel label]];
+        
     }
     return _stateLabel;
 }
@@ -51,6 +52,7 @@
     if (title == nil) return;
     self.stateTitles[@(state)] = title;
     self.stateLabel.text = self.stateTitles[@(self.state)];
+    self.stateLabel.font = [UIFont systemFontOfSize:12];
 }
 
 #pragma mark key的处理
@@ -86,6 +88,7 @@
         
         // 3.显示日期
         self.lastUpdatedTimeLabel.text = [NSString stringWithFormat:@"最后更新：%@", time];
+        self.lastUpdatedTimeLabel.font = [UIFont systemFontOfSize:12];
     } else {
         self.lastUpdatedTimeLabel.text = @"最后更新：无记录";
     }

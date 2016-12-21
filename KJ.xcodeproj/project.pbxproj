@@ -14,7 +14,6 @@
 		340B87271DE6C661004D54ED /* 6p.png in Resources */ = {isa = PBXBuildFile; fileRef = 340B87231DE6C661004D54ED /* 6p.png */; };
 		340B87281DE6C661004D54ED /* 6s.png in Resources */ = {isa = PBXBuildFile; fileRef = 340B87241DE6C661004D54ED /* 6s.png */; };
 		3411F62E1DF71A0800CEFC35 /* LayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3411F62D1DF71A0800CEFC35 /* LayViewController.m */; };
-		3411F6301DF7206400CEFC35 /* 0-2跟踪员-5.fw_r2_c2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3411F62F1DF7206400CEFC35 /* 0-2跟踪员-5.fw_r2_c2.png */; };
 		341362991DA9D88400FF17DC /* CompensationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 341362981DA9D88400FF17DC /* CompensationViewController.m */; };
 		3413629C1DAA0D9300FF17DC /* SelectCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3413629B1DAA0D9300FF17DC /* SelectCityViewController.m */; };
 		3413629E1DAA1BC700FF17DC /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3413629D1DAA1BC700FF17DC /* city.plist */; };
@@ -95,6 +94,33 @@
 		345321501DB8CBAD0055D178 /* 30.png in Resources */ = {isa = PBXBuildFile; fileRef = 3453214E1DB8CBAD0055D178 /* 30.png */; };
 		345326EA1DE2FAE900988D29 /* InsiderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 345326E91DE2FAE900988D29 /* InsiderViewController.m */; };
 		3453B7411DD43E1100D6B7F0 /* AddDiagnoseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3453B7401DD43E1100D6B7F0 /* AddDiagnoseViewController.m */; };
+		345AD42B1E03DE98007D2722 /* 1-必尿生殖.png in Resources */ = {isa = PBXBuildFile; fileRef = 345AD4191E03DE98007D2722 /* 1-必尿生殖.png */; };
+		345AD42C1E03DE98007D2722 /* 1-腹部.png in Resources */ = {isa = PBXBuildFile; fileRef = 345AD41A1E03DE98007D2722 /* 1-腹部.png */; };
+		345AD42D1E03DE98007D2722 /* 1-颈部.png in Resources */ = {isa = PBXBuildFile; fileRef = 345AD41B1E03DE98007D2722 /* 1-颈部.png */; };
+		345AD42E1E03DE98007D2722 /* 1-四肢.png in Resources */ = {isa = PBXBuildFile; fileRef = 345AD41C1E03DE98007D2722 /* 1-四肢.png */; };
+		345AD42F1E03DE98007D2722 /* 1-头部.png in Resources */ = {isa = PBXBuildFile; fileRef = 345AD41D1E03DE98007D2722 /* 1-头部.png */; };
+		345AD4301E03DE98007D2722 /* 1-胸部.png in Resources */ = {isa = PBXBuildFile; fileRef = 345AD41E1E03DE98007D2722 /* 1-胸部.png */; };
+		345AD4321E03DE98007D2722 /* 2-背部.png in Resources */ = {isa = PBXBuildFile; fileRef = 345AD4201E03DE98007D2722 /* 2-背部.png */; };
+		345AD4331E03DE98007D2722 /* 2-背面-颈部.png in Resources */ = {isa = PBXBuildFile; fileRef = 345AD4211E03DE98007D2722 /* 2-背面-颈部.png */; };
+		345AD4341E03DE98007D2722 /* 2-背面-盆骨.png in Resources */ = {isa = PBXBuildFile; fileRef = 345AD4221E03DE98007D2722 /* 2-背面-盆骨.png */; };
+		345AD4351E03DE98007D2722 /* 2-背面-四肢.png in Resources */ = {isa = PBXBuildFile; fileRef = 345AD4231E03DE98007D2722 /* 2-背面-四肢.png */; };
+		345AD4361E03DE98007D2722 /* 2-背面-头部.png in Resources */ = {isa = PBXBuildFile; fileRef = 345AD4241E03DE98007D2722 /* 2-背面-头部.png */; };
+		345AD4371E03DE98007D2722 /* 2-背面.png in Resources */ = {isa = PBXBuildFile; fileRef = 345AD4251E03DE98007D2722 /* 2-背面.png */; };
+		345AD4381E03DE98007D2722 /* 3-头部-鼻子.png in Resources */ = {isa = PBXBuildFile; fileRef = 345AD4261E03DE98007D2722 /* 3-头部-鼻子.png */; };
+		345AD4391E03DE98007D2722 /* 3-头部-耳朵.png in Resources */ = {isa = PBXBuildFile; fileRef = 345AD4271E03DE98007D2722 /* 3-头部-耳朵.png */; };
+		345AD43A1E03DE98007D2722 /* 3-头部-眼睛.png in Resources */ = {isa = PBXBuildFile; fileRef = 345AD4281E03DE98007D2722 /* 3-头部-眼睛.png */; };
+		345AD43B1E03DE98007D2722 /* 3-头部-嘴巴.png in Resources */ = {isa = PBXBuildFile; fileRef = 345AD4291E03DE98007D2722 /* 3-头部-嘴巴.png */; };
+		345AD43C1E03DE98007D2722 /* 3-头部.png in Resources */ = {isa = PBXBuildFile; fileRef = 345AD42A1E03DE98007D2722 /* 3-头部.png */; };
+		345AD4411E03DFE3007D2722 /* SQSectorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 345AD43E1E03DFE3007D2722 /* SQSectorButton.m */; };
+		345AD4421E03DFE3007D2722 /* UIImage+ColorAtPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 345AD4401E03DFE3007D2722 /* UIImage+ColorAtPoint.m */; };
+		345AD44B1E03EDE0007D2722 /* 1-头.png in Resources */ = {isa = PBXBuildFile; fileRef = 345AD4431E03EDE0007D2722 /* 1-头.png */; };
+		345AD44C1E03EDE0007D2722 /* 2-四肢.png in Resources */ = {isa = PBXBuildFile; fileRef = 345AD4441E03EDE0007D2722 /* 2-四肢.png */; };
+		345AD44D1E03EDE0007D2722 /* 3-颈部.png in Resources */ = {isa = PBXBuildFile; fileRef = 345AD4451E03EDE0007D2722 /* 3-颈部.png */; };
+		345AD44E1E03EDE0007D2722 /* 4-胸.png in Resources */ = {isa = PBXBuildFile; fileRef = 345AD4461E03EDE0007D2722 /* 4-胸.png */; };
+		345AD44F1E03EDE0007D2722 /* 5-腹部.png in Resources */ = {isa = PBXBuildFile; fileRef = 345AD4471E03EDE0007D2722 /* 5-腹部.png */; };
+		345AD4501E03EDE0007D2722 /* 6-盆骨.png in Resources */ = {isa = PBXBuildFile; fileRef = 345AD4481E03EDE0007D2722 /* 6-盆骨.png */; };
+		345AD4511E03EDE0007D2722 /* 7-生殖.png in Resources */ = {isa = PBXBuildFile; fileRef = 345AD4491E03EDE0007D2722 /* 7-生殖.png */; };
+		345AD4521E03EDE0007D2722 /* 底图.png in Resources */ = {isa = PBXBuildFile; fileRef = 345AD44A1E03EDE0007D2722 /* 底图.png */; };
 		345B2E9D1DED413400A8852C /* 10-空白页_r2_c2.png in Resources */ = {isa = PBXBuildFile; fileRef = 345B2E9B1DED413400A8852C /* 10-空白页_r2_c2.png */; };
 		345B2EA01DED419500A8852C /* CountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 345B2E9F1DED419500A8852C /* CountViewController.m */; };
 		345CF2F31DDE9A4800EBB824 /* DefaultCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 345CF2F11DDE9A4800EBB824 /* DefaultCellTableViewCell.m */; };
@@ -104,6 +130,25 @@
 		345CF2FE1DDED7AC00EBB824 /* SelectItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 345CF2FD1DDED7AC00EBB824 /* SelectItemViewController.m */; };
 		345D55371DE1713E0024F70C /* DeathInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 345D55361DE1713E0024F70C /* DeathInfoViewController.m */; };
 		345D553B1DE1763E0024F70C /* DelayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 345D553A1DE1763E0024F70C /* DelayViewController.m */; };
+		345FB36A1E0A475500425A60 /* NewTsakViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 345FB3691E0A475500425A60 /* NewTsakViewController.m */; };
+		345FB36B1E0A4A4500425A60 /* HomePageParentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3444FBF81DEEA5BD00F4AACD /* HomePageParentViewController.m */; };
+		345FB36E1E0A5DE600425A60 /* switch_pre.png in Resources */ = {isa = PBXBuildFile; fileRef = 345FB36C1E0A5DE600425A60 /* switch_pre.png */; };
+		345FB36F1E0A5DE600425A60 /* switch.png in Resources */ = {isa = PBXBuildFile; fileRef = 345FB36D1E0A5DE600425A60 /* switch.png */; };
+		345FB3751E0A719900425A60 /* 1-耳朵.png in Resources */ = {isa = PBXBuildFile; fileRef = 345FB3701E0A719900425A60 /* 1-耳朵.png */; };
+		345FB3761E0A719900425A60 /* 1-头底图.png in Resources */ = {isa = PBXBuildFile; fileRef = 345FB3711E0A719900425A60 /* 1-头底图.png */; };
+		345FB3771E0A719900425A60 /* 3-鼻子.png in Resources */ = {isa = PBXBuildFile; fileRef = 345FB3721E0A719900425A60 /* 3-鼻子.png */; };
+		345FB3781E0A719900425A60 /* 4-眼睛.png in Resources */ = {isa = PBXBuildFile; fileRef = 345FB3731E0A719900425A60 /* 4-眼睛.png */; };
+		345FB3791E0A719900425A60 /* 6-嘴.png in Resources */ = {isa = PBXBuildFile; fileRef = 345FB3741E0A719900425A60 /* 6-嘴.png */; };
+		345FB37E1E0A71A300425A60 /* 2-鼻子.png in Resources */ = {isa = PBXBuildFile; fileRef = 345FB37A1E0A71A300425A60 /* 2-鼻子.png */; };
+		345FB37F1E0A71A300425A60 /* 3-右耳.png in Resources */ = {isa = PBXBuildFile; fileRef = 345FB37B1E0A71A300425A60 /* 3-右耳.png */; };
+		345FB3801E0A71A300425A60 /* 4-嘴.png in Resources */ = {isa = PBXBuildFile; fileRef = 345FB37C1E0A71A300425A60 /* 4-嘴.png */; };
+		345FB3811E0A71A300425A60 /* 5-眼睛.png in Resources */ = {isa = PBXBuildFile; fileRef = 345FB37D1E0A71A300425A60 /* 5-眼睛.png */; };
+		345FB3831E0A72E600425A60 /* 3(1).png in Resources */ = {isa = PBXBuildFile; fileRef = 345FB3821E0A72E600425A60 /* 3(1).png */; };
+		345FB3851E0A742700425A60 /* 点击区域.png in Resources */ = {isa = PBXBuildFile; fileRef = 345FB3841E0A742700425A60 /* 点击区域.png */; };
+		345FB3881E0A771400425A60 /* back-pre.png in Resources */ = {isa = PBXBuildFile; fileRef = 345FB3861E0A771400425A60 /* back-pre.png */; };
+		345FB3891E0A771400425A60 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 345FB3871E0A771400425A60 /* back.png */; };
+		345FB38B1E0A79B800425A60 /* 3-背部-分散.png in Resources */ = {isa = PBXBuildFile; fileRef = 345FB38A1E0A79B800425A60 /* 3-背部-分散.png */; };
+		345FB38D1E0A79C700425A60 /* 2-点击区域.png in Resources */ = {isa = PBXBuildFile; fileRef = 345FB38C1E0A79C700425A60 /* 2-点击区域.png */; };
 		34607C6B1DBEF320006B8E2D /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34607C6A1DBEF320006B8E2D /* SearchViewController.m */; };
 		34607C6E1DBEFFD5006B8E2D /* CommUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 34607C6D1DBEFFD5006B8E2D /* CommUtil.m */; };
 		34607C721DBF0A20006B8E2D /* 1-收藏空白页.png in Resources */ = {isa = PBXBuildFile; fileRef = 34607C6F1DBF0A20006B8E2D /* 1-收藏空白页.png */; };
@@ -434,7 +479,6 @@
 		340B87241DE6C661004D54ED /* 6s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 6s.png; sourceTree = "<group>"; };
 		3411F62C1DF71A0800CEFC35 /* LayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayViewController.h; sourceTree = "<group>"; };
 		3411F62D1DF71A0800CEFC35 /* LayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayViewController.m; sourceTree = "<group>"; };
-		3411F62F1DF7206400CEFC35 /* 0-2跟踪员-5.fw_r2_c2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0-2跟踪员-5.fw_r2_c2.png"; sourceTree = "<group>"; };
 		341362971DA9D88400FF17DC /* CompensationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompensationViewController.h; sourceTree = "<group>"; };
 		341362981DA9D88400FF17DC /* CompensationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompensationViewController.m; sourceTree = "<group>"; };
 		3413629A1DAA0D9300FF17DC /* SelectCityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectCityViewController.h; sourceTree = "<group>"; };
@@ -546,6 +590,35 @@
 		345326E91DE2FAE900988D29 /* InsiderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InsiderViewController.m; sourceTree = "<group>"; };
 		3453B73F1DD43E1100D6B7F0 /* AddDiagnoseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddDiagnoseViewController.h; sourceTree = "<group>"; };
 		3453B7401DD43E1100D6B7F0 /* AddDiagnoseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddDiagnoseViewController.m; sourceTree = "<group>"; };
+		345AD4191E03DE98007D2722 /* 1-必尿生殖.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1-必尿生殖.png"; sourceTree = "<group>"; };
+		345AD41A1E03DE98007D2722 /* 1-腹部.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1-腹部.png"; sourceTree = "<group>"; };
+		345AD41B1E03DE98007D2722 /* 1-颈部.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1-颈部.png"; sourceTree = "<group>"; };
+		345AD41C1E03DE98007D2722 /* 1-四肢.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1-四肢.png"; sourceTree = "<group>"; };
+		345AD41D1E03DE98007D2722 /* 1-头部.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1-头部.png"; sourceTree = "<group>"; };
+		345AD41E1E03DE98007D2722 /* 1-胸部.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1-胸部.png"; sourceTree = "<group>"; };
+		345AD4201E03DE98007D2722 /* 2-背部.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2-背部.png"; sourceTree = "<group>"; };
+		345AD4211E03DE98007D2722 /* 2-背面-颈部.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2-背面-颈部.png"; sourceTree = "<group>"; };
+		345AD4221E03DE98007D2722 /* 2-背面-盆骨.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2-背面-盆骨.png"; sourceTree = "<group>"; };
+		345AD4231E03DE98007D2722 /* 2-背面-四肢.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2-背面-四肢.png"; sourceTree = "<group>"; };
+		345AD4241E03DE98007D2722 /* 2-背面-头部.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2-背面-头部.png"; sourceTree = "<group>"; };
+		345AD4251E03DE98007D2722 /* 2-背面.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2-背面.png"; sourceTree = "<group>"; };
+		345AD4261E03DE98007D2722 /* 3-头部-鼻子.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3-头部-鼻子.png"; sourceTree = "<group>"; };
+		345AD4271E03DE98007D2722 /* 3-头部-耳朵.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3-头部-耳朵.png"; sourceTree = "<group>"; };
+		345AD4281E03DE98007D2722 /* 3-头部-眼睛.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3-头部-眼睛.png"; sourceTree = "<group>"; };
+		345AD4291E03DE98007D2722 /* 3-头部-嘴巴.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3-头部-嘴巴.png"; sourceTree = "<group>"; };
+		345AD42A1E03DE98007D2722 /* 3-头部.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3-头部.png"; sourceTree = "<group>"; };
+		345AD43D1E03DFE3007D2722 /* SQSectorButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQSectorButton.h; sourceTree = "<group>"; };
+		345AD43E1E03DFE3007D2722 /* SQSectorButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQSectorButton.m; sourceTree = "<group>"; };
+		345AD43F1E03DFE3007D2722 /* UIImage+ColorAtPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ColorAtPoint.h"; sourceTree = "<group>"; };
+		345AD4401E03DFE3007D2722 /* UIImage+ColorAtPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ColorAtPoint.m"; sourceTree = "<group>"; };
+		345AD4431E03EDE0007D2722 /* 1-头.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1-头.png"; sourceTree = "<group>"; };
+		345AD4441E03EDE0007D2722 /* 2-四肢.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2-四肢.png"; sourceTree = "<group>"; };
+		345AD4451E03EDE0007D2722 /* 3-颈部.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3-颈部.png"; sourceTree = "<group>"; };
+		345AD4461E03EDE0007D2722 /* 4-胸.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "4-胸.png"; sourceTree = "<group>"; };
+		345AD4471E03EDE0007D2722 /* 5-腹部.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "5-腹部.png"; sourceTree = "<group>"; };
+		345AD4481E03EDE0007D2722 /* 6-盆骨.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "6-盆骨.png"; sourceTree = "<group>"; };
+		345AD4491E03EDE0007D2722 /* 7-生殖.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "7-生殖.png"; sourceTree = "<group>"; };
+		345AD44A1E03EDE0007D2722 /* 底图.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "底图.png"; sourceTree = "<group>"; };
 		345B2E9B1DED413400A8852C /* 10-空白页_r2_c2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "10-空白页_r2_c2.png"; sourceTree = "<group>"; };
 		345B2E9E1DED419500A8852C /* CountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountViewController.h; sourceTree = "<group>"; };
 		345B2E9F1DED419500A8852C /* CountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountViewController.m; sourceTree = "<group>"; };
@@ -562,6 +635,25 @@
 		345D55361DE1713E0024F70C /* DeathInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeathInfoViewController.m; sourceTree = "<group>"; };
 		345D55391DE1763E0024F70C /* DelayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelayViewController.h; sourceTree = "<group>"; };
 		345D553A1DE1763E0024F70C /* DelayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelayViewController.m; sourceTree = "<group>"; };
+		345FB3681E0A475500425A60 /* NewTsakViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewTsakViewController.h; sourceTree = "<group>"; };
+		345FB3691E0A475500425A60 /* NewTsakViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewTsakViewController.m; sourceTree = "<group>"; };
+		345FB36C1E0A5DE600425A60 /* switch_pre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switch_pre.png; sourceTree = "<group>"; };
+		345FB36D1E0A5DE600425A60 /* switch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switch.png; sourceTree = "<group>"; };
+		345FB3701E0A719900425A60 /* 1-耳朵.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1-耳朵.png"; sourceTree = "<group>"; };
+		345FB3711E0A719900425A60 /* 1-头底图.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1-头底图.png"; sourceTree = "<group>"; };
+		345FB3721E0A719900425A60 /* 3-鼻子.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3-鼻子.png"; sourceTree = "<group>"; };
+		345FB3731E0A719900425A60 /* 4-眼睛.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "4-眼睛.png"; sourceTree = "<group>"; };
+		345FB3741E0A719900425A60 /* 6-嘴.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "6-嘴.png"; sourceTree = "<group>"; };
+		345FB37A1E0A71A300425A60 /* 2-鼻子.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2-鼻子.png"; sourceTree = "<group>"; };
+		345FB37B1E0A71A300425A60 /* 3-右耳.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3-右耳.png"; sourceTree = "<group>"; };
+		345FB37C1E0A71A300425A60 /* 4-嘴.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "4-嘴.png"; sourceTree = "<group>"; };
+		345FB37D1E0A71A300425A60 /* 5-眼睛.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "5-眼睛.png"; sourceTree = "<group>"; };
+		345FB3821E0A72E600425A60 /* 3(1).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3(1).png"; sourceTree = "<group>"; };
+		345FB3841E0A742700425A60 /* 点击区域.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "点击区域.png"; sourceTree = "<group>"; };
+		345FB3861E0A771400425A60 /* back-pre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-pre.png"; sourceTree = "<group>"; };
+		345FB3871E0A771400425A60 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
+		345FB38A1E0A79B800425A60 /* 3-背部-分散.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3-背部-分散.png"; sourceTree = "<group>"; };
+		345FB38C1E0A79C700425A60 /* 2-点击区域.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2-点击区域.png"; sourceTree = "<group>"; };
 		34607C691DBEF320006B8E2D /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		34607C6A1DBEF320006B8E2D /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		34607C6C1DBEFFD5006B8E2D /* CommUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommUtil.h; sourceTree = "<group>"; };
@@ -1188,6 +1280,10 @@
 		3445DBF51D9CB0F000ABB524 /* myTool */ = {
 			isa = PBXGroup;
 			children = (
+				345AD43D1E03DFE3007D2722 /* SQSectorButton.h */,
+				345AD43E1E03DFE3007D2722 /* SQSectorButton.m */,
+				345AD43F1E03DFE3007D2722 /* UIImage+ColorAtPoint.h */,
+				345AD4401E03DFE3007D2722 /* UIImage+ColorAtPoint.m */,
 				3445DBEF1D9CAA0400ABB524 /* MyTextField.h */,
 				3445DBF01D9CAA0400ABB524 /* MyTextField.m */,
 				34607C6C1DBEFFD5006B8E2D /* CommUtil.h */,
@@ -1431,6 +1527,48 @@
 		34AD20FA1DB0754E00A17B29 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				345FB38C1E0A79C700425A60 /* 2-点击区域.png */,
+				345FB38A1E0A79B800425A60 /* 3-背部-分散.png */,
+				345FB3861E0A771400425A60 /* back-pre.png */,
+				345FB3871E0A771400425A60 /* back.png */,
+				345FB3841E0A742700425A60 /* 点击区域.png */,
+				345FB3821E0A72E600425A60 /* 3(1).png */,
+				345FB3701E0A719900425A60 /* 1-耳朵.png */,
+				345FB3711E0A719900425A60 /* 1-头底图.png */,
+				345FB3721E0A719900425A60 /* 3-鼻子.png */,
+				345FB3731E0A719900425A60 /* 4-眼睛.png */,
+				345FB3741E0A719900425A60 /* 6-嘴.png */,
+				345FB37A1E0A71A300425A60 /* 2-鼻子.png */,
+				345FB37B1E0A71A300425A60 /* 3-右耳.png */,
+				345FB37C1E0A71A300425A60 /* 4-嘴.png */,
+				345FB37D1E0A71A300425A60 /* 5-眼睛.png */,
+				345FB36C1E0A5DE600425A60 /* switch_pre.png */,
+				345FB36D1E0A5DE600425A60 /* switch.png */,
+				345AD4431E03EDE0007D2722 /* 1-头.png */,
+				345AD4441E03EDE0007D2722 /* 2-四肢.png */,
+				345AD4451E03EDE0007D2722 /* 3-颈部.png */,
+				345AD4461E03EDE0007D2722 /* 4-胸.png */,
+				345AD4471E03EDE0007D2722 /* 5-腹部.png */,
+				345AD4481E03EDE0007D2722 /* 6-盆骨.png */,
+				345AD4491E03EDE0007D2722 /* 7-生殖.png */,
+				345AD44A1E03EDE0007D2722 /* 底图.png */,
+				345AD4191E03DE98007D2722 /* 1-必尿生殖.png */,
+				345AD41A1E03DE98007D2722 /* 1-腹部.png */,
+				345AD41B1E03DE98007D2722 /* 1-颈部.png */,
+				345AD41C1E03DE98007D2722 /* 1-四肢.png */,
+				345AD41D1E03DE98007D2722 /* 1-头部.png */,
+				345AD41E1E03DE98007D2722 /* 1-胸部.png */,
+				345AD4201E03DE98007D2722 /* 2-背部.png */,
+				345AD4211E03DE98007D2722 /* 2-背面-颈部.png */,
+				345AD4221E03DE98007D2722 /* 2-背面-盆骨.png */,
+				345AD4231E03DE98007D2722 /* 2-背面-四肢.png */,
+				345AD4241E03DE98007D2722 /* 2-背面-头部.png */,
+				345AD4251E03DE98007D2722 /* 2-背面.png */,
+				345AD4261E03DE98007D2722 /* 3-头部-鼻子.png */,
+				345AD4271E03DE98007D2722 /* 3-头部-耳朵.png */,
+				345AD4281E03DE98007D2722 /* 3-头部-眼睛.png */,
+				345AD4291E03DE98007D2722 /* 3-头部-嘴巴.png */,
+				345AD42A1E03DE98007D2722 /* 3-头部.png */,
 				3490CA421DFCF2870058AE67 /* 0_all_normal.png */,
 				3490CA431DFCF2870058AE67 /* 0_all_pre.png */,
 				3490CA441DFCF2870058AE67 /* 1_basic_normal.png */,
@@ -1482,7 +1620,6 @@
 				3447E1421DEC2B6300E31592 /* 8_disability.png */,
 				3447E1431DEC2B6300E31592 /* 9_death.png */,
 				3447E1341DEBF84400E31592 /* home img.png */,
-				3411F62F1DF7206400CEFC35 /* 0-2跟踪员-5.fw_r2_c2.png */,
 				3475F25A1DD1B95A00F4D01F /* search.png */,
 				34AD20FB1DB0754E00A17B29 /* 1-1.png */,
 				34AD20FC1DB0754E00A17B29 /* 1-切图.fw.png */,
@@ -1714,6 +1851,8 @@
 				344912F61DADDB7400D2C4BB /* ForgetPassWordViewController.m */,
 				344912F81DADE35B00D2C4BB /* NewPassWordViewController.h */,
 				344912F91DADE35B00D2C4BB /* NewPassWordViewController.m */,
+				345FB3681E0A475500425A60 /* NewTsakViewController.h */,
+				345FB3691E0A475500425A60 /* NewTsakViewController.m */,
 				3437BD021D9B9939001DEC7B /* 跟踪平台 */,
 				3437BD011D9B992A001DEC7B /* 工具 */,
 				3437BD001D9B9916001DEC7B /* 我的 */,
@@ -2204,18 +2343,21 @@
 				346A51191DEFBC3200D03AF7 /* 96.png in Resources */,
 				3475F2631DD1C1A100F4D01F /* OnlyLabelTableViewCell.xib in Resources */,
 				348CDBC31DCAFFEB007094BF /* PictureTableViewCell.xib in Resources */,
+				345AD43B1E03DE98007D2722 /* 3-头部-嘴巴.png in Resources */,
 				34AD21321DB0754E00A17B29 /* IOS-@2X.png in Resources */,
 				34AD212D1DB0754E00A17B29 /* 3-1.png in Resources */,
 				34AD213C1DB0754E00A17B29 /* 地区下拉箭头.png in Resources */,
+				345AD44E1E03EDE0007D2722 /* 4-胸.png in Resources */,
 				3447E1451DEC2B6300E31592 /* 2_process.png in Resources */,
 				3490CA561DFCF2870058AE67 /* 0_all_normal.png in Resources */,
 				34607C721DBF0A20006B8E2D /* 1-收藏空白页.png in Resources */,
 				34AD21661DB0757C00A17B29 /* 8-搜索-1.png in Resources */,
+				345AD4501E03EDE0007D2722 /* 6-盆骨.png in Resources */,
 				34AD21361DB0754E00A17B29 /* 切图-全_r11_c5.png in Resources */,
-				3411F6301DF7206400CEFC35 /* 0-2跟踪员-5.fw_r2_c2.png in Resources */,
 				34AD21341DB0754E00A17B29 /* 切图-全_r11_c1.png in Resources */,
 				34AD216A1DB0757C00A17B29 /* 10-1.png in Resources */,
 				3490CA5C1DFCF2870058AE67 /* 3_hospital_normal.png in Resources */,
+				345FB3791E0A719900425A60 /* 6-嘴.png in Resources */,
 				3490CA691DFCF2870058AE67 /* 9_death_pre.png in Resources */,
 				34AD217A1DB0757C00A17B29 /* 切图-跟踪.png in Resources */,
 				3490CA671DFCF2870058AE67 /* 8_disability_pre.png in Resources */,
@@ -2240,7 +2382,9 @@
 				346A511E1DEFBC3200D03AF7 /* 1024.png in Resources */,
 				3490CA681DFCF2870058AE67 /* 9_death_mormal.png in Resources */,
 				34AD212E1DB0754E00A17B29 /* 3-医疗理赔系统APP端-我的_r3_c2.png in Resources */,
+				345AD4331E03DE98007D2722 /* 2-背面-颈部.png in Resources */,
 				34AD21251DB0754E00A17B29 /* 1-我的切图_r2_c1@2x.png in Resources */,
+				345FB3781E0A719900425A60 /* 4-眼睛.png in Resources */,
 				3437BCF71D9B5B83001DEC7B /* MineTableViewCell.xib in Resources */,
 				34AD213F1DB0754E00A17B29 /* 未命名-1_r1_c1.png in Resources */,
 				345245211DF6867100A7D53B /* editor.png in Resources */,
@@ -2250,6 +2394,7 @@
 				3475F25B1DD1B95A00F4D01F /* search.png in Resources */,
 				34AD21881DB0A38F00A17B29 /* FollowPlatFormViewCell.xib in Resources */,
 				34AF949B1DBB197E00D84254 /* 31-1.png in Resources */,
+				345AD43C1E03DE98007D2722 /* 3-头部.png in Resources */,
 				3447E14C1DEC2B6300E31592 /* 9_death.png in Resources */,
 				34AD21401DB0754E00A17B29 /* 未命名-1_r1_c3.png in Resources */,
 				34772C1E1DB4B3F8009D51B0 /* FollowDetailTableViewCell.xib in Resources */,
@@ -2257,10 +2402,13 @@
 				3447E1461DEC2B6300E31592 /* 3_hospital.png in Resources */,
 				346A51141DEFBC3200D03AF7 /* 29.png in Resources */,
 				34AD21271DB0754E00A17B29 /* 1-我的切图_r5_c6@2x.png in Resources */,
+				345FB36F1E0A5DE600425A60 /* switch.png in Resources */,
 				34AD21641DB0757C00A17B29 /* 5.png in Resources */,
 				340B87251DE6C661004D54ED /* 4s.png in Resources */,
 				34AD21421DB0754E00A17B29 /* 未命名-1_r2_c7.png in Resources */,
+				345AD4361E03DE98007D2722 /* 2-背面-头部.png in Resources */,
 				344CECC41DF94CD900C25870 /* ShowDetailLabelTableViewCell.xib in Resources */,
+				345AD44F1E03EDE0007D2722 /* 5-腹部.png in Resources */,
 				346A51181DEFBC3200D03AF7 /* 80.png in Resources */,
 				34AD216D1DB0757C00A17B29 /* 12.png in Resources */,
 				3490CA641DFCF2870058AE67 /* 7_raised_normal.png in Resources */,
@@ -2268,6 +2416,7 @@
 				3490CA5B1DFCF2870058AE67 /* 2_process_pre.png in Resources */,
 				44FE69BE1CBF5CEE00C2A8A5 /* LaunchScreen.storyboard in Resources */,
 				344E7FCF1DE59AEF008400FA /* 切图-跟踪_r2_c1.png in Resources */,
+				345AD4391E03DE98007D2722 /* 3-头部-耳朵.png in Resources */,
 				34AD21741DB0757C00A17B29 /* 17-1.png in Resources */,
 				3415CC0A1DF691C200C6F8CF /* nor.png in Resources */,
 				34AD21231DB0754E00A17B29 /* 1-切图.png in Resources */,
@@ -2275,6 +2424,7 @@
 				344E7FCE1DE59AEF008400FA /* 切图-跟踪_r1_c3.png in Resources */,
 				346A511D1DEFBC3200D03AF7 /* 512.png in Resources */,
 				3476FFD71DF7F96800498A58 /* HomeShaiXuanCollectionViewCell.xib in Resources */,
+				345FB3811E0A71A300425A60 /* 5-眼睛.png in Resources */,
 				345245251DF6867100A7D53B /* unfinished.png in Resources */,
 				3447E1491DEC2B6300E31592 /* 6_houseregister.png in Resources */,
 				3447E14B1DEC2B6300E31592 /* 8_disability.png in Resources */,
@@ -2297,14 +2447,17 @@
 				34AD21291DB0754E00A17B29 /* 1-我的切图_r6_c4@2x.png in Resources */,
 				3490CA5F1DFCF2870058AE67 /* 4_salary_pre.png in Resources */,
 				34AD21211DB0754E00A17B29 /* 1-1.png in Resources */,
+				345FB3831E0A72E600425A60 /* 3(1).png in Resources */,
 				34AD21261DB0754E00A17B29 /* 1-我的切图_r2_c4@2x.png in Resources */,
 				34AD21331DB0754E00A17B29 /* IOS-@3X.png in Resources */,
 				34DF309A1DC88D8C00EC6B57 /* AccidentTimeTableViewCell.xib in Resources */,
 				34AD21651DB0757C00A17B29 /* 6.png in Resources */,
 				34AF949C1DBB197E00D84254 /* 31.png in Resources */,
 				34AD21241DB0754E00A17B29 /* 1-我的切图_r1_c6@2x.png in Resources */,
+				345AD42C1E03DE98007D2722 /* 1-腹部.png in Resources */,
 				346A511C1DEFBC3200D03AF7 /* 180.png in Resources */,
 				3413629E1DAA1BC700FF17DC /* city.plist in Resources */,
+				345FB38D1E0A79C700425A60 /* 2-点击区域.png in Resources */,
 				34607C731DBF0A20006B8E2D /* 2-搜索空白页.png in Resources */,
 				34AD21701DB0757C00A17B29 /* 15-1.png in Resources */,
 				3490CA5A1DFCF2870058AE67 /* 2_process_normal.png in Resources */,
@@ -2313,7 +2466,9 @@
 				3490CA5E1DFCF2870058AE67 /* 4_salary_normal.png in Resources */,
 				3490CA6F1DFD1D560058AE67 /* LXRTableViewCell.xib in Resources */,
 				3475F2531DD1713B00F4D01F /* MedicalVisitTableViewCell.xib in Resources */,
+				345AD44B1E03EDE0007D2722 /* 1-头.png in Resources */,
 				3490CA571DFCF2870058AE67 /* 0_all_pre.png in Resources */,
+				345FB3761E0A719900425A60 /* 1-头底图.png in Resources */,
 				34839C441DB8B562002EB9BD /* DeleteContactTableViewCell.xib in Resources */,
 				34D95C7F1D9E43AB0092ECD3 /* ToolTableViewCell.xib in Resources */,
 				340B87281DE6C661004D54ED /* 6s.png in Resources */,
@@ -2322,11 +2477,16 @@
 				34AD217E1DB0757C00A17B29 /* r.png in Resources */,
 				34AD21451DB0754E00A17B29 /* 箭头.png in Resources */,
 				3447E1441DEC2B6300E31592 /* 1_basic.png in Resources */,
+				345AD4511E03EDE0007D2722 /* 7-生殖.png in Resources */,
 				346A51151DEFBC3200D03AF7 /* 40.png in Resources */,
+				345AD42B1E03DE98007D2722 /* 1-必尿生殖.png in Resources */,
 				34AD21411DB0754E00A17B29 /* 未命名-1_r1_c5.png in Resources */,
+				345FB3801E0A71A300425A60 /* 4-嘴.png in Resources */,
 				3452451A1DF6652A00A7D53B /* 22-消息(1).png in Resources */,
 				3437BD0A1D9B9CE9001DEC7B /* PersonalInformationTableViewCell.xib in Resources */,
 				34AD21711DB0757C00A17B29 /* 15-添加电话.png in Resources */,
+				345AD4371E03DE98007D2722 /* 2-背面.png in Resources */,
+				345AD44D1E03EDE0007D2722 /* 3-颈部.png in Resources */,
 				3437BCFF1D9B8A80001DEC7B /* MineTableViewCell2.xib in Resources */,
 				34AD21461DB0754E00A17B29 /* 返回.png in Resources */,
 				34AD21301DB0754E00A17B29 /* 4-1.png in Resources */,
@@ -2336,39 +2496,59 @@
 				34AD217F1DB0757C00A17B29 /* t.png in Resources */,
 				340B87261DE6C661004D54ED /* 5s.png in Resources */,
 				34AD21431DB0754E00A17B29 /* 标签.png in Resources */,
+				345FB3751E0A719900425A60 /* 1-耳朵.png in Resources */,
+				345AD4321E03DE98007D2722 /* 2-背部.png in Resources */,
 				34ED55EF1DC845B300D8CA37 /* AccidentAddressTableViewCell.xib in Resources */,
 				3490CA631DFCF2870058AE67 /* 6_houseregister_pre.png in Resources */,
 				346A51171DEFBC3200D03AF7 /* 76.png in Resources */,
 				34AD21731DB0757C00A17B29 /* 16.png in Resources */,
+				345AD4521E03EDE0007D2722 /* 底图.png in Resources */,
 				3490CA661DFCF2870058AE67 /* 8_disability_normal.png in Resources */,
+				345FB36E1E0A5DE600425A60 /* switch_pre.png in Resources */,
 				34AD21771DB0757C00A17B29 /* 19.png in Resources */,
 				34AD21221DB0754E00A17B29 /* 1-切图.fw.png in Resources */,
 				34AD216B1DB0757C00A17B29 /* 10.png in Resources */,
 				346A51161DEFBC3200D03AF7 /* 58.png in Resources */,
+				345FB37E1E0A71A300425A60 /* 2-鼻子.png in Resources */,
 				34AD21311DB0754E00A17B29 /* 4.png in Resources */,
 				34AD21781DB0757C00A17B29 /* 20.png in Resources */,
 				34AD21371DB0754E00A17B29 /* 切图-全_r1_c1.png in Resources */,
 				34AD213B1DB0754E00A17B29 /* 启动.png in Resources */,
 				34839C491DB8B82A002EB9BD /* ContactNameTableViewCell.xib in Resources */,
+				345AD44C1E03EDE0007D2722 /* 2-四肢.png in Resources */,
+				345AD4301E03DE98007D2722 /* 1-胸部.png in Resources */,
 				34AD213A1DB0754E00A17B29 /* 切图-全_r21_c17.png in Resources */,
 				345245191DF6652A00A7D53B /* 22-消息-1(1).png in Resources */,
+				345AD42F1E03DE98007D2722 /* 1-头部.png in Resources */,
 				34607C7E1DBF635A006B8E2D /* SearchTableViewCell.xib in Resources */,
+				345FB38B1E0A79B800425A60 /* 3-背部-分散.png in Resources */,
+				345FB37F1E0A71A300425A60 /* 3-右耳.png in Resources */,
 				34AD213E1DB0754E00A17B29 /* 收藏_r1_c3.png in Resources */,
+				345FB3881E0A771400425A60 /* back-pre.png in Resources */,
 				3453214F1DB8CBAD0055D178 /* 30-1.png in Resources */,
 				34AD21281DB0754E00A17B29 /* 1-我的切图_r6_c1@2x.png in Resources */,
 				44FE6AB91CBF672400C2A8A5 /* MJRefresh.bundle in Resources */,
+				345AD42E1E03DE98007D2722 /* 1-四肢.png in Resources */,
 				44FE69B91CBF5CEE00C2A8A5 /* Main.storyboard in Resources */,
+				345FB3891E0A771400425A60 /* back.png in Resources */,
+				345FB3771E0A719900425A60 /* 3-鼻子.png in Resources */,
 				34AD21761DB0757C00A17B29 /* 18.png in Resources */,
 				34710D441DDC3704000840EF /* AddDiagnoseDetailTableViewCell.xib in Resources */,
 				345245241DF6867100A7D53B /* timeout.png in Resources */,
+				345AD4351E03DE98007D2722 /* 2-背面-四肢.png in Resources */,
 				34AD217D1DB0757C00A17B29 /* q.png in Resources */,
 				3490CA591DFCF2870058AE67 /* 1_basic_pre.png in Resources */,
 				34AD21801DB0757C00A17B29 /* w.png in Resources */,
 				344B20361DFE6D8B00C8B852 /* ImagePhotoTableViewCell.xib in Resources */,
 				34AD21791DB0757C00A17B29 /* 21.png in Resources */,
+				345AD4341E03DE98007D2722 /* 2-背面-盆骨.png in Resources */,
+				345AD42D1E03DE98007D2722 /* 1-颈部.png in Resources */,
 				3437BD181D9BA209001DEC7B /* PersonalInformationTableViewCell2.xib in Resources */,
 				347127E41DE4228C008B2B8E /* DeleteBringUpTableViewCell.xib in Resources */,
 				340B87271DE6C661004D54ED /* 6p.png in Resources */,
+				345FB3851E0A742700425A60 /* 点击区域.png in Resources */,
+				345AD4381E03DE98007D2722 /* 3-头部-鼻子.png in Resources */,
+				345AD43A1E03DE98007D2722 /* 3-头部-眼睛.png in Resources */,
 				3490CA601DFCF2870058AE67 /* 5_work_normal.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2429,6 +2609,7 @@
 				44FE6A321CBF610000C2A8A5 /* BaseNavigationController.m in Sources */,
 				44FE6AB11CBF672400C2A8A5 /* MJRefreshAutoNormalFooter.m in Sources */,
 				344E7FCA1DE5986A008400FA /* DisabilityTableViewCell.m in Sources */,
+				345AD4411E03DFE3007D2722 /* SQSectorButton.m in Sources */,
 				44FE6A3B1CBF62F700C2A8A5 /* BaseViewController.m in Sources */,
 				44FE6A161CBF5E4000C2A8A5 /* NSObject+MTLComparisonAdditions.m in Sources */,
 				347600A31DF8011A00498A58 /* HospitalModel.m in Sources */,
@@ -2503,6 +2684,7 @@
 				3437BD1C1D9BA21B001DEC7B /* PersonalInformationTableViewCell3.m in Sources */,
 				44FE6AD71CBF677800C2A8A5 /* AFURLConnectionOperation.m in Sources */,
 				44FE6A0F1CBF5E4000C2A8A5 /* MTLModel+NSCoding.m in Sources */,
+				345AD4421E03DFE3007D2722 /* UIImage+ColorAtPoint.m in Sources */,
 				34FAF9711D9A676F00D2FABC /* AppDelegate.mm in Sources */,
 				3437BD171D9BA209001DEC7B /* PersonalInformationTableViewCell2.m in Sources */,
 				3476009C1DF8011A00498A58 /* ClaimModel.m in Sources */,
@@ -2546,6 +2728,7 @@
 				340220411DB4AC8800941FEC /* FollowDetaiViewController.m in Sources */,
 				34607C6E1DBEFFD5006B8E2D /* CommUtil.m in Sources */,
 				44FE6AD51CBF677800C2A8A5 /* AFNetworkReachabilityManager.m in Sources */,
+				345FB36A1E0A475500425A60 /* NewTsakViewController.m in Sources */,
 				34710D3F1DDBF862000840EF /* FamilyRegisterViewController.m in Sources */,
 				34710D471DDC38F2000840EF /* SelectWayViewController.m in Sources */,
 				44FE6AB21CBF672400C2A8A5 /* MJRefreshAutoStateFooter.m in Sources */,
@@ -2600,6 +2783,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				345FB36B1E0A4A4500425A60 /* HomePageParentViewController.m in Sources */,
 				44FE69C91CBF5CEE00C2A8A5 /* KJTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2743,8 +2927,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Jingyou Century Software Technology Co., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: Beijing Jingyou Century Software Technology Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer: yu dejian (4QTEFF37DT)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: yu dejian (4QTEFF37DT)";
 				DEVELOPMENT_TEAM = 358B5J757A;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2759,8 +2943,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jingyoutimes.PersonClaim;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f9f6ee76-2368-4055-a229-284ba2e59503";
-				PROVISIONING_PROFILE_SPECIFIER = MyPersonClaimProduct;
+				PROVISIONING_PROFILE = "7a2d521a-1904-4994-bb17-e9e957e4f38d";
+				PROVISIONING_PROFILE_SPECIFIER = PersonClaimDevelop;
 			};
 			name = Debug;
 		};
@@ -2768,8 +2952,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Jingyou Century Software Technology Co., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: Beijing Jingyou Century Software Technology Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer: yu dejian (4QTEFF37DT)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: yu dejian (4QTEFF37DT)";
 				DEVELOPMENT_TEAM = 358B5J757A;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2784,8 +2968,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jingyoutimes.PersonClaim;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f9f6ee76-2368-4055-a229-284ba2e59503";
-				PROVISIONING_PROFILE_SPECIFIER = MyPersonClaimProduct;
+				PROVISIONING_PROFILE = "7a2d521a-1904-4994-bb17-e9e957e4f38d";
+				PROVISIONING_PROFILE_SPECIFIER = PersonClaimDevelop;
 			};
 			name = Release;
 		};

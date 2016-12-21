@@ -30,7 +30,7 @@
 #import "DisabilityModel.h"
 #import "UpBringModel.h"
 #import "CityModel.h"
-@interface FollowDetaiViewController ()<UIScrollViewDelegate>
+@interface FollowDetaiViewController ()<UIScrollViewDelegate,UIGestureRecognizerDelegate>
 //编辑按钮
 @property (nonatomic,strong)UIButton *btnEdit;
 //提交按钮
@@ -47,6 +47,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;      // 手势有效设置为YES  无效为NO
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;    // 手势的代理设置为self
     self.infoModel =[CommUtil readDataWithFileName:[NSString stringWithFormat:@"%@%@",self.taskModel.taskNo,self.taskModel.taskType]];
     [self getData];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
@@ -364,7 +366,9 @@
     lblTime.frame = CGRectMake(25, 0, lblTime.text.length*22, bottomView.height);
     [bottomView addSubview:lblTime];
     [bottomView addSubview:self.btnCommit];
-    [self.view addSubview:self.btnEdit];
+    if (self.selectIndex ==0) {
+        [self.view addSubview:self.btnEdit];
+    }
     [self.view addSubview:bottomView];
 }
 
@@ -676,6 +680,7 @@
                         cell = [nib firstObject];
                     }
                 }
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 if (indexPath.section ==1) {
                     NSDictionary *dic = self.infoModel.hosArray.firstObject;
                     NSMutableString *detailString = [NSMutableString string];
@@ -713,6 +718,7 @@
                         cell = [nib firstObject];
                     }
                 }
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 if (indexPath.row ==0 && indexPath.section ==6) {
                     ItemTypeModel *model = self.infoModel.finishFlag;
                     [cell configCellWithString:model.title];
@@ -768,6 +774,7 @@
                         cell = [nib firstObject];
                     }
                 }
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 NSArray *arr = @[];
                 if ([sectionDic.allKeys.firstObject isEqual:@"section1"]) {
                      arr = sectionDic[@"section1"];
@@ -786,6 +793,7 @@
                         cell = [nib firstObject];
                     }
                 }
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 NSArray *arr = sectionDic[@"section2"];
                 NSDictionary *dataDic = arr[indexPath.row];
                 cell.lblName.text = dataDic.allKeys.firstObject;
@@ -830,6 +838,7 @@
                         cell = [nib firstObject];
                     }
                 }
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 NSArray *arr = sectionDic.allValues.firstObject;
                 NSDictionary *dataDic = arr[indexPath.row];
                 cell.lblTitle.text = dataDic.allKeys.firstObject;
@@ -843,6 +852,7 @@
                         cell = [nib firstObject];
                     }
                 }
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 NSArray *arr = sectionDic[@"section3"];
                 NSDictionary *dataDic = arr[indexPath.row];
                 cell.lblName.text = dataDic.allKeys.firstObject;
@@ -887,6 +897,7 @@
                         cell = [nib firstObject];
                     }
                 }
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 NSArray *arr = @[];
                 if ([sectionDic.allKeys.firstObject isEqual:@"section1"]) {
                     arr = sectionDic[@"section1"];
@@ -934,6 +945,7 @@
                         cell = [nib firstObject];
                     }
                 }
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 NSArray *arr = sectionDic[@"section4"];
                 NSDictionary *dataDic = arr[indexPath.row];
                 ContactPeopleModel *model =dataDic.allValues.firstObject;
@@ -960,6 +972,7 @@
                         cell = [nib firstObject];
                     }
                 }
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 NSArray *arr = @[];
                 if ([sectionDic.allKeys.firstObject isEqual:@"section2"]) {
                     arr = sectionDic[@"section2"];
@@ -1003,6 +1016,7 @@
                         cell = [nib firstObject];
                     }
                 }
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 NSArray *arr = sectionDic[@"section1"];
                 NSDictionary *dataDic = arr[indexPath.row];
                 UpBringModel *model = dataDic.allValues.firstObject;
@@ -1027,6 +1041,7 @@
                         cell = [nib firstObject];
                     }
                 }
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 NSArray *arr = @[];
                 if ([sectionDic.allKeys.firstObject isEqual:@"section1"]) {
                     arr = sectionDic[@"section1"];
@@ -1073,6 +1088,7 @@
                         cell = [nib firstObject];
                     }
                 }
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 NSArray *arr = @[];
                 if ([sectionDic.allKeys.firstObject isEqual:@"section1"]) {
                     arr = sectionDic[@"section1"];
@@ -1116,6 +1132,7 @@
                         cell = [nib firstObject];
                     }
                 }
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 NSArray *arr = sectionDic[@"section2"];
                 NSDictionary *dataDic = arr[indexPath.row];
                 cell.lblTitle.text = dataDic.allKeys.firstObject;
@@ -1221,6 +1238,7 @@
                         cell = [nib firstObject];
                     }
                 }
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 ContactPeopleModel *model = self.infoModel.contactPersonArray[indexPath.row];
                 cell.lblName.text = model.name;
                 cell.lblPhoneNumber.text = model.phone;
@@ -1232,49 +1250,53 @@
         }
         return nil;
     }else{
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+        ShowDetailLabelTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"ShowLabelCell"];
         if (!cell) {
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"Cell"];
+            NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"ShowDetailLabelTableViewCell" owner:nil options:nil];
+            if (nib.count>0) {
+                cell = [nib firstObject];
+            }
         }
-        cell.textLabel.textColor = [UIColor colorWithHexString:@"#666666"];
-        cell.textLabel.font = [UIFont systemFontOfSize:15];
-        cell.detailTextLabel.textColor = [UIColor colorWithHexString:Colorblack];
-        cell.detailTextLabel.font = [UIFont systemFontOfSize:15];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         if (indexPath.row ==0) {
-            cell.textLabel.text = @"损伤类型";
-            cell.detailTextLabel.text = @"";
+            [cell.line removeFromSuperview];
+        }
+        cell.lblTitle.textColor = [UIColor colorWithHexString:@"#666666"];
+        cell.lblTitle.font = [UIFont systemFontOfSize:15];
+        cell.lblShowDetail.textColor = [UIColor colorWithHexString:Colorblack];
+        cell.lblShowDetail.font = [UIFont systemFontOfSize:15];
+        if (indexPath.row ==0) {
+            cell.lblTitle.text = @"损伤类型:";
+            cell.lblShowDetail.text = @"";
         }else if (indexPath.row ==1){
-            cell.textLabel.text = @"报案号";
-            cell.detailTextLabel.text = self.claimModel.reportNo;
+            cell.lblTitle.text = @"报  案  号:";
+            cell.lblShowDetail.text = self.claimModel.reportNo;
         }else if (indexPath.row ==2){
-            cell.textLabel.text = @"估损单号";
-            cell.detailTextLabel.text = @"";
+            cell.lblTitle.text = @"估损单号:";
+            cell.lblShowDetail.text = @"";
         }else if (indexPath.row ==3){
-            cell.textLabel.text = @"车牌号";
-            cell.detailTextLabel.text = self.claimModel.plateNo;
+            cell.lblTitle.text = @"车  牌  号:";
+            cell.lblShowDetail.text = self.claimModel.plateNo;
         }else if (indexPath.row ==4){
-            cell.textLabel.text = @"出险时间";
-            cell.detailTextLabel.text = self.claimModel.dangerDate;
+            cell.lblTitle.text = @"出险时间:";
+            cell.lblShowDetail.text = self.claimModel.dangerDate;
         }else if (indexPath.row ==5){
-            cell.textLabel.text = @"报案时间";
-            cell.detailTextLabel.text = self.claimModel.reportDate;
+            cell.lblTitle.text = @"报案时间:";
+            cell.lblShowDetail.text = self.claimModel.reportDate;
         }else if (indexPath.row ==6){
-            cell.textLabel.text = @"被保险人";
-            cell.detailTextLabel.text = self.claimModel.insuredName;
+            cell.lblTitle.text = @"被保险人:";
+            cell.lblShowDetail.text = self.claimModel.insuredName;
         }else if (indexPath.row ==7){
-            cell.textLabel.text = @"交强险保单号";
-            cell.detailTextLabel.text = self.claimModel.fPolicyNo;
+            cell.lblTitle.text = @"交  强  险:";
+            cell.lblShowDetail.text = self.claimModel.fPolicyNo;
         }else if (indexPath.row ==8){
-            cell.textLabel.text = @"商业保单号";
-            cell.detailTextLabel.text = self.claimModel.bPolicyNo;
+            cell.lblTitle.text = @"商  业  险:";
+            cell.lblShowDetail.text = self.claimModel.bPolicyNo;
         }else {
-            cell.textLabel.text = @"是否异地";
-            cell.detailTextLabel.text = @"";
+            cell.lblTitle.text = @"是否异地:";
+            cell.lblShowDetail.text = @"";
         }
         cell.userInteractionEnabled = NO;
-        UIView *line = [[UIView alloc]initWithFrame:CGRectMake(15, 0, DeviceSize.width-30, 1)];
-        line.backgroundColor = [UIColor colorWithHexString:pageBackgroundColor];
-        [cell.contentView addSubview:line];
         return cell;
     }
 }
@@ -1749,6 +1771,11 @@
     [UIView animateWithDuration:0.5 animations:^{
         self.buttonDown.frame = CGRectMake(DeviceSize.width/2*self.selectIndex, self.seg.bottom, DeviceSize.width/2, 3) ;
     }];
+    if (self.selectIndex ==0) {
+        [self.view addSubview:self.btnEdit];
+    }else{
+        [self.btnEdit removeFromSuperview];
+    }
     [self.tableView reloadData];
 }
 -(UIButton *)btnCommit{

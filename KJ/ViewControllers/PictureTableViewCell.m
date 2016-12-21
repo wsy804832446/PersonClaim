@@ -23,12 +23,14 @@
 -(void)configImgWithImgArray:(NSMutableArray *)array{
     for (int i=0; i<=array.count; i++) {
         UIButton *btnImg = [UIButton buttonWithType:UIButtonTypeCustom];
+        btnImg.backgroundColor = [UIColor colorWithHexString:Colorwhite];
         CGFloat width = (DeviceSize.width-15)/4;
         btnImg.frame = CGRectMake(15+width*(i%4), self.lblTitle.bottom+12+i/4*87, 75, 75);
+        [btnImg setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
         if (i<array.count) {
-             [btnImg setImage:array[i] forState:UIControlStateNormal];
+            [btnImg setBackgroundImage:array[i] forState:UIControlStateNormal];
         }else{
-             [btnImg setImage:[UIImage imageNamed:@"13-1"] forState:UIControlStateNormal];
+            [btnImg setBackgroundImage:[UIImage imageNamed:@"13-1"] forState:UIControlStateNormal];
         }
         [btnImg addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
         btnImg.tag = 2000+i;

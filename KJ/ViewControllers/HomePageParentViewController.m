@@ -9,12 +9,14 @@
 #import "HomePageParentViewController.h"
 #import "HomePageViewController.h"
 #import "FollowPlatFormViewController.h"
+#import "NewTsakViewController.h"
 @interface HomePageParentViewController ()
 @property (nonatomic,strong)UISegmentedControl *segMent;
 @property (nonatomic,strong)HomePageViewController *firstvc;
 @property (nonatomic,strong)FollowPlatFormViewController *secondVc;
 @property (nonatomic,strong)UIViewController *currentVc;
 @property (nonatomic,strong)UIImageView *imgView;
+@property (nonatomic,strong)UIScrollView *scrollView;
 @end
 
 @implementation HomePageParentViewController
@@ -26,30 +28,43 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-    [self.view addSubview:self.imgView];
+    [self.view addSubview:self.scrollView];
+    [self.scrollView addSubview:self.imgView];
     self.firstvc = [[HomePageViewController alloc]init];
     self.firstvc.view.frame = CGRectMake(0, 64, DeviceSize.width, DeviceSize.height);
     [self addChildViewController:self.firstvc];
     self.secondVc = [[FollowPlatFormViewController alloc]init];
     self.secondVc.view.frame = CGRectMake(0, 64, DeviceSize.width, DeviceSize.height);
     self.currentVc = self.firstvc;
-    [self.view addSubview:self.firstvc.view];
+    [self.scrollView addSubview:self.firstvc.view];
     [self.view addSubview:self.segMent];
     [self addBarbutton];
     // Do any additional setup after loading the view.
 }
+
 -(void)addBarbutton{
     UIButton *btnLeft = [UIButton buttonWithType:UIButtonTypeCustom];
     btnLeft.frame = CGRectMake(20, 30, 24, 22);
     [btnLeft setImage:[UIImage imageNamed:@"22-消息(1)"] forState:UIControlStateNormal];
     [btnLeft setImage:[UIImage imageNamed:@"22-消息-1(1)"] forState:UIControlStateHighlighted];
+    [btnLeft addTarget:self action:@selector(leftAction) forControlEvents:UIControlEventTouchUpInside];
     btnLeft.tag = 8888;
     [self.view addSubview:btnLeft];
+}
+-(void)addRightBtn{
     UIButton *btnRight = [UIButton buttonWithType:UIButtonTypeCustom];
     btnRight.frame = CGRectMake(self.view.right-20-24, 30, 24, 22);
     [btnRight setImage:[UIImage imageNamed:@"shaixuan"] forState:UIControlStateNormal];
     btnRight.tag = 9999;
+    [btnRight addTarget:self action:@selector(rightAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btnRight];
+}
+-(void)leftAction{
+    NewTsakViewController *vc = [[NewTsakViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+-(void)rightAction{
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"select" object:nil];
 }
 -(UISegmentedControl *)segMent{
     if (!_segMent) {
@@ -72,8 +87,11 @@
             if (finished) {
                 UIButton *btnLeft = [self.view viewWithTag:8888];
                 UIButton *btnRight = [self.view viewWithTag:9999];
+                if (btnRight) {
+                    [btnRight removeFromSuperview];
+                }
+                self.scrollView.scrollEnabled = YES;
                 [self.view bringSubviewToFront:btnLeft];
-                [self.view bringSubviewToFront:btnRight];
                 [self.view bringSubviewToFront:self.segMent];
                 [self.firstvc didMoveToParentViewController:self];
                 [self.currentVc willMoveToParentViewController:nil];
@@ -87,9 +105,12 @@
             if (finished) {
                 UIButton *btnLeft = [self.view viewWithTag:8888];
                 UIButton *btnRight = [self.view viewWithTag:9999];
+                if (!btnRight) {
+                    [self addRightBtn];
+                }
                 [self.view bringSubviewToFront:btnLeft];
-                [self.view bringSubviewToFront:btnRight];
                 [self.view bringSubviewToFront:self.segMent];
+                self.scrollView.scrollEnabled = NO;
                 [self.secondVc didMoveToParentViewController:self];
                 [self.currentVc willMoveToParentViewController:nil];
                 [self.currentVc removeFromParentViewController];
@@ -105,7 +126,15 @@
     }
     return _imgView;
 }
-
+-(UIScrollView *)scrollView{
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, -20, DeviceSize.width, DeviceSize.height-49+20)];
+        _scrollView.contentSize = CGSizeMake(DeviceSize.width, DeviceSize.height-49-64+20);
+        _scrollView.showsVerticalScrollIndicator = NO;
+        _scrollView.showsHorizontalScrollIndicator = NO;
+    }
+    return _scrollView;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

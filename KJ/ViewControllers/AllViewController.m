@@ -72,12 +72,25 @@
     UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.size.width, self.view.size.height)];
     backView.backgroundColor = [UIColor colorWithHexString:Colorblack alpha:0.5];
     backView.tag = 6666;
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissContactView:)];
+    [backView addGestureRecognizer:tapGesture];
+
     [self.view addSubview:backView];
     [backView addSubview:self.collectionView];
     [UIView animateWithDuration:0.5 animations:^{
         self.collectionView.frame = CGRectMake(0, 0, DeviceSize.width, 312);
     }];
     btn.enabled = NO;
+}
+-(void)dismissContactView:(UITapGestureRecognizer *)tap{
+    if ([tap locationInView:tap.view].y >312) {
+        UIView *view = [self.view viewWithTag:6666];
+        [UIView animateWithDuration:0.5 animations:^{
+            [view removeFromSuperview];
+            UIButton *btn = [self.view viewWithTag:1001];
+            btn.enabled = YES;
+        }];
+    }
 }
 -(void)getData{
     NSArray *arr = [CommUtil readDataWithFileName:[NSString stringWithFormat:@"cliam%@",[CommUtil readDataWithFileName:@"account"]]];
@@ -122,9 +135,7 @@
 -(void)leftAction{
     [self.navigationController popViewControllerAnimated:YES];
 }
--(void)rightAction{
-    
-}
+
 -(void)AddSegumentArray:(NSArray *)SegumentArray
 {
     CGFloat witdFloat=(DeviceSize.width)/4;

@@ -11,7 +11,9 @@
 #import "AllViewController.h"
 #import "FollowDetaiViewController.h"
 #import "ClaimModel.h"
-@interface FollowPlatFormViewController ()
+#import "HomeShaiXuanCollectionViewCell.h"
+#import "AllViewController.h"
+@interface FollowPlatFormViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 //选时间按钮数组
 @property (nonatomic,strong)NSMutableArray *btnArr;
 @property (nonatomic,strong)NSCalendar *calendar;
@@ -19,6 +21,8 @@
 //当前几号
 @property (nonatomic,assign)NSInteger dateNum;
 @property (nonatomic,strong)UIImageView *imgView;
+//筛选view
+@property(nonatomic,strong)UICollectionView *collectionView;
 @end
 
 @implementation FollowPlatFormViewController
@@ -27,6 +31,7 @@
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     [self getTask];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(screenClick) name:@"select" object:nil];
     [self.view addSubview:self.imgView];
     [self.view sendSubviewToBack:self.imgView];
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -70,10 +75,28 @@
         [weakSelf.tableView.header endRefreshing];
     }];
 }
--(void)leftAction{
+-(void)screenClick{
+    UIView *view = [self.view viewWithTag:6666];
+    if (view) {
+        [view removeFromSuperview];
+    }
+    UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.size.width, self.view.size.height)];
+    backView.backgroundColor = [UIColor colorWithHexString:Colorblack alpha:0.5];
+    backView.tag = 6666;
+    /*添加手势事件,移除View*/
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissContactView)];
+    [backView addGestureRecognizer:tapGesture];
+    [self.view addSubview:backView];
+    [backView addSubview:self.collectionView];
+    [UIView animateWithDuration:0.5 animations:^{
+        self.collectionView.frame = CGRectMake(0, 0, DeviceSize.width, 312);
+    }];
 }
--(void)rightAction:(UIButton *)btn{
-    
+-(void)dismissContactView{
+    UIView *view = [self.view viewWithTag:6666];
+    [UIView animateWithDuration:0.5 animations:^{
+        [view removeFromSuperview];
+    }];
 }
 -(void)addBtnTime{
     //获取今天日期
@@ -95,11 +118,13 @@
         lbldate.text = [NSString stringWithFormat:@"%ld",self.dateNum];
         if (i==3) {
             lbldate.text = @"今";
+            lbldate.layer.borderColor = [UIColor colorWithHexString:@"#ffc106"].CGColor;
+        }else{
+            lbldate.layer.borderColor = [UIColor clearColor].CGColor;
         }
         lbldate.layer.masksToBounds = YES;
         lbldate.layer.cornerRadius = 29/2;
         lbldate.layer.borderWidth = 1;
-        lbldate.layer.borderColor = [UIColor clearColor].CGColor;
         lbldate.tag = 2000+i;
         if (i == 3) {
             lbldate.textColor = [UIColor colorWithHexString:@"#ffc106"];
@@ -284,6 +309,65 @@
 }
 -(void)headerRequestWithData{
     [self getTask];
+}
+
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return 1;
+}
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return 10;
+}
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    HomeShaiXuanCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HomeShaiXuanCell" forIndexPath:indexPath];
+    if (!cell) {
+        NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"HomeCollectionViewCell" owner:nil options:nil];
+        if (nib.count>0) {
+            cell = [nib firstObject];
+        }
+    }
+    [cell configCellWithRow:indexPath.row];
+    return cell;
+}
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    AllViewController *vc = [[AllViewController alloc]init];
+    if (indexPath.row>0) {
+        vc.claimType = indexPath.row-1;
+    }else{
+        vc.claimType = 10;
+    }
+    UIView *backView = [self.view viewWithTag:6666];
+    self.collectionView.frame = CGRectMake(0, -312, DeviceSize.width, 312);
+    [backView removeFromSuperview];
+    UIButton *btn = [self.navigationItem.rightBarButtonItem.customView viewWithTag:1001];
+    btn.enabled = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+-(void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath{
+    HomeShaiXuanCollectionViewCell *cell =(HomeShaiXuanCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    cell.backgroundColor = [UIColor colorWithHexString:@"#eeeeee"];
+}
+-(void)collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath{
+    HomeShaiXuanCollectionViewCell *cell =(HomeShaiXuanCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    cell.backgroundColor = [UIColor colorWithHexString:Colorwhite];
+}
+-(UICollectionView *)collectionView{
+    if (!_collectionView) {
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
+        // 设置间距
+        layout.minimumLineSpacing = 0;
+        layout.minimumInteritemSpacing = 0;
+        layout.itemSize = CGSizeMake(DeviceSize.width/4,312/3);
+        _collectionView =[[UICollectionView alloc]initWithFrame:CGRectMake(0, -312, DeviceSize.width,312)collectionViewLayout:layout];
+        _collectionView.scrollEnabled = NO;
+        _collectionView.contentSize = CGSizeMake(DeviceSize.width, 312);
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+        _collectionView.backgroundColor =[UIColor colorWithHexString:Colorwhite];
+        [_collectionView registerNib:[UINib nibWithNibName:@"HomeShaiXuanCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"HomeShaiXuanCell"];
+    }
+    return _collectionView;
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
