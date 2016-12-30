@@ -84,7 +84,17 @@
     shape3.strokeColor = [UIColor colorWithHexString:@"#f2f200"].CGColor;
     shape3.path = bezier.CGPath;
     [self.imgView.layer addSublayer:shape3];
-
+    //未超时
+    UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn1.frame = CGRectMake(self.imgView.center.x/10, self.imgView.center.y+40, 70, 70);
+    btn1.layer.masksToBounds = YES;
+    btn1.layer.cornerRadius = 35;
+    btn1.layer.borderWidth = 1;
+    btn1.layer.borderColor = [UIColor colorWithHexString:@"#00ffff"].CGColor;
+    [btn1 setTitle:@"未超时" forState:UIControlStateNormal];
+    [btn1 setTitleColor:[UIColor colorWithHexString:@"#00ffff"] forState:UIControlStateNormal];
+    [self.imgView addSubview:btn1];
+    
 }
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 1;
